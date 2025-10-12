@@ -14,6 +14,11 @@
 <junit.version>5.12.1</junit.version>  </properties>
 
   <dependencies>
+      <dependency>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+          <version>1.18.42</version>
+      </dependency>
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
@@ -58,7 +63,7 @@
             <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>edu.ijse.mvc.fx.shopmanagementsystem/edu.ijse.mvc.fx.shopmanagementsystem.HelloApplication</mainClass>
+              <mainClass>edu.ijse.mvc.fx.shopmanagementsystem/edu.ijse.mvc.fx.shopmanagementsystem.Main</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>
