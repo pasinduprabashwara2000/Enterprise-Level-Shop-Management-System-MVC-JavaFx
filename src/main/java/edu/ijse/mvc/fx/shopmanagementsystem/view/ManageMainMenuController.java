@@ -5,15 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.URL;
 
 public class ManageMainMenuController {
-
-    @FXML
-    private Button inventoryBtn;
 
     @FXML
     private Button categoryBtn;
@@ -25,20 +22,79 @@ public class ManageMainMenuController {
     private Button customersBtn;
 
     @FXML
+    private Button dashboardBtn;
+
+    @FXML
+    private Button inventoryBtn;
+
+    @FXML
+    private Button logoutBtn;
+
+    @FXML
+    private VBox menuVBox;
+
+    @FXML
+    private Button paymentBtn;
+
+    @FXML
+    private Button productsBtn;
+
+    @FXML
+    private Button promotionBtn;
+
+    @FXML
+    private Button purchaseOrderBtn;
+
+    @FXML
+    private Button purchaseOrderProductBtn;
+
+    @FXML
+    private Button reportsBtn;
+
+    @FXML
+    private Button returnBtn;
+
+    @FXML
+    private Button returnproductBtn;
+
+    @FXML
+    private Button roleBtn;
+
+    @FXML
+    private Button saleBtn;
+
+    @FXML
+    private Button saleProductBtn;
+
+    @FXML
     private Button suppliersBtn;
 
     @FXML
-    private Label titleLabel;
+    private Button supplyBtn;
 
     @FXML
     private Hyperlink tradeMarkLabel;
 
     @FXML
+    private Button userBtn;
+
+    @FXML
     public void initialize() {
+        roleBtn.setOnAction(e -> loadUI("ManageRole"));
+        userBtn.setOnAction(e -> loadUI("ManageUser"));
         customersBtn.setOnAction(e -> loadUI("ManageCustomer"));
-        suppliersBtn.setOnAction(e -> loadUI("ManageSupplier"));
-        inventoryBtn.setOnAction(e -> loadUI("ManageInventory"));
         categoryBtn.setOnAction(e -> loadUI("ManageCategory"));
+        inventoryBtn.setOnAction(e -> loadUI("ManageInventory"));
+        suppliersBtn.setOnAction(e -> loadUI("ManageSupplier"));
+        supplyBtn.setOnAction(event -> loadUI("ManageSupply"));
+        promotionBtn.setOnAction(event -> loadUI("ManagePromotion"));
+        saleBtn.setOnAction(event -> loadUI("ManageSale"));
+        saleProductBtn.setOnAction(event -> loadUI("ManageSaleProduct"));
+        paymentBtn.setOnAction(event -> loadUI("ManagePayment"));
+        returnBtn.setOnAction(event -> loadUI("ManageReturn"));
+        returnproductBtn.setOnAction(event -> loadUI("ManageReturnProduct"));
+        dashboardBtn.setOnAction(event -> loadUI("DashBoard"));
+
     }
 
     private void loadUI(String fxmlName) {

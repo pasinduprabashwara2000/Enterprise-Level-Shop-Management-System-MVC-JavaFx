@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="640.0" prefWidth="1075.0" styleClass="white-bg" stylesheets="@css/style2.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.ManageReturnController">
+
+    <children>
+        <Label layoutX="33.0" layoutY="18.0" prefHeight="38.0" prefWidth="300.0" text="Manage Return">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+
+        <Label layoutX="34.0" layoutY="76.0" prefWidth="157.0" text="Return ID :">
+            <font><Font size="15.0" /></font>
+        </Label>
+        <TextField fx:id="returnIDTxt" layoutX="206.0" layoutY="75.0" prefWidth="259.0" />
+
+        <Label layoutX="34.0" layoutY="132.0" prefWidth="157.0" text="Sale ID :">
+            <font><Font size="15.0" /></font>
+        </Label>
+        <TextField fx:id="saleIDTxt" layoutX="206.0" layoutY="130.0" prefWidth="259.0" />
+
+        <Label layoutX="34.0" layoutY="187.0" prefWidth="157.0" text="Processed By :">
+            <font><Font size="15.0" /></font>
+        </Label>
+        <TextField fx:id="processedByTxt" layoutX="206.0" layoutY="185.0" prefWidth="259.0" />
+
+        <Label layoutX="521.0" layoutY="76.0" prefWidth="157.0" text="Return Date :">
+            <font><Font size="15.0" /></font>
+        </Label>
+        <DatePicker fx:id="returnDatePicker" layoutX="650.0" layoutY="75.0" prefWidth="259.0" />
+
+        <Label layoutX="521.0" layoutY="132.0" prefWidth="157.0" text="Reason :">
+            <font><Font size="15.0" /></font>
+        </Label>
+        <TextField fx:id="reasonTxt" layoutX="650.0" layoutY="130.0" prefWidth="259.0" />
+
+        <Label layoutX="34.0" layoutY="240.0" prefWidth="157.0" text="Status :">
+            <font><Font size="15.0" /></font>
+        </Label>
+        <ComboBox fx:id="statusCmb" layoutX="206.0" layoutY="238.0" prefHeight="35.0" prefWidth="259.0" promptText="Select Status" />
+
+        <Button fx:id="saveBtn" layoutX="236.0" layoutY="300.0" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Save" />
+        <Button fx:id="updateBtn" layoutX="395.0" layoutY="300.0" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Update" />
+        <Button fx:id="deleteBtn" layoutX="552.0" layoutY="300.0" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Delete" />
+        <Button fx:id="resetBtn" layoutX="706.0" layoutY="300.0" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Reset" />
+
+        <TableView fx:id="returnTable" layoutX="33.0" layoutY="370.0" prefHeight="260.0" prefWidth="1003.0">
+            <columns>
+                <TableColumn prefWidth="120.0" text="Return ID" />
+                <TableColumn prefWidth="120.0" text="Sale ID" />
+                <TableColumn prefWidth="150.0" text="Processed By" />
+                <TableColumn prefWidth="165.0" text="Return Date" />
+                <TableColumn prefWidth="311.0" text="Reason" />
+                <TableColumn prefWidth="135.0" text="Status" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>
