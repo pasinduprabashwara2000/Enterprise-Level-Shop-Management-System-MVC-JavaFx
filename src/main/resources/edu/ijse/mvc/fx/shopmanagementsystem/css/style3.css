@@ -1,0 +1,35 @@
+.white-bg {
+    -fx-background-color: white;
+}
+
+/* Box 1: Red to Orange */
+.box1 {
+    -fx-background-color: linear-gradient(to bottom right, #ff4e50, #f9d423);
+    -fx-background-radius: 10;
+}
+
+/* Box 2: Blue to Purple */
+.box2 {
+    -fx-background-color: linear-gradient(to bottom right, #1e3c72, #2a5298);
+    -fx-background-radius: 10;
+}
+
+/* Box 3: Green to Yellow */
+.box3 {
+    -fx-background-color: linear-gradient(to bottom right, #11998e, #38ef7d);
+    -fx-background-radius: 10;
+}
+
+/* Dashboard Labels */
+.dashboard-label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+/* Dashboard Values */
+.dashboard-value {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
