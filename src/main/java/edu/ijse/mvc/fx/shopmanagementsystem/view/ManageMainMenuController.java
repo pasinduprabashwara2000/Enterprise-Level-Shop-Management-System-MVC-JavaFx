@@ -80,6 +80,7 @@ public class ManageMainMenuController {
 
     @FXML
     public void initialize() {
+        dashboardBtn.setOnAction(event -> loadUI("Dashboard"));
         roleBtn.setOnAction(e -> loadUI("ManageRole"));
         userBtn.setOnAction(e -> loadUI("ManageUser"));
         customersBtn.setOnAction(e -> loadUI("ManageCustomer"));
@@ -93,7 +94,6 @@ public class ManageMainMenuController {
         paymentBtn.setOnAction(event -> loadUI("ManagePayment"));
         returnBtn.setOnAction(event -> loadUI("ManageReturn"));
         returnproductBtn.setOnAction(event -> loadUI("ManageReturnProduct"));
-        dashboardBtn.setOnAction(event -> loadUI("DashBoard"));
 
     }
 
