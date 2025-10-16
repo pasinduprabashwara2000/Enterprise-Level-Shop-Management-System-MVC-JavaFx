@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1075.0"
+            styleClass="white-bg"
+            stylesheets="@css/style3.css"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.DashboardController">
+
+    <children>
+        <!-- Row 1 -->
+        <VBox alignment="CENTER" layoutX="57.0" layoutY="38.0"
+              prefHeight="161.0" prefWidth="281.0" spacing="10" styleClass="box1">
+            <children>
+                <Label styleClass="dashboard-label" text="📦 Total Products" />
+                <Label styleClass="dashboard-value" text="150" />
+            </children>
+        </VBox>
+
+        <VBox alignment="CENTER" layoutX="397.0" layoutY="38.0"
+              prefHeight="161.0" prefWidth="281.0" spacing="10" styleClass="box2">
+            <children>
+                <Label styleClass="dashboard-label" text="🛒 Total Orders" />
+                <Label styleClass="dashboard-value" text="75" />
+            </children>
+        </VBox>
+
+        <VBox alignment="CENTER" layoutX="734.0" layoutY="38.0"
+              prefHeight="161.0" prefWidth="281.0" spacing="10" styleClass="box3">
+            <children>
+                <Label styleClass="dashboard-label" text="💰 Total Revenue" />
+                <Label styleClass="dashboard-value" text="Rs. 125,000" />
+            </children>
+        </VBox>
+
+        <!-- Row 2 -->
+        <VBox alignment="CENTER" layoutX="57.0" layoutY="240.0"
+              prefHeight="161.0" prefWidth="281.0" spacing="10" styleClass="box4">
+            <children>
+                <Label styleClass="dashboard-label" text="👥 Total Customers" />
+                <Label styleClass="dashboard-value" text="230" />
+            </children>
+        </VBox>
+
+        <VBox alignment="CENTER" layoutX="397.0" layoutY="240.0"
+              prefHeight="161.0" prefWidth="281.0" spacing="10" styleClass="box5">
+            <children>
+                <Label styleClass="dashboard-label" text="🚚 Pending Deliveries" />
+                <Label styleClass="dashboard-value" text="20" />
+            </children>
+        </VBox>
+
+        <VBox alignment="CENTER" layoutX="734.0" layoutY="240.0"
+              prefHeight="161.0" prefWidth="281.0" spacing="10" styleClass="box6">
+            <children>
+                <Label styleClass="dashboard-label" text="⭐ Total Return" />
+                <Label styleClass="dashboard-value" text="35" />
+            </children>
+        </VBox>
+
+        <!-- Row 3 -->
+        <VBox alignment="CENTER" layoutX="57.0" layoutY="440.0"
+              prefHeight="161.0" prefWidth="281.0" spacing="10" styleClass="box7">
+            <children>
+                <Label styleClass="dashboard-label" text="📈 Sales Growth" />
+                <Label styleClass="dashboard-value" text="15%" />
+            </children>
+        </VBox>
+
+        <VBox alignment="CENTER" layoutX="397.0" layoutY="440.0"
+              prefHeight="161.0" prefWidth="281.0" spacing="10" styleClass="box8">
+            <children>
+                <Label styleClass="dashboard-label" text="🧾 Total Invoices" />
+                <Label styleClass="dashboard-value" text="180" />
+            </children>
+        </VBox>
+
+        <VBox alignment="CENTER" layoutX="734.0" layoutY="440.0"
+              prefHeight="161.0" prefWidth="281.0" spacing="10" styleClass="box9">
+            <children>
+                <Label styleClass="dashboard-label" text="🏬 Total Suppliers" />
+                <Label styleClass="dashboard-value" text="25" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
