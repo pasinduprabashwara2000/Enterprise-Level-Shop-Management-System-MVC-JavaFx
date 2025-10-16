@@ -45,17 +45,17 @@
       </Label>
       <TextField fx:id="emailTxt" layoutX="650.0" layoutY="76.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
       <TextField fx:id="loyaltyCodeTxt" layoutX="651.0" layoutY="132.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
-      <Button fx:id="saveBtn" layoutX="236.0" layoutY="254.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Save" />
-      <Button fx:id="updateBtn" layoutX="395.0" layoutY="254.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Update" />
-      <Button fx:id="deleteBtn" layoutX="552.0" layoutY="254.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Delete" />
-      <Button fx:id="resetBtn" layoutX="706.0" layoutY="254.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Reset" />
+      <Button fx:id="saveBtn" layoutX="236.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Save" />
+      <Button fx:id="updateBtn" layoutX="395.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Update" />
+      <Button fx:id="deleteBtn" layoutX="552.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateDelete" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Delete" />
+      <Button fx:id="resetBtn" layoutX="706.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateReset" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Reset" />
       <TableView fx:id="detailsTabel" layoutX="33.0" layoutY="322.0" prefHeight="264.0" prefWidth="1003.0">
         <columns>
-            <TableColumn prefWidth="200.0" text="Customer ID" />
-            <TableColumn prefWidth="200.0" text="Customer Name" />
-            <TableColumn prefWidth="200.0" text="Contact Number" />
-            <TableColumn prefWidth="200.0" text="Email Address" />
-            <TableColumn prefWidth="202.0" text="Loyalty Code" />
+            <TableColumn fx:id="colCusId" prefWidth="200.0" text="Customer ID" />
+            <TableColumn fx:id="colCusName" prefWidth="200.0" text="Customer Name" />
+            <TableColumn fx:id="colCusNum" prefWidth="200.0" text="Contact Number" />
+            <TableColumn fx:id="colEmailAddress" prefWidth="200.0" text="Email Address" />
+            <TableColumn fx:id="colLoyaltyCode" prefWidth="202.0" text="Loyalty Code" />
         </columns>
       </TableView>
    </children>

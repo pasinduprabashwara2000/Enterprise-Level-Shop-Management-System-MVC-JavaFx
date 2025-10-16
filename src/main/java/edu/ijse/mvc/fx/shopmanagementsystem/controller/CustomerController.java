@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.CustomerDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.model.CustomerModel;
 
-class CustomerController {
+public class CustomerController {
 
     final private CustomerModel customerModel = new CustomerModel();
 

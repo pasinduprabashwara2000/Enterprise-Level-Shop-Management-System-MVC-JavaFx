@@ -20,8 +20,9 @@ public class ProductModel {
         pstm.setDouble(6, productDTO.getUnitPrice());
         pstm.setDouble(7, productDTO.getTaxRate());
         pstm.setBoolean(8, productDTO.isActive());
-        pstm.setString(9, productDTO.getCustomerID());
-        pstm.setString(10, productDTO.getCategoryID());
+        pstm.setBytes(9, productDTO.getImage());
+        pstm.setString(10, productDTO.getCustomerID());
+        pstm.setString(11, productDTO.getCategoryID());
 
         return pstm.executeUpdate() > 0 ? "Product Saved Successfully" : "Product Save Failed";
     
@@ -29,7 +30,7 @@ public class ProductModel {
 
     public String updateProduct(ProductDTO productDTO) throws Exception {
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "UPDATE Product SET SKU=?, barCode=?, name=?, unit=?, unitPrice=?, taxRate=?, active=?, customerID=?, categoryID=? WHERE productID=?";
+        String sql = "UPDATE Product SET SKU = ?, barCode = ?, name = ?, unit = ?, unitPrice = ?, taxRate = ?, active = ?, image = ?, customerID = ?, categoryID = ? WHERE productID = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, productDTO.getSKU());
         pstm.setInt(2, productDTO.getBarCode());
@@ -38,43 +39,43 @@ public class ProductModel {
         pstm.setDouble(5, productDTO.getUnitPrice());
         pstm.setDouble(6, productDTO.getTaxRate());
         pstm.setBoolean(7, productDTO.isActive());
-        pstm.setString(8, productDTO.getCustomerID());
-        pstm.setString(9, productDTO.getCategoryID());
-        pstm.setString(10, productDTO.getProductID());
+        pstm.setBytes(8, productDTO.getImage());
+        pstm.setString(9, productDTO.getCustomerID());
+        pstm.setString(10, productDTO.getCategoryID());
+        pstm.setString(11, productDTO.getProductID());
 
         return pstm.executeUpdate() > 0 ? "Product Updated Successfully" : "Product Update Failed";
-    
     }
 
     public String deleteProduct(String productID) throws Exception {
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "DELETE FROM Product WHERE productID=?";
+        String sql = "DELETE FROM Product WHERE productID = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, productID);
 
-        return pstm.executeUpdate() > 0 ? "Product Deleted Successfully" : "Product Delete Failed";
-    
+        return pstm.executeUpdate() > 0 ? "Product Deleted Successfully" : "Product Deletion Failed";
     }
 
     public ProductDTO searchProduct(String productID) throws Exception {
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "SELECT * FROM Product WHERE productID=?";
+        String sql = "SELECT * FROM Product WHERE productID = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, productID);
+        var resultSet = pstm.executeQuery();
 
-        var rst = pstm.executeQuery();
-        if (rst.next()) {
+        if (resultSet.next()) {
             return new ProductDTO(
-                    rst.getString("productID"),
-                    rst.getString("SKU"),
-                    rst.getInt("barCode"),
-                    rst.getString("name"),
-                    rst.getString("unit"),
-                    rst.getDouble("unitPrice"),
-                    rst.getDouble("taxRate"),
-                    rst.getBoolean("active"),
-                    rst.getString("customerID"),
-                    rst.getString("categoryID")
+                resultSet.getString("productID"),
+                resultSet.getString("SKU"),
+                resultSet.getInt("barCode"),
+                resultSet.getString("name"),
+                resultSet.getString("unit"),
+                resultSet.getDouble("unitPrice"),
+                resultSet.getDouble("taxRate"),
+                resultSet.getBoolean("active"),
+                resultSet.getBytes("image"),
+                resultSet.getString("customerID"),
+                resultSet.getString("categoryID")
             );
         }
         return null;
@@ -84,22 +85,24 @@ public class ProductModel {
         Connection connection = DBConnection.getInstance().getConnection();
         String sql = "SELECT * FROM Product";
         PreparedStatement pstm = connection.prepareStatement(sql);
-
-        var rst = pstm.executeQuery();
+        var resultSet = pstm.executeQuery();
         ArrayList<ProductDTO> productList = new ArrayList<>();
-        while (rst.next()) {
-            productList.add(new ProductDTO(
-                    rst.getString("productID"),
-                    rst.getString("SKU"),
-                    rst.getInt("barCode"),
-                    rst.getString("name"),
-                    rst.getString("unit"),
-                    rst.getDouble("unitPrice"),
-                    rst.getDouble("taxRate"),
-                    rst.getBoolean("active"),
-                    rst.getString("customerID"),
-                    rst.getString("categoryID")
-            ));
+
+        while (resultSet.next()) {
+            ProductDTO productDTO = new ProductDTO(
+                resultSet.getString("productID"),
+                resultSet.getString("SKU"),
+                resultSet.getInt("barCode"),
+                resultSet.getString("name"),
+                resultSet.getString("unit"),
+                resultSet.getDouble("unitPrice"),
+                resultSet.getDouble("taxRate"),
+                resultSet.getBoolean("active"),
+                resultSet.getBytes("image"),
+                resultSet.getString("customerID"),
+                resultSet.getString("categoryID")
+            );
+            productList.add(productDTO);
         }
         return productList;
     }

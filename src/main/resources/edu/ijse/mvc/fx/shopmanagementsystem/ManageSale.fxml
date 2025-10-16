@@ -64,22 +64,22 @@
         </Label>
         <ComboBox fx:id="statusCmb" layoutX="206.0" layoutY="293.0" prefHeight="35.0" prefWidth="259.0" promptText="Select Status" />
 
-        <Button fx:id="saveBtn" layoutX="236.0" layoutY="350.0" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Save" />
-        <Button fx:id="updateBtn" layoutX="395.0" layoutY="350.0" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Update" />
-        <Button fx:id="deleteBtn" layoutX="552.0" layoutY="350.0" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Delete" />
-        <Button fx:id="resetBtn" layoutX="706.0" layoutY="350.0" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Reset" />
+        <Button fx:id="saveBtn" layoutX="236.0" layoutY="350.0" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Save" />
+        <Button fx:id="updateBtn" layoutX="395.0" layoutY="350.0" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Update" />
+        <Button fx:id="deleteBtn" layoutX="552.0" layoutY="350.0" onAction="#navigateDelete" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Delete" />
+        <Button fx:id="resetBtn" layoutX="706.0" layoutY="350.0" onAction="#navigateReset" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Reset" />
 
         <TableView fx:id="saleTable" layoutX="33.0" layoutY="410.0" prefHeight="210.0" prefWidth="1003.0">
             <columns>
-                <TableColumn prefWidth="110.0" text="Sale ID" />
-                <TableColumn prefWidth="110.0" text="User ID" />
-                <TableColumn prefWidth="110.0" text="Customer ID" />
-                <TableColumn prefWidth="100.0" text="Sub Total" />
-                <TableColumn prefWidth="100.0" text="Tax Total" />
-                <TableColumn prefWidth="110.0" text="Discount Total" />
-                <TableColumn prefWidth="110.0" text="Grand Total" />
-                <TableColumn prefWidth="120.0" text="Date" />
-                <TableColumn prefWidth="128.0" text="Status" />
+                <TableColumn fx:id="colSaleID" prefWidth="110.0" text="Sale ID" />
+                <TableColumn fx:id="colUserID" prefWidth="110.0" text="User ID" />
+                <TableColumn fx:id="colCustomerID" prefWidth="110.0" text="Customer ID" />
+                <TableColumn fx:id="colSubTotal" prefWidth="100.0" text="Sub Total" />
+                <TableColumn fx:id="colTaxTotal" prefWidth="100.0" text="Tax Total" />
+                <TableColumn fx:id="colDiscountTotal" prefWidth="110.0" text="Discount Total" />
+                <TableColumn fx:id="colGrandTotal" prefWidth="110.0" text="Grand Total" />
+                <TableColumn fx:id="colDate" prefWidth="120.0" text="Date" />
+                <TableColumn fx:id="colStatus" prefWidth="128.0" text="Status" />
             </columns>
         </TableView>
     </children>

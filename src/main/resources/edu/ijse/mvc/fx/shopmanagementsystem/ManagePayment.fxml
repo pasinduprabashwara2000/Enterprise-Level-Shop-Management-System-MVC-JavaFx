@@ -10,6 +10,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <AnchorPane prefHeight="640.0" prefWidth="1075.0" styleClass="white-bg" stylesheets="@css/style2.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.ManagePaymentController">
 
     <children>
@@ -32,8 +34,16 @@
         <Label layoutX="34.0" layoutY="187.0" prefHeight="35.0" prefWidth="157.0" text="Method :">
             <font><Font size="15.0" /></font>
         </Label>
-        <ComboBox fx:id="methodCmb" layoutX="206.0" layoutY="185.0" prefHeight="35.0" prefWidth="259.0" promptText="Select Method" />
-
+        <ComboBox fx:id="methodCmb" layoutX="206.0" layoutY="185.0" prefHeight="35.0" prefWidth="259.0" promptText="Select Method">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="CASH" />
+                <String fx:value="CARD" />
+                <String fx:value="MOBILE" />
+                <String fx:value="OTHER" />
+            </FXCollections>
+        </items>
+        </ComboBox>
         <Label layoutX="521.0" layoutY="76.0" prefWidth="157.0" text="Amount :">
             <font><Font size="15.0" /></font>
         </Label>
@@ -49,19 +59,19 @@
         </Label>
         <DatePicker fx:id="receivedAtPicker" layoutX="650.0" layoutY="185.0" prefWidth="259.0" />
 
-        <Button fx:id="saveBtn" layoutX="236.0" layoutY="263.0" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Save" />
-        <Button fx:id="updateBtn" layoutX="395.0" layoutY="263.0" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Update" />
-        <Button fx:id="deleteBtn" layoutX="552.0" layoutY="263.0" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Delete" />
-        <Button fx:id="resetBtn" layoutX="706.0" layoutY="263.0" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Reset" />
+        <Button fx:id="saveBtn" layoutX="236.0" layoutY="263.0" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Save" />
+        <Button fx:id="updateBtn" layoutX="395.0" layoutY="263.0" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Update" />
+        <Button fx:id="deleteBtn" layoutX="552.0" layoutY="263.0" onAction="#navigateDelete" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Delete" />
+        <Button fx:id="resetBtn" layoutX="706.0" layoutY="263.0" onAction="#navigateReset" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Reset" />
 
         <TableView fx:id="paymentTable" layoutX="33.0" layoutY="320.0" prefHeight="300.0" prefWidth="1003.0">
             <columns>
-                <TableColumn prefWidth="120.0" text="Payment ID" />
-                <TableColumn prefWidth="120.0" text="Sale ID" />
-                <TableColumn prefWidth="153.0" text="Method" />
-                <TableColumn prefWidth="166.0" text="Amount" />
-                <TableColumn prefWidth="179.0" text="Reference" />
-                <TableColumn prefWidth="263.0" text="Received At" />
+                <TableColumn fx:id="colPaymentId" prefWidth="120.0" text="Payment ID" />
+                <TableColumn fx:id="colSaleId" prefWidth="120.0" text="Sale ID" />
+                <TableColumn fx:id="colMethod" prefWidth="153.0" text="Method" />
+                <TableColumn fx:id="colAmount" prefWidth="166.0" text="Amount" />
+                <TableColumn fx:id="colReference" prefWidth="179.0" text="Reference" />
+                <TableColumn fx:id="colReceivedAt" prefWidth="263.0" text="Received At" />
             </columns>
         </TableView>
     </children>

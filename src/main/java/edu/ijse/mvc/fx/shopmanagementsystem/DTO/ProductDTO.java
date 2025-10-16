@@ -17,8 +17,8 @@ public class ProductDTO {
     private double unitPrice;
     private double taxRate;
     private boolean active;
+    private byte [] image;
     private String customerID;
     private String categoryID;
-    
-    
+
 }

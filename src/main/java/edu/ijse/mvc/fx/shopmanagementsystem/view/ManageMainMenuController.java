@@ -86,6 +86,7 @@ public class ManageMainMenuController {
         customersBtn.setOnAction(e -> loadUI("ManageCustomer"));
         categoryBtn.setOnAction(e -> loadUI("ManageCategory"));
         inventoryBtn.setOnAction(e -> loadUI("ManageInventory"));
+        productsBtn.setOnAction(event -> loadUI("ManageProducts"));
         suppliersBtn.setOnAction(e -> loadUI("ManageSupplier"));
         supplyBtn.setOnAction(event -> loadUI("ManageSupply"));
         promotionBtn.setOnAction(event -> loadUI("ManagePromotion"));

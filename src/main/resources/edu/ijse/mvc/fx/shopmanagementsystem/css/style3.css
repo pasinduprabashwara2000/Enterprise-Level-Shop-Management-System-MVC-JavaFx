@@ -1,35 +1,45 @@
 .white-bg {
+    -fx-background-color: #f4f6f8;
+}
+
+.box1, .box2, .box3, .box4, .box5, .box6, .box7, .box8, .box9 {
     -fx-background-color: white;
+    -fx-border-radius: 16px;
+    -fx-background-radius: 16px;
+    -fx-padding: 20;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 8, 0, 0, 4);
+    -fx-transition: all 0.3s ease-in-out;
 }
 
-/* Box 1: Red to Orange */
-.box1 {
-    -fx-background-color: linear-gradient(to bottom right, #ff4e50, #f9d423);
-    -fx-background-radius: 10;
+.box1:hover, .box2:hover, .box3:hover,
+.box4:hover, .box5:hover, .box6:hover,
+.box7:hover, .box8:hover, .box9:hover {
+    -fx-scale-x: 1.04;
+    -fx-scale-y: 1.04;
+    -fx-effect: dropshadow(three-pass-box, rgba(46, 204, 113, 0.5), 12, 0, 0, 6);
+    -fx-background-color: linear-gradient(to bottom right, #ffffff, #e8f8f2);
 }
 
-/* Box 2: Blue to Purple */
-.box2 {
-    -fx-background-color: linear-gradient(to bottom right, #1e3c72, #2a5298);
-    -fx-background-radius: 10;
-}
-
-/* Box 3: Green to Yellow */
-.box3 {
-    -fx-background-color: linear-gradient(to bottom right, #11998e, #38ef7d);
-    -fx-background-radius: 10;
-}
-
-/* Dashboard Labels */
 .dashboard-label {
     -fx-font-size: 18px;
-    -fx-font-weight: bold;
-    -fx-text-fill: white;
+    -fx-text-fill: #555;
+    -fx-font-family: "Noto Color Emoji";
 }
 
-/* Dashboard Values */
 .dashboard-value {
-    -fx-font-size: 24px;
+    -fx-font-size: 26px;
     -fx-font-weight: bold;
-    -fx-text-fill: white;
+    -fx-text-fill: #2ecc71;
+    -fx-font-family: "Segoe UI", "Noto Color Emoji";
 }
+
+.box1:hover { -fx-effect: dropshadow(three-pass-box, rgba(52, 152, 219, 0.5), 12, 0, 0, 6); }
+.box2:hover { -fx-effect: dropshadow(three-pass-box, rgba(230, 126, 34, 0.5), 12, 0, 0, 6); }
+.box3:hover { -fx-effect: dropshadow(three-pass-box, rgba(46, 204, 113, 0.5), 12, 0, 0, 6); }
+.box4:hover { -fx-effect: dropshadow(three-pass-box, rgba(155, 89, 182, 0.5), 12, 0, 0, 6); }
+.box5:hover { -fx-effect: dropshadow(three-pass-box, rgba(241, 196, 15, 0.5), 12, 0, 0, 6); }
+.box6:hover { -fx-effect: dropshadow(three-pass-box, rgba(231, 76, 60, 0.5), 12, 0, 0, 6); }
+.box7:hover { -fx-effect: dropshadow(three-pass-box, rgba(26, 188, 156, 0.5), 12, 0, 0, 6); }
+.box8:hover { -fx-effect: dropshadow(three-pass-box, rgba(52, 73, 94, 0.5), 12, 0, 0, 6); }
+.box9:hover { -fx-effect: dropshadow(three-pass-box, rgba(142, 68, 173, 0.5), 12, 0, 0, 6); }
