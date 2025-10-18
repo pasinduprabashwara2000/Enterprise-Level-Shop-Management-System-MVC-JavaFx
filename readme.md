@@ -2,7 +2,7 @@ Use Case Documentation
 
 ---
 
-## 👥 Actors
+## Actors
 
 | Actor                     | Description                                                      |
 | ------------------------- | ---------------------------------------------------------------- |
@@ -14,7 +14,7 @@ Use Case Documentation
 
 ---
 
-## 🛒 Use Case 1 — Manage Users & Roles
+## Use Case 1 — Manage Users & Roles
 
 **Actors:** Admin
 **Description:** Admin creates, updates, or deactivates user accounts and assigns roles.
@@ -38,7 +38,7 @@ Use Case Documentation
 
 ---
 
-## 💰 Use Case 2 — Process a Sale
+## Use Case 2 — Process a Sale
 
 **Actors:** Cashier / Customer
 **Description:** A customer purchases one or more products.
@@ -62,7 +62,7 @@ Use Case Documentation
 
 ---
 
-## 💳 Use Case 3 — Record Payment
+## Use Case 3 — Record Payment
 
 **Actors:** Cashier
 **Description:** Process customer payments linked to a sale.
@@ -84,7 +84,7 @@ Use Case Documentation
 
 ---
 
-## 📦 Use Case 4 — Manage Inventory
+## Use Case 4 — Manage Inventory
 
 **Actors:** Inventory Manager
 **Description:** Update product quantities and reorder items as needed.
@@ -103,7 +103,7 @@ Use Case Documentation
 
 ---
 
-## 🧾 Use Case 5 — Create Purchase Order
+## Use Case 5 — Create Purchase Order
 
 **Actors:** Inventory Manager, Supplier
 **Description:** Manager creates and sends purchase orders to suppliers.
@@ -127,7 +127,7 @@ Use Case Documentation
 
 ---
 
-## 📥 Use Case 6 — Receive Goods
+## Use Case 6 — Receive Goods
 
 **Actors:** Inventory Manager
 **Description:** Record goods received from suppliers.
@@ -146,7 +146,7 @@ Use Case Documentation
 
 ---
 
-## 🎁 Use Case 7 — Apply Promotions
+## Use Case 7 — Apply Promotions
 
 **Actors:** Admin / Cashier
 **Description:** Manage and apply discounts or promotions to products.
@@ -164,7 +164,7 @@ Use Case Documentation
 
 ---
 
-## 🔄 Use Case 8 — Handle Returns & Refunds
+## Use Case 8 — Handle Returns & Refunds
 
 **Actors:** Cashier / Customer
 **Description:** Process a return and issue a refund.
@@ -189,7 +189,7 @@ Use Case Documentation
 
 ---
 
-## 👥 Use Case 9 — Manage Customers
+## Use Case 9 — Manage Customers
 
 **Actors:** Cashier / Admin
 **Description:** Add or update customer profiles.
@@ -207,7 +207,7 @@ Use Case Documentation
 
 ---
 
-## 🧾 Use Case 10 — Generate Reports
+## Use Case 10 — Generate Reports
 
 **Actors:** Admin / Manager
 **Description:** Generate system reports (sales, inventory, revenue, etc.).
@@ -224,7 +224,7 @@ Use Case Documentation
 
 ---
 
-## ✅ Summary Table
+## Summary Table
 
 | ID   | Use Case              | Primary Actor      | Key Outcome                       |
 | ---- | --------------------- | ------------------ | --------------------------------- |
