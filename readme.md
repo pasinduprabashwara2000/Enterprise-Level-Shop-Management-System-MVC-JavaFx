@@ -1,4 +1,4 @@
-Use Case Documentation
+## Use Case Documentation
 
 ---
 
