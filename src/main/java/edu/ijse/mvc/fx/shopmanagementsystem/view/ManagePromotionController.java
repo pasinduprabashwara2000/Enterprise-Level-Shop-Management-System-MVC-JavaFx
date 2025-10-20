@@ -1,4 +1,4 @@
-package edu.ijse.mvc.fx.shopmanagementsystem.view;
+/*package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
 import java.sql.Date;
 
@@ -181,4 +181,4 @@ public class ManagePromotionController {
 
 }
 
-}
+} */

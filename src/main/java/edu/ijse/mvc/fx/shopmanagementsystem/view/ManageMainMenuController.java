@@ -95,6 +95,7 @@ public class ManageMainMenuController {
         paymentBtn.setOnAction(event -> loadUI("ManagePayment"));
         returnBtn.setOnAction(event -> loadUI("ManageReturn"));
         returnproductBtn.setOnAction(event -> loadUI("ManageReturnProduct"));
+        purchaseOrderBtn.setOnAction(event -> loadUI("ManagePurchaseOrder"));
 
     }
 

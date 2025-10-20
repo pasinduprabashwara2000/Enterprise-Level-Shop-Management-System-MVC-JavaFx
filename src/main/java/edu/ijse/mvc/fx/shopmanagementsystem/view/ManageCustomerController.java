@@ -76,25 +76,23 @@ public class ManageCustomerController {
     @FXML
     private Button updateBtn;
 
-    @FXML
-    public void initialize(){
-        try{
-            detailsTabel.getItems().clear();
-            detailsTabel.getItems().addAll(customerController.getAllCustomers());
-        } catch (Exception e){
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-
-        loadTable();
-    }
-
-    @FXML
-    public void loadTable(){
+    public void initialize() throws Exception {
        colCusId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
        colCusName.setCellValueFactory(new PropertyValueFactory<>("name"));
        colCusNum.setCellValueFactory(new PropertyValueFactory<>("contactNo"));
        colEmailAddress.setCellValueFactory(new PropertyValueFactory<>("email"));
        colLoyaltyCode.setCellValueFactory(new PropertyValueFactory<>("loyaltyCode"));
+
+       loadTable();
+    }
+
+    public void loadTable(){
+        try {
+            detailsTabel.getItems().clear();
+            detailsTabel.getItems().addAll(customerController.getAllCustomers());
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage());
+        }
     }
 
     @FXML

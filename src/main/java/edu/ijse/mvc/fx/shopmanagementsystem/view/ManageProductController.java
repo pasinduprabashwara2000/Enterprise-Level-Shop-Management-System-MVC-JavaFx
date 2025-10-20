@@ -1,4 +1,4 @@
-package edu.ijse.mvc.fx.shopmanagementsystem.view;
+/*package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.ProductController;
@@ -184,4 +184,4 @@ public class ManageProductController {
         }
     }
 
-}
+} */

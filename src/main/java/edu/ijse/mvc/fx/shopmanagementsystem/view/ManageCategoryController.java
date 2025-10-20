@@ -11,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ManageCategoryController {
 
@@ -58,11 +59,30 @@ public class ManageCategoryController {
     @FXML
     private Button updateBtn;
 
+    public void initialize(){
+        colCategoryId.setCellValueFactory(new PropertyValueFactory<>("categoryID"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+
+        loadTable();
+    }
+
+    private void loadTable() {
+        try {
+            detailsTable.getItems().clear();
+            detailsTable.getItems().addAll(categoryController.getAllCategories());
+        } catch (Exception e) {
+            new Alert(AlertType.ERROR,e.getMessage()).show();
+        }
+    }
+
     @FXML
     void navigateDelete(ActionEvent event) {
         try {
             String res = categoryController.deleteCategory(categoryIDTxt.getText());
             new Alert(AlertType.INFORMATION,res).show();
+            loadTable();
+            navigateReset(event);
         } catch (Exception e){
             new Alert(AlertType.ERROR,e.getMessage()).show();
         }
@@ -84,7 +104,9 @@ public class ManageCategoryController {
                     descriptionTxt.getText()
             );
             String res = categoryController.saveCategory(categoryDTO);
-            new Alert(Alert.AlertType.INFORMATION,res).show();;
+            new Alert(Alert.AlertType.INFORMATION,res).show();
+            loadTable();
+            navigateReset(event);
         } catch (Exception e){
             new Alert(Alert.AlertType.ERROR,e.getMessage());
         }
@@ -100,6 +122,8 @@ public class ManageCategoryController {
             );
             String res = categoryController.updateCategory(categoryDTO);
             new Alert(AlertType.INFORMATION,res).show();
+            loadTable();
+            navigateReset(event);
         } catch (Exception e){
             new Alert(AlertType.ERROR,e.getMessage()).show();
         }
