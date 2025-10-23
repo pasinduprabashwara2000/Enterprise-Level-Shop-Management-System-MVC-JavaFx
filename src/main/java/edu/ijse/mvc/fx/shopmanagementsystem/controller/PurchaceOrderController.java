@@ -1,7 +1,6 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.controller;
 
 import java.util.ArrayList;
-
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.PurchaceOrderDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.model.PurchaceOrderModel;
 

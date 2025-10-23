@@ -76,14 +76,15 @@ public class ManageCustomerController {
     @FXML
     private Button updateBtn;
 
-    public void initialize() throws Exception {
+    public void initialize() {
        colCusId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
        colCusName.setCellValueFactory(new PropertyValueFactory<>("name"));
-       colCusNum.setCellValueFactory(new PropertyValueFactory<>("contactNo"));
+       colCusNum.setCellValueFactory(new PropertyValueFactory<>("phone"));
        colEmailAddress.setCellValueFactory(new PropertyValueFactory<>("email"));
        colLoyaltyCode.setCellValueFactory(new PropertyValueFactory<>("loyaltyCode"));
 
        loadTable();
+
     }
 
     public void loadTable(){

@@ -13,7 +13,7 @@ public class CustomerModel {
         Connection conn = DBConnection.getInstance().getConnection();
         String sql = "INSERT INTO customer VALUES (?,?,?,?,?)";
         PreparedStatement st = conn.prepareStatement(sql);
-        st.setString(1,customerDTO.getCustomerID());
+        st.setString(1,customerDTO.getCustomerId());
         st.setString(2,customerDTO.getName());
         st.setInt(3,customerDTO.getPhone());
         st.setString(4,customerDTO.getEmail());
@@ -32,7 +32,7 @@ public class CustomerModel {
         st.setInt(2,customerDTO.getPhone());
         st.setString(3,customerDTO.getEmail());
         st.setString(4,customerDTO.getLoyaltyCode());
-        st.setString(5,customerDTO.getCustomerID());
+        st.setString(5,customerDTO.getCustomerId());
 
         return st.executeUpdate() > 0 ? "Customer Updated Successfully" : "Customer Update Failed";
 
@@ -59,7 +59,7 @@ public class CustomerModel {
         var rst = st.executeQuery();
         if(rst.next()){
             return new CustomerDTO(
-                    rst.getString("customerID"),
+                    rst.getString("customerId"),
                     rst.getString("name"),
                     rst.getInt("phone"),
                     rst.getString("email"),

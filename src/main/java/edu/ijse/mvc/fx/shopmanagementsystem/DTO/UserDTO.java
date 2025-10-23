@@ -1,6 +1,6 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.DTO;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,8 +13,7 @@ public class UserDTO {
     private String userID;
     private String userName;
     private String password;
-    private String roleID;
-    private boolean active;
-    private Date createdAt;
+    private String active;
+    private LocalDate createdAt;
 
 }
