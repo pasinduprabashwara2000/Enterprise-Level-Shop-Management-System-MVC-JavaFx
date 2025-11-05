@@ -5,6 +5,8 @@ import edu.ijse.mvc.fx.shopmanagementsystem.controller.RoleController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ManageRoleController {
 
@@ -53,12 +55,32 @@ public class ManageRoleController {
     private TextField userIDTxt;
 
     @FXML
+    public void initialize(){
+        colRoleID.setCellValueFactory(new PropertyValueFactory<>("roleID"));
+        colRoleName.setCellValueFactory(new PropertyValueFactory<>("roleName"));
+        colUserID.setCellValueFactory(new PropertyValueFactory<>("userID"));
+        
+        loadTable();
+    }
+
+    public void loadTable(){
+        try{
+            detailsTable.getItems().clear();
+            detailsTable.getItems().addAll(roleController.getAllRoles());
+        } catch(Exception e){
+            new Alert(AlertType.ERROR,e.getMessage()).show();
+        }
+    }
+
+    @FXML
     void navigateDelete(ActionEvent event) {
         try {
             String rsp = roleController.deleteRole(roleIDTxt.getText());
-            new Alert(Alert.AlertType.INFORMATION,rsp).show();
+            loadTable();
+            navigateReset(event);
+            new Alert(Alert.AlertType.INFORMATION, rsp).show();
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -78,9 +100,11 @@ public class ManageRoleController {
                     userIDTxt.getText()
             );
             String rsp = roleController.saveRole(roleDTO);
-            new Alert(Alert.AlertType.INFORMATION,rsp).show();
+            new Alert(Alert.AlertType.INFORMATION, rsp).show();
+            loadTable();
+            navigateReset(event);
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -93,10 +117,13 @@ public class ManageRoleController {
                     userIDTxt.getText()
             );
             String rsp = roleController.updateRole(roleDTO);
-            new Alert(Alert.AlertType.INFORMATION,rsp).show();
+            new Alert(Alert.AlertType.INFORMATION, rsp).show();
+            loadTable();
+            navigateReset(event);
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+
     }
 
 }

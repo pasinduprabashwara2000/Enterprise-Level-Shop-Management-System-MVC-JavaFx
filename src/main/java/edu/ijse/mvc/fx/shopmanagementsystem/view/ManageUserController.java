@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
+
 import java.util.Date;
 
 public class ManageUserController {
@@ -73,10 +75,33 @@ public class ManageUserController {
     private TextField userNameTxt;
 
     @FXML
+    public void initialize(){
+        colId.setCellValueFactory(new PropertyValueFactory<>("userID"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        colPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
+        colActive.setCellValueFactory(new PropertyValueFactory<>("activeStatus"));
+        colCreatedAt.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
+
+        loadTable();
+
+    }
+    
+    public void loadTable(){
+        try{
+            detailsTable.getItems().clear();
+            detailsTable.getItems().addAll(userController.getAllUsers());
+        } catch(Exception e){
+            new Alert(AlertType.ERROR,e.getMessage()).show();
+        }
+    }
+
+    @FXML
     void navigateDelete(ActionEvent event) {
         try {
             String rsp = userController.deleteUser(userIDTxt.getText());
-            new Alert(AlertType.INFORMATION,rsp);
+            new Alert(AlertType.INFORMATION,rsp).show();
+            loadTable();
+            navigateReset(event);
         } catch (Exception e) {
             new Alert(AlertType.ERROR,e.getMessage()).show();
         }
@@ -100,11 +125,11 @@ public class ManageUserController {
                     passwordTxt.getText(),
                     activeStatusPicker.getValue(),
                     datePicker.getValue()
-
-
             );
             String rsp = userController.saveUser(userDTO);
             new Alert(AlertType.INFORMATION,rsp).show();
+            loadTable();
+            navigateReset(event);
         } catch (Exception e) {
             new Alert(AlertType.ERROR,e.getMessage()).show();
         }
@@ -122,6 +147,8 @@ public class ManageUserController {
             );
             String rsp = userController.updateUser(userDTO);
             new Alert(AlertType.INFORMATION,rsp).show();
+            loadTable();
+            navigateReset(event);
         } catch (Exception e) {
             new Alert(AlertType.ERROR,e.getMessage()).show();
         }

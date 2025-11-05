@@ -26,7 +26,7 @@ public class UserModel {
     public String updateUser(UserDTO userDTO) throws Exception {
 
         Connection conn = DBConnection.getInstance().getConnection();
-        String sql = "UPDATE User SET user_name=?, password=?, active=?, created_at=? WHERE user_id=?";
+        String sql = "UPDATE User SET userName=?, password=?, active=?, createdAt=? WHERE userID=?";
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, userDTO.getUserName());
         pstm.setString(2, userDTO.getPassword());
@@ -40,7 +40,7 @@ public class UserModel {
     public String deleteUser(String userID) throws Exception {
 
         Connection conn = DBConnection.getInstance().getConnection();
-        String sql = "DELETE FROM User WHERE user_id=?";
+        String sql = "DELETE FROM User WHERE userID=?";
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, userID);
 
@@ -50,17 +50,17 @@ public class UserModel {
     public UserDTO searchUser(String userID) throws Exception {
 
         Connection conn = DBConnection.getInstance().getConnection();
-        String sql = "SELECT * FROM User WHERE user_id=?";
+        String sql = "SELECT * FROM User WHERE userID=?";
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, userID);
         var rst = pstm.executeQuery();
         if (rst.next()) {
             return new UserDTO(
-                    rst.getString("user_id"),
-                    rst.getString("name"),
+                    rst.getString("userID"),
+                    rst.getString("userName"),
                     rst.getString("password"),
                     rst.getString("active"),
-                    rst.getDate("created_at").toLocalDate()
+                    rst.getDate("createdAt").toLocalDate()
             );
         }
         return null;
@@ -75,11 +75,11 @@ public class UserModel {
         ArrayList<UserDTO> userList = new ArrayList<>();
         while (rst.next()) {
             userList.add(new UserDTO(
-                    rst.getString("user_id"),
-                    rst.getString("name"),
+                    rst.getString("userID"),
+                    rst.getString("userName"),
                     rst.getString("password"),
                     rst.getString("active"),
-                    rst.getDate("created_at").toLocalDate()
+                    rst.getDate("createdAt").toLocalDate()
             ));
         }
         return userList;

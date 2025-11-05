@@ -41,7 +41,7 @@ public class ManageCustomerController {
     private Button deleteBtn;
 
     @FXML
-    private TableView<CustomerDTO> detailsTabel;
+    private TableView<CustomerDTO> detailsTable;
 
     @FXML
     private Label emailLabel;
@@ -89,8 +89,8 @@ public class ManageCustomerController {
 
     public void loadTable(){
         try {
-            detailsTabel.getItems().clear();
-            detailsTabel.getItems().addAll(customerController.getAllCustomers());
+            detailsTable.getItems().clear();
+            detailsTable.getItems().addAll(customerController.getAllCustomers());
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage());
         }
