@@ -51,11 +51,11 @@
       <Button fx:id="resetBtn" layoutX="706.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateReset" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Reset" />
       <TableView fx:id="detailsTable" layoutX="33.0" layoutY="322.0" prefHeight="264.0" prefWidth="1003.0">
         <columns>
-            <TableColumn fx:id="colCusId" prefWidth="200.0" text="Customer ID" />
-            <TableColumn fx:id="colCusName" prefWidth="200.0" text="Customer Name" />
-            <TableColumn fx:id="colCusNum" prefWidth="200.0" text="Contact Number" />
-            <TableColumn fx:id="colEmailAddress" prefWidth="200.0" text="Email Address" />
-            <TableColumn fx:id="colLoyaltyCode" prefWidth="202.0" text="Loyalty Code" />
+            <TableColumn fx:id="colCusId" prefWidth="104.0" text="Customer ID" />
+            <TableColumn fx:id="colCusName" prefWidth="213.0" text="Customer Name" />
+            <TableColumn fx:id="colCusNum" prefWidth="223.0" text="Contact Number" />
+            <TableColumn fx:id="colEmailAddress" prefWidth="354.0" text="Email Address" />
+            <TableColumn fx:id="colLoyaltyCode" prefWidth="108.0" text="Loyalty Code" />
         </columns>
       </TableView>
    </children>

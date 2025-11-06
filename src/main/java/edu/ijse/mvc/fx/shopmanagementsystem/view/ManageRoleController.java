@@ -57,7 +57,7 @@ public class ManageRoleController {
     @FXML
     public void initialize(){
         colRoleID.setCellValueFactory(new PropertyValueFactory<>("roleID"));
-        colRoleName.setCellValueFactory(new PropertyValueFactory<>("roleName"));
+        colRoleName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colUserID.setCellValueFactory(new PropertyValueFactory<>("userID"));
         
         loadTable();

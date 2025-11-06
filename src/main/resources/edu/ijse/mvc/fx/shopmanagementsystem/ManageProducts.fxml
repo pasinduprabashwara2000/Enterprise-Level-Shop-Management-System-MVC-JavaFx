@@ -77,17 +77,17 @@
         <Button fx:id="deleteBtn" layoutX="536.0" layoutY="365.0" onAction="#navigateDelete" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Delete" />
         <Button fx:id="resetBtn" layoutX="690.0" layoutY="365.0" onAction="#navigateReset" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Reset" />
 
-        <TableView fx:id="productTable" layoutX="20.0" layoutY="433.0" prefHeight="311.0" prefWidth="1003.0">
+        <TableView fx:id="detailsTable" layoutX="20.0" layoutY="433.0" prefHeight="311.0" prefWidth="1003.0">
             <columns>
                 <TableColumn fx:id="colProductID" prefWidth="100.0" text="Product ID" />
                 <TableColumn fx:id="colSKU" prefWidth="100.0" text="SKU" />
                 <TableColumn fx:id="colBarcode" prefWidth="100.0" text="Barcode" />
-                <TableColumn fx:id="colName" prefWidth="150.0" text="Name" />
-                <TableColumn fx:id="colUnit" prefWidth="100.0" text="Unit" />
-                <TableColumn fx:id="colUnitPrice" prefWidth="116.0" text="Unit Price" />
-                <TableColumn fx:id="colTaxRate" prefWidth="83.0" text="Tax Rate" />
-                <TableColumn fx:id="colActive" prefWidth="118.0" text="Active" />
-                <TableColumn fx:id="colCategoryID" prefWidth="132.0" text="Category ID" />
+                <TableColumn fx:id="colName" prefWidth="246.0" text="Name" />
+                <TableColumn fx:id="colUnit" prefWidth="60.0" text="Unit" />
+                <TableColumn fx:id="colUnitPrice" prefWidth="107.0" text="Unit Price" />
+                <TableColumn fx:id="colTaxRate" prefWidth="99.0" text="Tax Rate" />
+                <TableColumn fx:id="colActive" prefWidth="87.0" text="Active" />
+                <TableColumn fx:id="colCategoryID" prefWidth="100.0" text="Category ID" />
             </columns>
         </TableView>
     </children>

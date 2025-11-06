@@ -4,19 +4,17 @@ import edu.ijse.mvc.fx.shopmanagementsystem.DTO.InventoryDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.InventoryController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.time.LocalDate;
 
 public class ManageInventoryController {
 
     private final InventoryController inventoryController = new InventoryController();
 
     @FXML
-    private TableColumn<InventoryDTO, String> colLastStockUpdate;
+    private TableColumn<InventoryDTO, LocalDate> colLastStockUpdate;
 
     @FXML
     private TableColumn<InventoryDTO, String> colProductId;
@@ -29,6 +27,9 @@ public class ManageInventoryController {
 
     @FXML
     private TableColumn<InventoryDTO, Integer> colReorderQYT;
+
+    @FXML
+    private DatePicker datePicker;
 
     @FXML
     private Button deleteBtn;
@@ -61,6 +62,9 @@ public class ManageInventoryController {
     private Label reOrderQYTLabel;
 
     @FXML
+    private TextField reOrderQytTxt;
+
+    @FXML
     private Button resetBtn;
 
     @FXML
@@ -70,10 +74,32 @@ public class ManageInventoryController {
     private Button updateBtn;
 
     @FXML
+    public void initialize(){
+        colProductId.setCellValueFactory(new PropertyValueFactory<>("productID"));
+        colQYT.setCellValueFactory(new PropertyValueFactory<>("QYT"));
+        colReorderLevel.setCellValueFactory(new PropertyValueFactory<>("reOrderLevel"));
+        colReorderQYT.setCellValueFactory(new PropertyValueFactory<>("reOrderQYT"));
+        colLastStockUpdate.setCellValueFactory(new PropertyValueFactory<>("lastStockUpdate"));
+        
+        loadTable();
+    }
+
+    public void loadTable(){
+        try {
+            detailsTabel.getItems().clear();
+            detailsTabel.getItems().addAll(inventoryController.getAllInventories());    
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage());
+        }
+    }
+
+    @FXML
     void navigateDelete(ActionEvent event) {
         try {
             String res = inventoryController.deleteInventory(idTxt.getText());
             new Alert(Alert.AlertType.INFORMATION,res);
+            loadTable();
+            navigateReset(event);
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage());
         }
@@ -84,7 +110,7 @@ public class ManageInventoryController {
         idTxt.clear();
         qytTxt.clear();
         reOrderLevelTxt.clear();
-        reOrderQYTLabel.setText("0");
+        reOrderQytTxt.clear();
     }
 
     @FXML
@@ -94,11 +120,13 @@ public class ManageInventoryController {
                     idTxt.getText(),
                     Integer.parseInt(qytTxt.getText()),
                     Integer.parseInt(reOrderLevelTxt.getText()),
-                    Integer.parseInt(reOrderQYTLabel.getText()),
-                    null
+                    Integer.parseInt(reOrderQytTxt.getText()),
+                    datePicker.getValue()
             );
             String res = inventoryController.saveInventory(inventoryDTO);
             new Alert(Alert.AlertType.INFORMATION,res);
+            loadTable();
+            navigateReset(event);
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage());
         }
@@ -111,11 +139,13 @@ public class ManageInventoryController {
                     idTxt.getText(),
                     Integer.parseInt(qytTxt.getText()),
                     Integer.parseInt(reOrderLevelTxt.getText()),
-                    Integer.parseInt(reOrderQYTLabel.getText()),
-                    null
+                    Integer.parseInt(reOrderQytTxt.getText()),
+                    datePicker.getValue()
             );
             String res = inventoryController.updateInventory(inventoryDTO);
             new Alert(Alert.AlertType.INFORMATION,res);
+            loadTable();
+            navigateReset(event);
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage());
         }

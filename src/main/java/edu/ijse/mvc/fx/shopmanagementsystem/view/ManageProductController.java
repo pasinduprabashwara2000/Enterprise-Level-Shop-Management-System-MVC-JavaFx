@@ -10,6 +10,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ManageProductController {
 
@@ -61,7 +62,7 @@ public class ManageProductController {
     private TextField productIDTxt;
 
     @FXML
-    private TableView<ProductDTO> productTable;
+    private TableView<ProductDTO> detailsTable;
 
     @FXML
     private Button resetBtn;
@@ -85,10 +86,36 @@ public class ManageProductController {
     private Button updateBtn;
 
     @FXML
+    private void initialize(){
+        colProductID.setCellValueFactory(new PropertyValueFactory<>("productID"));
+        colSKU.setCellValueFactory(new PropertyValueFactory<>("SKU"));
+        colBarcode.setCellValueFactory(new PropertyValueFactory<>("barCode"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colUnit.setCellValueFactory(new PropertyValueFactory<>("unit"));
+        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+        colTaxRate.setCellValueFactory(new PropertyValueFactory<>("taxRate"));
+        colActive.setCellValueFactory(new PropertyValueFactory<>("active"));
+        colCategoryID.setCellValueFactory(new PropertyValueFactory<>("categoryID"));
+          
+        loadTable();
+    }
+
+    public void loadTable(){
+        try{
+            detailsTable.getItems().clear();
+            detailsTable.getItems().addAll(productController.getAllProducts());
+        } catch (Exception e){
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
+    }
+
+    @FXML
     void navigateDelete(ActionEvent event) {
         try {
             String rsp = productController.deleteProduct(productIDTxt.getText());
             new Alert(Alert.AlertType.INFORMATION, rsp).show();
+            loadTable();
+            navigateReset(event);
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
@@ -123,6 +150,8 @@ public class ManageProductController {
             );
             String rsp = productController.saveProduct(productDTO);
             new Alert(Alert.AlertType.INFORMATION, rsp).show();
+            loadTable();
+            navigateReset(event);
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
@@ -144,6 +173,8 @@ public class ManageProductController {
             );
             String rsp = productController.updateProduct(productDTO);
             new Alert(Alert.AlertType.INFORMATION, rsp).show();
+            loadTable();
+            navigateReset(event);
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }

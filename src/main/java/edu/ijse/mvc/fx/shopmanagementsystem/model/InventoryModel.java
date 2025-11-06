@@ -1,6 +1,7 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.InventoryDTO;
@@ -17,7 +18,7 @@ public class InventoryModel {
         pstm.setInt(2, inventoryDTO.getQYT());
         pstm.setInt(3, inventoryDTO.getReOrderLevel());
         pstm.setInt(4, inventoryDTO.getReOrderQYT());
-        pstm.setDate(5, new java.sql.Date(inventoryDTO.getLastStockUpdate().getTime()));
+        pstm.setDate(5, Date.valueOf(inventoryDTO.getLastStockUpdate()));
 
         return pstm.executeUpdate() > 0 ? "Inventory Saved Successfully" : "Inventory Save Failed";
     
@@ -31,7 +32,7 @@ public class InventoryModel {
         pstm.setInt(1, inventoryDTO.getQYT());
         pstm.setInt(2, inventoryDTO.getReOrderLevel());
         pstm.setInt(3, inventoryDTO.getReOrderQYT());
-        pstm.setDate(4, new java.sql.Date(inventoryDTO.getLastStockUpdate().getTime()));
+        pstm.setDate(4, Date.valueOf(inventoryDTO.getLastStockUpdate()));
         pstm.setString(5, inventoryDTO.getProductID());
 
         return pstm.executeUpdate() > 0 ? "Inventory Updated Successfully" : "Inventory Update Failed";
@@ -62,7 +63,7 @@ public class InventoryModel {
                     rst.getInt("QYT"),
                     rst.getInt("reOrderLevel"),
                     rst.getInt("reOrderQYT"),
-                    rst.getDate("lastStockUpdate")
+                    rst.getDate("lastStockUpdate").toLocalDate()
             );
         }
         return null;
@@ -82,7 +83,7 @@ public class InventoryModel {
                     rst.getInt("QYT"),
                     rst.getInt("reOrderLevel"),
                     rst.getInt("reOrderQYT"),
-                    rst.getDate("lastStockUpdate")
+                    rst.getDate("lastStockUpdate").toLocalDate()
             ));
         }
         return allInventories;
