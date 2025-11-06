@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class SupplyDTO {
 
     private String productID;
-    private String supplyID;
+    private String supplierID;
     private double lastCost;
     private String supplierProductCode;
 

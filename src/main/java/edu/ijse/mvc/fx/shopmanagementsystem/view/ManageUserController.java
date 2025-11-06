@@ -79,7 +79,7 @@ public class ManageUserController {
         colId.setCellValueFactory(new PropertyValueFactory<>("userID"));
         colName.setCellValueFactory(new PropertyValueFactory<>("userName"));
         colPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
-        colActive.setCellValueFactory(new PropertyValueFactory<>("activeStatus"));
+        colActive.setCellValueFactory(new PropertyValueFactory<>("active"));
         colCreatedAt.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
 
         loadTable();

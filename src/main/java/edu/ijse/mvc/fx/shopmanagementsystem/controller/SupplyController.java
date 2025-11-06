@@ -16,12 +16,12 @@ public class SupplyController {
         return supplyModel.updateSupply(supplyDTO);
     }
 
-    public String deleteSupply(String productID, String supplyID) throws Exception {
-        return supplyModel.deleteSupply(productID, supplyID);
+    public String deleteSupply(String productID, String supplierID) throws Exception {
+        return supplyModel.deleteSupply(productID, supplierID);
     }
 
-    public SupplyDTO searchSupply(String productID, String supplyID) throws Exception {
-        return supplyModel.searchSupply(productID, supplyID);
+    public SupplyDTO searchSupply(String productID, String supplierID) throws Exception {
+        return supplyModel.searchSupply(productID, supplierID);
     }
 
     public ArrayList<SupplyDTO> getAllSupplies() throws Exception {

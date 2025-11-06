@@ -111,6 +111,7 @@ public class ManageInventoryController {
         qytTxt.clear();
         reOrderLevelTxt.clear();
         reOrderQytTxt.clear();
+        datePicker.setValue(null);
     }
 
     @FXML
