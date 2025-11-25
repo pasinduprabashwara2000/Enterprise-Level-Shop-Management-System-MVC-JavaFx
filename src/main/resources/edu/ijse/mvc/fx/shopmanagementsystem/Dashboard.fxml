@@ -1,43 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1075.0" styleClass="white-bg" stylesheets="@css/style3.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.DashboardController">
+<AnchorPane prefHeight="900.0" prefWidth="1075.0" styleClass="white-bg" stylesheets="@css/style3.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.DashboardController">
 
     <children>
 
-         <VBox alignment="CENTER" layoutX="22.0" layoutY="50.0" prefWidth="230" spacing="10" styleClass="box1">
-             <Label styleClass="dashboard-label" text="📦 Total Products" />
-             <Label fx:id="lblProductsCount" styleClass="dashboard-value" text="0" />
-         </VBox>
+        <FlowPane fx:id="flowStats" hgap="20" layoutX="18.0" layoutY="70.0" prefWidth="1040" vgap="20">
 
-         <VBox alignment="CENTER" layoutX="281.0" layoutY="50.0" prefWidth="230" spacing="10" styleClass="box4">
-             <Label styleClass="dashboard-label" text="👥 Total Customers" />
-             <Label fx:id="lblCustomerCount" styleClass="dashboard-value" text="0" />
-         </VBox>
+            <!-- 1 -->
+            <VBox alignment="CENTER" prefWidth="230" spacing="10" styleClass="box1">
+                <Label styleClass="dashboard-label" text="📦 Total Products" />
+                <Label fx:id="lblProductsCount" styleClass="dashboard-value" text="0" />
+            </VBox>
 
-         <VBox alignment="CENTER" layoutX="539.0" layoutY="50.0" prefWidth="230" spacing="10" styleClass="box8">
-             <Label styleClass="dashboard-label" text="🧾 Total Sales" />
-             <Label fx:id="lblInvoiceCount" styleClass="dashboard-value" text="0" />
-         </VBox>
+               <!-- 2 -->
+            <VBox alignment="CENTER" prefWidth="230" spacing="10" styleClass="box2">
+                <Label styleClass="dashboard-label" text="👥 Total Customers" />
+                <Label fx:id="lblCustomerCount" styleClass="dashboard-value" text="0" />
+            </VBox>
 
-         <VBox alignment="CENTER" layoutX="799.0" layoutY="50.0" prefWidth="230" spacing="10" styleClass="box3">
-             <Label styleClass="dashboard-label" text="💰 Total Revenue" />
-             <Label fx:id="lblRevenue" styleClass="dashboard-value" text="Rs. 0.00" />
-         </VBox>
+            <!-- 3 -->
+            <VBox alignment="CENTER" prefWidth="230" spacing="10" styleClass="box3">
+                <Label styleClass="dashboard-label" text="🧾 Total Invoices" />
+                <Label fx:id="lblSalesCount" styleClass="dashboard-value" text="0" />
+            </VBox>
 
-        <Label layoutX="17.0" layoutY="210.0" prefHeight="51.0" prefWidth="640.0" styleClass="section-title" text="🔥 Top Selling Products">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font></Label>
+            <!-- 4 -->
+            <VBox alignment="CENTER" prefWidth="230" spacing="10" styleClass="box4">
+                <Label styleClass="dashboard-label" text="💰 Total Revenue" />
+                <Label fx:id="lblRevenue" styleClass="dashboard-value" text="Rs. 0.00" />
+            </VBox>
 
-        <FlowPane fx:id="flowTopProducts" hgap="20" layoutX="17.0" layoutY="240.0" prefWidth="1040" vgap="20">
-            <!-- Product cards dynamically added here -->
+            <!-- 5 -->
+            <VBox alignment="CENTER" prefWidth="230" spacing="10" styleClass="box5">
+                <Label styleClass="dashboard-label" text="🏭 Total Suppliers" />
+                <Label fx:id="lblSupplierCount" styleClass="dashboard-value" text="0" />
+            </VBox>
+
+            <!-- 6 -->
+            <VBox alignment="CENTER" prefWidth="230" spacing="10" styleClass="box6">
+                <Label styleClass="dashboard-label" text="🛒 Purchase Orders" />
+                <Label fx:id="lblPurchaseOrders" styleClass="dashboard-value" text="0" />
+            </VBox>
+
+            <!-- 7 -->
+            <VBox alignment="CENTER" prefWidth="230" spacing="10" styleClass="box7">
+                <Label styleClass="dashboard-label" text="↩️ Returns" />
+                <Label fx:id="lblReturnCount" styleClass="dashboard-value" text="0" />
+            </VBox>
+
+            <!-- 8 -->
+            <VBox alignment="CENTER" prefWidth="230" spacing="10" styleClass="box8">
+                <Label styleClass="dashboard-label" text="📊 Inventory Items" />
+                <Label fx:id="lblInventoryCount" styleClass="dashboard-value" text="0" />
+            </VBox>
+
         </FlowPane>
+      <TableView fx:id="detailsTable" layoutX="20.0" layoutY="382.0" prefHeight="282.0" prefWidth="1003.0" stylesheets="@css/style2.css">
+         <columns>
+            <TableColumn fx:id="colProductID" prefWidth="100.0" text="Product ID" />
+            <TableColumn fx:id="colSKU" prefWidth="100.0" text="SKU" />
+            <TableColumn fx:id="colBarcode" prefWidth="100.0" text="Barcode" />
+            <TableColumn fx:id="colName" prefWidth="246.0" text="Name" />
+            <TableColumn fx:id="colUnit" prefWidth="60.0" text="Unit" />
+            <TableColumn fx:id="colUnitPrice" prefWidth="107.0" text="Unit Price" />
+            <TableColumn fx:id="colTaxRate" prefWidth="99.0" text="Tax Rate" />
+            <TableColumn fx:id="colActive" prefWidth="87.0" text="Active" />
+            <TableColumn fx:id="colCategoryID" prefWidth="100.0" text="Category ID" />
+         </columns>
+      </TableView>
+      <Label layoutX="20.0" layoutY="338.0" prefHeight="18.0" prefWidth="217.0" text="Top Selling Products" textFill="#070707">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="27.0" prefHeight="18.0" prefWidth="217.0" text="Summary" textFill="#070707">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
 
     </children>
 </AnchorPane>

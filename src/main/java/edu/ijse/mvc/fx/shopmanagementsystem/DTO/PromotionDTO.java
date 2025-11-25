@@ -12,16 +12,11 @@ public class PromotionDTO {
 
     private String promoteID;
     private String name;
-    private Type type;
+    private String type;
     private Double value;
     private Date startAt;
     private Date endAt;
     private boolean active;
-    private String categoryID;
     private String productID;
 
-    public enum Type {
-        PERCENT, AMOUNT
-    }
-    
 }

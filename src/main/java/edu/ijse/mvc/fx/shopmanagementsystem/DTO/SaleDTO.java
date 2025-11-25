@@ -1,6 +1,6 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.DTO;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,11 +17,7 @@ public class SaleDTO {
     private double taxTotal;
     private double discountTotal;
     private double grandTotal;
-    private Date date;
-    private Status status;
-
-    public enum Status {
-        COMPLETED, PENDING, CANCELLED
-    }
+    private LocalDate date;
+    private String status;
 
 }

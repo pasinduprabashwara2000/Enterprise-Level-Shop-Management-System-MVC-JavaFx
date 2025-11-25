@@ -11,7 +11,7 @@ public class ReturnProductModel {
     public String saveReturnProduct(ReturnProductDTO returnProductDTO) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO ReturnProduct VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO ReturnProduct VALUES(?,?,?,?,?,?,?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, returnProductDTO.getReturnItemId());
         pstm.setString(2, returnProductDTO.getReturnId());
@@ -68,7 +68,7 @@ public class ReturnProductModel {
                 rst.getString("saleItemId"),
                 rst.getInt("quantity"),
                 rst.getDouble("refundAmount"),
-                (ReturnProductDTO.Action) rst.getObject("action")
+                rst.getString("action")
             );
         }
         return null;
@@ -90,7 +90,7 @@ public class ReturnProductModel {
                 rst.getString("saleItemId"),
                 rst.getInt("quantity"),
                 rst.getDouble("refundAmount"),
-                (ReturnProductDTO.Action) rst.getObject("action")
+                rst.getString("action")
             ));
         }
         return allReturnProducts;
@@ -113,7 +113,7 @@ public class ReturnProductModel {
                 rst.getString("saleItemId"),
                 rst.getInt("quantity"),
                 rst.getDouble("refundAmount"),
-                (ReturnProductDTO.Action) rst.getObject("action")
+                rst.getString("action")
             ));
         }
         return returnProductsByReturnId;

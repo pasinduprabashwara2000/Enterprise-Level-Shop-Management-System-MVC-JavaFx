@@ -11,17 +11,16 @@ public class PromotionModel {
     public String savePromotion(PromotionDTO promotionDTO) throws Exception {
         
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO Promotion (promoteID, name, type, discount, startAt, endAt, active, categoryID, productID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Promotion VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, promotionDTO.getPromoteID());
         pstm.setString(2, promotionDTO.getName());
-        pstm.setString(3, promotionDTO.getType().name());
+        pstm.setString(3, promotionDTO.getType());
         pstm.setDouble(4, promotionDTO.getValue());
         pstm.setDate(5, new java.sql.Date(promotionDTO.getStartAt().getTime()));
         pstm.setDate(6, new java.sql.Date(promotionDTO.getEndAt().getTime()));
         pstm.setBoolean(7, promotionDTO.isActive());
-        pstm.setString(8, promotionDTO.getCategoryID());
-        pstm.setString(9, promotionDTO.getProductID());
+        pstm.setString(8, promotionDTO.getProductID());
 
         return pstm.executeUpdate() > 0 ? "Promotion Saved Successfully" : "Promotion Save Failed";
     }
@@ -32,14 +31,13 @@ public class PromotionModel {
         String sql = "UPDATE Promotion SET name=?, type=?, discount=?, startAt=?, endAt=?, active=?, categoryID=?, productID=? WHERE promoteID=?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, promotionDTO.getName());
-        pstm.setString(2, promotionDTO.getType().name());
+        pstm.setString(2, promotionDTO.getType());
         pstm.setDouble(3, promotionDTO.getValue());
         pstm.setDate(4, new java.sql.Date(promotionDTO.getStartAt().getTime()));
         pstm.setDate(5, new java.sql.Date(promotionDTO.getEndAt().getTime()));
         pstm.setBoolean(6, promotionDTO.isActive());
-        pstm.setString(7, promotionDTO.getCategoryID());
-        pstm.setString(8, promotionDTO.getProductID());
-        pstm.setString(9, promotionDTO.getPromoteID());
+        pstm.setString(7, promotionDTO.getProductID());
+        pstm.setString(8, promotionDTO.getPromoteID());
 
         return pstm.executeUpdate() > 0 ? "Promotion Updated Successfully" : "Promotion Update Failed";
 }
@@ -66,12 +64,11 @@ public class PromotionModel {
             return new PromotionDTO(
                     rst.getString("promoteID"),
                     rst.getString("name"),
-                    PromotionDTO.Type.valueOf(rst.getString("type")),
+                    rst.getString("type"),
                     rst.getDouble("value"),
                     rst.getDate("startAt"),
                     rst.getDate("endAt"),
                     rst.getBoolean("active"),
-                    rst.getString("categoryID"),
                     rst.getString("productID")
             );
         }        
@@ -88,12 +85,11 @@ public class PromotionModel {
             promotionList.add(new PromotionDTO(
                     rst.getString("promoteID"),
                     rst.getString("name"),
-                    PromotionDTO.Type.valueOf(rst.getString("type")),
+                    rst.getString("type"),
                     rst.getDouble("value"),
                     rst.getDate("startAt"),
                     rst.getDate("endAt"),
                     rst.getBoolean("active"),
-                    rst.getString("categoryID"),
                     rst.getString("productID")
             ));
         }

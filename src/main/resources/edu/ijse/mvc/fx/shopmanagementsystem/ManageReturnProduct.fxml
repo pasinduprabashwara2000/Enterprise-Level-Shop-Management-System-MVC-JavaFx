@@ -9,6 +9,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <AnchorPane prefHeight="640.0" prefWidth="1075.0" styleClass="white-bg" stylesheets="@css/style2.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.ManageReturnProductController">
 
     <children>
@@ -51,7 +53,14 @@
         <Label layoutX="34.0" layoutY="240.0" prefWidth="157.0" text="Action :">
             <font><Font size="15.0" /></font>
         </Label>
-        <ComboBox fx:id="actionCmb" layoutX="206.0" layoutY="238.0" prefHeight="35.0" prefWidth="259.0" promptText="Select Action" />
+        <ComboBox fx:id="actionCmb" layoutX="206.0" layoutY="238.0" prefHeight="35.0" prefWidth="259.0" promptText="Select Action">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="REFUND" />
+                    <String fx:value="EXCHANGE" />
+                </FXCollections>
+            </items>
+        </ComboBox>
 
         <Button fx:id="saveBtn" layoutX="236.0" layoutY="304.0" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Save" />
         <Button fx:id="updateBtn" layoutX="395.0" layoutY="304.0" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Update" />

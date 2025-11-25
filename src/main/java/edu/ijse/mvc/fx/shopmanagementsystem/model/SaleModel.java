@@ -1,6 +1,7 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SaleDTO;
@@ -20,7 +21,7 @@ public class SaleModel {
         pstm.setDouble(5, saleDTO.getTaxTotal());
         pstm.setDouble(6, saleDTO.getDiscountTotal());
         pstm.setDouble(7, saleDTO.getGrandTotal());
-        pstm.setDate(8, saleDTO.getDate());
+        pstm.setDate(8, Date.valueOf(saleDTO.getDate()));
         pstm.setObject(9, saleDTO.getStatus());
 
         return pstm.executeUpdate() > 0 ? "Sale Saved Successfully" : "Sale Save Failed";
@@ -38,7 +39,7 @@ public class SaleModel {
         pstm.setDouble(4, saleDTO.getTaxTotal());
         pstm.setDouble(5, saleDTO.getDiscountTotal());
         pstm.setDouble(6, saleDTO.getGrandTotal());
-        pstm.setDate(7, saleDTO.getDate());
+        pstm.setDate(7, Date.valueOf(saleDTO.getDate()));
         pstm.setObject(8, saleDTO.getStatus());
         pstm.setString(9, saleDTO.getSaleID());
 
@@ -74,8 +75,8 @@ public class SaleModel {
                     rst.getDouble("taxTotal"),
                     rst.getDouble("discountTotal"),
                     rst.getDouble("grandTotal"),
-                    rst.getDate("date"),
-                    SaleDTO.Status.valueOf(rst.getString("status"))
+                    rst.getDate("date").toLocalDate(),
+                    rst.getString("status")
             );
         }
         return null;
@@ -99,8 +100,8 @@ public class SaleModel {
                     rst.getDouble("taxTotal"),
                     rst.getDouble("discountTotal"),
                     rst.getDouble("grandTotal"),
-                    rst.getDate("date"),
-                    SaleDTO.Status.valueOf(rst.getString("status"))
+                    rst.getDate("date").toLocalDate(),
+                    rst.getString("status")
             ));
         }
         return saleList;

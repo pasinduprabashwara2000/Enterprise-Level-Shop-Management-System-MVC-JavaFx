@@ -89,7 +89,7 @@ public class ManageInventoryController {
             detailsTabel.getItems().clear();
             detailsTabel.getItems().addAll(inventoryController.getAllInventories());    
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage());
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
 
@@ -97,11 +97,11 @@ public class ManageInventoryController {
     void navigateDelete(ActionEvent event) {
         try {
             String res = inventoryController.deleteInventory(idTxt.getText());
-            new Alert(Alert.AlertType.INFORMATION,res);
+            new Alert(Alert.AlertType.INFORMATION,res).show();
             loadTable();
             navigateReset(event);
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage());
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
 
@@ -125,11 +125,11 @@ public class ManageInventoryController {
                     datePicker.getValue()
             );
             String res = inventoryController.saveInventory(inventoryDTO);
-            new Alert(Alert.AlertType.INFORMATION,res);
+            new Alert(Alert.AlertType.INFORMATION,res).show();
             loadTable();
             navigateReset(event);
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage());
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
 
@@ -144,11 +144,11 @@ public class ManageInventoryController {
                     datePicker.getValue()
             );
             String res = inventoryController.updateInventory(inventoryDTO);
-            new Alert(Alert.AlertType.INFORMATION,res);
+            new Alert(Alert.AlertType.INFORMATION,res).show();
             loadTable();
             navigateReset(event);
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage());
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
 

@@ -1,35 +1,78 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.model.DashboardModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
-
-import java.util.List;
 
 public class DashboardController {
 
     @FXML
-    private FlowPane flowTopProducts;
+    private FlowPane flowStats;
+
+    @FXML
+    private Label lblActiveUsers;
+
+    @FXML
+    private Label lblCategoryCount;
 
     @FXML
     private Label lblCustomerCount;
 
     @FXML
-    private Label lblInvoiceCount;
+    private Label lblDeliveries;
+
+    @FXML
+    private Label lblEmployeeCount;
+
+    @FXML
+    private Label lblInventoryCount;
+
+    @FXML
+    private Label lblLowStockCount;
+
+    @FXML
+    private Label lblMonthlySales;
+
+    @FXML
+    private Label lblPaymentCount;
+
+    @FXML
+    private Label lblPendingOrders;
+
+    @FXML
+    private Label lblPendingPayments;
 
     @FXML
     private Label lblProductsCount;
 
     @FXML
+    private Label lblPromotionCount;
+
+    @FXML
+    private Label lblPurchaseOrders;
+
+    @FXML
+    private Label lblReturnCount;
+
+    @FXML
     private Label lblRevenue;
+
+    @FXML
+    private Label lblSalesCount;
+
+    @FXML
+    private Label lblSupplierCount;
+
+    @FXML
+    private Label lblTodaySales;
 
     public void initialize(){
         loadCustomerCount();
-        loadTopProducts();
+        loadProductsCount();
+        //loadInvoiceCount();
+        loadSupplerCount();
     }
 
     public void loadProductsCount(){
@@ -37,7 +80,6 @@ public class DashboardController {
             int count = DashboardModel.getProductsCount();
             lblProductsCount.setText(String.valueOf(count));
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage());
             lblProductsCount.setText("Error");
         }
     }
@@ -47,33 +89,26 @@ public class DashboardController {
             int count = DashboardModel.getCustomerCount();
             lblCustomerCount.setText(String.valueOf(count));
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage());
             lblCustomerCount.setText("Error");
         }
     }
 
-    private void loadTopProducts() {
+    public void loadSupplerCount(){
         try {
-            List<ProductDTO> topProducts = DashboardModel.getTopSellingProducts();
-
-            for (ProductDTO product : topProducts) {
-                VBox card = new VBox();
-                card.setSpacing(5);
-                card.setPrefWidth(200);
-                card.setPrefHeight(120);
-                card.getStyleClass().add("product-card");
-
-                Label lblName = new Label(product.getName());
-                lblName.getStyleClass().add("product-name");
-
-                card.getChildren().addAll(lblName);
-
-                flowTopProducts.getChildren().add(card);
-            }
-
+            int count = DashboardModel.getSupplierCount();
+            lblSupplierCount.setText(String.valueOf(count));
         } catch (Exception e) {
-            e.printStackTrace();
+            lblSupplierCount.setText("Error");
         }
     }
+
+    public void loadInventoryCount(){
+        try {
+
+        } catch (Exception e) {
+
+        }
+    }
+
 }
 

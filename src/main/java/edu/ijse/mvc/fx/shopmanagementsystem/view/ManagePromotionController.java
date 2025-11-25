@@ -1,7 +1,6 @@
-/*package edu.ijse.mvc.fx.shopmanagementsystem.view;
+package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
 import java.sql.Date;
-
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.PromotionDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.PromotionController;
 import javafx.event.ActionEvent;
@@ -13,16 +12,17 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ManagePromotionController {
 
-    private final PromotionController promotionController = new PromotionController()
+    private final PromotionController promotionController = new PromotionController();
 
     @FXML
-    private ComboBox<?> activeCmb;
+    private ComboBox<String> activeCmb;
 
     @FXML
-    private TextField categoryIDTxt;
+    private ComboBox<String> typeCmb;
 
     @FXML
     private TableColumn<PromotionDTO, Boolean> colActive;
@@ -46,7 +46,7 @@ public class ManagePromotionController {
     private TableColumn<PromotionDTO, Date> colStartDate;
 
     @FXML
-    private TableColumn<PromotionDTO, Object> colType;
+    private TableColumn<PromotionDTO, String> colType;
 
     @FXML
     private TableColumn<PromotionDTO, Double> colValue;
@@ -79,9 +79,6 @@ public class ManagePromotionController {
     private DatePicker startDatePicker;
 
     @FXML
-    private ComboBox<?> typeCmb;
-
-    @FXML
     private Button updateBtn;
 
     @FXML
@@ -89,37 +86,37 @@ public class ManagePromotionController {
 
     @FXML
     void initialize() {
-        colPromotionID.setCellValueFactory(new PropertyValueFactory<>("promotionID"));
-        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colPromotionID.setCellValueFactory(new PropertyValueFactory<>("promoteID"));
         colProductID.setCellValueFactory(new PropertyValueFactory<>("productID"));
-        colCategoryID.setCellValueFactory(new PropertyValueFactory<>("categoryID"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colType.setCellValueFactory(new PropertyValueFactory<>("type"));
         colValue.setCellValueFactory(new PropertyValueFactory<>("value"));
-        colStartDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        colEndDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        colStartDate.setCellValueFactory(new PropertyValueFactory<>("startAt"));
+        colEndDate.setCellValueFactory(new PropertyValueFactory<>("endAt"));
         colActive.setCellValueFactory(new PropertyValueFactory<>("active"));
+        typeCmb.getItems().addAll("PERCENT","AMOUNT");
+        activeCmb.getItems().addAll("Active", "Inactive");
         loadTable();
-
     }
-    
+
     @FXML
-    public void loadTable(){
-        try{
+    public void loadTable() {
+        try {
             promotionTable.getItems().clear();
             promotionTable.getItems().addAll(promotionController.getAllPromotions());
-        } catch (Exception e){
+        } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
-
 
     @FXML
     void navigateDelete(ActionEvent event) {
-        try{
+        try {
             String res = promotionController.deletePromotion(promoteIDTxt.getText());
             loadTable();
             navigateReset(event);
             new Alert(Alert.AlertType.INFORMATION, res).show();
-        } catch (Exception e){
+        } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -129,7 +126,6 @@ public class ManagePromotionController {
         promoteIDTxt.clear();
         nameTxt.clear();
         productIDTxt.clear();
-        categoryIDTxt.clear();
         typeCmb.setValue(null);
         valueTxt.clear();
         startDatePicker.setValue(null);
@@ -143,17 +139,18 @@ public class ManagePromotionController {
             PromotionDTO promotionDTO = new PromotionDTO(
                     promoteIDTxt.getText(),
                     nameTxt.getText(),
-                    productIDTxt.getText(),
-                    categoryIDTxt.getText(),
                     typeCmb.getValue(),
                     Double.parseDouble(valueTxt.getText()),
-                    startDatePicker.getValue(),
-                    endDatePicker.getValue(),
-                    Boolean.parseBoolean(activeCmb.getValue().toString())
+                    Date.valueOf(startDatePicker.getValue()),
+                    Date.valueOf(endDatePicker.getValue()),
+                    Boolean.parseBoolean(activeCmb.getValue()),
+                    productIDTxt.getText()
             );
             String res = promotionController.savePromotion(promotionDTO);
             new Alert(Alert.AlertType.INFORMATION, res).show();
-        } catch (Exception e){
+            loadTable();
+            navigateReset(event);
+        } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -164,21 +161,19 @@ public class ManagePromotionController {
             PromotionDTO promotionDTO = new PromotionDTO(
                     promoteIDTxt.getText(),
                     nameTxt.getText(),
-                    productIDTxt.getText(),
-                    categoryIDTxt.getText(),
                     typeCmb.getValue(),
                     Double.parseDouble(valueTxt.getText()),
-                    startDatePicker.getValue(),
-                    endDatePicker.getValue(),
-                    Boolean.parseBoolean(activeCmb.getValue().toString())
+                    Date.valueOf(startDatePicker.getValue()),
+                    Date.valueOf(endDatePicker.getValue()),
+                    Boolean.parseBoolean(activeCmb.getValue()),
+                    productIDTxt.getText()
             );
             String res = promotionController.updatePromotion(promotionDTO);
             new Alert(Alert.AlertType.INFORMATION, res).show();
-        } catch (Exception e){
+            loadTable();
+            navigateReset(event);
+        } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
-
 }
-
-} */

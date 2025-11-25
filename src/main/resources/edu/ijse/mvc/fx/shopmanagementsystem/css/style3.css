@@ -2,7 +2,11 @@
     -fx-background-color: #f4f6f8;
 }
 
-.box1, .box2, .box3, .box4, .box5, .box6, .box7, .box8, .box9 {
+/* Base Style for All Boxes */
+.box1, .box2, .box3, .box4, .box5,
+.box6, .box7, .box8, .box9, .box10,
+.box11, .box12, .box13, .box14, .box15,
+.box16, .box17, .box18, .box19, .box20 {
     -fx-background-color: white;
     -fx-border-radius: 16px;
     -fx-background-radius: 16px;
@@ -12,15 +16,17 @@
     -fx-transition: all 0.3s ease-in-out;
 }
 
-.box1:hover, .box2:hover, .box3:hover,
-.box4:hover, .box5:hover, .box6:hover,
-.box7:hover, .box8:hover, .box9:hover {
+/* Hover Animation */
+.box1:hover, .box2:hover, .box3:hover, .box4:hover, .box5:hover,
+.box6:hover, .box7:hover, .box8:hover, .box9:hover, .box10:hover,
+.box11:hover, .box12:hover, .box13:hover, .box14:hover, .box15:hover,
+.box16:hover, .box17:hover, .box18:hover, .box19:hover, .box20:hover {
     -fx-scale-x: 1.04;
     -fx-scale-y: 1.04;
-    -fx-effect: dropshadow(three-pass-box, rgba(46, 204, 113, 0.5), 12, 0, 0, 6);
     -fx-background-color: linear-gradient(to bottom right, #ffffff, #e8f8f2);
 }
 
+/* Label and Value Styles */
 .dashboard-label {
     -fx-font-size: 18px;
     -fx-text-fill: #555;
@@ -34,12 +40,24 @@
     -fx-font-family: "Segoe UI", "Noto Color Emoji";
 }
 
-.box1:hover { -fx-effect: dropshadow(three-pass-box, rgba(52, 152, 219, 0.5), 12, 0, 0, 6); }
-.box2:hover { -fx-effect: dropshadow(three-pass-box, rgba(230, 126, 34, 0.5), 12, 0, 0, 6); }
-.box3:hover { -fx-effect: dropshadow(three-pass-box, rgba(46, 204, 113, 0.5), 12, 0, 0, 6); }
-.box4:hover { -fx-effect: dropshadow(three-pass-box, rgba(155, 89, 182, 0.5), 12, 0, 0, 6); }
-.box5:hover { -fx-effect: dropshadow(three-pass-box, rgba(241, 196, 15, 0.5), 12, 0, 0, 6); }
-.box6:hover { -fx-effect: dropshadow(three-pass-box, rgba(231, 76, 60, 0.5), 12, 0, 0, 6); }
-.box7:hover { -fx-effect: dropshadow(three-pass-box, rgba(26, 188, 156, 0.5), 12, 0, 0, 6); }
-.box8:hover { -fx-effect: dropshadow(three-pass-box, rgba(52, 73, 94, 0.5), 12, 0, 0, 6); }
-.box9:hover { -fx-effect: dropshadow(three-pass-box, rgba(142, 68, 173, 0.5), 12, 0, 0, 6); }
+/* Individual Hover Colors */
+.box1:hover  { -fx-effect: dropshadow(three-pass-box, rgba(52, 152, 219, 0.5), 12, 0, 0, 6); }  /* Blue */
+.box2:hover  { -fx-effect: dropshadow(three-pass-box, rgba(230, 126, 34, 0.5), 12, 0, 0, 6); }  /* Orange */
+.box3:hover  { -fx-effect: dropshadow(three-pass-box, rgba(46, 204, 113, 0.5), 12, 0, 0, 6); }  /* Green */
+.box4:hover  { -fx-effect: dropshadow(three-pass-box, rgba(155, 89, 182, 0.5), 12, 0, 0, 6); }  /* Purple */
+.box5:hover  { -fx-effect: dropshadow(three-pass-box, rgba(241, 196, 15, 0.5), 12, 0, 0, 6); }  /* Yellow */
+.box6:hover  { -fx-effect: dropshadow(three-pass-box, rgba(231, 76, 60, 0.5), 12, 0, 0, 6); }   /* Red */
+.box7:hover  { -fx-effect: dropshadow(three-pass-box, rgba(26, 188, 156, 0.5), 12, 0, 0, 6); }  /* Teal */
+.box8:hover  { -fx-effect: dropshadow(three-pass-box, rgba(52, 73, 94, 0.5), 12, 0, 0, 6); }    /* Dark Gray */
+.box9:hover  { -fx-effect: dropshadow(three-pass-box, rgba(142, 68, 173, 0.5), 12, 0, 0, 6); }  /* Violet */
+.box10:hover { -fx-effect: dropshadow(three-pass-box, rgba(41, 128, 185, 0.5), 12, 0, 0, 6); }  /* Deep Blue */
+.box11:hover { -fx-effect: dropshadow(three-pass-box, rgba(243, 156, 18, 0.5), 12, 0, 0, 6); }  /* Amber */
+.box12:hover { -fx-effect: dropshadow(three-pass-box, rgba(39, 174, 96, 0.5), 12, 0, 0, 6); }   /* Emerald */
+.box13:hover { -fx-effect: dropshadow(three-pass-box, rgba(192, 57, 43, 0.5), 12, 0, 0, 6); }   /* Crimson */
+.box14:hover { -fx-effect: dropshadow(three-pass-box, rgba(127, 140, 141, 0.5), 12, 0, 0, 6); } /* Silver Gray */
+.box15:hover { -fx-effect: dropshadow(three-pass-box, rgba(22, 160, 133, 0.5), 12, 0, 0, 6); }  /* Aqua Green */
+.box16:hover { -fx-effect: dropshadow(three-pass-box, rgba(211, 84, 0, 0.5), 12, 0, 0, 6); }    /* Burnt Orange */
+.box17:hover { -fx-effect: dropshadow(three-pass-box, rgba(44, 62, 80, 0.5), 12, 0, 0, 6); }    /* Navy Gray */
+.box18:hover { -fx-effect: dropshadow(three-pass-box, rgba(149, 165, 166, 0.5), 12, 0, 0, 6); } /* Cloud Gray */
+.box19:hover { -fx-effect: dropshadow(three-pass-box, rgba(26, 82, 118, 0.5), 12, 0, 0, 6); }   /* Ocean Blue */
+.box20:hover { -fx-effect: dropshadow(three-pass-box, rgba(142, 68, 173, 0.5), 12, 0, 0, 6); }  /* Deep Violet */

@@ -25,7 +25,7 @@ public class ManagePaymentController {
     private TableColumn<PaymentDTO, Double> colAmount;
 
     @FXML
-    private TableColumn<PaymentDTO, Object> colMethod;
+    private TableColumn<PaymentDTO, String> colMethod;
 
     @FXML
     private TableColumn<PaymentDTO, String> colPaymentId;
@@ -43,7 +43,7 @@ public class ManagePaymentController {
     private Button deleteBtn;
 
     @FXML
-    private ComboBox<PaymentDTO> methodCmb;
+    private ComboBox<String> methodCmb;
 
     @FXML
     private TextField paymentIDTxt;
@@ -118,7 +118,7 @@ public class ManagePaymentController {
             PaymentDTO paymentDTO = new PaymentDTO(
                     paymentIDTxt.getText(),
                     saleIDTxt.getText(),
-                    methodCmb.getValue().getMethod(),
+                    methodCmb.getValue(),
                     Double.parseDouble(amountTxt.getText()),
                     referenceTxt.getText(),
                     java.sql.Date.valueOf(receivedAtPicker.getValue())
@@ -138,7 +138,7 @@ public class ManagePaymentController {
             PaymentDTO paymentDTO = new PaymentDTO(
                     paymentIDTxt.getText(),
                     saleIDTxt.getText(),
-                    methodCmb.getValue().getMethod(),
+                    methodCmb.getValue(),
                     Double.parseDouble(amountTxt.getText()),
                     referenceTxt.getText(),
                     java.sql.Date.valueOf(receivedAtPicker.getValue())

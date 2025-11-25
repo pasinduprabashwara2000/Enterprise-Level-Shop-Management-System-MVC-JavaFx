@@ -15,10 +15,6 @@ public class ReturnProductDTO {
     private String saleItemId;
     private int quantity;
     private double refundAmount;
-    private Action action;
-    
-    public enum Action {
-        REFUND,EXCHANGE
-    }
+    private String action;
 
 }

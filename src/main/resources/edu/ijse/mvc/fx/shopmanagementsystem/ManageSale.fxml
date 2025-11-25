@@ -10,6 +10,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <AnchorPane prefHeight="640.0" prefWidth="1075.0" styleClass="white-bg" stylesheets="@css/style2.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.ManageSaleController">
 
     <children>
@@ -49,20 +51,29 @@
         </Label>
         <TextField fx:id="discountTotalTxt" layoutX="650.0" layoutY="185.0" prefWidth="259.0" />
 
-        <Label layoutX="34.0" layoutY="240.0" prefHeight="35.0" prefWidth="157.0" text="Grand Total :">
+        <Label layoutX="521.0" layoutY="247.0" prefHeight="35.0" prefWidth="157.0" text="Grand Total :">
             <font><Font size="15.0" /></font>
         </Label>
-        <TextField fx:id="grandTotalTxt" layoutX="206.0" layoutY="238.0" prefWidth="259.0" />
+        <TextField fx:id="grandTotalTxt" layoutX="650.0" layoutY="247.0" prefWidth="259.0" />
 
-        <Label layoutX="521.0" layoutY="240.0" prefHeight="35.0" prefWidth="157.0" text="Date :">
+        <Label layoutX="34.0" layoutY="238.0" prefHeight="35.0" prefWidth="157.0" text="Date :">
             <font><Font size="15.0" /></font>
         </Label>
-        <DatePicker fx:id="datePicker" layoutX="650.0" layoutY="238.0" prefWidth="259.0" />
+        <DatePicker fx:id="datePicker" layoutX="206.0" layoutY="238.0" prefWidth="259.0" />
 
         <Label layoutX="34.0" layoutY="295.0" prefHeight="35.0" prefWidth="157.0" text="Status :">
             <font><Font size="15.0" /></font>
         </Label>
-        <ComboBox fx:id="statusCmb" layoutX="206.0" layoutY="293.0" prefHeight="35.0" prefWidth="259.0" promptText="Select Status" />
+        <ComboBox fx:id="statusCmb" layoutX="206.0" layoutY="293.0" prefHeight="35.0" prefWidth="259.0" promptText="Select Status">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="CASH" />
+                    <String fx:value="CARD" />
+                    <String fx:value="MOBILE" />
+                    <String fx:value="OTHER" />
+                </FXCollections>
+            </items>
+        </ComboBox>
 
         <Button fx:id="saveBtn" layoutX="236.0" layoutY="350.0" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Save" />
         <Button fx:id="updateBtn" layoutX="395.0" layoutY="350.0" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Update" />

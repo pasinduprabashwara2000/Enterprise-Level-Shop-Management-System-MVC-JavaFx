@@ -8,12 +8,12 @@ public class ReturnProductController {
 
     private final ReturnProductModel returnProductModel = new ReturnProductModel();
 
-    public String saveReturnProduct(String returnItemId, String returnId, String productId, String saleItemId, int quantity, double refundAmount, edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnProductDTO.Action action) throws Exception {
-        return returnProductModel.saveReturnProduct(new edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnProductDTO(returnItemId, returnId, productId, saleItemId, quantity, refundAmount, action));
+    public String saveReturnProduct(ReturnProductDTO returnProductDTO) throws Exception {
+        return returnProductModel.saveReturnProduct(returnProductDTO);
     }
 
-    public String updateReturnProduct(String returnItemId, String returnId, String productId, String saleItemId, int quantity, double refundAmount, edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnProductDTO.Action action) throws Exception {
-        return returnProductModel.updateReturnProduct(new edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnProductDTO(returnItemId, returnId, productId, saleItemId, quantity, refundAmount, action));
+    public String updateReturnProduct(ReturnProductDTO returnProductDTO) throws Exception {
+        return returnProductModel.updateReturnProduct(returnProductDTO);
     }
 
     public String deleteReturnProduct(String returnItemId) throws Exception {
@@ -27,5 +27,5 @@ public class ReturnProductController {
     public ArrayList<ReturnProductDTO> getAllReturnProducts() throws Exception {
         return returnProductModel.getAllReturnProducts();
     }
-    
+
 }

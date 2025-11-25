@@ -12,13 +12,9 @@ public class PaymentDTO {
 
     private String paymentID;
     private String saleID;
-    private Method method;
+    private String method;
     private double amount;
     private String reference;
     private Date receivedAt;
 
-    public enum Method {
-        CASH, CARD, MOBILE, OTHER
-    }
-    
 }

@@ -23,15 +23,17 @@
     -fx-text-fill: #000;
 }
 
-.logout {
-    -fx-background-color: #106abf;
-    -fx-padding: 5px;
-    -fx-cursor: hand;
-    -fx-background-radius: 50px;
+.logout-btn {
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 8px;
+    -fx-text-fill: #ff5c5c;
+    -fx-font-weight: bold;
 }
 
-.logout:hover {
-    -fx-background-color: #a71931;
+.logout-btn:hover {
+    -fx-background-color: #ff5c5c;
+    -fx-text-fill: #ffffff;
+    -fx-cursor: hand;
 }
 
 .hyperlink {

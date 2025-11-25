@@ -1,9 +1,9 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.DTO;
 
-import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,12 +13,8 @@ public class ReturnDTO {
     private String returnID;
     private String saleID;
     private String processedBy;
-    private Date returnDateTime;
+    private LocalDate returnDateTime;
     private String reason;
-    private Status status;
+    private String status;
 
-    public enum Status {
-        PENDING,APPROVED,REJECTED,COMPLETED
-    }
-    
 }

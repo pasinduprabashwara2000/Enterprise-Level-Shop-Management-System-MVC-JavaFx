@@ -1,9 +1,9 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
-
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.db.DBConnection;
 
@@ -12,12 +12,12 @@ public class ReturnModel {
     public String saveReturn(ReturnDTO returnDTO) throws Exception {
         
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO Return VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO Returns VALUES(?,?,?,?,?,?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, returnDTO.getReturnID());
         pstm.setString(2, returnDTO.getSaleID());
         pstm.setString(3, returnDTO.getProcessedBy());
-        pstm.setDate(4, returnDTO.getReturnDateTime());
+        pstm.setDate(4, Date.valueOf(returnDTO.getReturnDateTime()));
         pstm.setString(5, returnDTO.getReason());
         pstm.setObject(6, returnDTO.getStatus());
 
@@ -28,11 +28,11 @@ public class ReturnModel {
     public String updateReturn(ReturnDTO returnDTO) throws Exception {
         
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "UPDATE Return SET saleID=?, processedBy=?, returnDateTime=?, reason=?, status=? WHERE returnID=?";
+        String sql = "UPDATE Returns SET saleID=?, processedBy=?, returnDateTime=?, reason=?, status=? WHERE returnID=?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, returnDTO.getSaleID());
         pstm.setString(2, returnDTO.getProcessedBy());
-        pstm.setDate(3, returnDTO.getReturnDateTime());
+        pstm.setDate(3, Date.valueOf(returnDTO.getReturnDateTime()));
         pstm.setString(4, returnDTO.getReason());
         pstm.setObject(5, returnDTO.getStatus());
         pstm.setString(6, returnDTO.getReturnID());
@@ -44,7 +44,7 @@ public class ReturnModel {
     public String deleteReturn(String returnID) throws Exception {
         
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "DELETE FROM Return WHERE returnID=?";
+        String sql = "DELETE FROM Returns WHERE returnID=?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, returnID);
 
@@ -55,7 +55,7 @@ public class ReturnModel {
     public ReturnDTO searchReturn(String returnID) throws Exception {
         
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "SELECT * FROM Return WHERE returnID=?";
+        String sql = "SELECT * FROM Returns WHERE returnID=?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, returnID);
         var rst = pstm.executeQuery();
@@ -64,9 +64,9 @@ public class ReturnModel {
                 rst.getString("returnID"),
                 rst.getString("saleID"),
                 rst.getString("processedBy"),
-                rst.getDate("returnDateTime"),
+                rst.getDate("returnDateTime").toLocalDate(),
                 rst.getString("reason"),
-                (ReturnDTO.Status) rst.getObject("status")
+                rst.getString("status")
             );
         }
         return null;
@@ -75,7 +75,7 @@ public class ReturnModel {
     public ArrayList<ReturnDTO> getAllReturns() throws Exception {
         
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "SELECT * FROM Return";
+        String sql = "SELECT * FROM Returns";
         PreparedStatement pstm = connection.prepareStatement(sql);
         var rst = pstm.executeQuery();
         ArrayList<ReturnDTO> allReturns = new ArrayList<>();
@@ -84,9 +84,9 @@ public class ReturnModel {
                 rst.getString("returnID"),
                 rst.getString("saleID"),
                 rst.getString("processedBy"),
-                rst.getDate("returnDateTime"),
+                rst.getDate("returnDateTime").toLocalDate(),
                 rst.getString("reason"),
-                (ReturnDTO.Status) rst.getObject("status")
+                rst.getString("status")
             ));
         }
         return allReturns;

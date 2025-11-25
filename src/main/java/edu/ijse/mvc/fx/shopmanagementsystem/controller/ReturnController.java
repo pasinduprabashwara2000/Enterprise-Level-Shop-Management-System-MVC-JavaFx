@@ -8,12 +8,12 @@ public class ReturnController {
 
     private final ReturnModel returnModel = new ReturnModel();
 
-    public String saveReturn(String returnID, String saleID, String processedBy, java.sql.Date returnDateTime, String reason, edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnDTO.Status status) throws Exception {
-        return returnModel.saveReturn(new edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnDTO(returnID, saleID, processedBy, returnDateTime, reason, status));
+    public String saveReturn(ReturnDTO returnDTO) throws Exception {
+        return returnModel.saveReturn(returnDTO);
     }
 
-    public String updateReturn(String returnID, String saleID, String processedBy, java.sql.Date returnDateTime, String reason, edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnDTO.Status status) throws Exception {
-        return returnModel.updateReturn(new edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnDTO(returnID, saleID, processedBy, returnDateTime, reason, status));
+    public String updateReturn(ReturnDTO returnDTO) throws Exception {
+        return returnModel.updateReturn(returnDTO);
     }
 
     public String deleteReturn(String returnID) throws Exception {

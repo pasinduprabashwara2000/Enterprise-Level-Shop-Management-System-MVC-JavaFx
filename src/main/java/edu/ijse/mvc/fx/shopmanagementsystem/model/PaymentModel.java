@@ -64,7 +64,7 @@ public class PaymentModel {
             return new PaymentDTO(
                 rst.getString("paymentID"),
                 rst.getString("saleID"),
-                PaymentDTO.Method.valueOf(rst.getString("method")),
+                rst.getString("method"),
                 rst.getDouble("amount"),
                 rst.getString("reference"),
                 rst.getDate("receivedAt")
@@ -85,7 +85,7 @@ public class PaymentModel {
             payments.add(new PaymentDTO(
                 rst.getString("paymentID"),
                 rst.getString("saleID"),
-                PaymentDTO.Method.valueOf(rst.getString("method")),
+                rst.getString("method"),
                 rst.getDouble("amount"),
                 rst.getString("reference"),
                 rst.getDate("receivedAt")

@@ -10,6 +10,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <AnchorPane prefHeight="680.0" prefWidth="1075.0" styleClass="white-bg" stylesheets="@css/style2.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.ManagePurchaseOrderController">
 
     <children>
@@ -19,25 +21,56 @@
             </font>
         </Label>
 
-        <Label layoutX="34.0" layoutY="76.0" text="PO ID :" />
+        <Label layoutX="34.0" layoutY="76.0" text="PO ID :">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
         <TextField fx:id="poIdTxt" layoutX="206.0" layoutY="74.0" prefWidth="259.0" />
 
-        <Label layoutX="34.0" layoutY="132.0" text="Supplier ID :" />
+        <Label layoutX="34.0" layoutY="132.0" text="Supplier ID :">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
         <TextField fx:id="supplierIdTxt" layoutX="206.0" layoutY="130.0" prefWidth="259.0" />
 
-        <Label layoutX="34.0" layoutY="187.0" text="Created At :" />
+        <Label layoutX="34.0" layoutY="187.0" text="Created At :">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
         <DatePicker fx:id="createdAtPicker" layoutX="206.0" layoutY="185.0" prefWidth="259.0" />
 
-        <Label layoutX="521.0" layoutY="76.0" text="Created By :" />
+        <Label layoutX="521.0" layoutY="76.0" text="Created By :">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
         <TextField fx:id="createdByTxt" layoutX="650.0" layoutY="74.0" prefWidth="259.0" />
 
-        <Label layoutX="521.0" layoutY="132.0" text="Status :" />
-        <ComboBox fx:id="statusCombo" layoutX="650.0" layoutY="130.0" prefWidth="259.0" />
+        <Label layoutX="521.0" layoutY="132.0" text="Status :">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+        <ComboBox fx:id="statusCombo" layoutX="650.0" layoutY="130.0" prefHeight="35.0" prefWidth="259.0" promptText="Select Status">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="DRAFT"/>
+                    <String fx:value="SENT"/>
+                    <String fx:value="RECEIVED"/>
+                    <String fx:value="CANCELLED"/>
+                    <String fx:value="PARTIAL"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
 
-        <Label layoutX="521.0" layoutY="187.0" text="Expected Date :" />
+        <Label layoutX="521.0" layoutY="187.0" text="Expected Date :">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
         <DatePicker fx:id="expectedDatePicker" layoutX="650.0" layoutY="185.0" prefWidth="259.0" />
 
-        <Label layoutX="34.0" layoutY="242.0" text="Total Cost :" />
+        <Label layoutX="34.0" layoutY="242.0" text="Total Cost :">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
         <TextField fx:id="totalCostTxt" layoutX="206.0" layoutY="240.0" prefWidth="259.0" />
 
         <Button fx:id="saveBtn" layoutX="236.0" layoutY="310.0" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Save" />
