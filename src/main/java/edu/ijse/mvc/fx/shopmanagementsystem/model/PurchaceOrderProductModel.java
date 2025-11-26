@@ -12,7 +12,7 @@ public class PurchaceOrderProductModel {
     public String savePurchaceOrderProduct(PurchaceOrderProductDTO purchaceOrderProductDTO) throws Exception {
         
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO PurchaceOrderProduct (poItemId, poId, quantityOrdered, quantityReceived, unitCost, lineTotal) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO PurchaseOrderProduct (poItemId, poId, quantityOrdered, quantityReceived, unitCost, lineTotal) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, purchaceOrderProductDTO.getPoItemId());
         pstm.setString(2, purchaceOrderProductDTO.getPoId());
@@ -28,7 +28,7 @@ public class PurchaceOrderProductModel {
     public String updatePurchaceOrderProduct(PurchaceOrderProductDTO purchaceOrderProductDTO) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "UPDATE PurchaceOrderProduct SET poId=?, quantityOrdered=?, quantityReceived=?, unitCost=?, lineTotal=? WHERE poItemId=?";
+        String sql = "UPDATE PurchaseOrderProduct SET poId=?, quantityOrdered=?, quantityReceived=?, unitCost=?, lineTotal=? WHERE poItemId=?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, purchaceOrderProductDTO.getPoId());
         pstm.setInt(2, purchaceOrderProductDTO.getQuantityOrdered());
@@ -44,7 +44,7 @@ public class PurchaceOrderProductModel {
     public String deletePurchaceOrderProduct(String poItemId) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "DELETE FROM PurchaceOrderProduct WHERE poItemId=?";
+        String sql = "DELETE FROM PurchaseOrderProduct WHERE poItemId=?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, poItemId);
 
@@ -55,7 +55,7 @@ public class PurchaceOrderProductModel {
     public PurchaceOrderProductDTO searchPurchaceOrderProduct(String poItemId) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "SELECT * FROM PurchaceOrderProduct WHERE poItemId=?";
+        String sql = "SELECT * FROM PurchaseOrderProduct WHERE poItemId=?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, poItemId);
         ResultSet rst = pstm.executeQuery();
@@ -75,7 +75,7 @@ public class PurchaceOrderProductModel {
 
     public ArrayList<PurchaceOrderProductDTO> getAllPurchaceOrderProducts() throws Exception {
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "SELECT * FROM PurchaceOrderProduct";
+        String sql = "SELECT * FROM PurchaseOrderProduct";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
         ResultSet rst = pstm.executeQuery();

@@ -31,23 +31,23 @@
 
                     <children>
                         <Button fx:id="dashboardBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="🏠 Dashboard" />
-                        <Button fx:id="roleBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="👔 Manage Role" />
-                        <Button fx:id="userBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="👤 Manage User" />
-                        <Button fx:id="customersBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="👥 Manage Customers" />
-                        <Button fx:id="categoryBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="📂 Manage Category" />
-                        <Button fx:id="inventoryBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="📦 Manage Inventory" />
-                        <Button fx:id="productsBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="🛍️ Manage Products" />
-                        <Button fx:id="suppliersBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="🚚 Manage Suppliers" />
-                        <Button fx:id="supplyBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="🔁 Manage Product Supply" />
-                        <Button fx:id="promotionBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="🎯 Manage Promotion" />
-                        <Button fx:id="saleBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="💰 Manage Sale" />
-                        <Button fx:id="saleProductBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="🛒 Manage Sale Product" />
-                        <Button fx:id="paymentBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="💳 Manage Payment" />
-                        <Button fx:id="returnBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="↩️ Manage Return" />
-                        <Button fx:id="returnproductBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="📦↩️ Manage Return Product" />
-                        <Button fx:id="purchaseOrderBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="🧾 Manage Purchase Order" />
-                        <Button fx:id="purchaseOrderProductBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="📋 Manage PurchaseOrder Product" />
-                        <Button fx:id="reportsBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="📊 Manage Reports" />
+                        <Button fx:id="roleBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Role" />
+                        <Button fx:id="userBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage User" />
+                        <Button fx:id="customersBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Customers" />
+                        <Button fx:id="categoryBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Category" />
+                        <Button fx:id="inventoryBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Inventory" />
+                        <Button fx:id="productsBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Products" />
+                        <Button fx:id="suppliersBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Suppliers" />
+                        <Button fx:id="supplyBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Product Supply" />
+                        <Button fx:id="promotionBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Promotion" />
+                        <Button fx:id="saleBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Sale" />
+                        <Button fx:id="saleProductBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Sale Product" />
+                        <Button fx:id="paymentBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Payment" />
+                        <Button fx:id="returnBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Return" />
+                        <Button fx:id="returnproductBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Return Product" />
+                        <Button fx:id="purchaseOrderBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Purchase Order" />
+                        <Button fx:id="purchaseOrderProductBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage PurchaseOrder Product" />
+                        <Button fx:id="reportsBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Reports" />
 
                         <Separator prefWidth="280.0" />
                         <Hyperlink fx:id="tradeMarkLabel" prefWidth="308" style="-fx-text-fill: #777;" text="© 2025 Sample IT System. All rights reserved." />

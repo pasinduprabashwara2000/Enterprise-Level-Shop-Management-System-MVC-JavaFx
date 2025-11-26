@@ -28,7 +28,7 @@
 
             <!-- 3 -->
             <VBox alignment="CENTER" prefWidth="230" spacing="10" styleClass="box3">
-                <Label styleClass="dashboard-label" text="🧾 Total Invoices" />
+                <Label styleClass="dashboard-label" text="🧾 Total Sales" />
                 <Label fx:id="lblSalesCount" styleClass="dashboard-value" text="0" />
             </VBox>
 
