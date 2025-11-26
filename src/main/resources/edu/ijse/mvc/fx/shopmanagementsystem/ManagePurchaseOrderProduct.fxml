@@ -41,7 +41,7 @@
         <Label layoutX="504.0" layoutY="180.0" text="Line Total :">
             <font><Font size="15.0" /></font>
         </Label>
-        <TextField fx:id="lineTotalTxt" editable="false" layoutX="665.0" layoutY="178.0" prefWidth="250.0" />
+        <TextField fx:id="lineTotalTxt" layoutX="665.0" layoutY="178.0" prefWidth="250.0" />
 
         <Button fx:id="saveBtn" layoutX="253.0" layoutY="243.0" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Save" />
         <Button fx:id="updateBtn" layoutX="398.0" layoutY="243.0" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Update" />
