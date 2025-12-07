@@ -35,8 +35,3 @@
     -fx-text-fill: #ffffff;
     -fx-cursor: hand;
 }
-
-.hyperlink {
-    -fx-text-fill: #d1e8de;
-    -fx-font-size: 12px;
-}

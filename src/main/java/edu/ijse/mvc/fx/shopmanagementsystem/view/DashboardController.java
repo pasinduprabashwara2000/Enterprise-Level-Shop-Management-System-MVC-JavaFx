@@ -2,53 +2,54 @@ package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
 import edu.ijse.mvc.fx.shopmanagementsystem.model.DashboardModel;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.FlowPane;
 
 public class DashboardController {
 
     @FXML
+    private TableColumn<?, ?> colActive;
+
+    @FXML
+    private TableColumn<?, ?> colBarcode;
+
+    @FXML
+    private TableColumn<?, ?> colCategoryID;
+
+    @FXML
+    private TableColumn<?, ?> colName;
+
+    @FXML
+    private TableColumn<?, ?> colProductID;
+
+    @FXML
+    private TableColumn<?, ?> colSKU;
+
+    @FXML
+    private TableColumn<?, ?> colTaxRate;
+
+    @FXML
+    private TableColumn<?, ?> colUnit;
+
+    @FXML
+    private TableColumn<?, ?> colUnitPrice;
+
+    @FXML
+    private TableView<?> detailsTable;
+
+    @FXML
     private FlowPane flowStats;
-
-    @FXML
-    private Label lblActiveUsers;
-
-    @FXML
-    private Label lblCategoryCount;
 
     @FXML
     private Label lblCustomerCount;
 
     @FXML
-    private Label lblDeliveries;
-
-    @FXML
-    private Label lblEmployeeCount;
-
-    @FXML
     private Label lblInventoryCount;
 
     @FXML
-    private Label lblLowStockCount;
-
-    @FXML
-    private Label lblMonthlySales;
-
-    @FXML
-    private Label lblPaymentCount;
-
-    @FXML
-    private Label lblPendingOrders;
-
-    @FXML
-    private Label lblPendingPayments;
-
-    @FXML
     private Label lblProductsCount;
-
-    @FXML
-    private Label lblPromotionCount;
 
     @FXML
     private Label lblPurchaseOrders;
@@ -65,14 +66,13 @@ public class DashboardController {
     @FXML
     private Label lblSupplierCount;
 
-    @FXML
-    private Label lblTodaySales;
-
     public void initialize(){
         loadCustomerCount();
         loadProductsCount();
-        //loadInvoiceCount();
+        loadSaleCount();
         loadSupplerCount();
+        loadPurchaseCount();
+        loadReturnCount();
     }
 
     public void loadProductsCount(){
@@ -102,11 +102,30 @@ public class DashboardController {
         }
     }
 
-    public void loadInventoryCount(){
+    public void loadSaleCount(){
         try {
-
+            int count = DashboardModel.getSaleCount();
+            lblSalesCount.setText(String.valueOf(count));
         } catch (Exception e) {
+            lblSalesCount.setText("Error");
+        }
+    }
 
+    public void loadPurchaseCount(){
+        try {
+            int count = DashboardModel.getPurchaseOrdersCount();
+            lblPurchaseOrders.setText(String.valueOf(count));
+        } catch (Exception e) {
+            lblPurchaseOrders.setText("Error");
+        }
+    }
+
+    public void loadReturnCount(){
+        try {
+            int count = DashboardModel.getReturnCount();
+            lblReturnCount.setText(String.valueOf(count));
+        } catch (Exception e) {
+            lblReturnCount.setText("Error");
         }
     }
 

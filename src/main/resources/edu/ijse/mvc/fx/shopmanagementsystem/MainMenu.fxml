@@ -30,6 +30,11 @@
                 <VBox fx:id="menuVBox" alignment="TOP_CENTER" prefWidth="317.0" spacing="10.0" styleClass="anchor-pane">
 
                     <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="271.0" text="Main Menu" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
                         <Button fx:id="dashboardBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="🏠 Dashboard" />
                         <Button fx:id="roleBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Role" />
                         <Button fx:id="userBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage User" />
@@ -50,14 +55,11 @@
                         <Button fx:id="reportsBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Reports" />
 
                         <Separator prefWidth="280.0" />
-                        <Hyperlink fx:id="tradeMarkLabel" prefWidth="308" style="-fx-text-fill: #777;" text="© 2025 Sample IT System. All rights reserved." />
+                        <Hyperlink fx:id="tradeMarkLabel" prefWidth="308" text="© 2025 Sample IT System. All rights reserved." />
                     </children>
                 </VBox>
             </content>
         </ScrollPane>
-        <Button fx:id="logoutBtn" alignment="CENTER" contentDisplay="CENTER"
-                layoutX="1225.0" layoutY="6.0"
-                prefHeight="30.0" prefWidth="113.0"
-                styleClass="logout-btn" text="Log Out" />
+        <Button fx:id="logoutBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="1225.0" layoutY="6.0" prefHeight="30.0" prefWidth="113.0" styleClass="logout-btn" text="Log Out" />
     </children>
 </AnchorPane>

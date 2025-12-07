@@ -88,6 +88,5 @@ public class CustomerModel {
             ));
         }
         return allCustomers;
-
     }
 }

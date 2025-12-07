@@ -16,19 +16,19 @@
 
             <!-- 1 -->
             <VBox alignment="CENTER" prefWidth="230" spacing="10" styleClass="box1">
-                <Label styleClass="dashboard-label" text="📦 Total Products" />
+                <Label styleClass="dashboard-label" text="Total Products" />
                 <Label fx:id="lblProductsCount" styleClass="dashboard-value" text="0" />
             </VBox>
 
                <!-- 2 -->
             <VBox alignment="CENTER" prefWidth="230" spacing="10" styleClass="box2">
-                <Label styleClass="dashboard-label" text="👥 Total Customers" />
+                <Label styleClass="dashboard-label" text="Total Customers" />
                 <Label fx:id="lblCustomerCount" styleClass="dashboard-value" text="0" />
             </VBox>
 
             <!-- 3 -->
             <VBox alignment="CENTER" prefWidth="230" spacing="10" styleClass="box3">
-                <Label styleClass="dashboard-label" text="🧾 Total Sales" />
+                <Label styleClass="dashboard-label" text="Total Sales" />
                 <Label fx:id="lblSalesCount" styleClass="dashboard-value" text="0" />
             </VBox>
 
@@ -40,25 +40,25 @@
 
             <!-- 5 -->
             <VBox alignment="CENTER" prefWidth="230" spacing="10" styleClass="box5">
-                <Label styleClass="dashboard-label" text="🏭 Total Suppliers" />
+                <Label styleClass="dashboard-label" text="Total Suppliers" />
                 <Label fx:id="lblSupplierCount" styleClass="dashboard-value" text="0" />
             </VBox>
 
             <!-- 6 -->
             <VBox alignment="CENTER" prefWidth="230" spacing="10" styleClass="box6">
-                <Label styleClass="dashboard-label" text="🛒 Purchase Orders" />
+                <Label styleClass="dashboard-label" text="Purchase Orders" />
                 <Label fx:id="lblPurchaseOrders" styleClass="dashboard-value" text="0" />
             </VBox>
 
             <!-- 7 -->
             <VBox alignment="CENTER" prefWidth="230" spacing="10" styleClass="box7">
-                <Label styleClass="dashboard-label" text="↩️ Returns" />
+                <Label styleClass="dashboard-label" text="Returns" />
                 <Label fx:id="lblReturnCount" styleClass="dashboard-value" text="0" />
             </VBox>
 
             <!-- 8 -->
             <VBox alignment="CENTER" prefWidth="230" spacing="10" styleClass="box8">
-                <Label styleClass="dashboard-label" text="📊 Inventory Items" />
+                <Label styleClass="dashboard-label" text="Inventory Items" />
                 <Label fx:id="lblInventoryCount" styleClass="dashboard-value" text="0" />
             </VBox>
 
