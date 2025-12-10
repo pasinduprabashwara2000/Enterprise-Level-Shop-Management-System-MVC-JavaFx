@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.URL;
 
@@ -15,19 +14,19 @@ public class ManageMainMenu2Controller {
     private AnchorPane contentPane;
 
     @FXML
-    private Button customersBtn;
+    private Button searchProducts;
 
     @FXML
-    private Button dashboardBtn;
+    private Button customerBtn;
 
     @FXML
-    private Button logoutBtn;
-
-    @FXML
-    private VBox menuVBox;
+    private Button logOutBtn;
 
     @FXML
     private Button paymentBtn;
+
+    @FXML
+    private Button placeOrderBtn;
 
     @FXML
     private Button returnBtn;
@@ -37,10 +36,14 @@ public class ManageMainMenu2Controller {
 
     @FXML
     public void initialize() {
-        customersBtn.setOnAction(e -> loadUI("ManageCustomer"));
+        placeOrderBtn.setOnAction(event -> loadUI("ManagePlaceOrder"));
+        searchProducts.setOnAction(event -> loadUI("ManageProducts2"));
+        customerBtn.setOnAction(event -> loadUI("ManageCustomer"));
         saleBtn.setOnAction(event -> loadUI("ManageSale"));
         paymentBtn.setOnAction(event -> loadUI("ManagePayment"));
         returnBtn.setOnAction(event -> loadUI("ManageReturn"));
+        logOutBtn.setOnAction(event -> loadUI(""));
+
     }
 
     private void loadUI(String fxmlName) {

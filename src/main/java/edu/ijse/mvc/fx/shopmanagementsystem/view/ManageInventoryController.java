@@ -1,17 +1,23 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.InventoryDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.InventoryController;
+import edu.ijse.mvc.fx.shopmanagementsystem.controller.ProductController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class ManageInventoryController {
 
-    private final InventoryController inventoryController = new InventoryController();
+    final private InventoryController inventoryController = new InventoryController();
+    final private ProductController productController = new ProductController();
 
     @FXML
     private TableColumn<InventoryDTO, LocalDate> colLastStockUpdate;
@@ -41,7 +47,7 @@ public class ManageInventoryController {
     private Label idLabel;
 
     @FXML
-    private TextField idTxt;
+    private ComboBox<String> productIdCombo;
 
     @FXML
     private Label loyaltyCodeLabel;
@@ -82,6 +88,7 @@ public class ManageInventoryController {
         colLastStockUpdate.setCellValueFactory(new PropertyValueFactory<>("lastStockUpdate"));
         
         loadTable();
+        loadProductId();
     }
 
     public void loadTable(){
@@ -94,9 +101,26 @@ public class ManageInventoryController {
     }
 
     @FXML
+    void loadProductId() {
+        try {
+            ArrayList <ProductDTO> productDTOS = productController.getAllProducts();
+            ObservableList <String> list = FXCollections.observableArrayList();
+
+            for (ProductDTO productDTO : productDTOS){
+                list.add(productDTO.getProductID());
+            }
+
+            productIdCombo.setItems(list);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
+    }
+
+
+    @FXML
     void navigateDelete(ActionEvent event) {
         try {
-            String res = inventoryController.deleteInventory(idTxt.getText());
+            String res = inventoryController.deleteInventory(productIdCombo.getValue());
             new Alert(Alert.AlertType.INFORMATION,res).show();
             loadTable();
             navigateReset(event);
@@ -107,7 +131,6 @@ public class ManageInventoryController {
 
     @FXML
     void navigateReset(ActionEvent event) {
-        idTxt.clear();
         qytTxt.clear();
         reOrderLevelTxt.clear();
         reOrderQytTxt.clear();
@@ -118,7 +141,7 @@ public class ManageInventoryController {
     void navigateSave(ActionEvent event) {
         try {
             InventoryDTO inventoryDTO = new InventoryDTO(
-                    idTxt.getText(),
+                    productIdCombo.getValue(),
                     Integer.parseInt(qytTxt.getText()),
                     Integer.parseInt(reOrderLevelTxt.getText()),
                     Integer.parseInt(reOrderQytTxt.getText()),
@@ -137,7 +160,7 @@ public class ManageInventoryController {
     void navigateUpdate(ActionEvent event) {
         try {
             InventoryDTO inventoryDTO = new InventoryDTO(
-                    idTxt.getText(),
+                   productIdCombo.getValue(),
                     Integer.parseInt(qytTxt.getText()),
                     Integer.parseInt(reOrderLevelTxt.getText()),
                     Integer.parseInt(reOrderQytTxt.getText()),

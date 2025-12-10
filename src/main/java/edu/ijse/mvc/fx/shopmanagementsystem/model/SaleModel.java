@@ -1,111 +1,103 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.model;
 
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SaleDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.db.DBConnection;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SaleDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.db.DBConnection;
 
 public class SaleModel {
-    
-    public String saveSale(SaleDTO saleDTO) throws Exception {
+
+    public String saveSale(SaleDTO dto) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO Sale VALUES (?,?,?,?,?,?,?,?,?)";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, saleDTO.getSaleID());
-        pstm.setString(2, saleDTO.getUserID());
-        pstm.setString(3, saleDTO.getCustomerID());
-        pstm.setDouble(4, saleDTO.getSubTotal());
-        pstm.setDouble(5, saleDTO.getTaxTotal());
-        pstm.setDouble(6, saleDTO.getDiscountTotal());
-        pstm.setDouble(7, saleDTO.getGrandTotal());
-        pstm.setDate(8, Date.valueOf(saleDTO.getDate()));
-        pstm.setObject(9, saleDTO.getStatus());
+        String sql = "INSERT INTO Sale (sale_id, customer_id, sale_date, total_amount, discount, net_total) VALUES (?, ?, ?, ?, ?, ?)";
+        PreparedStatement ps = connection.prepareStatement(sql);
 
-        return pstm.executeUpdate() > 0 ? "Sale Saved Successfully" : "Sale Save Failed";
-    
+        ps.setString(1, dto.getSaleID());
+        ps.setString(2, dto.getCustomerID());
+        ps.setDate(3, Date.valueOf(dto.getSaleDate()));
+        ps.setDouble(4, dto.getTotalAmount());
+        ps.setDouble(5, dto.getDiscount());
+        ps.setDouble(6, dto.getNetTotal());
+
+        return ps.executeUpdate() > 0
+                ? "Sale saved successfully!"
+                : "Failed to save sale!";
     }
 
-    public String updateSale(SaleDTO saleDTO) throws Exception {
+    public String updateSale(SaleDTO dto) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "UPDATE Sale SET userID=?, customerID=?, subTotal=?, taxTotal=?, discountTotal=?, grandTotal=?, date=?, status=? WHERE saleID=?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, saleDTO.getUserID());
-        pstm.setString(2, saleDTO.getCustomerID());
-        pstm.setDouble(3, saleDTO.getSubTotal());
-        pstm.setDouble(4, saleDTO.getTaxTotal());
-        pstm.setDouble(5, saleDTO.getDiscountTotal());
-        pstm.setDouble(6, saleDTO.getGrandTotal());
-        pstm.setDate(7, Date.valueOf(saleDTO.getDate()));
-        pstm.setObject(8, saleDTO.getStatus());
-        pstm.setString(9, saleDTO.getSaleID());
+        String sql = "UPDATE Sale SET customer_id = ?, sale_date = ?, total_amount = ?, discount = ?, net_total = ? WHERE sale_id = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
 
-        return pstm.executeUpdate() > 0 ? "Sale Updated Successfully" : "Sale Update Failed";
-    
+        ps.setString(1, dto.getCustomerID());
+        ps.setDate(2, Date.valueOf(dto.getSaleDate()));
+        ps.setDouble(3, dto.getTotalAmount());
+        ps.setDouble(4, dto.getDiscount());
+        ps.setDouble(5, dto.getNetTotal());
+        ps.setString(6, dto.getSaleID());
+
+        return ps.executeUpdate() > 0
+                ? "Sale updated successfully!"
+                : "Sale not found!";
     }
 
     public String deleteSale(String saleID) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "DELETE FROM Sale WHERE saleID=?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, saleID);
+        String sql = "DELETE FROM Sale WHERE sale_id = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, saleID);
 
-        return pstm.executeUpdate() > 0 ? "Sale Deleted Successfully" : "Sale Delete Failed";
-    
+        return ps.executeUpdate() > 0
+                ? "Sale deleted successfully!"
+                : "Sale not found!";
     }
 
     public SaleDTO searchSale(String saleID) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "SELECT * FROM Sale WHERE saleID=?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, saleID);
+        String sql = "SELECT * FROM Sale WHERE sale_id = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, saleID);
 
-        var rst = pstm.executeQuery();
-        if (rst.next()) {
-            return new SaleDTO(
-                    rst.getString("saleID"),
-                    rst.getString("userID"),
-                    rst.getString("customerID"),
-                    rst.getDouble("subTotal"),
-                    rst.getDouble("taxTotal"),
-                    rst.getDouble("discountTotal"),
-                    rst.getDouble("grandTotal"),
-                    rst.getDate("date").toLocalDate(),
-                    rst.getString("status")
-            );
-        }
-        return null;
-    
+        ResultSet rs = ps.executeQuery();
+
+        return rs.next()
+                ? new SaleDTO(
+                rs.getString("sale_id"),
+                rs.getString("customer_id"),
+                rs.getDate("sale_date").toLocalDate(),
+                rs.getDouble("total_amount"),
+                rs.getDouble("discount"),
+                rs.getDouble("net_total"))
+                : null;
     }
 
     public ArrayList<SaleDTO> getAllSales() throws Exception {
-        
+
         Connection connection = DBConnection.getInstance().getConnection();
         String sql = "SELECT * FROM Sale";
-        PreparedStatement pstm = connection.prepareStatement(sql);
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
 
-        var rst = pstm.executeQuery();
-        ArrayList<SaleDTO> saleList = new ArrayList<>();
-        while (rst.next()) {
-            saleList.add(new SaleDTO(
-                    rst.getString("saleID"),
-                    rst.getString("userID"),
-                    rst.getString("customerID"),
-                    rst.getDouble("subTotal"),
-                    rst.getDouble("taxTotal"),
-                    rst.getDouble("discountTotal"),
-                    rst.getDouble("grandTotal"),
-                    rst.getDate("date").toLocalDate(),
-                    rst.getString("status")
+        ArrayList<SaleDTO> list = new ArrayList<>();
+
+        while (rs.next()) {
+            list.add(new SaleDTO(
+                    rs.getString("sale_id"),
+                    rs.getString("customer_id"),
+                    rs.getDate("sale_date").toLocalDate(),
+                    rs.getDouble("total_amount"),
+                    rs.getDouble("discount"),
+                    rs.getDouble("net_total")
             ));
         }
-        return saleList;
-    
-    }
 
+        return list;
+    }
 }

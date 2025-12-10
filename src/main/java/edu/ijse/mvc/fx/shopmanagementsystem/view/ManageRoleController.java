@@ -1,16 +1,26 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.RoleDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.UserDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.RoleController;
+import edu.ijse.mvc.fx.shopmanagementsystem.controller.UserController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import java.util.ArrayList;
+
 
 public class ManageRoleController {
 
-    private final RoleController roleController = new RoleController();
+    final private RoleController roleController = new RoleController();
+    final private UserController userController = new UserController();
+
+    @FXML
+    private ComboBox<String> ComboUserId;
 
     @FXML
     private TableColumn<RoleDTO, String> colRoleID;
@@ -52,15 +62,13 @@ public class ManageRoleController {
     private Label userIDLabel;
 
     @FXML
-    private TextField userIDTxt;
-
-    @FXML
     public void initialize(){
         colRoleID.setCellValueFactory(new PropertyValueFactory<>("roleID"));
         colRoleName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colUserID.setCellValueFactory(new PropertyValueFactory<>("userID"));
         
         loadTable();
+        loadComboUserId();
     }
 
     public void loadTable(){
@@ -69,6 +77,20 @@ public class ManageRoleController {
             detailsTable.getItems().addAll(roleController.getAllRoles());
         } catch(Exception e){
             new Alert(AlertType.ERROR,e.getMessage()).show();
+        }
+    }
+
+    @FXML
+    void loadComboUserId() {
+        try {
+            ArrayList<UserDTO> users = userController.getAllUsers();
+            ObservableList<String> userIds = FXCollections.observableArrayList();
+            for (UserDTO user : users) {
+                userIds.add(user.getUserID());
+            }
+            ComboUserId.setItems(userIds);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -86,9 +108,8 @@ public class ManageRoleController {
 
     @FXML
     void navigateReset(ActionEvent event) {
-        roleIDTxt.clear();
-        nameTxt.clear();
-        userIDTxt.clear();
+       roleIDTxt.setText("");
+       nameTxt.setText("");
     }
 
     @FXML
@@ -97,7 +118,7 @@ public class ManageRoleController {
             RoleDTO roleDTO = new RoleDTO(
                     roleIDTxt.getText(),
                     nameTxt.getText(),
-                    userIDTxt.getText()
+                    ComboUserId.getValue()
             );
             String rsp = roleController.saveRole(roleDTO);
             new Alert(Alert.AlertType.INFORMATION, rsp).show();
@@ -114,7 +135,7 @@ public class ManageRoleController {
             RoleDTO roleDTO = new RoleDTO(
                     roleIDTxt.getText(),
                     nameTxt.getText(),
-                    userIDTxt.getText()
+                    ComboUserId.getValue()
             );
             String rsp = roleController.updateRole(roleDTO);
             new Alert(Alert.AlertType.INFORMATION, rsp).show();

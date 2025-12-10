@@ -4,6 +4,7 @@ module edu.ijse.mvc.fx.shopmanagementsystem {
     requires transitive javafx.fxml;
     requires java.sql;
     requires static lombok;
+    requires javafx.base;
 
     opens edu.ijse.mvc.fx.shopmanagementsystem.view to javafx.fxml;
     opens edu.ijse.mvc.fx.shopmanagementsystem.model to javafx.base;

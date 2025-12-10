@@ -24,10 +24,10 @@
 }
 
 .logout-btn {
-    -fx-background-color: #ffffff;
-    -fx-border-radius: 8px;
-    -fx-text-fill: #ff5c5c;
-    -fx-font-weight: bold;
+    -fx-background-color: transparent;
+    -fx-border-color: #fff;
+    -fx-border-width: 0.4px;
+    -fx-text-fill: #fff;
 }
 
 .logout-btn:hover {

@@ -118,15 +118,15 @@ public class ManageSaleProductController {
     void navigateSave(ActionEvent event) {
         try {
             SaleProductDTO saleProductDTO = new SaleProductDTO(
-                saleProductIDTxt.getText(),
-                saleIDTxt.getText(),
-                productIDTxt.getText(),
-                productIDTxt.getText(),
-                Integer.parseInt(quantityTxt.getText()),
-                Double.parseDouble(unitPriceTxt.getText()),
-                Double.parseDouble(lineDiscountTxt.getText()),
-                Double.parseDouble(lineTaxTxt.getText()),
-                Double.parseDouble(lineTotalTxt.getText())
+                    saleProductIDTxt.getText(),
+                    saleIDTxt.getText(),
+                    productIDTxt.getText(),
+                    productIDTxt.getText(),
+                    Integer.parseInt(quantityTxt.getText()),
+                    Double.parseDouble(unitPriceTxt.getText()),
+                    Double.parseDouble(lineDiscountTxt.getText()),
+                    Double.parseDouble(lineTaxTxt.getText()),
+                    Double.parseDouble(lineTotalTxt.getText())
             );
             String rsp = saleProductController.saveSaleProduct(saleProductDTO);
             new Alert(Alert.AlertType.INFORMATION,rsp).show();

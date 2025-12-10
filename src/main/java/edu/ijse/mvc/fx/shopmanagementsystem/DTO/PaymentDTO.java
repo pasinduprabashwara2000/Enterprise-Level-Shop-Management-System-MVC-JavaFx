@@ -1,6 +1,6 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.DTO;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +15,6 @@ public class PaymentDTO {
     private String method;
     private double amount;
     private String reference;
-    private Date receivedAt;
+    private LocalDate receivedAt;
 
 }

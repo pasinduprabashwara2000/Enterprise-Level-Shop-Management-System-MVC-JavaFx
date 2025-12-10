@@ -1,97 +1,103 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.model;
 
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.PaymentDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.db.DBConnection;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.PaymentDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.db.DBConnection;
 
 public class PaymentModel {
 
-    public String savePayment(PaymentDTO paymentDTO) throws Exception {
-
-    Connection connection = DBConnection.getInstance().getConnection();
-    String sql = "INSERT INTO Payment VALUES (?,?,?,?,?,?)";
-    PreparedStatement pstm = connection.prepareStatement(sql);
-    pstm.setString(1, paymentDTO.getPaymentID());
-    pstm.setString(2, paymentDTO.getSaleID());
-    pstm.setObject(3, paymentDTO.getMethod());
-    pstm.setDouble(4, paymentDTO.getAmount());
-    pstm.setString(5, paymentDTO.getReference());
-    pstm.setDate(6, paymentDTO.getReceivedAt());
-
-    return pstm.executeUpdate() > 0 ? "Payment Saved Successfully" : "Payment Save Failed"; 
-        
-    }
-
-    public String updatePayment(PaymentDTO paymentDTO) throws Exception {
+    public String savePayment(PaymentDTO dto) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "UPDATE Payment SET saleID=?, method=?, amount=?, reference=?, receivedAt=? WHERE paymentID=?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, paymentDTO.getSaleID());
-        pstm.setObject(2, paymentDTO.getMethod());
-        pstm.setDouble(3, paymentDTO.getAmount());
-        pstm.setString(4, paymentDTO.getReference());
-        pstm.setDate(5, paymentDTO.getReceivedAt());
-        pstm.setString(6, paymentDTO.getPaymentID());
+        String sql = "INSERT INTO Payment (payment_id, sale_id, method, amount, reference, received_at) VALUES (?, ?, ?, ?, ?, ?)";
+        PreparedStatement ps = connection.prepareStatement(sql);
 
-        return pstm.executeUpdate() > 0 ? "Payment Updated Successfully" : "Payment Update Failed"; 
-        
+        ps.setString(1, dto.getPaymentID());
+        ps.setString(2, dto.getSaleID());
+        ps.setString(3, dto.getMethod());
+        ps.setDouble(4, dto.getAmount());
+        ps.setString(5, dto.getReference());
+        ps.setDate(6, Date.valueOf(dto.getReceivedAt()));
+
+        return ps.executeUpdate() > 0
+                ? "Payment saved successfully!"
+                : "Failed to save payment!";
+    }
+
+    public String updatePayment(PaymentDTO dto) throws Exception {
+
+        Connection connection = DBConnection.getInstance().getConnection();
+        String sql = "UPDATE Payment SET sale_id = ?, method = ?, amount = ?, reference = ?, received_at = ? WHERE payment_id = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+
+        ps.setString(1, dto.getSaleID());
+        ps.setString(2, dto.getMethod());
+        ps.setDouble(3, dto.getAmount());
+        ps.setString(4, dto.getReference());
+        ps.setDate(5, Date.valueOf(dto.getReceivedAt()));
+        ps.setString(6, dto.getPaymentID());
+
+        return ps.executeUpdate() > 0
+                ? "Payment updated successfully!"
+                : "Payment not found!";
     }
 
     public String deletePayment(String paymentID) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "DELETE FROM Payment WHERE paymentID=?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, paymentID);
+        String sql = "DELETE FROM Payment WHERE payment_id = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, paymentID);
 
-        return pstm.executeUpdate() > 0 ? "Payment Deleted Successfully" : "Payment Delete Failed"; 
-        
+        return ps.executeUpdate() > 0
+                ? "Payment deleted successfully!"
+                : "Payment not found!";
     }
 
     public PaymentDTO searchPayment(String paymentID) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "SELECT * FROM Payment WHERE paymentID=?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, paymentID);
+        String sql = "SELECT * FROM Payment WHERE payment_id = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, paymentID);
 
-        var rst = pstm.executeQuery();
-        if (rst.next()) {
-            return new PaymentDTO(
-                rst.getString("paymentID"),
-                rst.getString("saleID"),
-                rst.getString("method"),
-                rst.getDouble("amount"),
-                rst.getString("reference"),
-                rst.getDate("receivedAt")
-            );
-        }
-        return null;
-        
+        ResultSet rs = ps.executeQuery();
+
+        return rs.next()
+                ? new PaymentDTO(
+                rs.getString("payment_id"),
+                rs.getString("sale_id"),
+                rs.getString("method"),
+                rs.getDouble("amount"),
+                rs.getString("reference"),
+                rs.getDate("received_at").toLocalDate())
+                : null;
     }
 
     public ArrayList<PaymentDTO> getAllPayments() throws Exception {
+
         Connection connection = DBConnection.getInstance().getConnection();
         String sql = "SELECT * FROM Payment";
-        PreparedStatement pstm = connection.prepareStatement(sql);
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
 
-        ResultSet rst = pstm.executeQuery();
-        ArrayList<PaymentDTO> payments = new ArrayList<>();
-        while (rst.next()) {
-            payments.add(new PaymentDTO(
-                rst.getString("paymentID"),
-                rst.getString("saleID"),
-                rst.getString("method"),
-                rst.getDouble("amount"),
-                rst.getString("reference"),
-                rst.getDate("receivedAt")
+        ArrayList<PaymentDTO> list = new ArrayList<>();
+
+        while (rs.next()) {
+            list.add(new PaymentDTO(
+                    rs.getString("payment_id"),
+                    rs.getString("sale_id"),
+                    rs.getString("method"),
+                    rs.getDouble("amount"),
+                    rs.getString("reference"),
+                    rs.getDate("received_at").toLocalDate()
             ));
         }
-        return payments;
+
+        return list;
     }
-    
 }

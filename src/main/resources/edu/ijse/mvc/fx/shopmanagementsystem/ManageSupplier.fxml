@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="612.0" prefWidth="1075.0" styleClass="white-bg" stylesheets="@css/style2.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.ManageSupplierController">
+<AnchorPane prefHeight="680.0" prefWidth="1075.0" styleClass="white-bg" stylesheets="@css/style2.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.ManageSupplierController">
     <children>
         <Label layoutX="33.0" layoutY="18.0" prefHeight="38.0" prefWidth="201.0" text="Manage Supplier">
             <font>
@@ -63,7 +63,7 @@
         <Button fx:id="deleteBtn" layoutX="552.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateDelete" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Delete" />
         <Button fx:id="resetBtn" layoutX="706.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateReset" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Reset" />
 
-        <TableView fx:id="detailsTable" layoutX="33.0" layoutY="322.0" prefHeight="264.0" prefWidth="1003.0">
+        <TableView fx:id="detailsTable" layoutX="33.0" layoutY="322.0" prefHeight="317.0" prefWidth="1003.0">
             <columns>
                 <TableColumn fx:id="colId" prefWidth="167.0" text="Supplier ID" />
                 <TableColumn fx:id="colName" prefWidth="167.0" text="Name" />

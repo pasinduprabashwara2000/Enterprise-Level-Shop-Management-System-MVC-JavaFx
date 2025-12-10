@@ -1,12 +1,12 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.controller;
 
-import java.util.ArrayList;
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.PaymentDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.model.PaymentModel;
+import java.util.ArrayList;
 
 public class PaymentController {
 
-    private final PaymentModel paymentModel = new PaymentModel();
+    final private PaymentModel paymentModel = new PaymentModel();
 
     public String savePayment(PaymentDTO paymentDTO) throws Exception {
         return paymentModel.savePayment(paymentDTO);
@@ -16,16 +16,16 @@ public class PaymentController {
         return paymentModel.updatePayment(paymentDTO);
     }
 
-    public String deletePayment(String paymentID) throws Exception {
-        return paymentModel.deletePayment(paymentID);
+    public String deletePayment(String paymentId) throws Exception {
+        return paymentModel.deletePayment(paymentId);
     }
 
-    public PaymentDTO searchPayment(String paymentID) throws Exception {
-        return paymentModel.searchPayment(paymentID);
+    public PaymentDTO searchPayment(String paymentId) throws Exception {
+        return paymentModel.searchPayment(paymentId);
     }
 
-    public ArrayList<PaymentDTO> getAllPayments() throws Exception {
+    ArrayList<PaymentDTO> getAllPayments() throws Exception {
         return paymentModel.getAllPayments();
     }
-    
+
 }

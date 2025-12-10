@@ -11,13 +11,10 @@ import lombok.NoArgsConstructor;
 public class SaleDTO {
 
     private String saleID;
-    private String userID;
     private String customerID;
-    private double subTotal;
-    private double taxTotal;
-    private double discountTotal;
-    private double grandTotal;
-    private LocalDate date;
-    private String status;
+    private LocalDate saleDate;
+    private double totalAmount;
+    private double discount;
+    private double netTotal;
 
 }

@@ -1,5 +1,6 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
+import java.time.LocalDate;
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SaleDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.SaleController;
 import javafx.event.ActionEvent;
@@ -7,112 +8,89 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.time.LocalDate;
-
 public class ManageSaleController {
 
     final private SaleController saleController = new SaleController();
 
     @FXML
-    private TableColumn<SaleDTO, String> colCustomerID;
+    private TableColumn<SaleDTO, String> colCustomerId;
 
     @FXML
-    private TableColumn<SaleDTO, LocalDate> colDate;
+    private TableColumn<SaleDTO, Double> colDiscount;
 
     @FXML
-    private TableColumn<SaleDTO, Double> colDiscountTotal;
+    private TableColumn<SaleDTO, Double> colNetTotal;
 
     @FXML
-    private TableColumn<SaleDTO, Double> colGrandTotal;
+    private TableColumn<SaleDTO, LocalDate> colSaleDate;
 
     @FXML
-    private TableColumn<SaleDTO, String> colSaleID;
+    private TableColumn<SaleDTO, String> colSaleId;
 
     @FXML
-    private TableColumn<SaleDTO, String> colStatus;
+    private TableColumn<SaleDTO, Double> colTotalAmount;
 
     @FXML
-    private TableColumn<SaleDTO, Double> colSubTotal;
-
-    @FXML
-    private TableColumn<SaleDTO, Double> colTaxTotal;
-
-    @FXML
-    private TableColumn<SaleDTO, String> colUserID;
-
-    @FXML
-    private TextField customerIDTxt;
-
-    @FXML
-    private DatePicker datePicker;
+    private TextField customerIdTxt;
 
     @FXML
     private Button deleteBtn;
 
     @FXML
-    private TextField discountTotalTxt;
+    private TableView<SaleDTO> detailsTable;
 
     @FXML
-    private TextField grandTotalTxt;
+    private TextField discountTxt;
+
+    @FXML
+    private TextField netTotalTxt;
 
     @FXML
     private Button resetBtn;
 
     @FXML
-    private TextField saleIDTxt;
+    private DatePicker datePicker;
 
     @FXML
-    private TableView<SaleDTO> saleTable;
+    private TextField saleIdTxt;
 
     @FXML
     private Button saveBtn;
 
     @FXML
-    private ComboBox<String> statusCmb;
-
-    @FXML
-    private TextField subTotalTxt;
-
-    @FXML
-    private TextField taxTotalTxt;
+    private TextField totalAmountTxt;
 
     @FXML
     private Button updateBtn;
 
     @FXML
-    private TextField userIDTxt;
-
-    @FXML
-    public void initialize() {
-        colSaleID.setCellValueFactory(new PropertyValueFactory<>("saleID"));
-        colUserID.setCellValueFactory(new PropertyValueFactory<>("userID"));
-        colCustomerID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-        colSubTotal.setCellValueFactory(new PropertyValueFactory<>("subTotal"));
-        colTaxTotal.setCellValueFactory(new PropertyValueFactory<>("taxTotal"));
-        colDiscountTotal.setCellValueFactory(new PropertyValueFactory<>("discountTotal"));
-        colGrandTotal.setCellValueFactory(new PropertyValueFactory<>("grandTotal"));
-        colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-
+    void initialize() {
+        colSaleId.setCellValueFactory(new PropertyValueFactory<>("saleID"));
+        colCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        colSaleDate.setCellValueFactory(new PropertyValueFactory<>("saleDate"));
+        colTotalAmount.setCellValueFactory(new PropertyValueFactory<>("totalAmount"));
+        colDiscount.setCellValueFactory(new PropertyValueFactory<>("discount"));
+        colNetTotal.setCellValueFactory(new PropertyValueFactory<>("netTotal"));
+        
         loadTable();
+
     }
 
-    public void loadTable(){
+    private void loadTable() {
         try {
-            saleTable.getItems().clear();
-            saleTable.getItems().addAll(saleController.getAllModel());
+            detailsTable.getItems().setAll(saleController.getAllSales());
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
-
+    
     @FXML
     void navigateDelete(ActionEvent event) {
         try {
-            String rsp = saleController.deleteModel(saleIDTxt.getText());
-            new Alert(Alert.AlertType.INFORMATION,rsp).show();
-            loadTable();
+            String res = saleController.deleteSale(saleIdTxt.getText());
+            new Alert(Alert.AlertType.INFORMATION,res).show();
             navigateReset(event);
+            loadTable();
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
@@ -120,36 +98,30 @@ public class ManageSaleController {
 
     @FXML
     void navigateReset(ActionEvent event) {
-        saleIDTxt.setText("");
-        userIDTxt.setText("");
-        customerIDTxt.setText("");
-        grandTotalTxt.setText("");
-        statusCmb.setValue(null);
-        subTotalTxt.setText("");
-        taxTotalTxt.setText("");
-        discountTotalTxt.setText("");
+        saleIdTxt.setText("");
+        customerIdTxt.setText("");
         datePicker.setValue(null);
+        totalAmountTxt.setText("");
+        discountTxt.setText("");
+        netTotalTxt.setText("");
     }
 
     @FXML
     void navigateSave(ActionEvent event) {
         try {
-           SaleDTO saleDTO = new SaleDTO(
-                saleIDTxt.getText(),
-                userIDTxt.getText(),
-                customerIDTxt.getText(),
-                Double.parseDouble(subTotalTxt.getText()),
-                Double.parseDouble(taxTotalTxt.getText()),
-                Double.parseDouble(discountTotalTxt.getText()),
-                Double.parseDouble(grandTotalTxt.getText()),
-                datePicker.getValue(),
-                statusCmb.getValue()
-           );
-           String rsp = saleController.saveModel(saleDTO);
-            new Alert(Alert.AlertType.INFORMATION,rsp).show();
-            loadTable();
+            SaleDTO saleDTO = new SaleDTO(
+                    saleIdTxt.getText(),
+                    customerIdTxt.getText(),
+                    datePicker.getValue(),
+                    Double.parseDouble(totalAmountTxt.getText()),
+                    Double.parseDouble(discountTxt.getText()),
+                    Double.parseDouble(netTotalTxt.getText())
+            );
+            String res = saleController.saveSale(saleDTO);
+            new Alert(Alert.AlertType.INFORMATION,res).show();
             navigateReset(event);
-        } catch (Exception e) {
+            loadTable();
+        } catch (Exception e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
@@ -158,20 +130,17 @@ public class ManageSaleController {
     void navigateUpdate(ActionEvent event) {
         try {
             SaleDTO saleDTO = new SaleDTO(
-                    saleIDTxt.getText(),
-                    userIDTxt.getText(),
-                    customerIDTxt.getText(),
-                    Double.parseDouble(subTotalTxt.getText()),
-                    Double.parseDouble(taxTotalTxt.getText()),
-                    Double.parseDouble(discountTotalTxt.getText()),
-                    Double.parseDouble(grandTotalTxt.getText()),
+                    saleIdTxt.getText(),
+                    customerIdTxt.getText(),
                     datePicker.getValue(),
-                    statusCmb.getValue()
+                    Double.parseDouble(totalAmountTxt.getText()),
+                    Double.parseDouble(discountTxt.getText()),
+                    Double.parseDouble(netTotalTxt.getText())
             );
-            String rsp = saleController.updateModel(saleDTO);
-            new Alert(Alert.AlertType.INFORMATION,rsp).show();
-            loadTable();
+            String res = saleController.updateSale(saleDTO);
+            new Alert(Alert.AlertType.INFORMATION,res).show();
             navigateReset(event);
+            loadTable();
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }

@@ -30,11 +30,11 @@
                 <VBox fx:id="menuVBox" alignment="TOP_CENTER" prefWidth="317.0" spacing="10.0" styleClass="anchor-pane">
 
                     <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="271.0" text="Main Menu" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="271.0" text="Main Menu" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
                         <Button fx:id="dashboardBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="🏠 Dashboard" />
                         <Button fx:id="roleBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Role" />
                         <Button fx:id="userBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage User" />

@@ -7,16 +7,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class SaleProductDTO {
+public class OrderItemDTO {
 
-    private String saleProductID;
     private String saleID;
     private String productID;
-    private String promotionID;
-    private int quantity;
+    private int qty;
     private double unitPrice;
-    private double lineDiscount;
-    private double lineTax;
-    private double lineTotal;
 
 }

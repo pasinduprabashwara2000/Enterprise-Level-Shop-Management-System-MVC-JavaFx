@@ -1,20 +1,22 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.CategoryDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.controller.CategoryController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.ProductController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.util.ArrayList;
 
 public class ManageProductController {
 
     private final ProductController productController = new ProductController();
+    private final CategoryController categoryController = new CategoryController();
 
     @FXML
     private CheckBox activeChk;
@@ -23,7 +25,7 @@ public class ManageProductController {
     private TextField barcodeTxt;
 
     @FXML
-    private TextField categoryIDTxt;
+    private ComboBox<String> categoryCombo;
 
     @FXML
     private TableColumn<ProductDTO, Boolean> colActive;
@@ -98,6 +100,7 @@ public class ManageProductController {
         colCategoryID.setCellValueFactory(new PropertyValueFactory<>("categoryID"));
           
         loadTable();
+        loadCategoryID();
     }
 
     public void loadTable(){
@@ -105,6 +108,22 @@ public class ManageProductController {
             detailsTable.getItems().clear();
             detailsTable.getItems().addAll(productController.getAllProducts());
         } catch (Exception e){
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
+    }
+
+    @FXML
+    void loadCategoryID() {
+        try {
+            ArrayList <CategoryDTO> categoryDTOS = categoryController.getAllCategories();
+            ObservableList <String> list = FXCollections.observableArrayList();
+
+            for (CategoryDTO categoryDTO : categoryDTOS){
+                list.add(categoryDTO.getCategoryID());
+            }
+
+            categoryCombo.setItems(list);
+        } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
@@ -131,7 +150,6 @@ public class ManageProductController {
         unitPriceTxt.clear();
         taxRateTxt.clear();
         activeChk.setSelected(false);
-        categoryIDTxt.clear();
     }
 
     @FXML
@@ -146,7 +164,7 @@ public class ManageProductController {
                     Double.parseDouble(unitPriceTxt.getText()),
                     Double.parseDouble(taxRateTxt.getText()),
                     activeChk.isSelected(),
-                    categoryIDTxt.getText()
+                    categoryCombo.getValue()
             );
             String rsp = productController.saveProduct(productDTO);
             new Alert(Alert.AlertType.INFORMATION, rsp).show();
@@ -169,7 +187,7 @@ public class ManageProductController {
                     Double.parseDouble(unitPriceTxt.getText()),
                     Double.parseDouble(taxRateTxt.getText()),
                     activeChk.isSelected(),
-                    categoryIDTxt.getText()
+                    categoryCombo.getValue()
             );
             String rsp = productController.updateProduct(productDTO);
             new Alert(Alert.AlertType.INFORMATION, rsp).show();

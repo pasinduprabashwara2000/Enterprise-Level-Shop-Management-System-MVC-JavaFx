@@ -11,7 +11,7 @@ public class SaleProductController {
     public String saveSaleProduct(SaleProductDTO saleProductDTO) throws Exception {
         return saleProductModel.saveSaleProduct(saleProductDTO);
     }
-    
+
     public String updateSaleProduct(SaleProductDTO saleProductDTO) throws Exception {
         return saleProductModel.updateSaleProduct(saleProductDTO);
     }
@@ -27,5 +27,5 @@ public class SaleProductController {
     public ArrayList<SaleProductDTO> getAllSaleProducts() throws Exception {
         return saleProductModel.getAllSaleProducts();
     }
-    
+
 }

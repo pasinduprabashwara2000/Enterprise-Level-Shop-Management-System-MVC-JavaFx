@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -10,69 +12,75 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
-<AnchorPane prefHeight="640.0" prefWidth="1075.0" styleClass="white-bg" stylesheets="@css/style2.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.ManagePaymentController">
-
+<AnchorPane prefHeight="680.0" prefWidth="1075.0" styleClass="white-bg" stylesheets="@css/style2.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.ManagePaymentController">
     <children>
-        <Label layoutX="33.0" layoutY="18.0" prefHeight="38.0" prefWidth="300.0" text="Manage Payment">
+        <Label layoutX="33.0" layoutY="18.0" prefHeight="38.0" prefWidth="201.0" text="Manage Payments">
             <font>
                 <Font name="System Bold" size="20.0" />
             </font>
         </Label>
 
-        <Label layoutX="34.0" layoutY="76.0" prefWidth="157.0" text="Payment ID :">
+        <!-- Payment ID -->
+        <Label layoutX="34.0" layoutY="76.0" prefHeight="38.0" prefWidth="157.0" text="Payment ID : ">
             <font><Font size="15.0" /></font>
         </Label>
-        <TextField fx:id="paymentIDTxt" layoutX="206.0" layoutY="75.0" prefWidth="259.0" />
+        <TextField fx:id="paymentIdTxt" layoutX="206.0" layoutY="75.0" prefHeight="38.0" prefWidth="259.0" />
 
-        <Label layoutX="34.0" layoutY="132.0" prefWidth="157.0" text="Sale ID :">
+        <!-- Sale ID -->
+        <Label layoutX="34.0" layoutY="132.0" prefHeight="38.0" prefWidth="157.0" text="Sale ID : ">
             <font><Font size="15.0" /></font>
         </Label>
-        <TextField fx:id="saleIDTxt" layoutX="206.0" layoutY="130.0" prefWidth="259.0" />
+        <TextField fx:id="saleIdTxt" layoutX="206.0" layoutY="130.0" prefHeight="38.0" prefWidth="259.0" />
 
-        <Label layoutX="34.0" layoutY="187.0" prefHeight="35.0" prefWidth="157.0" text="Method :">
+        <!-- Method -->
+        <Label layoutX="34.0" layoutY="187.0" prefHeight="38.0" prefWidth="157.0" text="Payment Method : ">
             <font><Font size="15.0" /></font>
         </Label>
-        <ComboBox fx:id="methodCmb" layoutX="206.0" layoutY="185.0" prefHeight="35.0" prefWidth="259.0" promptText="Select Method">
-        <items>
-            <FXCollections fx:factory="observableArrayList">
-                <String fx:value="CASH" />
-                <String fx:value="CARD" />
-                <String fx:value="MOBILE" />
-                <String fx:value="OTHER" />
-            </FXCollections>
-        </items>
-        </ComboBox>
-        <Label layoutX="521.0" layoutY="76.0" prefWidth="157.0" text="Amount :">
+
+        <!-- Amount -->
+        <Label layoutX="521.0" layoutY="76.0" prefHeight="38.0" prefWidth="157.0" text="Amount : ">
             <font><Font size="15.0" /></font>
         </Label>
-        <TextField fx:id="amountTxt" layoutX="650.0" layoutY="75.0" prefWidth="259.0" />
+        <TextField fx:id="amountTxt" layoutX="650.0" layoutY="75.0" prefHeight="38.0" prefWidth="259.0" />
 
-        <Label layoutX="521.0" layoutY="132.0" prefWidth="157.0" text="Reference :">
+        <!-- Reference -->
+        <Label layoutX="521.0" layoutY="132.0" prefHeight="38.0" prefWidth="157.0" text="Reference : ">
             <font><Font size="15.0" /></font>
         </Label>
-        <TextField fx:id="referenceTxt" layoutX="650.0" layoutY="130.0" prefWidth="259.0" />
+        <TextField fx:id="referenceTxt" layoutX="650.0" layoutY="130.0" prefHeight="38.0" prefWidth="259.0" />
 
-        <Label layoutX="521.0" layoutY="187.0" prefHeight="30.0" prefWidth="157.0" text="Received At :">
+        <!-- Received Date -->
+        <Label layoutX="521.0" layoutY="187.0" prefHeight="38.0" prefWidth="157.0" text="Received At : ">
             <font><Font size="15.0" /></font>
         </Label>
-        <DatePicker fx:id="receivedAtPicker" layoutX="650.0" layoutY="185.0" prefWidth="259.0" />
 
-        <Button fx:id="saveBtn" layoutX="236.0" layoutY="263.0" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Save" />
-        <Button fx:id="updateBtn" layoutX="395.0" layoutY="263.0" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Update" />
-        <Button fx:id="deleteBtn" layoutX="552.0" layoutY="263.0" onAction="#navigateDelete" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Delete" />
-        <Button fx:id="resetBtn" layoutX="706.0" layoutY="263.0" onAction="#navigateReset" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Reset" />
+        <!-- Action Buttons -->
+        <Button fx:id="saveBtn" layoutX="236.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Save" />
+        <Button fx:id="updateBtn" layoutX="395.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Update" />
+        <Button fx:id="deleteBtn" layoutX="552.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateDelete" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Delete" />
+        <Button fx:id="resetBtn" layoutX="706.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateReset" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Reset" />
 
-        <TableView fx:id="paymentTable" layoutX="33.0" layoutY="320.0" prefHeight="300.0" prefWidth="1003.0">
+        <!-- TableView for Payment Records -->
+        <TableView fx:id="detailsTable" layoutX="33.0" layoutY="322.0" prefHeight="325.0" prefWidth="1003.0">
             <columns>
-                <TableColumn fx:id="colPaymentId" prefWidth="120.0" text="Payment ID" />
-                <TableColumn fx:id="colSaleId" prefWidth="120.0" text="Sale ID" />
-                <TableColumn fx:id="colMethod" prefWidth="153.0" text="Method" />
-                <TableColumn fx:id="colAmount" prefWidth="166.0" text="Amount" />
-                <TableColumn fx:id="colReference" prefWidth="179.0" text="Reference" />
-                <TableColumn fx:id="colReceivedAt" prefWidth="263.0" text="Received At" />
+                <TableColumn fx:id="colPaymentId" prefWidth="127.0" text="Payment ID" />
+                <TableColumn fx:id="colSaleId" prefWidth="152.0" text="Sale ID" />
+                <TableColumn fx:id="colMethod" prefWidth="182.0" text="Method" />
+                <TableColumn fx:id="colAmount" prefWidth="178.0" text="Amount" />
+                <TableColumn fx:id="colReference" prefWidth="192.0" text="Reference" />
+                <TableColumn fx:id="colReceivedAt" prefWidth="167.0" text="Received At" />
             </columns>
         </TableView>
+      <DatePicker fx:id="datePicker" layoutX="650.0" layoutY="187.0" prefHeight="38.0" prefWidth="259.0" />
+      <ComboBox fx:id="paymentMethodCombo" layoutX="206.0" layoutY="187.0" prefHeight="38.0" prefWidth="259.0" promptText="Select Payment Method">
+          <items>
+              <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="CASH" />
+                  <String fx:value="CARD" />
+                  <String fx:value="MOBILE" />
+                  <String fx:value="OTHER" />
+              </FXCollections>
+          </items>
+      </ComboBox>
     </children>
 </AnchorPane>

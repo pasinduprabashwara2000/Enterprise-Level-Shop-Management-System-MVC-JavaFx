@@ -1,20 +1,25 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SupplierDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SupplyDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.controller.ProductController;
+import edu.ijse.mvc.fx.shopmanagementsystem.controller.SupplierController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.SupplyController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.util.ArrayList;
 
 public class ManageSupplyController {
 
     final private SupplyController supplyController = new SupplyController();
+    final private ProductController productController = new ProductController();
+    final private SupplierController supplierController = new SupplierController();
 
     @FXML
     private TableColumn<SupplyDTO, Double> colLastCost;
@@ -44,7 +49,7 @@ public class ManageSupplyController {
     private Label productIDLabel;
 
     @FXML
-    private TextField productIDTxt;
+    private ComboBox<String> productIdCombo;
 
     @FXML
     private Button resetBtn;
@@ -62,7 +67,7 @@ public class ManageSupplyController {
     private Label supplierIDLabel;
 
     @FXML
-    private TextField supplierTxt;
+    private ComboBox<String> supplierIdCombo;
 
     @FXML
     private Button updateBtn;
@@ -75,6 +80,8 @@ public class ManageSupplyController {
         colSupplierProductCode.setCellValueFactory(new PropertyValueFactory<>("supplierProductCode"));
         
         loadTable();
+        loadProductId();
+        loadSupplierId();
 
     }
 
@@ -88,9 +95,37 @@ public class ManageSupplyController {
     }
 
     @FXML
+    void loadProductId() {
+        try {
+            ArrayList <ProductDTO> productDTOS = productController.getAllProducts();
+            ObservableList <String> list = FXCollections.observableArrayList();
+            for (ProductDTO productDTO : productDTOS){
+                list.add(productDTO.getProductID());
+            }
+            productIdCombo.setItems(list);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
+    }
+
+    @FXML
+    void loadSupplierId() {
+        try {
+            ArrayList <SupplierDTO> supplyDTOS = supplierController.getAllSuppliers();
+            ObservableList <String> list = FXCollections.observableArrayList();
+            for (SupplierDTO supplierDTO : supplyDTOS){
+                list.add(supplierDTO.getSupplierID());
+            }
+            supplierIdCombo.setItems(list);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
+    }
+
+    @FXML
     void navigateDelete(ActionEvent event) {
         try {
-            String rsp = supplyController.deleteSupply(productIDTxt.getText(), supplierTxt.getText());
+            String rsp = supplyController.deleteSupply(productIdCombo.getValue(), supplierIdCombo.getValue());
             new Alert(Alert.AlertType.INFORMATION, rsp).show();
             loadTable();
             navigateReset(event);
@@ -102,8 +137,6 @@ public class ManageSupplyController {
 
     @FXML
     void navigateReset(ActionEvent event) {
-        productIDTxt.setText("");
-        supplierTxt.setText("");
         lastCostTxt.setText("");
         supplierCodeTxt.setText("");
         
@@ -113,8 +146,8 @@ public class ManageSupplyController {
     void navigateSave(ActionEvent event) {
         try{
             SupplyDTO supplyDTO = new SupplyDTO(
-                    productIDTxt.getText(),
-                    supplierTxt.getText(),
+                    productIdCombo.getValue(),
+                    supplierIdCombo.getValue(),
                     Double.parseDouble(lastCostTxt.getText()),
                     supplierCodeTxt.getText()
             );
@@ -131,8 +164,8 @@ public class ManageSupplyController {
     void navigateUpdate(ActionEvent event) {
         try {
             SupplyDTO supplyDTO = new SupplyDTO(
-                    productIDTxt.getText(),
-                    supplierTxt.getText(),
+                    productIdCombo.getValue(),
+                    supplierIdCombo.getValue(),
                     Double.parseDouble(lastCostTxt.getText()),
                     supplierCodeTxt.getText() 
             );

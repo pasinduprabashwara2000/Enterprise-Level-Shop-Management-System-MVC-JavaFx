@@ -65,15 +65,15 @@ public class SaleProductModel {
         ResultSet rst = pstm.executeQuery();
         if (rst.next()) {
             return new SaleProductDTO(
-                rst.getString("saleProductID"),
-                rst.getString("saleID"),
-                rst.getString("productID"),
-                rst.getString("promotionID"),
-                rst.getInt("quantity"),
-                rst.getDouble("unitPrice"),
-                rst.getDouble("lineDiscount"),
-                rst.getDouble("lineTax"),
-                rst.getDouble("lineTotal")
+                    rst.getString("saleProductID"),
+                    rst.getString("saleID"),
+                    rst.getString("productID"),
+                    rst.getString("promotionID"),
+                    rst.getInt("quantity"),
+                    rst.getDouble("unitPrice"),
+                    rst.getDouble("lineDiscount"),
+                    rst.getDouble("lineTax"),
+                    rst.getDouble("lineTotal")
             );
         }
         return null;
@@ -89,18 +89,18 @@ public class SaleProductModel {
         ArrayList<SaleProductDTO> saleProductList = new ArrayList<>();
         while (rst.next()) {
             saleProductList.add(new SaleProductDTO(
-                rst.getString("saleProductID"),
-                rst.getString("saleID"),
-                rst.getString("productID"),
-                rst.getString("promotionID"),
-                rst.getInt("quantity"),
-                rst.getDouble("unitPrice"),
-                rst.getDouble("lineDiscount"),
-                rst.getDouble("lineTax"),
-                rst.getDouble("lineTotal")
+                    rst.getString("saleProductID"),
+                    rst.getString("saleID"),
+                    rst.getString("productID"),
+                    rst.getString("promotionID"),
+                    rst.getInt("quantity"),
+                    rst.getDouble("unitPrice"),
+                    rst.getDouble("lineDiscount"),
+                    rst.getDouble("lineTax"),
+                    rst.getDouble("lineTotal")
             ));
         }
         return saleProductList;
     }
-    
+
 }
