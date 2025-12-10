@@ -29,17 +29,18 @@
     -fx-background-color: #e6b21a;
 }
 
-.blue-btn {
-    -fx-background-color: #0078d7;
-    -fx-text-fill: white;
+.light-yellow-btn {
+    -fx-background-color: #fff176;
+    -fx-text-fill: #333333;
     -fx-background-radius: 8px;
     -fx-padding: 8px 18px;
     -fx-font-weight: bold;
     -fx-font-size: 14px;
 }
 
-.blue-btn:hover {
-    -fx-background-color: #005ea3;
+.light-yellow-btn:hover {
+    -fx-background-color: #fdd835;
+    -fx-cursor: hand;
 }
 
 .success-btn {
