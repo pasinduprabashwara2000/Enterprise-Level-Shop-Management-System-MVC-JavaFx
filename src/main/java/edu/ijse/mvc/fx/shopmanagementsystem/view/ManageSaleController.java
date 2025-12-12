@@ -84,6 +84,26 @@ public class ManageSaleController {
         totalAmountTxt.textProperty().addListener((obs, oldVal, newVal) -> calculateTotal());
         discountTxt.textProperty().addListener((obs, oldVal, newVal) -> calculateTotal());
         netTotalTxt.setEditable(false);
+
+        detailsTable.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 1){
+                loadSelectedRow();
+            }
+        });
+
+    }
+
+    private void loadSelectedRow(){
+        SaleDTO selectedSale = detailsTable.getSelectionModel().getSelectedItem();
+
+        if(selectedSale != null){
+            saleIdTxt.setText(selectedSale.getSaleID());
+            customerIdCombo.setValue(selectedSale.getCustomerID());
+            datePicker.setValue(selectedSale.getSaleDate());
+            totalAmountTxt.setText(String.valueOf(selectedSale.getTotalAmount()));
+            discountTxt.setText(String.valueOf(selectedSale.getDiscount()));
+            netTotalTxt.setText(String.valueOf(selectedSale.getTotalAmount()));
+        }
     }
 
     private void loadTable() {
@@ -124,8 +144,8 @@ public class ManageSaleController {
 
             netTotalTxt.setText(String.valueOf(netTotal));
 
-        } catch (NumberFormatException e) {
-            netTotalTxt.setText("");
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
 
@@ -155,7 +175,7 @@ public class ManageSaleController {
     void navigateSave(ActionEvent event) {
         try {
             SaleDTO saleDTO = new SaleDTO(
-                    saleIdTxt.getText(),
+                    null,
                     customerIdCombo.getValue(),
                     datePicker.getValue(),
                     Double.parseDouble(totalAmountTxt.getText()),

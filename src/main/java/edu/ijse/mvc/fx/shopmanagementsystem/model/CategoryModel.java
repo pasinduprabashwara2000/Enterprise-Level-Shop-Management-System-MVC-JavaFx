@@ -11,11 +11,10 @@ public class CategoryModel {
     public String saveCategory(CategoryDTO categoryDTO) throws Exception {
         
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO Category VALUES(?,?,?)";
+        String sql = "INSERT INTO Category (name, description) VALUES(?,?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, categoryDTO.getCategoryID());
-        pstm.setString(2, categoryDTO.getName());
-        pstm.setString(3, categoryDTO.getDescription());
+        pstm.setString(1, categoryDTO.getName());
+        pstm.setString(2, categoryDTO.getDescription());
 
         return pstm.executeUpdate() > 0 ? "Category Saved Successfully" : "Category Save Failed";
 

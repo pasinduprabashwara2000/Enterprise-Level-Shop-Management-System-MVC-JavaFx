@@ -13,15 +13,13 @@ public class SaleModel {
     public String saveSale(SaleDTO dto) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO Sale (sale_id, customer_id, sale_date, total_amount, discount, net_total) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Sale (customer_id, sale_date, total_amount, discount, net_total) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement ps = connection.prepareStatement(sql);
-
-        ps.setString(1, dto.getSaleID());
-        ps.setString(2, dto.getCustomerID());
-        ps.setDate(3, Date.valueOf(dto.getSaleDate()));
-        ps.setDouble(4, dto.getTotalAmount());
-        ps.setDouble(5, dto.getDiscount());
-        ps.setDouble(6, dto.getNetTotal());
+        ps.setString(1, dto.getCustomerID());
+        ps.setDate(2, Date.valueOf(dto.getSaleDate()));
+        ps.setDouble(3, dto.getTotalAmount());
+        ps.setDouble(4, dto.getDiscount());
+        ps.setDouble(5, dto.getNetTotal());
 
         return ps.executeUpdate() > 0
                 ? "Sale saved successfully!"

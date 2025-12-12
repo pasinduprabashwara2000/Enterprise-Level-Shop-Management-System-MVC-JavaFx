@@ -64,19 +64,10 @@ public class ManageSaleProductController {
     private TextField lineTotalTxt;
 
     @FXML
-    private TextField productIDTxt;
-
-    @FXML
-    private TextField promotionIDTxt;
-
-    @FXML
     private TextField quantityTxt;
 
     @FXML
     private Button resetBtn;
-
-    @FXML
-    private TextField saleIDTxt;
 
     @FXML
     private TextField saleProductIDTxt;
@@ -118,12 +109,35 @@ public class ManageSaleProductController {
         loadSaleId();
         loadProductId();
         loadPromotionId();
+
         lineTotalTxt.setEditable(false);
         quantityTxt.textProperty().addListener((observable, oldValue, newValue) -> calculateTotal());
         unitPriceTxt.textProperty().addListener(((observable, oldValue, newValue) -> calculateTotal()));
         lineDiscountTxt.textProperty().addListener(((observable, oldValue, newValue) -> calculateTotal()));
         lineTaxTxt.textProperty().addListener((observable, oldValue, newValue) -> calculateTotal());
 
+        saleProductTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1){
+                loadSelectedProduct();
+            }
+        });
+
+    }
+
+    private void loadSelectedProduct(){
+        SaleProductDTO selectedSaleProduct = saleProductTable.getSelectionModel().getSelectedItem();
+
+        if (selectedSaleProduct != null){
+            saleProductIDTxt.setText(selectedSaleProduct.getProductID());
+            saleIdCombo.setValue(selectedSaleProduct.getSaleID());
+            productIdCombo.setValue(selectedSaleProduct.getProductID());
+            promotionIdCombo.setValue(selectedSaleProduct.getPromotionID());
+            quantityTxt.setText(String.valueOf(selectedSaleProduct.getQuantity()));
+            unitPriceTxt.setText(String.valueOf(selectedSaleProduct.getUnitPrice()));
+            lineDiscountTxt.setText(String.valueOf(selectedSaleProduct.getLineDiscount()));
+            lineTaxTxt.setText(String.valueOf(selectedSaleProduct.getLineTax()));
+            lineTotalTxt.setText(String.valueOf(selectedSaleProduct.getLineTotal()));
+        }
     }
 
     public void loadTable(){
@@ -218,17 +232,25 @@ public class ManageSaleProductController {
 
     @FXML
     void navigateReset(ActionEvent event) {
-
+                saleProductIDTxt.setText("");
+                saleIdCombo.setValue(null);
+                promotionIdCombo.setValue("");
+                promotionIdCombo.setValue(null);
+                quantityTxt.setText("");
+                unitPriceTxt.setText("");
+                lineDiscountTxt.setText("");
+                lineTaxTxt.setText("");
+                lineTotalTxt.setText("");
     }
 
     @FXML
     void navigateSave(ActionEvent event) {
         try {
             SaleProductDTO saleProductDTO = new SaleProductDTO(
-                    saleProductIDTxt.getText(),
-                    saleIDTxt.getText(),
-                    productIDTxt.getText(),
-                    productIDTxt.getText(),
+                    null,
+                    saleIdCombo.getValue(),
+                    promotionIdCombo.getValue(),
+                    productIdCombo.getValue(),
                     Integer.parseInt(quantityTxt.getText()),
                     Double.parseDouble(unitPriceTxt.getText()),
                     Double.parseDouble(lineDiscountTxt.getText()),
@@ -249,9 +271,9 @@ public class ManageSaleProductController {
         try {
             SaleProductDTO saleProductDTO = new SaleProductDTO(
                     saleProductIDTxt.getText(),
-                    saleIDTxt.getText(),
-                    productIDTxt.getText(),
-                    productIDTxt.getText(),
+                    saleIdCombo.getValue(),
+                    promotionIdCombo.getValue(),
+                    promotionIdCombo.getValue(),
                     Integer.parseInt(quantityTxt.getText()),
                     Double.parseDouble(unitPriceTxt.getText()),
                     Double.parseDouble(lineDiscountTxt.getText()),

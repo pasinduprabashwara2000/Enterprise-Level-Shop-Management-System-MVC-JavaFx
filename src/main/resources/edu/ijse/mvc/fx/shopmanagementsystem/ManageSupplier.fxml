@@ -16,26 +16,20 @@
             </font>
         </Label>
 
-        <Label fx:id="supplierIDLabel" layoutX="34.0" layoutY="76.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style.css" text="Supplier ID : ">
+        <TextField fx:id="supplierIDTxt" managed="false" visible="false" />
+        <Label fx:id="nameLabel" layoutX="34.0" layoutY="77.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style.css" text="Name : ">
             <font>
                 <Font size="15.0" />
             </font>
         </Label>
-        <TextField fx:id="supplierIDTxt" layoutX="206.0" layoutY="75.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
+        <TextField fx:id="nameTxt" layoutX="206.0" layoutY="75.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
 
-        <Label fx:id="nameLabel" layoutX="34.0" layoutY="132.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style.css" text="Name : ">
+        <Label fx:id="contactPersonLabel" layoutX="34.0" layoutY="132.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style.css" text="Contact Person : ">
             <font>
                 <Font size="15.0" />
             </font>
         </Label>
-        <TextField fx:id="nameTxt" layoutX="206.0" layoutY="130.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
-
-        <Label fx:id="contactPersonLabel" layoutX="34.0" layoutY="187.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style.css" text="Contact Person : ">
-            <font>
-                <Font size="15.0" />
-            </font>
-        </Label>
-        <TextField fx:id="contactPersonTxt" layoutX="206.0" layoutY="185.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
+        <TextField fx:id="contactPersonTxt" layoutX="206.0" layoutY="130.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
 
         <Label fx:id="phoneLabel" layoutX="521.0" layoutY="76.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style.css" text="Phone : ">
             <font>
@@ -51,12 +45,12 @@
         </Label>
         <TextField fx:id="emailTxt" layoutX="650.0" layoutY="130.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
 
-        <Label fx:id="addressLabel" layoutX="521.0" layoutY="187.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style.css" text="Address : ">
+        <Label fx:id="addressLabel" layoutX="35.0" layoutY="187.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style.css" text="Address : ">
             <font>
                 <Font size="15.0" />
             </font>
         </Label>
-        <TextField fx:id="addressTxt" layoutX="650.0" layoutY="185.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
+        <TextField fx:id="addressTxt" layoutX="205.0" layoutY="185.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
 
         <Button fx:id="saveBtn" layoutX="236.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Save" />
         <Button fx:id="updateBtn" layoutX="395.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Update" />

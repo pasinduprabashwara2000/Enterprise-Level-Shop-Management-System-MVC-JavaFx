@@ -62,19 +62,16 @@ public class ManageUserController {
     private Button updateBtn;
 
     @FXML
-    private Label userIDLabel;
-
-    @FXML
-    private TextField userIDTxt;
-
-    @FXML
     private Label userNameLabel;
 
     @FXML
     private TextField userNameTxt;
 
     @FXML
-    public void initialize(){
+    private TextField userIDTxt;
+
+    @FXML
+    public void initialize() {
         colId.setCellValueFactory(new PropertyValueFactory<>("userID"));
         colName.setCellValueFactory(new PropertyValueFactory<>("userName"));
         colPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
@@ -83,14 +80,30 @@ public class ManageUserController {
 
         loadTable();
 
+        detailsTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1) {
+                loadSelectedRow();
+            }
+        });
     }
-    
-    public void loadTable(){
-        try{
+
+    private void loadSelectedRow() {
+        UserDTO selectedUser = detailsTable.getSelectionModel().getSelectedItem();
+        if (selectedUser != null) {
+            userIDTxt.setText(selectedUser.getUserID());
+            userNameTxt.setText(selectedUser.getUserName());
+            passwordTxt.setText(selectedUser.getPassword());
+            activeStatusPicker.setValue(selectedUser.getActive());
+            datePicker.setValue(selectedUser.getCreatedAt());
+        }
+    }
+
+    public void loadTable() {
+        try {
             detailsTable.getItems().clear();
             detailsTable.getItems().addAll(userController.getAllUsers());
-        } catch(Exception e){
-            new Alert(AlertType.ERROR,e.getMessage()).show();
+        } catch (Exception e) {
+            new Alert(AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -98,11 +111,11 @@ public class ManageUserController {
     void navigateDelete(ActionEvent event) {
         try {
             String rsp = userController.deleteUser(userIDTxt.getText());
-            new Alert(AlertType.INFORMATION,rsp).show();
+            new Alert(AlertType.INFORMATION, rsp).show();
             loadTable();
             navigateReset(event);
         } catch (Exception e) {
-            new Alert(AlertType.ERROR,e.getMessage()).show();
+            new Alert(AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -119,18 +132,18 @@ public class ManageUserController {
     void navigateSave(ActionEvent event) {
         try {
             UserDTO userDTO = new UserDTO(
-                    userIDTxt.getText(),
+                    null, 
                     userNameTxt.getText(),
                     passwordTxt.getText(),
                     activeStatusPicker.getValue(),
                     datePicker.getValue()
             );
             String rsp = userController.saveUser(userDTO);
-            new Alert(AlertType.INFORMATION,rsp).show();
+            new Alert(AlertType.INFORMATION, rsp).show();
             loadTable();
             navigateReset(event);
         } catch (Exception e) {
-            new Alert(AlertType.ERROR,e.getMessage()).show();
+            new Alert(AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -145,12 +158,11 @@ public class ManageUserController {
                     datePicker.getValue()
             );
             String rsp = userController.updateUser(userDTO);
-            new Alert(AlertType.INFORMATION,rsp).show();
+            new Alert(AlertType.INFORMATION, rsp).show();
             loadTable();
             navigateReset(event);
         } catch (Exception e) {
-            new Alert(AlertType.ERROR,e.getMessage()).show();
+            new Alert(AlertType.ERROR, e.getMessage()).show();
         }
     }
-
 }

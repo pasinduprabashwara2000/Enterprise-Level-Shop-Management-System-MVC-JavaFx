@@ -9,18 +9,17 @@ import edu.ijse.mvc.fx.shopmanagementsystem.db.DBConnection;
 public class PromotionModel {
 
     public String savePromotion(PromotionDTO promotionDTO) throws Exception {
-        
+
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO Promotion VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Promotion (name, type, value, startAt, endAt, active, productID) VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, promotionDTO.getPromoteID());
-        pstm.setString(2, promotionDTO.getName());
-        pstm.setString(3, promotionDTO.getType());
-        pstm.setDouble(4, promotionDTO.getValue());
-        pstm.setDate(5, new java.sql.Date(promotionDTO.getStartAt().getTime()));
-        pstm.setDate(6, new java.sql.Date(promotionDTO.getEndAt().getTime()));
-        pstm.setBoolean(7, promotionDTO.isActive());
-        pstm.setString(8, promotionDTO.getProductID());
+        pstm.setString(1, promotionDTO.getName());
+        pstm.setString(2, promotionDTO.getType());
+        pstm.setDouble(3, promotionDTO.getValue());
+        pstm.setDate(4, promotionDTO.getStartAt());
+        pstm.setDate(5, promotionDTO.getEndAt());
+        pstm.setBoolean(6, promotionDTO.isActive());
+        pstm.setString(7, promotionDTO.getProductID());
 
         return pstm.executeUpdate() > 0 ? "Promotion Saved Successfully" : "Promotion Save Failed";
     }
@@ -33,8 +32,8 @@ public class PromotionModel {
         pstm.setString(1, promotionDTO.getName());
         pstm.setString(2, promotionDTO.getType());
         pstm.setDouble(3, promotionDTO.getValue());
-        pstm.setDate(4, new java.sql.Date(promotionDTO.getStartAt().getTime()));
-        pstm.setDate(5, new java.sql.Date(promotionDTO.getEndAt().getTime()));
+        pstm.setDate(4, promotionDTO.getStartAt());
+        pstm.setDate(5, promotionDTO.getEndAt());
         pstm.setBoolean(6, promotionDTO.isActive());
         pstm.setString(7, promotionDTO.getProductID());
         pstm.setString(8, promotionDTO.getPromoteID());

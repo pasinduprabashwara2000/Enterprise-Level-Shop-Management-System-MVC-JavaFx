@@ -2,6 +2,8 @@ package edu.ijse.mvc.fx.shopmanagementsystem.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.RoleDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.db.DBConnection;
@@ -9,20 +11,31 @@ import edu.ijse.mvc.fx.shopmanagementsystem.db.DBConnection;
 public class RoleModel {
 
     public String saveRole(RoleDTO roleDTO) throws Exception {
-        Connection conn = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO Role VALUES (?,?,?)";
-        PreparedStatement pstm = conn.prepareStatement(sql);
-        pstm.setString(1, roleDTO.getRoleID());
-        pstm.setString(2, roleDTO.getName());
-        pstm.setString(3, roleDTO.getUserID());
 
-        return pstm.executeUpdate() > 0 ? "Role Saved Successfully" : "Role Save Failed";
+        Connection conn = DBConnection.getInstance().getConnection();
+        String sql = "INSERT INTO Role (name, userID) VALUES (?, ?)";
+        PreparedStatement pstm = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        pstm.setString(1, roleDTO.getName());
+        pstm.setString(2, roleDTO.getUserID());
+
+        int affectedRows = pstm.executeUpdate();
+
+        if (affectedRows > 0) {
+            ResultSet rs = pstm.getGeneratedKeys();
+            if (rs.next()) {
+                roleDTO.setRoleID(String.valueOf(rs.getInt(1)));
+            }
+            return "Role Saved Successfully";
+        }
+        return "Role Save Failed";
     }
 
     public String updateRole(RoleDTO roleDTO) throws Exception {
+
         Connection conn = DBConnection.getInstance().getConnection();
         String sql = "UPDATE Role SET name=?, userID=? WHERE roleID=?";
         PreparedStatement pstm = conn.prepareStatement(sql);
+
         pstm.setString(1, roleDTO.getName());
         pstm.setString(2, roleDTO.getUserID());
         pstm.setString(3, roleDTO.getRoleID());
@@ -31,20 +44,23 @@ public class RoleModel {
     }
 
     public String deleteRole(String roleID) throws Exception {
+
         Connection conn = DBConnection.getInstance().getConnection();
         String sql = "DELETE FROM Role WHERE roleID=?";
         PreparedStatement pstm = conn.prepareStatement(sql);
-        pstm.setString(1, roleID);
 
+        pstm.setString(1, roleID);
         return pstm.executeUpdate() > 0 ? "Role Deleted Successfully" : "Role Delete Failed";
     }
 
     public RoleDTO searchRole(String roleID) throws Exception {
+
         Connection conn = DBConnection.getInstance().getConnection();
         String sql = "SELECT * FROM Role WHERE roleID=?";
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, roleID);
-        var rst = pstm.executeQuery();
+        ResultSet rst = pstm.executeQuery();
+
         if (rst.next()) {
             return new RoleDTO(
                     rst.getString("roleID"),
@@ -56,11 +72,13 @@ public class RoleModel {
     }
 
     public ArrayList<RoleDTO> getAllRoles() throws Exception {
+
         Connection conn = DBConnection.getInstance().getConnection();
         String sql = "SELECT * FROM Role";
         PreparedStatement pstm = conn.prepareStatement(sql);
-        var rst = pstm.executeQuery();
+        ResultSet rst = pstm.executeQuery();
         ArrayList<RoleDTO> allRoles = new ArrayList<>();
+
         while (rst.next()) {
             allRoles.add(new RoleDTO(
                     rst.getString("roleID"),
@@ -68,7 +86,7 @@ public class RoleModel {
                     rst.getString("userID")
             ));
         }
+
         return allRoles;
     }
-    
 }

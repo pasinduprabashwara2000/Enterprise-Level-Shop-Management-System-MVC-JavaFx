@@ -12,13 +12,12 @@ public class InventoryModel {
     public String saveInventory(InventoryDTO inventoryDTO) throws Exception {
 
         Connection conn = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO Inventory VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO Inventory (QYT, reOrderLevel, reOrderQYT, lastStockUpdate) VALUES (?,?,?,?)";
         PreparedStatement pstm = conn.prepareStatement(sql);
-        pstm.setString(1, inventoryDTO.getProductID());
-        pstm.setInt(2, inventoryDTO.getQYT());
-        pstm.setInt(3, inventoryDTO.getReOrderLevel());
-        pstm.setInt(4, inventoryDTO.getReOrderQYT());
-        pstm.setDate(5, Date.valueOf(inventoryDTO.getLastStockUpdate()));
+        pstm.setInt(1, inventoryDTO.getQYT());
+        pstm.setInt(2, inventoryDTO.getReOrderLevel());
+        pstm.setInt(3, inventoryDTO.getReOrderQYT());
+        pstm.setDate(4, Date.valueOf(inventoryDTO.getLastStockUpdate()));
 
         return pstm.executeUpdate() > 0 ? "Inventory Saved Successfully" : "Inventory Save Failed";
     

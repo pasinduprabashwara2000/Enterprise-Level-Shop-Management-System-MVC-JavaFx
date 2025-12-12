@@ -13,15 +13,14 @@ public class PaymentModel {
     public String savePayment(PaymentDTO dto) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO Payment (payment_id, sale_id, method, amount, reference, received_at) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Payment (sale_id, method, amount, reference, received_at) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement ps = connection.prepareStatement(sql);
 
-        ps.setString(1, dto.getPaymentID());
-        ps.setString(2, dto.getSaleID());
-        ps.setString(3, dto.getMethod());
-        ps.setDouble(4, dto.getAmount());
-        ps.setString(5, dto.getReference());
-        ps.setDate(6, Date.valueOf(dto.getReceivedAt()));
+        ps.setString(1, dto.getSaleID());
+        ps.setString(2, dto.getMethod());
+        ps.setDouble(3, dto.getAmount());
+        ps.setString(4, dto.getReference());
+        ps.setDate(5, Date.valueOf(dto.getReceivedAt()));
 
         return ps.executeUpdate() > 0
                 ? "Payment saved successfully!"

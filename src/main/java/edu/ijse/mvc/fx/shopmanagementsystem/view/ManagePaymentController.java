@@ -2,7 +2,6 @@ package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.PaymentDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SaleDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.model.PaymentModel;
@@ -69,6 +68,26 @@ public class ManagePaymentController {
 
         loadTable();
         loadSaleId();
+
+        detailsTable.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 1){
+                loadSelectedRow();
+            }
+        });
+
+    }
+
+    private void loadSelectedRow(){
+        PaymentDTO selectedPayment = detailsTable.getSelectionModel().getSelectedItem();
+
+        if (selectedPayment != null){
+            paymentIdTxt.setText(selectedPayment.getPaymentID());
+            saleIdCombo.setValue(selectedPayment.getSaleID());
+            paymentMethodCombo.setValue(selectedPayment.getMethod());
+            amountTxt.setText(String.valueOf(selectedPayment.getAmount()));
+            referenceTxt.setText(selectedPayment.getReference());
+            datePicker.setValue(selectedPayment.getReceivedAt());
+        }
     }
 
     private void loadTable() {
@@ -100,7 +119,7 @@ public class ManagePaymentController {
     void navigateSave(ActionEvent event) {
         try {
             PaymentDTO paymentDTO = new PaymentDTO(
-                    paymentIdTxt.getText(),
+                    null,
                     saleIdCombo.getValue(),
                     paymentMethodCombo.getValue(),
                     Double.parseDouble(amountTxt.getText()),
@@ -147,6 +166,7 @@ public class ManagePaymentController {
 
     @FXML
     void navigateReset(ActionEvent event) {
+        saleIdCombo.setValue(null);
         paymentIdTxt.setText("");
         amountTxt.setText("");
         paymentMethodCombo.setValue(null);

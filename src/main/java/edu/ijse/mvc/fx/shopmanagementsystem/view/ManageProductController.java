@@ -10,7 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 import java.util.ArrayList;
 
 public class ManageProductController {
@@ -101,6 +100,30 @@ public class ManageProductController {
           
         loadTable();
         loadCategoryID();
+
+        detailsTable.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 1){
+                loadSelectedRow();
+            }
+        });
+    }
+
+    private void loadSelectedRow(){
+
+        ProductDTO selectedProduct = detailsTable.getSelectionModel().getSelectedItem();
+
+        if (selectedProduct != null){
+            productIDTxt.setText(selectedProduct.getProductID());
+            skuTxt.setText(selectedProduct.getSKU());
+            barcodeTxt.setText(String.valueOf(selectedProduct.getBarCode()));
+            nameTxt.setText(selectedProduct.getName());
+            unitTxt.setText(selectedProduct.getUnit());
+            unitPriceTxt.setText(String.valueOf(selectedProduct.getUnitPrice()));
+            taxRateTxt.setText(String.valueOf(selectedProduct.getTaxRate()));
+            activeChk.setSelected(selectedProduct.isActive());
+            categoryCombo.setValue(selectedProduct.getCategoryID());
+        }
+
     }
 
     public void loadTable(){
@@ -142,7 +165,6 @@ public class ManageProductController {
 
     @FXML
     void navigateReset(ActionEvent event) {
-        productIDTxt.clear();
         skuTxt.clear();
         barcodeTxt.clear();
         nameTxt.clear();
@@ -150,13 +172,14 @@ public class ManageProductController {
         unitPriceTxt.clear();
         taxRateTxt.clear();
         activeChk.setSelected(false);
+        categoryCombo.setValue(null);
     }
 
     @FXML
     void navigateSave(ActionEvent event) {
         try {
             ProductDTO productDTO = new ProductDTO(
-                    productIDTxt.getText(),
+                    null,
                     skuTxt.getText(),
                     Integer.parseInt(barcodeTxt.getText()),
                     nameTxt.getText(),

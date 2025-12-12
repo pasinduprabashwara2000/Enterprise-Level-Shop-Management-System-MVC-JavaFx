@@ -15,24 +15,19 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="idLabel" layoutX="34.0" layoutY="76.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style.css" text="Customer ID : ">
+      <Label fx:id="nameLabel" layoutX="34.0" layoutY="77.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style.css" text="Customer Name : ">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="idTxt" layoutX="206.0" layoutY="75.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
-      <Label fx:id="nameLabel" layoutX="34.0" layoutY="132.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style.css" text="Customer Name : ">
+       <TextField fx:id="idTxt" managed="false" visible="false" />
+      <TextField fx:id="nameTxt" layoutX="206.0" layoutY="75.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
+      <Label fx:id="contactNoLabel" layoutX="34.0" layoutY="132.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style.css" text="Contact Number  : ">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="nameTxt" layoutX="206.0" layoutY="130.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
-      <Label fx:id="contactNoLabel" layoutX="34.0" layoutY="187.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style.css" text="Contact Number  : ">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextField fx:id="contactNoTxt" layoutX="207.0" layoutY="187.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
+      <TextField fx:id="contactNoTxt" layoutX="207.0" layoutY="132.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
       <Label fx:id="emailLabel" layoutX="521.0" layoutY="76.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style.css" text="Email : ">
          <font>
             <Font size="15.0" />
@@ -45,11 +40,11 @@
       </Label>
       <TextField fx:id="emailTxt" layoutX="650.0" layoutY="76.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
       <TextField fx:id="loyaltyCodeTxt" layoutX="651.0" layoutY="132.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
-      <Button fx:id="saveBtn" layoutX="236.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Save" />
-      <Button fx:id="updateBtn" layoutX="395.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Update" />
-      <Button fx:id="deleteBtn" layoutX="552.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateDelete" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Delete" />
-      <Button fx:id="resetBtn" layoutX="706.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateReset" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Reset" />
-      <TableView fx:id="detailsTable" layoutX="33.0" layoutY="322.0" prefHeight="316.0" prefWidth="1003.0">
+      <Button fx:id="saveBtn" layoutX="236.0" layoutY="198.0" mnemonicParsing="false" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Save" />
+      <Button fx:id="updateBtn" layoutX="395.0" layoutY="198.0" mnemonicParsing="false" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Update" />
+      <Button fx:id="deleteBtn" layoutX="552.0" layoutY="198.0" mnemonicParsing="false" onAction="#navigateDelete" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Delete" />
+      <Button fx:id="resetBtn" layoutX="706.0" layoutY="198.0" mnemonicParsing="false" onAction="#navigateReset" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Reset" />
+      <TableView fx:id="detailsTable" layoutX="33.0" layoutY="262.0" prefHeight="376.0" prefWidth="1003.0">
         <columns>
             <TableColumn fx:id="colCusId" prefWidth="104.0" text="Customer ID" />
             <TableColumn fx:id="colCusName" prefWidth="213.0" text="Customer Name" />

@@ -78,9 +78,6 @@ public class ManageSupplierController {
     private Button saveBtn;
 
     @FXML
-    private Label supplierIDLabel;
-
-    @FXML
     private TextField supplierIDTxt;
 
     @FXML
@@ -95,6 +92,28 @@ public class ManageSupplierController {
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         loadTable();
+
+        detailsTable.setOnMouseClicked( event -> {
+
+            if(event.getClickCount() == 1) {
+                loadSelectedRow();
+            }
+        });
+
+    }
+
+    private void loadSelectedRow(){
+
+        SupplierDTO selectedItem = detailsTable.getSelectionModel().getSelectedItem();
+        if(selectedItem != null){
+            supplierIDTxt.setText(selectedItem.getSupplierID());
+            nameTxt.setText(selectedItem.getName());
+            contactPersonTxt.setText(selectedItem.getContactPerson());
+            phoneTxt.setText(String.valueOf(selectedItem.getPhone()));
+            emailTxt.setText(selectedItem.getEmail());
+            addressTxt.setText(selectedItem.getAddress());
+        }
+
     }
 
     public void loadTable() {
@@ -132,7 +151,7 @@ public class ManageSupplierController {
     void navigateSave(ActionEvent event) {
         try{
             SupplierDTO supplier = new SupplierDTO(
-                    supplierIDTxt.getText(),
+                    null,
                     nameTxt.getText(),
                     contactPersonTxt.getText(),
                     Integer.parseInt(phoneTxt.getText()),
@@ -152,7 +171,7 @@ public class ManageSupplierController {
     void navigateUpdate(ActionEvent event) {
         try {
             SupplierDTO supplierDTO = new SupplierDTO(
-                supplierIDTxt.getText(),
+                    supplierIDTxt.getText(),
                     nameTxt.getText(),
                     contactPersonTxt.getText(),
                     Integer.parseInt(phoneTxt.getText()),

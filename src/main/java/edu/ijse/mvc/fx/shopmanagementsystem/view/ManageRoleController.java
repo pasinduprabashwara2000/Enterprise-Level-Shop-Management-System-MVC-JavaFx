@@ -9,15 +9,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
 
-
 public class ManageRoleController {
 
-    final private RoleController roleController = new RoleController();
-    final private UserController userController = new UserController();
+    private final RoleController roleController = new RoleController();
+    private final UserController userController = new UserController();
 
     @FXML
     private ComboBox<String> ComboUserId;
@@ -32,51 +30,45 @@ public class ManageRoleController {
     private TableColumn<RoleDTO, String> colUserID;
 
     @FXML
-    private Button deleteBtn;
-
-    @FXML
     private TableView<RoleDTO> detailsTable;
-
-    @FXML
-    private Label nameLabel;
 
     @FXML
     private TextField nameTxt;
 
     @FXML
-    private Button resetBtn;
-
-    @FXML
-    private Label roleIDLabel;
-
-    @FXML
     private TextField roleIDTxt;
 
     @FXML
-    private Button saveBtn;
-
-    @FXML
-    private Button updateBtn;
-
-    @FXML
-    private Label userIDLabel;
-
-    @FXML
-    public void initialize(){
+    public void initialize() {
         colRoleID.setCellValueFactory(new PropertyValueFactory<>("roleID"));
         colRoleName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colUserID.setCellValueFactory(new PropertyValueFactory<>("userID"));
-        
+
         loadTable();
         loadComboUserId();
+
+        detailsTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1) {
+                loadSelectedRow();
+            }
+        });
     }
 
-    public void loadTable(){
-        try{
+    private void loadSelectedRow() {
+        RoleDTO selected = detailsTable.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            roleIDTxt.setText(selected.getRoleID());
+            nameTxt.setText(selected.getName());
+            ComboUserId.setValue(selected.getUserID());
+        }
+    }
+
+    public void loadTable() {
+        try {
             detailsTable.getItems().clear();
             detailsTable.getItems().addAll(roleController.getAllRoles());
-        } catch(Exception e){
-            new Alert(AlertType.ERROR,e.getMessage()).show();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -108,22 +100,25 @@ public class ManageRoleController {
 
     @FXML
     void navigateReset(ActionEvent event) {
-       roleIDTxt.setText("");
-       nameTxt.setText("");
+        roleIDTxt.setText("");
+        nameTxt.setText("");
+        ComboUserId.setValue(null);
     }
 
     @FXML
     void navigateSave(ActionEvent event) {
         try {
             RoleDTO roleDTO = new RoleDTO(
-                    roleIDTxt.getText(),
+                    null,
                     nameTxt.getText(),
                     ComboUserId.getValue()
             );
+
             String rsp = roleController.saveRole(roleDTO);
             new Alert(Alert.AlertType.INFORMATION, rsp).show();
             loadTable();
             navigateReset(event);
+
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
@@ -137,14 +132,14 @@ public class ManageRoleController {
                     nameTxt.getText(),
                     ComboUserId.getValue()
             );
+
             String rsp = roleController.updateRole(roleDTO);
             new Alert(Alert.AlertType.INFORMATION, rsp).show();
             loadTable();
             navigateReset(event);
+
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
-
     }
-
 }

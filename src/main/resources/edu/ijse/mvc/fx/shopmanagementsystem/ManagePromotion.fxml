@@ -19,49 +19,45 @@
             </font>
         </Label>
 
-        <Label layoutX="34.0" layoutY="76.0" prefWidth="157.0" text="Promotion ID :">
+        <TextField fx:id="promoteIDTxt" managed="false" visible="false" />
+        <Label layoutX="39.0" layoutY="85.0" prefWidth="157.0" text="Promotion Name :">
             <font><Font size="15.0" /></font>
         </Label>
-        <TextField fx:id="promoteIDTxt" layoutX="206.0" layoutY="75.0" prefWidth="259.0" />
+        <TextField fx:id="nameTxt" layoutX="211.0" layoutY="76.0" prefHeight="38.0" prefWidth="259.0" />
 
-        <Label layoutX="34.0" layoutY="132.0" prefWidth="157.0" text="Promotion Name :">
+        <Label layoutX="39.0" layoutY="142.0" prefWidth="157.0" text="Type :">
             <font><Font size="15.0" /></font>
         </Label>
-        <TextField fx:id="nameTxt" layoutX="206.0" layoutY="130.0" prefWidth="259.0" />
+        <ComboBox fx:id="typeCmb" layoutX="211.0" layoutY="131.0" prefHeight="38.0" prefWidth="259.0" promptText="Select Type" />
 
-        <Label layoutX="34.0" layoutY="187.0" prefWidth="157.0" text="Type :">
+        <Label layoutX="512.0" layoutY="82.0" prefWidth="157.0" text="Value :">
             <font><Font size="15.0" /></font>
         </Label>
-        <ComboBox fx:id="typeCmb" layoutX="206.0" layoutY="185.0" prefHeight="38.0" prefWidth="259.0" promptText="Select Type" />
+        <TextField fx:id="valueTxt" layoutX="641.0" layoutY="76.0" prefHeight="38.0" prefWidth="259.0" />
 
-        <Label layoutX="521.0" layoutY="131.0" prefWidth="157.0" text="Value :">
+        <Label layoutX="512.0" layoutY="138.0" prefWidth="157.0" text="Start Date :">
             <font><Font size="15.0" /></font>
         </Label>
-        <TextField fx:id="valueTxt" layoutX="650.0" layoutY="130.0" prefWidth="259.0" />
+        <DatePicker fx:id="startDatePicker" layoutX="641.0" layoutY="131.0" prefHeight="38.0" prefWidth="259.0" />
 
-        <Label layoutX="521.0" layoutY="187.0" prefWidth="157.0" text="Start Date :">
+        <Label layoutX="512.0" layoutY="193.0" prefWidth="157.0" text="End Date :">
             <font><Font size="15.0" /></font>
         </Label>
-        <DatePicker fx:id="startDatePicker" layoutX="650.0" layoutY="185.0" prefWidth="259.0" />
+        <DatePicker fx:id="endDatePicker" layoutX="641.0" layoutY="186.0" prefHeight="38.0" prefWidth="259.0" />
 
-        <Label layoutX="521.0" layoutY="242.0" prefWidth="157.0" text="End Date :">
+        <Label layoutX="39.0" layoutY="200.0" prefWidth="157.0" text="Active :">
             <font><Font size="15.0" /></font>
         </Label>
-        <DatePicker fx:id="endDatePicker" layoutX="650.0" layoutY="240.0" prefWidth="259.0" />
+        <ComboBox fx:id="activeCmb" layoutX="211.0" layoutY="190.0" prefHeight="38.0" prefWidth="259.0" promptText="Select Status" />
 
-        <Label layoutX="34.0" layoutY="240.0" prefWidth="157.0" text="Active :">
-            <font><Font size="15.0" /></font>
-        </Label>
-        <ComboBox fx:id="activeCmb" layoutX="206.0" layoutY="238.0" prefHeight="35.0" prefWidth="259.0" promptText="Select Status" />
-
-        <Label layoutX="521.0" layoutY="82.0" prefWidth="157.0" text="Product ID :">
+        <Label layoutX="39.0" layoutY="262.0" prefWidth="157.0" text="Product ID :">
             <font><Font size="15.0" /></font>
         </Label>
 
-        <Button fx:id="saveBtn" layoutX="236.0" layoutY="310.0" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Save" />
-        <Button fx:id="updateBtn" layoutX="395.0" layoutY="310.0" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Update" />
-        <Button fx:id="deleteBtn" layoutX="552.0" layoutY="310.0" onAction="#navigateDelete" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Delete" />
-        <Button fx:id="resetBtn" layoutX="706.0" layoutY="310.0" onAction="#navigateReset" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Reset" />
+        <Button fx:id="saveBtn" layoutX="236.0" layoutY="315.0" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Save" />
+        <Button fx:id="updateBtn" layoutX="395.0" layoutY="315.0" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Update" />
+        <Button fx:id="deleteBtn" layoutX="552.0" layoutY="315.0" onAction="#navigateDelete" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Delete" />
+        <Button fx:id="resetBtn" layoutX="706.0" layoutY="315.0" onAction="#navigateReset" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Reset" />
 
         <TableView fx:id="promotionTable" layoutX="33.0" layoutY="372.0" prefHeight="278.0" prefWidth="1003.0">
             <columns>
@@ -75,6 +71,6 @@
                 <TableColumn fx:id="colProductID" prefWidth="192.0" text="Product ID" />
             </columns>
         </TableView>
-      <ComboBox fx:id="productIdCombo" layoutX="650.0" layoutY="74.0" onAction="#loadProductId" prefHeight="38.0" prefWidth="259.0" promptText="Select Product ID" />
+      <ComboBox fx:id="productIdCombo" layoutX="211.0" layoutY="250.0" onAction="#loadProductId" prefHeight="38.0" prefWidth="259.0" promptText="Select Product ID" />
     </children>
 </AnchorPane>

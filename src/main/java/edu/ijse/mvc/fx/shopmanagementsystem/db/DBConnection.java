@@ -6,24 +6,19 @@ import java.sql.SQLException;
 
 public class DBConnection {
 
-        private static DBConnection dBConnection;
-        private Connection connection;
+    private static final String URL =
+            "jdbc:mysql://localhost:3306/ShopManagementSystem?connectTimeout=10000&socketTimeout=30000";
+    private static final String USER = "root";
+    private static final String PASSWORD = "mysql";
 
-        private DBConnection() throws ClassNotFoundException, SQLException {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ShopManagementSystem", "root", "mysql");
-        }
+    private DBConnection() {}
 
-        public static DBConnection getInstance() throws ClassNotFoundException, SQLException{
-            if(dBConnection == null){
-                dBConnection = new DBConnection();
-            }
-            return dBConnection;
-        }
+    public static DBConnection getInstance() {
+        return new DBConnection();
+    }
 
-        public Connection getConnection() {
-            return connection;
-        }
-
+    public Connection getConnection() throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        return DriverManager.getConnection(URL, USER, PASSWORD);
+    }
 }
-

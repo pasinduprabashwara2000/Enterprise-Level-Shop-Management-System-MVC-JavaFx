@@ -16,37 +16,31 @@
             </font>
         </Label>
 
-        <Label fx:id="categoryIDLabel" layoutX="34.0" layoutY="76.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style.css" text="Category ID : ">
+        <TextField fx:id="categoryIDTxt" managed="false" visible="false" />
+        <Label fx:id="nameLabel" layoutX="34.0" layoutY="77.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style.css" text="Name : ">
             <font>
                 <Font size="15.0" />
             </font>
         </Label>
-        <TextField fx:id="categoryIDTxt" layoutX="206.0" layoutY="75.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
+        <TextField fx:id="nameTxt" layoutX="206.0" layoutY="75.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
 
-        <Label fx:id="nameLabel" layoutX="34.0" layoutY="132.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style.css" text="Name : ">
+        <Label fx:id="descriptionLabel" layoutX="34.0" layoutY="132.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style.css" text="Description : ">
             <font>
                 <Font size="15.0" />
             </font>
         </Label>
-        <TextField fx:id="nameTxt" layoutX="206.0" layoutY="130.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
+        <TextField fx:id="descriptionTxt" layoutX="206.0" layoutY="130.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
 
-        <Label fx:id="descriptionLabel" layoutX="34.0" layoutY="187.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style.css" text="Description : ">
-            <font>
-                <Font size="15.0" />
-            </font>
-        </Label>
-        <TextField fx:id="descriptionTxt" layoutX="206.0" layoutY="185.0" prefHeight="38.0" prefWidth="259.0" stylesheets="@css/style.css" />
+        <Button fx:id="saveBtn" layoutX="236.0" layoutY="202.0" mnemonicParsing="false" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Save" />
+        <Button fx:id="updateBtn" layoutX="395.0" layoutY="202.0" mnemonicParsing="false" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Update" />
+        <Button fx:id="deleteBtn" layoutX="552.0" layoutY="202.0" mnemonicParsing="false" onAction="#navigateDelete" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Delete" />
+        <Button fx:id="resetBtn" layoutX="706.0" layoutY="202.0" mnemonicParsing="false" onAction="#navigateReset" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Reset" />
 
-        <Button fx:id="saveBtn" layoutX="236.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Save" />
-        <Button fx:id="updateBtn" layoutX="395.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Update" />
-        <Button fx:id="deleteBtn" layoutX="552.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateDelete" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Delete" />
-        <Button fx:id="resetBtn" layoutX="706.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateReset" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style.css" text="Reset" />
-
-        <TableView fx:id="detailsTable" layoutX="33.0" layoutY="322.0" prefHeight="326.0" prefWidth="1003.0">
+        <TableView fx:id="detailsTable" layoutX="33.0" layoutY="267.0" prefHeight="387.0" prefWidth="1003.0">
             <columns>
                 <TableColumn fx:id="colCategoryId" prefWidth="250.0" text="Category ID" />
-                <TableColumn fx:id="colName" prefWidth="250.0" text="Name" />
-                <TableColumn fx:id="colDescription" prefWidth="503.0" text="Description" />
+                <TableColumn fx:id="colName" prefWidth="274.0" text="Name" />
+                <TableColumn fx:id="colDescription" prefWidth="479.0" text="Description" />
             </columns>
         </TableView>
     </children>

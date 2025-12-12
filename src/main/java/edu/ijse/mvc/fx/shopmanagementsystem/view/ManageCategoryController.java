@@ -18,9 +18,6 @@ public class ManageCategoryController {
     private final CategoryController categoryController = new CategoryController();
 
     @FXML
-    private Label categoryIDLabel;
-
-    @FXML
     private TextField categoryIDTxt;
 
     @FXML
@@ -65,6 +62,25 @@ public class ManageCategoryController {
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
 
         loadTable();
+
+        detailsTable.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 1){
+                loadSelectedRow();
+            }
+        });
+
+    }
+
+    private void loadSelectedRow(){
+
+        CategoryDTO selectedCategory = detailsTable.getSelectionModel().getSelectedItem();
+
+        if(selectedCategory != null){
+            categoryIDTxt.setText(selectedCategory.getCategoryID());
+            nameTxt.setText(selectedCategory.getName());
+            descriptionTxt.setText(selectedCategory.getDescription());
+        }
+
     }
 
     private void loadTable() {
@@ -90,7 +106,6 @@ public class ManageCategoryController {
 
     @FXML
     void navigateReset(ActionEvent event) {
-        categoryIDTxt.clear();
         nameTxt.clear();
         descriptionTxt.clear();
     }
@@ -99,7 +114,7 @@ public class ManageCategoryController {
     void navigateSave(ActionEvent event) {
         try{
             CategoryDTO categoryDTO = new CategoryDTO(
-                    categoryIDTxt.getText(),
+                    null,
                     nameTxt.getText(),
                     descriptionTxt.getText()
             );

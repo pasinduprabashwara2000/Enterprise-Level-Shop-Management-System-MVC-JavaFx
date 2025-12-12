@@ -104,6 +104,28 @@ public class ManagePromotionController {
         activeCmb.getItems().addAll("Active", "Inactive");
         loadTable();
         loadProductId();
+
+        promotionTable.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 1){
+                loadSelectedRow();
+            }
+        });
+    }
+
+    private void loadSelectedRow(){
+        PromotionDTO selectedPromotion = promotionTable.getSelectionModel().getSelectedItem();
+
+        if(selectedPromotion != null){
+            promoteIDTxt.setText(selectedPromotion.getPromoteID());
+            nameTxt.setText(selectedPromotion.getName());
+            productIdCombo.setValue(selectedPromotion.getProductID());
+            typeCmb.setValue(selectedPromotion.getType());
+            valueTxt.setText(String.valueOf(selectedPromotion.getValue()));
+            startDatePicker.setValue(selectedPromotion.getStartAt().toLocalDate());
+            endDatePicker.setValue(selectedPromotion.getEndAt().toLocalDate());
+            activeCmb.setValue(String.valueOf(selectedPromotion.isActive()));
+        }
+
     }
 
     @FXML
@@ -159,7 +181,7 @@ public class ManagePromotionController {
     void navigateSave(ActionEvent event) {
         try {
             PromotionDTO promotionDTO = new PromotionDTO(
-                    promoteIDTxt.getText(),
+                    null,
                     nameTxt.getText(),
                     typeCmb.getValue(),
                     Double.parseDouble(valueTxt.getText()),

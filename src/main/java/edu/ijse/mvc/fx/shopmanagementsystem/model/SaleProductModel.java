@@ -12,17 +12,16 @@ public class SaleProductModel {
     public String saveSaleProduct(SaleProductDTO saleProductDTO) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO SaleProduct VALUES(?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO SaleProduct (saleID, productID, promotionID, quantity, unitPrice, lineDiscount, lineTax, lineTotal) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, saleProductDTO.getSaleProductID());
-        pstm.setString(2, saleProductDTO.getSaleID());
-        pstm.setString(3, saleProductDTO.getProductID());
-        pstm.setString(4, saleProductDTO.getPromotionID());
-        pstm.setInt(5, saleProductDTO.getQuantity());
-        pstm.setDouble(6, saleProductDTO.getUnitPrice());
-        pstm.setDouble(7, saleProductDTO.getLineDiscount());
-        pstm.setDouble(8, saleProductDTO.getLineTax());
-        pstm.setDouble(9, saleProductDTO.getLineTotal());
+        pstm.setString(1, saleProductDTO.getSaleID());
+        pstm.setString(2, saleProductDTO.getProductID());
+        pstm.setString(3, saleProductDTO.getPromotionID());
+        pstm.setInt(4, saleProductDTO.getQuantity());
+        pstm.setDouble(5, saleProductDTO.getUnitPrice());
+        pstm.setDouble(6, saleProductDTO.getLineDiscount());
+        pstm.setDouble(7, saleProductDTO.getLineTax());
+        pstm.setDouble(8, saleProductDTO.getLineTotal());
 
         return pstm.executeUpdate() > 0 ? "Sale Product Saved Successfully" : "Sale Product Save Failed";
     }

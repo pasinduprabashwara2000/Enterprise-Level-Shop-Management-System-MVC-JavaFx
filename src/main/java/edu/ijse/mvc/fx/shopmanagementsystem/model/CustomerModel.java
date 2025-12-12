@@ -11,13 +11,12 @@ public class CustomerModel {
     public String saveCustomer(CustomerDTO customerDTO) throws Exception{
 
         Connection conn = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO customer VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO Customer (name,phone,email,loyaltyCode) VALUES (?,?,?,?)";
         PreparedStatement st = conn.prepareStatement(sql);
-        st.setString(1,customerDTO.getCustomerId());
-        st.setString(2,customerDTO.getName());
-        st.setInt(3,customerDTO.getPhone());
-        st.setString(4,customerDTO.getEmail());
-        st.setString(5,customerDTO.getLoyaltyCode());
+        st.setString(1,customerDTO.getName());
+        st.setInt(2,customerDTO.getPhone());
+        st.setString(3,customerDTO.getEmail());
+        st.setString(4,customerDTO.getLoyaltyCode());
 
         return st.executeUpdate() > 0 ? "Customer Saved Successfully" : "Customer Saved Failed";
 
@@ -26,7 +25,7 @@ public class CustomerModel {
     public String updateCustomer(CustomerDTO customerDTO) throws Exception{
 
         Connection conn = DBConnection.getInstance().getConnection();
-        String sql = "UPDATE customer SET name=?, phone=?, email=?, loyaltyCode=? WHERE customerID=?";
+        String sql = "UPDATE Customer SET name=?, phone=?, email=?, loyaltyCode=? WHERE customerId=?";
         PreparedStatement st = conn.prepareStatement(sql);
         st.setString(1,customerDTO.getName());
         st.setInt(2,customerDTO.getPhone());
@@ -41,7 +40,7 @@ public class CustomerModel {
     public String deleteCustomer(String customerID) throws Exception{
 
         Connection conn = DBConnection.getInstance().getConnection();
-        String sql = "DELETE FROM customer WHERE customerID=?";
+        String sql = "DELETE FROM Customer WHERE customerId=?";
         PreparedStatement st = conn.prepareStatement(sql);
         st.setString(1,customerID);
 
@@ -52,7 +51,7 @@ public class CustomerModel {
     public CustomerDTO searchCustomer(String customerID) throws Exception{
 
         Connection conn = DBConnection.getInstance().getConnection();
-        String sql = "SELECT * FROM customer WHERE customerID=?";
+        String sql = "SELECT * FROM Customer WHERE customerId=?";
         PreparedStatement st = conn.prepareStatement(sql);
         st.setString(1,customerID);
 
@@ -73,14 +72,14 @@ public class CustomerModel {
     public ArrayList<CustomerDTO> getAllCustomers() throws Exception{
 
         Connection conn = DBConnection.getInstance().getConnection();
-        String sql = "SELECT * FROM customer";
+        String sql = "SELECT * FROM Customer";
         PreparedStatement st = conn.prepareStatement(sql);
 
         var rst = st.executeQuery();
         ArrayList<CustomerDTO> allCustomers = new ArrayList<>();
         while(rst.next()){
             allCustomers.add(new CustomerDTO(
-                    rst.getString("customerID"),
+                    rst.getString("customerId"),
                     rst.getString("name"),
                     rst.getInt("phone"),
                     rst.getString("email"),

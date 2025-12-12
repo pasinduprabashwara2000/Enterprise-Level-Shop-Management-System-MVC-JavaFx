@@ -12,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 import java.util.ArrayList;
 
 public class ManageSupplyController {
@@ -78,10 +77,16 @@ public class ManageSupplyController {
         colSupplierId.setCellValueFactory(new PropertyValueFactory<>("supplierID"));
         colLastCost.setCellValueFactory(new PropertyValueFactory<>("lastCost"));
         colSupplierProductCode.setCellValueFactory(new PropertyValueFactory<>("supplierProductCode"));
-        
+
         loadTable();
         loadProductId();
         loadSupplierId();
+
+        detailsTable.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 1){
+                loadSelectedRow();
+            }
+        });
 
     }
 
@@ -93,6 +98,20 @@ public class ManageSupplyController {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
+
+    private void loadSelectedRow(){
+        SupplyDTO selectedSupply = detailsTable.getSelectionModel().getSelectedItem();
+
+        if(selectedSupply != null){
+            supplierIdCombo.setValue(selectedSupply.getSupplierID());
+            productIdCombo.setValue(selectedSupply.getProductID());
+            lastCostTxt.setText(String.valueOf(selectedSupply.getLastCost()));
+            supplierCodeTxt.setText(selectedSupply.getSupplierProductCode());
+        }
+
+
+
+     }
 
     @FXML
     void loadProductId() {
@@ -137,9 +156,11 @@ public class ManageSupplyController {
 
     @FXML
     void navigateReset(ActionEvent event) {
+        productIdCombo.setValue(null);
+        supplierIdCombo.setValue(null);
         lastCostTxt.setText("");
         supplierCodeTxt.setText("");
-        
+
     }
 
     @FXML
@@ -154,7 +175,7 @@ public class ManageSupplyController {
             String rsp = supplyController.saveSupply(supplyDTO);
             new Alert(Alert.AlertType.INFORMATION,rsp).show();
             loadTable();
-            navigateReset(event);     
+            navigateReset(event);
         } catch (Exception e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
@@ -167,7 +188,7 @@ public class ManageSupplyController {
                     productIdCombo.getValue(),
                     supplierIdCombo.getValue(),
                     Double.parseDouble(lastCostTxt.getText()),
-                    supplierCodeTxt.getText() 
+                    supplierCodeTxt.getText()
             );
             String rsp = supplyController.updateSupply(supplyDTO);
             new Alert(Alert.AlertType.INFORMATION, rsp).show();

@@ -45,9 +45,6 @@ public class ManageCustomerController {
     private TextField emailTxt;
 
     @FXML
-    private Label idLabel;
-
-    @FXML
     private TextField idTxt;
 
     @FXML
@@ -79,7 +76,23 @@ public class ManageCustomerController {
        colLoyaltyCode.setCellValueFactory(new PropertyValueFactory<>("loyaltyCode"));
 
        loadTable();
+       detailsTable.setOnMouseClicked(event -> {
+           if(event.getClickCount() == 1){
+               loadRowData();
+           }
+       });
 
+    }
+
+    private void loadRowData(){
+        CustomerDTO selectedCustomer = detailsTable.getSelectionModel().getSelectedItem();
+        if(selectedCustomer != null){
+            idTxt.setText(selectedCustomer.getCustomerId());
+            nameTxt.setText(selectedCustomer.getName());
+            contactNoTxt.setText(String.valueOf(selectedCustomer.getPhone()));
+            emailTxt.setText(selectedCustomer.getEmail());
+            loyaltyCodeTxt.setText(selectedCustomer.getLoyaltyCode());
+        }
     }
 
     public void loadTable(){
@@ -105,7 +118,6 @@ public class ManageCustomerController {
 
     @FXML
     void navigateReset(ActionEvent event) {
-        idTxt.clear();
         nameTxt.clear();
         contactNoTxt.clear();
         emailTxt.clear();
@@ -116,7 +128,7 @@ public class ManageCustomerController {
     void navigateSave(ActionEvent event) {
         try{
           CustomerDTO customerDTO = new CustomerDTO(
-                  idTxt.getText(),
+                  null,
                   nameTxt.getText(),
                   Integer.parseInt(contactNoTxt.getText()),
                   emailTxt.getText(),

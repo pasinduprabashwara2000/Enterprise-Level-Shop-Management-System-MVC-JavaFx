@@ -89,6 +89,26 @@ public class ManageInventoryController {
         
         loadTable();
         loadProductId();
+
+        detailsTabel.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 1){
+                loadSelectedRow();
+            }
+        });
+
+    }
+
+    private void loadSelectedRow(){
+
+        InventoryDTO selectedInventory = detailsTabel.getSelectionModel().getSelectedItem();
+        if(selectedInventory != null){
+            productIdCombo.setValue(selectedInventory.getProductID());
+            qytTxt.setText(String.valueOf(selectedInventory.getQYT()));
+            reOrderLevelTxt.setText(String.valueOf(selectedInventory.getReOrderLevel()));
+            reOrderQytTxt.setText(String.valueOf(selectedInventory.getQYT()));
+            datePicker.setValue(selectedInventory.getLastStockUpdate());
+        }
+
     }
 
     public void loadTable(){
@@ -131,6 +151,7 @@ public class ManageInventoryController {
 
     @FXML
     void navigateReset(ActionEvent event) {
+        productIdCombo.setValue(null);
         qytTxt.clear();
         reOrderLevelTxt.clear();
         reOrderQytTxt.clear();

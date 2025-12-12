@@ -20,36 +20,31 @@
             </font>
         </Label>
 
-        <!-- Payment ID -->
-        <Label layoutX="34.0" layoutY="76.0" prefHeight="38.0" prefWidth="157.0" text="Payment ID : ">
-            <font><Font size="15.0" /></font>
-        </Label>
-        <TextField fx:id="paymentIdTxt" layoutX="206.0" layoutY="75.0" prefHeight="38.0" prefWidth="259.0" />
-
+        <TextField fx:id="paymentIdTxt" managed="false" visible="false"/>
         <!-- Sale ID -->
-        <Label layoutX="34.0" layoutY="132.0" prefHeight="38.0" prefWidth="157.0" text="Sale ID : ">
+        <Label layoutX="34.0" layoutY="77.0" prefHeight="38.0" prefWidth="157.0" text="Sale ID : ">
             <font><Font size="15.0" /></font>
         </Label>
 
         <!-- Method -->
-        <Label layoutX="34.0" layoutY="187.0" prefHeight="38.0" prefWidth="157.0" text="Payment Method : ">
+        <Label layoutX="34.0" layoutY="137.0" prefHeight="38.0" prefWidth="157.0" text="Payment Method : ">
             <font><Font size="15.0" /></font>
         </Label>
 
         <!-- Amount -->
-        <Label layoutX="521.0" layoutY="76.0" prefHeight="38.0" prefWidth="157.0" text="Amount : ">
+        <Label layoutX="34.0" layoutY="196.0" prefHeight="38.0" prefWidth="157.0" text="Amount : ">
             <font><Font size="15.0" /></font>
         </Label>
-        <TextField fx:id="amountTxt" layoutX="650.0" layoutY="75.0" prefHeight="38.0" prefWidth="259.0" />
+        <TextField fx:id="amountTxt" layoutX="206.0" layoutY="196.0" prefHeight="38.0" prefWidth="259.0" />
 
         <!-- Reference -->
-        <Label layoutX="521.0" layoutY="132.0" prefHeight="38.0" prefWidth="157.0" text="Reference : ">
+        <Label layoutX="520.0" layoutY="72.0" prefHeight="38.0" prefWidth="157.0" text="Reference : ">
             <font><Font size="15.0" /></font>
         </Label>
-        <TextField fx:id="referenceTxt" layoutX="650.0" layoutY="130.0" prefHeight="38.0" prefWidth="259.0" />
+        <TextField fx:id="referenceTxt" layoutX="649.0" layoutY="70.0" prefHeight="38.0" prefWidth="259.0" />
 
         <!-- Received Date -->
-        <Label layoutX="521.0" layoutY="187.0" prefHeight="38.0" prefWidth="157.0" text="Received At : ">
+        <Label layoutX="520.0" layoutY="133.0" prefHeight="38.0" prefWidth="157.0" text="Received At : ">
             <font><Font size="15.0" /></font>
         </Label>
 
@@ -70,8 +65,8 @@
                 <TableColumn fx:id="colReceivedAt" prefWidth="167.0" text="Received At" />
             </columns>
         </TableView>
-      <DatePicker fx:id="datePicker" layoutX="650.0" layoutY="187.0" prefHeight="38.0" prefWidth="259.0" />
-      <ComboBox fx:id="paymentMethodCombo" layoutX="206.0" layoutY="187.0" prefHeight="38.0" prefWidth="259.0" promptText="Select Payment Method">
+      <DatePicker fx:id="datePicker" layoutX="649.0" layoutY="134.0" prefHeight="38.0" prefWidth="259.0" />
+      <ComboBox fx:id="paymentMethodCombo" layoutX="206.0" layoutY="134.0" prefHeight="38.0" prefWidth="259.0" promptText="Select Payment Method">
           <items>
               <FXCollections fx:factory="observableArrayList">
                   <String fx:value="CASH" />
@@ -81,6 +76,6 @@
               </FXCollections>
           </items>
       </ComboBox>
-      <ComboBox fx:id="saleIdCombo" layoutX="206.0" layoutY="130.0" onAction="#loadSaleId" prefHeight="38.0" prefWidth="259.0" promptText="Select Sale ID" />
+      <ComboBox fx:id="saleIdCombo" layoutX="206.0" layoutY="74.0" onAction="#loadSaleId" prefHeight="38.0" prefWidth="259.0" promptText="Select Sale ID" />
     </children>
 </AnchorPane>
