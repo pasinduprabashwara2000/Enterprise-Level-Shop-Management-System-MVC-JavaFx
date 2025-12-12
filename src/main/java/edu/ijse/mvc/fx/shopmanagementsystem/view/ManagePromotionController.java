@@ -1,8 +1,13 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.PromotionDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.controller.ProductController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.PromotionController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -16,7 +21,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ManagePromotionController {
 
-    private final PromotionController promotionController = new PromotionController();
+    final private PromotionController promotionController = new PromotionController();
+    final private ProductController productController = new ProductController();
 
     @FXML
     private ComboBox<String> activeCmb;
@@ -61,7 +67,7 @@ public class ManagePromotionController {
     private TextField nameTxt;
 
     @FXML
-    private TextField productIDTxt;
+    private ComboBox <String> productIdCombo;
 
     @FXML
     private TextField promoteIDTxt;
@@ -97,6 +103,7 @@ public class ManagePromotionController {
         typeCmb.getItems().addAll("PERCENT","AMOUNT");
         activeCmb.getItems().addAll("Active", "Inactive");
         loadTable();
+        loadProductId();
     }
 
     @FXML
@@ -106,6 +113,21 @@ public class ManagePromotionController {
             promotionTable.getItems().addAll(promotionController.getAllPromotions());
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    @FXML
+    void loadProductId() {
+        try {
+            ArrayList <ProductDTO> productDTOS = productController.getAllProducts();
+            ObservableList <String> list = FXCollections.observableArrayList();
+
+            for (ProductDTO productDTO : productDTOS){
+                list.add(productDTO.getProductID());
+            }
+            productIdCombo.setItems(list);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
 
@@ -125,7 +147,7 @@ public class ManagePromotionController {
     void navigateReset(ActionEvent event) {
         promoteIDTxt.clear();
         nameTxt.clear();
-        productIDTxt.clear();
+        productIdCombo.setValue(null);
         typeCmb.setValue(null);
         valueTxt.clear();
         startDatePicker.setValue(null);
@@ -144,7 +166,7 @@ public class ManagePromotionController {
                     Date.valueOf(startDatePicker.getValue()),
                     Date.valueOf(endDatePicker.getValue()),
                     Boolean.parseBoolean(activeCmb.getValue()),
-                    productIDTxt.getText()
+                    productIdCombo.getValue()
             );
             String res = promotionController.savePromotion(promotionDTO);
             new Alert(Alert.AlertType.INFORMATION, res).show();
@@ -166,7 +188,7 @@ public class ManagePromotionController {
                     Date.valueOf(startDatePicker.getValue()),
                     Date.valueOf(endDatePicker.getValue()),
                     Boolean.parseBoolean(activeCmb.getValue()),
-                    productIDTxt.getText()
+                    productIdCombo.getValue()
             );
             String res = promotionController.updatePromotion(promotionDTO);
             new Alert(Alert.AlertType.INFORMATION, res).show();

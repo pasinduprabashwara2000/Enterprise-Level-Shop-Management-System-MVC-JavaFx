@@ -1,8 +1,14 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.PaymentDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SaleDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.model.PaymentModel;
+import edu.ijse.mvc.fx.shopmanagementsystem.model.SaleModel;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -11,6 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class ManagePaymentController {
 
     private final PaymentModel paymentModel = new PaymentModel();
+    private final SaleModel saleModel = new SaleModel();
 
     @FXML
     private TextField amountTxt;
@@ -49,7 +56,7 @@ public class ManagePaymentController {
     private TextField referenceTxt;
 
     @FXML
-    private TextField saleIdTxt;
+    private ComboBox<String> saleIdCombo;
 
     @FXML
     void initialize() {
@@ -61,6 +68,7 @@ public class ManagePaymentController {
         colReceivedAt.setCellValueFactory(new PropertyValueFactory<>("receivedAt"));
 
         loadTable();
+        loadSaleId();
     }
 
     private void loadTable() {
@@ -73,11 +81,27 @@ public class ManagePaymentController {
     }
 
     @FXML
+    void loadSaleId() {
+        try {
+            ArrayList <SaleDTO> saleDTOS = saleModel.getAllSales();
+            ObservableList <String> list = FXCollections.observableArrayList();
+
+            for (SaleDTO saleDTO : saleDTOS){
+                list.add(saleDTO.getSaleID());
+            }
+
+            saleIdCombo.setItems(list);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
+    }
+
+    @FXML
     void navigateSave(ActionEvent event) {
         try {
             PaymentDTO paymentDTO = new PaymentDTO(
                     paymentIdTxt.getText(),
-                    saleIdTxt.getText(),
+                    saleIdCombo.getValue(),
                     paymentMethodCombo.getValue(),
                     Double.parseDouble(amountTxt.getText()),
                     referenceTxt.getText(),
@@ -96,7 +120,7 @@ public class ManagePaymentController {
         try {
             PaymentDTO paymentDTO = new PaymentDTO(
                     paymentIdTxt.getText(),
-                    saleIdTxt.getText(),
+                    saleIdCombo.getValue(),
                     paymentMethodCombo.getValue(),
                     Double.parseDouble(amountTxt.getText()),
                     referenceTxt.getText(),
@@ -124,7 +148,6 @@ public class ManagePaymentController {
     @FXML
     void navigateReset(ActionEvent event) {
         paymentIdTxt.setText("");
-        saleIdTxt.setText("");
         amountTxt.setText("");
         paymentMethodCombo.setValue(null);
         referenceTxt.setText("");
