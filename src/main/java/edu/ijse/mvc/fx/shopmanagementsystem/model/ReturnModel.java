@@ -12,14 +12,13 @@ public class ReturnModel {
     public String saveReturn(ReturnDTO returnDTO) throws Exception {
         
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO Returns VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO Returns (saleID, processedBy, returnDateTime, reason, status) VALUES (?,?,?,?,?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, returnDTO.getReturnID());
-        pstm.setString(2, returnDTO.getSaleID());
-        pstm.setString(3, returnDTO.getProcessedBy());
-        pstm.setDate(4, Date.valueOf(returnDTO.getReturnDateTime()));
-        pstm.setString(5, returnDTO.getReason());
-        pstm.setObject(6, returnDTO.getStatus());
+        pstm.setString(1, returnDTO.getSaleID());
+        pstm.setString(2, returnDTO.getProcessedBy());
+        pstm.setDate(3, Date.valueOf(returnDTO.getReturnDateTime()));
+        pstm.setString(4, returnDTO.getReason());
+        pstm.setObject(5, returnDTO.getStatus());
 
         return pstm.executeUpdate() > 0 ? "Return Processed Successfully" : "Return Processing Failed";
 

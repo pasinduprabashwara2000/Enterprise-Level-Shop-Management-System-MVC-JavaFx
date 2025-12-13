@@ -2,8 +2,10 @@ package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SaleDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.UserDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.ReturnController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.SaleController;
+import edu.ijse.mvc.fx.shopmanagementsystem.controller.UserController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,6 +19,7 @@ public class ManageReturnController {
 
     final private ReturnController returnController = new ReturnController();
     final private SaleController saleController = new SaleController();
+    final private UserController userController = new UserController();
 
     @FXML
     private TableColumn<ReturnDTO, String> colProccesedBy;
@@ -40,7 +43,7 @@ public class ManageReturnController {
     private Button deleteBtn;
 
     @FXML
-    private TextField processedByTxt;
+    private ComboBox <String> userIdCombo;
 
     @FXML
     private TextField reasonTxt;
@@ -80,13 +83,35 @@ public class ManageReturnController {
 
         loadTable();
         loadSaleId();
+        loadUserId();
+
+        returnTable.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 1){
+                loadSelectedRow();
+            }
+        });
+
+    }
+
+    private void loadSelectedRow(){
+
+       ReturnDTO returnDTO = returnTable.getSelectionModel().getSelectedItem();
+
+       if(returnDTO != null){
+              returnIDTxt.setText(returnDTO.getReturnID());
+              saleIdCombo.setValue(returnDTO.getSaleID());
+              userIdCombo.setValue(returnDTO.getProcessedBy());
+              returnDatePicker.setValue(returnDTO.getReturnDateTime());
+              reasonTxt.setText(returnDTO.getReason());
+              statusCmb.setValue(returnDTO.getStatus());
+       }
 
     }
 
     private void loadTable(){
         try{
-          returnTable.getItems().clear();
-          returnTable.getItems().addAll(returnController.getAllReturns());
+            returnTable.getItems().clear();
+            returnTable.getItems().addAll(returnController.getAllReturns());
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();;
         }
@@ -109,6 +134,22 @@ public class ManageReturnController {
     }
 
     @FXML
+    void loadUserId(){
+        try {
+            ArrayList <UserDTO> userDTOS = userController.getAllUsers();
+            ObservableList <String> list = FXCollections.observableArrayList();
+
+            for (UserDTO userDTO : userDTOS){
+                list.add(userDTO.getUserID());
+            }
+
+            userIdCombo.setItems(list);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
+    }
+
+    @FXML
     void navigateDelete(ActionEvent event) {
         try {
             String rsp = returnController.deleteReturn(returnIDTxt.getText());
@@ -122,16 +163,21 @@ public class ManageReturnController {
 
     @FXML
     void navigateReset(ActionEvent event) {
-
+        returnIDTxt.setText("");
+        saleIdCombo.setValue(null);
+        userIdCombo.setValue(null);
+        returnDatePicker.setValue(null);
+        reasonTxt.setText("");
+        statusCmb.setValue("");
     }
 
     @FXML
     void navigateSave(ActionEvent event) {
         try {
             ReturnDTO returnDTO = new ReturnDTO(
-                    returnIDTxt.getText(),
+                    null,
                     saleIdCombo.getValue(),
-                    processedByTxt.getText(),
+                    userIdCombo.getValue(),
                     returnDatePicker.getValue(),
                     reasonTxt.getText(),
                     statusCmb.getValue()
@@ -151,7 +197,7 @@ public class ManageReturnController {
             ReturnDTO returnDTO = new ReturnDTO(
                     returnIDTxt.getText(),
                     saleIdCombo.getValue(),
-                    processedByTxt.getText(),
+                    userIdCombo.getValue(),
                     returnDatePicker.getValue(),
                     reasonTxt.getText(),
                     statusCmb.getValue()
@@ -164,5 +210,4 @@ public class ManageReturnController {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
-
 }
