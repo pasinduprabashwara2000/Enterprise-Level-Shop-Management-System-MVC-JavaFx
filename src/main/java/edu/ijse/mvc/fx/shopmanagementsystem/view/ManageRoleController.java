@@ -6,10 +6,12 @@ import edu.ijse.mvc.fx.shopmanagementsystem.controller.RoleController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.UserController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
 import java.util.ArrayList;
 
 public class ManageRoleController {
@@ -44,65 +46,51 @@ public class ManageRoleController {
         colRoleName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colUserID.setCellValueFactory(new PropertyValueFactory<>("userID"));
 
-        loadTable();
-        loadComboUserId();
+        loadTableThread();
+        loadComboUserIdThread();
 
         detailsTable.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 1) {
-                loadSelectedRow();
-            }
+            if (event.getClickCount() == 1) loadSelectedRow();
         });
     }
 
     private void loadSelectedRow() {
         RoleDTO selected = detailsTable.getSelectionModel().getSelectedItem();
         if (selected != null) {
-            roleIDTxt.setText(selected.getRoleID());
             nameTxt.setText(selected.getName());
             ComboUserId.setValue(selected.getUserID());
         }
     }
 
-    public void loadTable() {
-        try {
-            detailsTable.getItems().clear();
-            detailsTable.getItems().addAll(roleController.getAllRoles());
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-    }
-
-    @FXML
-    void loadComboUserId() {
-        try {
-            ArrayList<UserDTO> users = userController.getAllUsers();
-            ObservableList<String> userIds = FXCollections.observableArrayList();
-            for (UserDTO user : users) {
-                userIds.add(user.getUserID());
+    private void loadTableThread() {
+        Task<ObservableList<RoleDTO>> task = new Task<>() {
+            @Override
+            protected ObservableList<RoleDTO> call() throws Exception {
+                return FXCollections.observableArrayList(roleController.getAllRoles());
             }
-            ComboUserId.setItems(userIds);
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
+        };
+
+        task.setOnSucceeded(e -> detailsTable.setItems(task.getValue()));
+        task.setOnFailed(e -> new Alert(Alert.AlertType.ERROR, task.getException().getMessage()).show());
+
+        new Thread(task).start();
     }
 
-    @FXML
-    void navigateDelete(ActionEvent event) {
-        try {
-            String rsp = roleController.deleteRole(roleIDTxt.getText());
-            loadTable();
-            navigateReset(event);
-            new Alert(Alert.AlertType.INFORMATION, rsp).show();
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-    }
+    private void loadComboUserIdThread() {
+        Task<ObservableList<String>> task = new Task<>() {
+            @Override
+            protected ObservableList<String> call() throws Exception {
+                ArrayList<UserDTO> users = userController.getAllUsers();
+                ObservableList<String> userIds = FXCollections.observableArrayList();
+                for (UserDTO user : users) userIds.add(user.getUserID());
+                return userIds;
+            }
+        };
 
-    @FXML
-    void navigateReset(ActionEvent event) {
-        roleIDTxt.setText("");
-        nameTxt.setText("");
-        ComboUserId.setValue(null);
+        task.setOnSucceeded(e -> ComboUserId.setItems(task.getValue()));
+        task.setOnFailed(e -> new Alert(Alert.AlertType.ERROR, task.getException().getMessage()).show());
+
+        new Thread(task).start();
     }
 
     @FXML
@@ -113,12 +101,10 @@ public class ManageRoleController {
                     nameTxt.getText(),
                     ComboUserId.getValue()
             );
-
             String rsp = roleController.saveRole(roleDTO);
             new Alert(Alert.AlertType.INFORMATION, rsp).show();
-            loadTable();
-            navigateReset(event);
-
+            loadTableThread();
+            navigateReset(null);
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
@@ -132,14 +118,31 @@ public class ManageRoleController {
                     nameTxt.getText(),
                     ComboUserId.getValue()
             );
-
             String rsp = roleController.updateRole(roleDTO);
             new Alert(Alert.AlertType.INFORMATION, rsp).show();
-            loadTable();
-            navigateReset(event);
-
+            loadTableThread();
+            navigateReset(null);
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+    }
+
+    @FXML
+    void navigateDelete(ActionEvent event) {
+        try {
+            String rsp = roleController.deleteRole(roleIDTxt.getText());
+            new Alert(Alert.AlertType.INFORMATION, rsp).show();
+            loadTableThread();
+            navigateReset(null);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    @FXML
+    void navigateReset(ActionEvent event) {
+        roleIDTxt.clear();
+        nameTxt.clear();
+        ComboUserId.setValue(null);
     }
 }

@@ -128,7 +128,7 @@ public class ManageSaleProductController {
         SaleProductDTO selectedSaleProduct = saleProductTable.getSelectionModel().getSelectedItem();
 
         if (selectedSaleProduct != null){
-            saleProductIDTxt.setText(selectedSaleProduct.getProductID());
+            saleProductIDTxt.setText(selectedSaleProduct.getSaleProductID());
             saleIdCombo.setValue(selectedSaleProduct.getSaleID());
             productIdCombo.setValue(selectedSaleProduct.getProductID());
             promotionIdCombo.setValue(selectedSaleProduct.getPromotionID());
@@ -273,7 +273,7 @@ public class ManageSaleProductController {
                     saleProductIDTxt.getText(),
                     saleIdCombo.getValue(),
                     promotionIdCombo.getValue(),
-                    promotionIdCombo.getValue(),
+                    productIdCombo.getValue(),
                     Integer.parseInt(quantityTxt.getText()),
                     Double.parseDouble(unitPriceTxt.getText()),
                     Double.parseDouble(lineDiscountTxt.getText()),

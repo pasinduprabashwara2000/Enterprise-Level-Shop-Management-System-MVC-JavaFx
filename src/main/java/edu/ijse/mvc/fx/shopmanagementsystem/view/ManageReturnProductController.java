@@ -1,18 +1,39 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnProductDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SaleDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.controller.ProductController;
+import edu.ijse.mvc.fx.shopmanagementsystem.controller.ReturnController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.ReturnProductController;
+import edu.ijse.mvc.fx.shopmanagementsystem.controller.SaleController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import java.util.ArrayList;
 
 public class ManageReturnProductController {
 
     private final ReturnProductController returnProductController = new ReturnProductController();
+    private final ProductController productController = new ProductController();
+    private final ReturnController returnController = new ReturnController();
+    private final SaleController saleController = new SaleController();
 
     @FXML
     private ComboBox<String> actionCmb;
+
+    @FXML
+    private ComboBox<String> returnIdCombo;
+
+    @FXML
+    private ComboBox<String> productIdCombo;
+
+    @FXML
+    private ComboBox<String> saleItemIdCombo;
 
     @FXML
     private TableColumn<ReturnProductDTO, String> colAction;
@@ -39,7 +60,7 @@ public class ManageReturnProductController {
     private Button deleteBtn;
 
     @FXML
-    private TextField productIDTxt;
+    private TextField returnProductIdTxt;
 
     @FXML
     private TextField quantityTxt;
@@ -51,16 +72,7 @@ public class ManageReturnProductController {
     private Button resetBtn;
 
     @FXML
-    private TextField returnIDTxt;
-
-    @FXML
-    private TextField returnItemIDTxt;
-
-    @FXML
     private TableView<ReturnProductDTO> returnProductTable;
-
-    @FXML
-    private TextField saleItemIDTxt;
 
     @FXML
     private Button saveBtn;
@@ -79,6 +91,16 @@ public class ManageReturnProductController {
         colAction.setCellValueFactory(new PropertyValueFactory<>("action"));
 
         loadTable();
+        loadProductId();
+        loadReturnId();
+        loadSaleItemId();
+
+        returnProductTable.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 1){
+                loadSelectedRow();
+            }
+        });
+
     }
 
     private void loadTable(){
@@ -90,10 +112,73 @@ public class ManageReturnProductController {
         }
     }
 
+    private void loadSelectedRow(){
+
+        ReturnProductDTO returnProductDTO = returnProductTable.getSelectionModel().getSelectedItem();
+
+        if(returnProductDTO != null){
+            returnIdCombo.setValue(returnProductDTO.getReturnId());
+            productIdCombo.setValue(returnProductDTO.getProductId());
+            saleItemIdCombo.setValue(returnProductDTO.getSaleItemId());
+            quantityTxt.setText(String.valueOf(returnProductDTO.getQuantity()));
+            refundAmountTxt.setText(String.valueOf(returnProductDTO.getRefundAmount()));
+            actionCmb.setValue(returnProductDTO.getAction());
+        }
+
+    }
+
+    @FXML
+    void loadProductId() {
+        try {
+            ArrayList <ProductDTO> productDTOS = productController.getAllProducts();
+            ObservableList <String> list = FXCollections.observableArrayList();
+
+            for (ProductDTO productDTO : productDTOS){
+                list.add(productDTO.getProductID());
+            }
+
+            productIdCombo.setItems(list);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
+    }
+
+    @FXML
+    void loadReturnId() {
+        try {
+            ArrayList <ReturnDTO> returnDTOS = returnController.getAllReturns();
+            ObservableList <String> list = FXCollections.observableArrayList();
+
+            for (ReturnDTO returnDTO : returnDTOS){
+                 list.add(returnDTO.getReturnID());
+            }
+
+            returnIdCombo.setItems(list);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
+    }
+
+    @FXML
+    void loadSaleItemId() {
+        try {
+            ArrayList <SaleDTO> saleDTOS = saleController.getAllSales();
+            ObservableList <String> list = FXCollections.observableArrayList();
+
+            for (SaleDTO saleDTO : saleDTOS){
+                list.add(saleDTO.getSaleID());
+            }
+
+            saleItemIdCombo.setItems(list);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
+    }
+
     @FXML
     void navigateDelete(ActionEvent event) {
         try {
-            String rsp = returnProductController.deleteReturnProduct(returnItemIDTxt.getText());
+            String rsp = returnProductController.deleteReturnProduct(returnProductIdTxt.getText());
             new Alert(Alert.AlertType.INFORMATION,rsp).show();
             loadTable();
             navigateReset(event);
@@ -104,10 +189,9 @@ public class ManageReturnProductController {
 
     @FXML
     void navigateReset(ActionEvent event) {
-        returnItemIDTxt.setText("");
-        returnIDTxt.setText("");
-        productIDTxt.setText("");
-        saleItemIDTxt.setText("");
+        returnIdCombo.setValue(null);
+        productIdCombo.setValue(null);
+        saleItemIdCombo.setValue(null);
         quantityTxt.setText("");
         refundAmountTxt.setText("");
         actionCmb.setValue("");
@@ -117,10 +201,10 @@ public class ManageReturnProductController {
     void navigateSave(ActionEvent event) {
         try {
             ReturnProductDTO returnProductDTO = new ReturnProductDTO(
-                    returnItemIDTxt.getText(),
-                    returnIDTxt.getText(),
-                    productIDTxt.getText(),
-                    saleItemIDTxt.getText(),
+                    null,
+                    returnIdCombo.getValue(),
+                    productIdCombo.getValue(),
+                    saleItemIdCombo.getValue(),
                     Integer.parseInt(quantityTxt.getText()),
                     Double.parseDouble(refundAmountTxt.getText()),
                     actionCmb.getValue()
@@ -138,10 +222,10 @@ public class ManageReturnProductController {
     void navigateUpdate(ActionEvent event) {
         try {
             ReturnProductDTO returnProductDTO = new ReturnProductDTO(
-                    returnItemIDTxt.getText(),
-                    returnIDTxt.getText(),
-                    productIDTxt.getText(),
-                    saleItemIDTxt.getText(),
+                    returnProductIdTxt.getText(),
+                    returnIdCombo.getValue(),
+                    productIdCombo.getValue(),
+                    saleItemIdCombo.getValue(),
                     Integer.parseInt(quantityTxt.getText()),
                     Double.parseDouble(refundAmountTxt.getText()),
                     actionCmb.getValue()

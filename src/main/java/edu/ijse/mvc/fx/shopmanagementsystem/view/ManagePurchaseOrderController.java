@@ -1,16 +1,22 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.PurchaceOrderDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SupplierDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.PurchaceOrderController;
+import edu.ijse.mvc.fx.shopmanagementsystem.controller.SupplierController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class ManagePurchaseOrderController {
 
     private final PurchaceOrderController purchaceOrderController = new PurchaceOrderController();
+    private final SupplierController supplierController = new SupplierController();
 
     @FXML
     private TableColumn<PurchaceOrderDTO, Date> colCreatedAt;
@@ -61,7 +67,7 @@ public class ManagePurchaseOrderController {
     private ComboBox<String> statusCombo;
 
     @FXML
-    private TextField supplierIdTxt;
+    private ComboBox<String> supplierIdCombo;
 
     @FXML
     private TextField totalCostTxt;
@@ -80,6 +86,29 @@ public class ManagePurchaseOrderController {
         colTotalCost.setCellValueFactory(new PropertyValueFactory<>("totalCost"));
 
         loadTable();
+        loadSupplierId();
+
+        poTable.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 1){
+                loadSelectedRow();
+            }
+        });
+
+    }
+
+    private void loadSelectedRow(){
+
+        PurchaceOrderDTO purchaceOrderDTO = poTable.getSelectionModel().getSelectedItem();
+
+        if(poTable != null){
+            poIdTxt.setText(purchaceOrderDTO.getPoId());
+            supplierIdCombo.setValue(purchaceOrderDTO.getSupplierId());
+            createdAtPicker.setValue(purchaceOrderDTO.getCreatedAt());
+            createdByTxt.setText(purchaceOrderDTO.getCreatedBy());
+            statusCombo.setValue(purchaceOrderDTO.getStatus());
+            expectedDatePicker.setValue(purchaceOrderDTO.getExpectedDate());
+            totalCostTxt.setText(String.valueOf(purchaceOrderDTO.getTotalCost()));
+        }
 
     }
 
@@ -87,6 +116,22 @@ public class ManagePurchaseOrderController {
         try {
             poTable.getItems().clear();
             poTable.getItems().addAll(purchaceOrderController.getAllPurchaceOrders());
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
+    }
+
+    @FXML
+    private void loadSupplierId(){
+        try {
+            ArrayList <SupplierDTO> supplierDTOS = supplierController.getAllSuppliers();
+            ObservableList <String> list = FXCollections.observableArrayList();
+
+            for (SupplierDTO supplierDTO : supplierDTOS){
+                list.add(supplierDTO.getSupplierID());
+            }
+
+            supplierIdCombo.setItems(list);
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
@@ -107,7 +152,7 @@ public class ManagePurchaseOrderController {
     @FXML
     void navigateReset(ActionEvent event) {
         poIdTxt.setText("");
-        supplierIdTxt.setText("");
+        supplierIdCombo.setValue(null);
         createdAtPicker.setValue(null);
         createdByTxt.setText("");
         statusCombo.setValue(null);
@@ -119,8 +164,8 @@ public class ManagePurchaseOrderController {
     void navigateSave(ActionEvent event) {
         try {
             PurchaceOrderDTO purchaceOrderDTO = new PurchaceOrderDTO(
-                poIdTxt.getText(),
-                supplierIdTxt.getText(),
+                null,
+                supplierIdCombo.getValue(),
                 createdAtPicker.getValue(),
                 createdByTxt.getText(),
                 statusCombo.getValue(),
@@ -141,7 +186,7 @@ public class ManagePurchaseOrderController {
         try {
             PurchaceOrderDTO purchaceOrderDTO = new PurchaceOrderDTO(
                     poIdTxt.getText(),
-                    supplierIdTxt.getText(),
+                    supplierIdCombo.getValue(),
                     createdAtPicker.getValue(),
                     createdByTxt.getText(),
                     statusCombo.getValue(),

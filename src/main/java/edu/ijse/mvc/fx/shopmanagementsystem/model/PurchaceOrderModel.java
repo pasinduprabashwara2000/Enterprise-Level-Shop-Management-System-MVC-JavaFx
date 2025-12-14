@@ -13,15 +13,14 @@ public class PurchaceOrderModel {
     public String savePurchaceOrder(PurchaceOrderDTO purchaceOrderDTO) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO PurchaseOrder VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO PurchaseOrder (supplierId, createdAt, createdBy, status, expectedDate, totalCost) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, purchaceOrderDTO.getPoId());
-        pstm.setString(2, purchaceOrderDTO.getSupplierId());
-        pstm.setDate(3, Date.valueOf(purchaceOrderDTO.getCreatedAt()));
-        pstm.setString(4, purchaceOrderDTO.getCreatedBy());
-        pstm.setObject(5, purchaceOrderDTO.getStatus());
-        pstm.setDate(6, Date.valueOf(purchaceOrderDTO.getExpectedDate()));
-        pstm.setDouble(7, purchaceOrderDTO.getTotalCost());
+        pstm.setString(1, purchaceOrderDTO.getSupplierId());
+        pstm.setDate(2, Date.valueOf(purchaceOrderDTO.getCreatedAt()));
+        pstm.setString(3, purchaceOrderDTO.getCreatedBy());
+        pstm.setObject(4, purchaceOrderDTO.getStatus());
+        pstm.setDate(5, Date.valueOf(purchaceOrderDTO.getExpectedDate()));
+        pstm.setDouble(6, purchaceOrderDTO.getTotalCost());
 
         return pstm.executeUpdate() > 0 ? "Purchase Order Saved Successfully" : "Purchase Order Save Failed";
 
