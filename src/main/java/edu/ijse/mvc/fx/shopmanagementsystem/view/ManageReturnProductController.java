@@ -1,15 +1,13 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnProductDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SaleDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.*;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.ProductController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.ReturnController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.ReturnProductController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.SaleController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -33,7 +31,7 @@ public class ManageReturnProductController {
     private ComboBox<String> productIdCombo;
 
     @FXML
-    private ComboBox<String> saleItemIdCombo;
+    private ComboBox<Integer> saleItemIdCombo;
 
     @FXML
     private TableColumn<ReturnProductDTO, String> colAction;
@@ -81,7 +79,7 @@ public class ManageReturnProductController {
     private Button updateBtn;
 
     @FXML
-    private void initialize(){
+    private void initialize() throws Exception {
         colReturnItemID.setCellValueFactory(new PropertyValueFactory<>("returnItemId"));
         colReturnID.setCellValueFactory(new PropertyValueFactory<>("returnId"));
         colProductID.setCellValueFactory(new PropertyValueFactory<>("productId"));
@@ -91,8 +89,8 @@ public class ManageReturnProductController {
         colAction.setCellValueFactory(new PropertyValueFactory<>("action"));
 
         loadTable();
-        loadProductId();
-        loadReturnId();
+        loadProductIdThread();
+        loadReturnIdThread();
         loadSaleItemId();
 
         returnProductTable.setOnMouseClicked(event -> {
@@ -119,7 +117,7 @@ public class ManageReturnProductController {
         if(returnProductDTO != null){
             returnIdCombo.setValue(returnProductDTO.getReturnId());
             productIdCombo.setValue(returnProductDTO.getProductId());
-            saleItemIdCombo.setValue(returnProductDTO.getSaleItemId());
+            saleItemIdCombo.setValue(Integer.valueOf(returnProductDTO.getSaleItemId()));
             quantityTxt.setText(String.valueOf(returnProductDTO.getQuantity()));
             refundAmountTxt.setText(String.valueOf(returnProductDTO.getRefundAmount()));
             actionCmb.setValue(returnProductDTO.getAction());
@@ -127,21 +125,34 @@ public class ManageReturnProductController {
 
     }
 
-    @FXML
-    void loadProductId() {
-        try {
-            ArrayList <ProductDTO> productDTOS = productController.getAllProducts();
-            ObservableList <String> list = FXCollections.observableArrayList();
+    private void loadProductIdThread() throws Exception{
+        Task <ObservableList<String>> task = new Task(){
 
-            for (ProductDTO productDTO : productDTOS){
-                list.add(productDTO.getProductID());
+            ArrayList <ProductDTO> products = productController.getAllProducts();
+            @Override
+            protected Object call() throws Exception {
+                return FXCollections.observableArrayList(products.stream().map(ProductDTO::getProductID));
             }
-
-            productIdCombo.setItems(list);
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-        }
+        };
+        task.setOnSucceeded(event -> productIdCombo.setItems(task.getValue()));
+        task.setOnFailed(event -> new Alert(Alert.AlertType.ERROR,task.getMessage()).show());
+        new Thread(task).start();
     }
+
+    private void loadReturnIdThread() throws Exception {
+        Task <ObservableList<String>> task = new Task() {
+
+            ArrayList <ReturnDTO> returns = returnController.getAllReturns();
+            @Override
+            protected Object call() throws Exception {
+                return FXCollections.observableArrayList(returns.stream().map(ReturnDTO::getReturnID));
+            }
+        };
+        task.setOnSucceeded(event -> returnIdCombo.setItems(task.getValue()));
+        task.setOnFailed(event -> new Alert(Alert.AlertType.ERROR,task.getMessage()).show());
+        new Thread(task).start();
+    }
+
 
     @FXML
     void loadReturnId() {
@@ -159,14 +170,15 @@ public class ManageReturnProductController {
         }
     }
 
+
     @FXML
     void loadSaleItemId() {
         try {
-            ArrayList <SaleDTO> saleDTOS = saleController.getAllSales();
-            ObservableList <String> list = FXCollections.observableArrayList();
+            ArrayList <SaleProductTM> saleDTOS = saleController.getAllSale();
+            ObservableList <Integer> list = FXCollections.observableArrayList();
 
-            for (SaleDTO saleDTO : saleDTOS){
-                list.add(saleDTO.getSaleID());
+            for (SaleProductTM saleProductTM : saleDTOS){
+                list.add(saleProductTM.getSaleId());
             }
 
             saleItemIdCombo.setItems(list);

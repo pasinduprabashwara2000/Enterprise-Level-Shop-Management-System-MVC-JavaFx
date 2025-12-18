@@ -1,5 +1,6 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -91,12 +92,12 @@ public class ManageMainMenuController {
         supplyBtn.setOnAction(event -> loadUI("ManageSupply"));
         promotionBtn.setOnAction(event -> loadUI("ManagePromotion"));
         saleBtn.setOnAction(event -> loadUI("ManageSale"));
-        saleProductBtn.setOnAction(event -> loadUI("ManageSaleProduct"));
         paymentBtn.setOnAction(event -> loadUI("ManagePayment"));
         returnBtn.setOnAction(event -> loadUI("ManageReturn"));
         returnproductBtn.setOnAction(event -> loadUI("ManageReturnProduct"));
         purchaseOrderBtn.setOnAction(event -> loadUI("ManagePurchaseOrder"));
         purchaseOrderProductBtn.setOnAction(event -> loadUI("ManagePurchaseOrderProduct"));
+        reportsBtn.setOnAction(event -> loadUI("ManageReports"));
 
     }
 
@@ -113,4 +114,7 @@ public class ManageMainMenuController {
         }
     }
 
+    public void navigateLogout(ActionEvent actionEvent) {
+
+    }
 }

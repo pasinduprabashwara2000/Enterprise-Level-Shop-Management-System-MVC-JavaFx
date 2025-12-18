@@ -8,6 +8,7 @@ import edu.ijse.mvc.fx.shopmanagementsystem.controller.ProductController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.PromotionController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -91,7 +92,7 @@ public class ManagePromotionController {
     private TextField valueTxt;
 
     @FXML
-    void initialize() {
+    void initialize() throws Exception {
         colPromotionID.setCellValueFactory(new PropertyValueFactory<>("promoteID"));
         colProductID.setCellValueFactory(new PropertyValueFactory<>("productID"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -102,8 +103,9 @@ public class ManagePromotionController {
         colActive.setCellValueFactory(new PropertyValueFactory<>("active"));
         typeCmb.getItems().addAll("PERCENT","AMOUNT");
         activeCmb.getItems().addAll("Active", "Inactive");
+
         loadTable();
-        loadProductId();
+        loadProductIdThread();
 
         promotionTable.setOnMouseClicked(event -> {
             if(event.getClickCount() == 1){
@@ -128,6 +130,22 @@ public class ManagePromotionController {
 
     }
 
+    private void loadProductIdThread() throws Exception {
+
+        Task <ObservableList<String>> task = new Task<>() {
+            ArrayList <ProductDTO> products = productController.getAllProducts();
+            @Override
+            protected ObservableList<String> call() throws Exception {
+                return FXCollections.observableArrayList(products.stream().map(ProductDTO::getProductID).toList()
+                );
+                }
+            };
+
+            task.setOnSucceeded(event -> productIdCombo.setItems(task.getValue()));
+            task.setOnFailed(event -> new Alert(Alert.AlertType.ERROR,task.getMessage()).show());
+            new Thread(task).start();
+    }
+
     @FXML
     public void loadTable() {
         try {
@@ -135,21 +153,6 @@ public class ManagePromotionController {
             promotionTable.getItems().addAll(promotionController.getAllPromotions());
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-    }
-
-    @FXML
-    void loadProductId() {
-        try {
-            ArrayList <ProductDTO> productDTOS = productController.getAllProducts();
-            ObservableList <String> list = FXCollections.observableArrayList();
-
-            for (ProductDTO productDTO : productDTOS){
-                list.add(productDTO.getProductID());
-            }
-            productIdCombo.setItems(list);
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
 

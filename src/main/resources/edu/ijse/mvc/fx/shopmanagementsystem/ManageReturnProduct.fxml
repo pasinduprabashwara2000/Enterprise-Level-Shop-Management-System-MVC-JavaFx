@@ -72,7 +72,7 @@
             </columns>
         </TableView>
       <ComboBox fx:id="returnIdCombo" layoutX="206.0" layoutY="66.0" onAction="#loadReturnId" prefHeight="38.0" prefWidth="259.0" promptText="Select Return ID" />
-      <ComboBox fx:id="productIdCombo" layoutX="206.0" layoutY="122.0" onAction="#loadProductId" prefHeight="38.0" prefWidth="259.0" promptText="Select Product ID" />
+      <ComboBox fx:id="productIdCombo" layoutX="206.0" layoutY="122.0" prefHeight="38.0" prefWidth="259.0" promptText="Select Product ID" />
       <ComboBox fx:id="saleItemIdCombo" layoutX="665.0" layoutY="65.0" onAction="#loadSaleItemId" prefHeight="38.0" prefWidth="259.0" promptText="Select Sale  ID" />
     </children>
 </AnchorPane>

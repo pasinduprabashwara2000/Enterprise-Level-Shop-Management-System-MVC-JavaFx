@@ -16,7 +16,7 @@ public class ReturnProductModel {
         pstm.setString(1, returnProductDTO.getReturnItemId());
         pstm.setString(2, returnProductDTO.getReturnId());
         pstm.setString(3, returnProductDTO.getProductId());
-        pstm.setString(4, returnProductDTO.getSaleItemId());
+        pstm.setInt(4, returnProductDTO.getSaleItemId());
         pstm.setInt(5, returnProductDTO.getQuantity());
         pstm.setDouble(6, returnProductDTO.getRefundAmount());
         pstm.setObject(7, returnProductDTO.getAction());
@@ -32,7 +32,7 @@ public class ReturnProductModel {
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, returnProductDTO.getReturnId());
         pstm.setString(2, returnProductDTO.getProductId());
-        pstm.setString(3, returnProductDTO.getSaleItemId());
+        pstm.setInt(3, returnProductDTO.getSaleItemId());
         pstm.setInt(4, returnProductDTO.getQuantity());
         pstm.setDouble(5, returnProductDTO.getRefundAmount());
         pstm.setObject(6, returnProductDTO.getAction());
@@ -65,7 +65,7 @@ public class ReturnProductModel {
                 rst.getString("returnItemId"),
                 rst.getString("returnId"),
                 rst.getString("productId"),
-                rst.getString("saleItemId"),
+                rst.getInt("saleItemId"),
                 rst.getInt("quantity"),
                 rst.getDouble("refundAmount"),
                 rst.getString("action")
@@ -87,7 +87,7 @@ public class ReturnProductModel {
                 rst.getString("returnItemId"),
                 rst.getString("returnId"),
                 rst.getString("productId"),
-                rst.getString("saleItemId"),
+                rst.getInt("saleItemId"),
                 rst.getInt("quantity"),
                 rst.getDouble("refundAmount"),
                 rst.getString("action")
@@ -110,7 +110,7 @@ public class ReturnProductModel {
                 rst.getString("returnItemId"),
                 rst.getString("returnId"),
                 rst.getString("productId"),
-                rst.getString("saleItemId"),
+                rst.getInt("saleItemId"),
                 rst.getInt("quantity"),
                 rst.getDouble("refundAmount"),
                 rst.getString("action")

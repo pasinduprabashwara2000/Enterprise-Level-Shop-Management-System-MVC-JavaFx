@@ -1,6 +1,6 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductTM;
 import edu.ijse.mvc.fx.shopmanagementsystem.model.DashboardModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -13,34 +13,37 @@ import javafx.scene.layout.FlowPane;
 public class DashboardController {
 
     @FXML
-    private TableColumn<ProductDTO, Boolean> colActive;
+    private TableColumn<ProductTM, Boolean> colActive;
 
     @FXML
-    private TableColumn<ProductDTO, Integer> colBarcode;
+    private TableColumn<ProductTM, Integer> colBarcode;
 
     @FXML
-    private TableColumn<ProductDTO, String> colCategoryID;
+    private TableColumn<ProductTM, String> colCategoryID;
 
     @FXML
-    private TableColumn<ProductDTO, String> colName;
+    private TableColumn<ProductTM, String> colName;
 
     @FXML
-    private TableColumn<ProductDTO, String> colProductID;
+    private TableColumn<ProductTM, String> colProductID;
 
     @FXML
-    private TableColumn<ProductDTO, String> colSKU;
+    private TableColumn<ProductTM, String> colSKU;
 
     @FXML
-    private TableColumn<ProductDTO, Double> colTaxRate;
+    private TableColumn<ProductTM, Double> colTaxRate;
 
     @FXML
-    private TableColumn<ProductDTO, String> colUnit;
+    private TableColumn<ProductTM, String> colUnit;
 
     @FXML
-    private TableColumn<ProductDTO, Double> colUnitPrice;
+    private TableColumn<ProductTM, Double> colUnitPrice;
 
     @FXML
-    private TableView<ProductDTO> detailsTable;
+    private TableColumn<ProductTM, Integer> colQty;
+
+    @FXML
+    private TableView<ProductTM> detailsTable;
 
     @FXML
     private FlowPane flowStats;
@@ -76,6 +79,7 @@ public class DashboardController {
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colUnit.setCellValueFactory(new PropertyValueFactory<>("unit"));
         colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+        colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
         colTaxRate.setCellValueFactory(new PropertyValueFactory<>("taxRate"));
         colActive.setCellValueFactory(new PropertyValueFactory<>("active"));
         colCategoryID.setCellValueFactory(new PropertyValueFactory<>("categoryID"));
@@ -87,6 +91,7 @@ public class DashboardController {
         loadSupplerCount();
         loadPurchaseCount();
         loadReturnCount();
+        loadTotalRevenue();
     }
 
     private void loadTable(){
@@ -149,6 +154,15 @@ public class DashboardController {
             lblReturnCount.setText(String.valueOf(count));
         } catch (Exception e) {
             lblReturnCount.setText("Error");
+        }
+    }
+
+    public void loadTotalRevenue(){
+        try {
+            double price = DashboardModel.calculateTotalRevenue();
+            lblRevenue.setText(String.valueOf(price));
+        } catch (Exception e){
+            lblRevenue.setText("Error");
         }
     }
 

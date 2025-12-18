@@ -23,45 +23,36 @@ public class ManageLoginController {
     private PasswordField passwordTxt;
 
     @FXML
-    private ComboBox<String> roleCombo;
-
-    @FXML
     private TextField userTxt;
 
     public void navigateLogin(ActionEvent actionEvent) {
 
         try {
-            LoginDTO loginDTO = new LoginDTO(
-                    userTxt.getText(),
-                    passwordTxt.getText(),
-                    roleCombo.getValue()
+            LoginDTO loginDTO = loginController.login(
+                userTxt.getText(),
+                passwordTxt.getText()
             );
-            LoginDTO rsp = loginController.login(loginDTO);
 
-            if(rsp != null){
-                if(rsp.getRole().equalsIgnoreCase("Admin")){
-                    new Alert(Alert.AlertType.INFORMATION,"Login Successfully "+rsp.getUserName()).show();
+            if(loginDTO != null){
+                if(loginDTO.getRole().equalsIgnoreCase("Admin")){
                     ((Stage) loginBtn.getScene().getWindow())
                             .setScene(new Scene(FXMLLoader.load(getClass().getResource("/edu/ijse/mvc/fx/shopmanagementsystem/MainMenu.fxml"))));
-                } else if (rsp.getRole().equalsIgnoreCase("Cashier")){
-                    new Alert(Alert.AlertType.INFORMATION,"Login Successfully "+rsp.getUserName()).show();
+                    new Alert(Alert.AlertType.INFORMATION," Admin Login Successfully !").show();
+                } else if (loginDTO.getRole().equalsIgnoreCase("Cashier")){
                     ((Stage) loginBtn.getScene().getWindow())
                             .setScene(new Scene(FXMLLoader.load(getClass().getResource("/edu/ijse/mvc/fx/shopmanagementsystem/MainMenu2.fxml"))));
+                    new Alert(Alert.AlertType.ERROR,"Cashier Login Successfully").show();
                 } else {
-                    new Alert(Alert.AlertType.ERROR,"Error").show();
+                    new Alert(Alert.AlertType.ERROR,"Invalid Credentials").show();
                 }
-            } else {
-                new Alert(Alert.AlertType.ERROR,"Invalid Credentials").show();
             }
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
-
     }
 
     public void navigateClear(ActionEvent actionEvent) {
         userTxt.setText("");
         passwordTxt.setText("");
-        roleCombo.setValue(null);
     }
 }

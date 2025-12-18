@@ -1,101 +1,129 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.model;
 
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SaleDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SaleProductDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SaleProductTM;
 import edu.ijse.mvc.fx.shopmanagementsystem.db.DBConnection;
+import edu.ijse.mvc.fx.shopmanagementsystem.util.CrudUtil;
 import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class SaleModel {
 
-    public String saveSale(SaleDTO dto) throws Exception {
+    public String save(SaleDTO dto) throws Exception {
 
-        Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO Sale (customer_id, sale_date, total_amount, discount, net_total) VALUES (?, ?, ?, ?, ?)";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, dto.getCustomerID());
-        ps.setDate(2, Date.valueOf(dto.getSaleDate()));
-        ps.setDouble(3, dto.getTotalAmount());
-        ps.setDouble(4, dto.getDiscount());
-        ps.setDouble(5, dto.getNetTotal());
+        Connection con = DBConnection.getInstance().getConnection();
 
-        return ps.executeUpdate() > 0
-                ? "Sale saved successfully!"
-                : "Failed to save sale!";
+        try {
+            con.setAutoCommit(false);
+
+            CrudUtil.execute(
+                    "INSERT INTO sale (sale_date, customer_id, promotion_id, total_amount, discount, net_total) VALUES (?,?,?,?,?,?)",
+                    java.sql.Date.valueOf(dto.getSaleDate()),
+                    dto.getCustomerId(),
+                    dto.getPromotionId(),
+                    dto.getTotalAmount(),
+                    dto.getDiscount(),
+                    dto.getNetTotal()
+            );
+
+            ResultSet rs = CrudUtil.execute(
+                    "SELECT sale_id FROM sale ORDER BY sale_id DESC LIMIT 1"
+            );
+
+            if (!rs.next()) {
+                throw new RuntimeException("Failed to retrieve sale ID");
+            }
+
+            int saleId = rs.getInt("sale_id");
+
+            for (SaleProductDTO sp : dto.getProducts()) {
+                CrudUtil.execute(
+                        "INSERT INTO SaleProduct (sale_id, product_id, qty) VALUES (?,?,?)",
+                        saleId,
+                        sp.getProductID(),
+                        sp.getQyt()
+                );
+            }
+
+            con.commit();
+            return "Sale Saved Successfully";
+
+        } catch (Exception e) {
+            con.rollback();
+            throw e;
+        } finally {
+            con.setAutoCommit(true);
+        }
     }
 
-    public String updateSale(SaleDTO dto) throws Exception {
+    public String update(SaleDTO dto) throws Exception {
 
-        Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "UPDATE Sale SET customer_id = ?, sale_date = ?, total_amount = ?, discount = ?, net_total = ? WHERE sale_id = ?";
-        PreparedStatement ps = connection.prepareStatement(sql);
-
-        ps.setString(1, dto.getCustomerID());
-        ps.setDate(2, Date.valueOf(dto.getSaleDate()));
-        ps.setDouble(3, dto.getTotalAmount());
-        ps.setDouble(4, dto.getDiscount());
-        ps.setDouble(5, dto.getNetTotal());
-        ps.setString(6, dto.getSaleID());
-
-        return ps.executeUpdate() > 0
-                ? "Sale updated successfully!"
-                : "Sale not found!";
+        return CrudUtil.execute(
+                "UPDATE sale SET sale_date=?, customer_id=?, promotion_id=?, total_amount=?, discount=?, net_total=? WHERE sale_id=?",
+                java.sql.Date.valueOf(dto.getSaleDate()),
+                dto.getCustomerId(),
+                dto.getPromotionId(),
+                dto.getTotalAmount(),
+                dto.getDiscount(),
+                dto.getNetTotal(),
+                dto.getSaleId()
+        ) ? "Sale Updated Successfully" : "Sale Update Failed";
     }
 
-    public String deleteSale(String saleID) throws Exception {
+    public String delete(int saleId) throws Exception {
 
-        Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "DELETE FROM Sale WHERE sale_id = ?";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, saleID);
-
-        return ps.executeUpdate() > 0
-                ? "Sale deleted successfully!"
-                : "Sale not found!";
+        return CrudUtil.execute(
+                "DELETE FROM sale WHERE sale_id=?",
+                saleId
+        ) ? "Sale Deleted Successfully" : "Sale Delete Failed";
     }
 
-    public SaleDTO searchSale(String saleID) throws Exception {
+    public SaleDTO search(int saleId) throws Exception {
 
-        Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "SELECT * FROM Sale WHERE sale_id = ?";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, saleID);
+        ResultSet rs = CrudUtil.execute(
+                "SELECT * FROM sale WHERE sale_id=?",
+                saleId
+        );
 
-        ResultSet rs = ps.executeQuery();
-
-        return rs.next()
-                ? new SaleDTO(
-                rs.getString("sale_id"),
-                rs.getString("customer_id"),
-                rs.getDate("sale_date").toLocalDate(),
-                rs.getDouble("total_amount"),
-                rs.getDouble("discount"),
-                rs.getDouble("net_total"))
-                : null;
-    }
-
-    public ArrayList<SaleDTO> getAllSales() throws Exception {
-
-        Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "SELECT * FROM Sale";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-
-        ArrayList<SaleDTO> list = new ArrayList<>();
-
-        while (rs.next()) {
-            list.add(new SaleDTO(
-                    rs.getString("sale_id"),
-                    rs.getString("customer_id"),
+        if (rs.next()) {
+            return new SaleDTO(
+                    rs.getInt("sale_id"),
                     rs.getDate("sale_date").toLocalDate(),
+                    rs.getString("customer_id"),
+                    rs.getString("promotion_id"),
                     rs.getDouble("total_amount"),
                     rs.getDouble("discount"),
-                    rs.getDouble("net_total")
+                    rs.getDouble("net_total"),
+                    null
+            );
+        }
+        return null;
+    }
+
+    public ArrayList<SaleProductTM> getAll() throws Exception {
+
+        ResultSet rs = CrudUtil.execute("SELECT sale.sale_id, sale.customer_id, sale.promotion_id, SaleProduct.product_id , SaleProduct.qty ,sale.total_amount, sale.discount, sale.net_total, sale.sale_date\n" +
+                "FROM sale\n" +
+                "JOIN SaleProduct\n" +
+                "ON sale.sale_id = SaleProduct.sale_id");
+
+        ArrayList<SaleProductTM> list = new ArrayList<>();
+
+        while (rs.next()) {
+            list.add(new SaleProductTM(
+                    rs.getInt("sale_id"),
+                    rs.getString("customer_id"),
+                    rs.getString("product_id"),
+                    rs.getString("promotion_id"),
+                    rs.getInt("qty"),
+                    rs.getDouble("total_amount"),
+                    rs.getDouble("discount"),
+                    rs.getDouble("net_total"),
+                    rs.getDate("sale_date").toLocalDate()
             ));
         }
-
         return list;
     }
 }

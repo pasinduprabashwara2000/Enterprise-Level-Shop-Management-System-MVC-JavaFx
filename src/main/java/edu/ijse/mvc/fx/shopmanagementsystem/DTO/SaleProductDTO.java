@@ -9,14 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class SaleProductDTO {
 
-    private String saleProductID;
-    private String saleID;
-    private String productID;
-    private String promotionID;
-    private int quantity;
-    private double unitPrice;
-    private double lineDiscount;
-    private double lineTax;
-    private double lineTotal;
+   private String productID;
+   private int qyt;
 
 }

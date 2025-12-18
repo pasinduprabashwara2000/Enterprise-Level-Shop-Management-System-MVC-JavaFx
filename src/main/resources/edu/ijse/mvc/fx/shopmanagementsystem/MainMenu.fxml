@@ -46,7 +46,6 @@
                         <Button fx:id="supplyBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Product Supply" />
                         <Button fx:id="promotionBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Promotion" />
                         <Button fx:id="saleBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Sale" />
-                        <Button fx:id="saleProductBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Sale Product" />
                         <Button fx:id="paymentBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Payment" />
                         <Button fx:id="returnBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Return" />
                         <Button fx:id="returnproductBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Return Product" />
@@ -60,6 +59,6 @@
                 </VBox>
             </content>
         </ScrollPane>
-        <Button fx:id="logoutBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="1225.0" layoutY="6.0" prefHeight="30.0" prefWidth="113.0" styleClass="logout-btn" text="Log Out" />
+        <Button fx:id="logoutBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="1225.0" layoutY="6.0" onAction="#navigateLogout" prefHeight="30.0" prefWidth="113.0" styleClass="logout-btn" text="Log Out" />
     </children>
 </AnchorPane>

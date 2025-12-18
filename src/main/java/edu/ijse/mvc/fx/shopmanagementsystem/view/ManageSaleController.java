@@ -1,49 +1,76 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.CustomerDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SaleDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.controller.CustomerController;
-import edu.ijse.mvc.fx.shopmanagementsystem.controller.SaleController;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.*;
+import edu.ijse.mvc.fx.shopmanagementsystem.controller.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 public class ManageSaleController {
 
-    final private SaleController saleController = new SaleController();
-    final private CustomerController customerController = new CustomerController();
+    private final SaleController saleController = new SaleController();
+    private final CustomerController customerController = new CustomerController();
+    private final ProductController productController = new ProductController();
+    private final PromotionController promotionController = new PromotionController();
 
     @FXML
-    private TableColumn<SaleDTO, String> colCustomerId;
+    private TableView<SaleProductTM> saleTable;
 
     @FXML
-    private TableColumn<SaleDTO, Double> colDiscount;
+    private TableColumn<SaleProductTM, Integer> colSaleId;
 
     @FXML
-    private TableColumn<SaleDTO, Double> colNetTotal;
+    private TableColumn<SaleProductTM, LocalDate> colSaleDate;
 
     @FXML
-    private TableColumn<SaleDTO, LocalDate> colSaleDate;
+    private TableColumn<SaleProductTM, String> colCustomerId;
 
     @FXML
-    private TableColumn<SaleDTO, String> colSaleId;
+    private TableColumn<SaleProductTM, String> colPromotionId;
 
     @FXML
-    private TableColumn<SaleDTO, Double> colTotalAmount;
+    private TableColumn<SaleProductTM, Double> colTotalAmount;
+
+    @FXML
+    private TableColumn<SaleProductTM, Double> colDiscount;
+
+    @FXML
+    private TableColumn<SaleProductTM, Double> colNetTotal;
+
+    @FXML
+    private TableColumn<SaleProductTM, String> colProductId;
+
+    @FXML
+    private TableColumn<SaleProductTM, Integer> colQty;
+
+    @FXML
+    private TextField saleIdTxt;
+
+    @FXML
+    private DatePicker datePicker;
 
     @FXML
     private ComboBox<String> customerIdCombo;
 
     @FXML
-    private Button deleteBtn;
+    private ComboBox<String> productIdCombo;
 
     @FXML
-    private TableView<SaleDTO> detailsTable;
+    private ComboBox<String> promotionIdCombo;
+
+    @FXML
+    private TextField quantityTxt;
+
+    @FXML
+    private TextField totalAmountTxt;
 
     @FXML
     private TextField discountTxt;
@@ -52,140 +79,154 @@ public class ManageSaleController {
     private TextField netTotalTxt;
 
     @FXML
-    private Button resetBtn;
+    private void initialize() {
 
-    @FXML
-    private DatePicker datePicker;
-
-    @FXML
-    private TextField saleIdTxt;
-
-    @FXML
-    private Button saveBtn;
-
-    @FXML
-    private TextField totalAmountTxt;
-
-    @FXML
-    private Button updateBtn;
-
-    @FXML
-    void initialize() {
-        colSaleId.setCellValueFactory(new PropertyValueFactory<>("saleID"));
-        colCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        colSaleId.setCellValueFactory(new PropertyValueFactory<>("saleId"));
         colSaleDate.setCellValueFactory(new PropertyValueFactory<>("saleDate"));
+        colCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        colProductId.setCellValueFactory(new PropertyValueFactory<>("productID"));
+        colPromotionId.setCellValueFactory(new PropertyValueFactory<>("promotionId"));
+        colQty.setCellValueFactory(new PropertyValueFactory<>("qyt"));
         colTotalAmount.setCellValueFactory(new PropertyValueFactory<>("totalAmount"));
         colDiscount.setCellValueFactory(new PropertyValueFactory<>("discount"));
         colNetTotal.setCellValueFactory(new PropertyValueFactory<>("netTotal"));
 
+        datePicker.setValue(LocalDate.now());
+
         loadTable();
-        loadCustomerId();
+        loadCustomerIds();
+        loadProductIds();
+        loadPromotionIds();
 
-        totalAmountTxt.textProperty().addListener((obs, oldVal, newVal) -> calculateTotal());
-        discountTxt.textProperty().addListener((obs, oldVal, newVal) -> calculateTotal());
-        netTotalTxt.setEditable(false);
+        totalAmountTxt.textProperty().addListener((obs, o, n) -> calculateNetTotal());
+        discountTxt.textProperty().addListener((obs, o, n) -> calculateNetTotal());
 
-        detailsTable.setOnMouseClicked(event -> {
-            if(event.getClickCount() == 1){
+        saleTable.setOnMouseClicked(e -> {
+            if (e.getClickCount() == 1) {
                 loadSelectedRow();
             }
         });
-
-    }
-
-    private void loadSelectedRow(){
-        SaleDTO selectedSale = detailsTable.getSelectionModel().getSelectedItem();
-
-        if(selectedSale != null){
-            saleIdTxt.setText(selectedSale.getSaleID());
-            customerIdCombo.setValue(selectedSale.getCustomerID());
-            datePicker.setValue(selectedSale.getSaleDate());
-            totalAmountTxt.setText(String.valueOf(selectedSale.getTotalAmount()));
-            discountTxt.setText(String.valueOf(selectedSale.getDiscount()));
-            netTotalTxt.setText(String.valueOf(selectedSale.getTotalAmount()));
-        }
     }
 
     private void loadTable() {
         try {
-            detailsTable.getItems().setAll(saleController.getAllSales());
+            ObservableList<SaleProductTM> list =
+                    FXCollections.observableArrayList(saleController.getAllSale());
+            saleTable.setItems(list);
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
-    @FXML
-    void loadCustomerId() {
-        try {
-            ArrayList<CustomerDTO> customerDTOS = customerController.getAllCustomers();
-            ObservableList<String> list = FXCollections.observableArrayList();
+    private void loadSelectedRow() {
+        SaleProductTM tm = saleTable.getSelectionModel().getSelectedItem();
 
-            for (CustomerDTO customerDTO : customerDTOS) {
-                list.add(customerDTO.getCustomerId());
-            }
-
-            customerIdCombo.setItems(list);
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        if (tm != null) {
+            saleIdTxt.setText(String.valueOf(tm.getSaleId()));
+            datePicker.setValue(tm.getSaleDate());
+            customerIdCombo.setValue(tm.getCustomerId());
+            productIdCombo.setValue(tm.getProductID());
+            quantityTxt.setText(String.valueOf(tm.getQyt()));
+            promotionIdCombo.setValue(tm.getPromotionId());
+            totalAmountTxt.setText(String.valueOf(tm.getTotalAmount()));
+            discountTxt.setText(String.valueOf(tm.getDiscount()));
+            netTotalTxt.setText(String.valueOf(tm.getNetTotal()));
         }
     }
 
-    @FXML
-    void calculateTotal() {
-        try {
-            if (totalAmountTxt.getText().isEmpty() || discountTxt.getText().isEmpty()) {
-                netTotalTxt.setText("");
-                return;
+    private void loadCustomerIds() {
+        Task<ObservableList<String>> task = new Task<>() {
+            @Override
+            protected ObservableList<String> call() throws Exception {
+                ArrayList<CustomerDTO> list = customerController.getAllCustomers();
+                return FXCollections.observableArrayList(
+                        list.stream().map(CustomerDTO::getCustomerId).toList()
+                );
             }
+        };
 
+        task.setOnSucceeded(e -> customerIdCombo.setItems(task.getValue()));
+        task.setOnFailed(e -> new Alert(Alert.AlertType.ERROR, task.getException().getMessage()).show());
+
+        new Thread(task).start();
+    }
+
+    private void loadProductIds() {
+        Task<ObservableList<String>> task = new Task<>() {
+            @Override
+            protected ObservableList<String> call() throws Exception {
+                ArrayList<ProductDTO> list = productController.getAllProducts();
+                return FXCollections.observableArrayList(
+                        list.stream().map(ProductDTO::getProductID).toList()
+                );
+            }
+        };
+
+        task.setOnSucceeded(e -> productIdCombo.setItems(task.getValue()));
+        task.setOnFailed(e -> new Alert(Alert.AlertType.ERROR, task.getException().getMessage()).show());
+
+        new Thread(task).start();
+    }
+
+    private void loadPromotionIds() {
+        Task<ObservableList<String>> task = new Task<>() {
+            @Override
+            protected ObservableList<String> call() throws Exception {
+                ArrayList<PromotionDTO> list = promotionController.getAllPromotions();
+                return FXCollections.observableArrayList(
+                        list.stream().map(PromotionDTO::getPromoteID).toList()
+                );
+            }
+        };
+
+        task.setOnSucceeded(e -> promotionIdCombo.setItems(task.getValue()));
+        task.setOnFailed(e -> new Alert(Alert.AlertType.ERROR, task.getException().getMessage()).show());
+
+        new Thread(task).start();
+    }
+
+    private void calculateNetTotal() {
+        try {
+            if (totalAmountTxt.getText().isEmpty() || discountTxt.getText().isEmpty()) return;
             double total = Double.parseDouble(totalAmountTxt.getText());
             double discount = Double.parseDouble(discountTxt.getText());
-            double netTotal = total - discount;
-
-            netTotalTxt.setText(String.valueOf(netTotal));
-
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            netTotalTxt.setText(String.valueOf(total - discount));
+        } catch (NumberFormatException ignored) {
         }
-    }
-
-    @FXML
-    void navigateDelete(ActionEvent event) {
-        try {
-            String res = saleController.deleteSale(saleIdTxt.getText());
-            new Alert(Alert.AlertType.INFORMATION, res).show();
-            navigateReset(event);
-            loadTable();
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-    }
-
-    @FXML
-    void navigateReset(ActionEvent event) {
-        saleIdTxt.setText("");
-        customerIdCombo.setValue(null);
-        datePicker.setValue(null);
-        totalAmountTxt.setText("");
-        discountTxt.setText("");
-        netTotalTxt.setText("");
     }
 
     @FXML
     void navigateSave(ActionEvent event) {
         try {
-            SaleDTO saleDTO = new SaleDTO(
-                    null,
-                    customerIdCombo.getValue(),
+
+            if (customerIdCombo.getValue() == null || productIdCombo.getValue() == null) {
+                new Alert(Alert.AlertType.WARNING, "Select required fields").show();
+                return;
+            }
+
+            List<SaleProductDTO> products = new ArrayList<>();
+            products.add(new SaleProductDTO(
+                    productIdCombo.getValue(),
+                    Integer.parseInt(quantityTxt.getText())
+            ));
+
+            SaleDTO dto = new SaleDTO(
+                    0,
                     datePicker.getValue(),
+                    customerIdCombo.getValue(),
+                    promotionIdCombo.getValue(),
                     Double.parseDouble(totalAmountTxt.getText()),
                     Double.parseDouble(discountTxt.getText()),
-                    Double.parseDouble(netTotalTxt.getText())
+                    Double.parseDouble(netTotalTxt.getText()),
+                    products
             );
-            String res = saleController.saveSale(saleDTO);
-            new Alert(Alert.AlertType.INFORMATION, res).show();
-            navigateReset(event);
+
+            new Alert(Alert.AlertType.INFORMATION,
+                    saleController.saveSale(dto)).show();
+
             loadTable();
+            navigateReset(null);
+
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
@@ -194,20 +235,52 @@ public class ManageSaleController {
     @FXML
     void navigateUpdate(ActionEvent event) {
         try {
-            SaleDTO saleDTO = new SaleDTO(
-                    saleIdTxt.getText(),
-                    customerIdCombo.getValue(),
+
+            SaleDTO dto = new SaleDTO(
+                    Integer.parseInt(saleIdTxt.getText()),
                     datePicker.getValue(),
+                    customerIdCombo.getValue(),
+                    promotionIdCombo.getValue(),
                     Double.parseDouble(totalAmountTxt.getText()),
                     Double.parseDouble(discountTxt.getText()),
-                    Double.parseDouble(netTotalTxt.getText())
+                    Double.parseDouble(netTotalTxt.getText()),
+                    new ArrayList<>()
             );
-            String res = saleController.updateSale(saleDTO);
-            new Alert(Alert.AlertType.INFORMATION, res).show();
-            navigateReset(event);
+
+            new Alert(Alert.AlertType.INFORMATION,
+                    saleController.updateSale(dto)).show();
+
             loadTable();
+            navigateReset(null);
+
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+    }
+
+    @FXML
+    void navigateDelete(ActionEvent event) {
+        try {
+            new Alert(Alert.AlertType.INFORMATION,
+                    saleController.deleteSale(Integer.parseInt(saleIdTxt.getText()))).show();
+            loadTable();
+            navigateReset(null);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    @FXML
+    void navigateReset(ActionEvent event) {
+        saleIdTxt.clear();
+        quantityTxt.clear();
+        totalAmountTxt.clear();
+        discountTxt.clear();
+        netTotalTxt.clear();
+        customerIdCombo.setValue(null);
+        productIdCombo.setValue(null);
+        promotionIdCombo.setValue(null);
+        datePicker.setValue(LocalDate.now());
+        saleTable.getSelectionModel().clearSelection();
     }
 }

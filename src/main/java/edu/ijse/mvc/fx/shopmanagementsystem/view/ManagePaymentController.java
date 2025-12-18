@@ -4,10 +4,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.PaymentDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SaleDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.model.PaymentModel;
-import edu.ijse.mvc.fx.shopmanagementsystem.model.SaleModel;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SaleProductTM;
+import edu.ijse.mvc.fx.shopmanagementsystem.controller.PaymentController;
+import edu.ijse.mvc.fx.shopmanagementsystem.controller.SaleController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -15,8 +17,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ManagePaymentController {
 
-    private final PaymentModel paymentModel = new PaymentModel();
-    private final SaleModel saleModel = new SaleModel();
+    private final PaymentController paymentController = new PaymentController();
+    private final SaleController saleController = new SaleController();
 
     @FXML
     private TextField amountTxt;
@@ -37,7 +39,7 @@ public class ManagePaymentController {
     private TableColumn<PaymentDTO, String> colReference;
 
     @FXML
-    private TableColumn<PaymentDTO, String> colSaleId;
+    private TableColumn<PaymentDTO, Integer> colSaleId;
 
     @FXML
     private TableView<PaymentDTO> detailsTable;
@@ -55,10 +57,10 @@ public class ManagePaymentController {
     private TextField referenceTxt;
 
     @FXML
-    private ComboBox<String> saleIdCombo;
+    private ComboBox<Integer> saleIdCombo;
 
     @FXML
-    void initialize() {
+    void initialize() throws Exception {
         colPaymentId.setCellValueFactory(new PropertyValueFactory<>("paymentID"));
         colSaleId.setCellValueFactory(new PropertyValueFactory<>("saleID"));
         colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
@@ -67,7 +69,7 @@ public class ManagePaymentController {
         colReceivedAt.setCellValueFactory(new PropertyValueFactory<>("receivedAt"));
 
         loadTable();
-        loadSaleId();
+        loadSaleIdThread();
 
         detailsTable.setOnMouseClicked(event -> {
             if(event.getClickCount() == 1){
@@ -82,7 +84,7 @@ public class ManagePaymentController {
 
         if (selectedPayment != null){
             paymentIdTxt.setText(selectedPayment.getPaymentID());
-            saleIdCombo.setValue(selectedPayment.getSaleID());
+            saleIdCombo.setValue(Integer.valueOf(selectedPayment.getSaleID()));
             paymentMethodCombo.setValue(selectedPayment.getMethod());
             amountTxt.setText(String.valueOf(selectedPayment.getAmount()));
             referenceTxt.setText(selectedPayment.getReference());
@@ -93,26 +95,26 @@ public class ManagePaymentController {
     private void loadTable() {
         try {
             detailsTable.getItems().clear();
-            detailsTable.getItems().addAll(paymentModel.getAllPayments());
+            detailsTable.getItems().addAll(paymentController.getAllPayments());
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
 
-    @FXML
-    void loadSaleId() {
-        try {
-            ArrayList <SaleDTO> saleDTOS = saleModel.getAllSales();
-            ObservableList <String> list = FXCollections.observableArrayList();
 
-            for (SaleDTO saleDTO : saleDTOS){
-                list.add(saleDTO.getSaleID());
+    private void loadSaleIdThread() throws Exception{
+
+        Task <ObservableList<Integer>> task = new Task() {
+
+            ArrayList <SaleProductTM> sales = saleController.getAllSale();
+            @Override
+            protected Object call() throws Exception {
+                return FXCollections.observableArrayList(sales.stream().map(SaleProductTM::getSaleId).toList());
             }
-
-            saleIdCombo.setItems(list);
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-        }
+        };
+        task.setOnSucceeded(event -> saleIdCombo.setItems(task.getValue()));
+        task.setOnFailed(event -> new Alert(Alert.AlertType.ERROR,task.getMessage()).show());
+        new Thread(task).start();
     }
 
     @FXML
@@ -120,13 +122,13 @@ public class ManagePaymentController {
         try {
             PaymentDTO paymentDTO = new PaymentDTO(
                     null,
-                    saleIdCombo.getValue(),
+                    String.valueOf(saleIdCombo.getValue()),
                     paymentMethodCombo.getValue(),
                     Double.parseDouble(amountTxt.getText()),
                     referenceTxt.getText(),
                     datePicker.getValue()
             );
-            new Alert(Alert.AlertType.INFORMATION, paymentModel.savePayment(paymentDTO)).show();
+            new Alert(Alert.AlertType.INFORMATION, paymentController.savePayment(paymentDTO)).show();
             navigateReset(event);
             loadTable();
         } catch (Exception e) {
@@ -139,13 +141,13 @@ public class ManagePaymentController {
         try {
             PaymentDTO paymentDTO = new PaymentDTO(
                     paymentIdTxt.getText(),
-                    saleIdCombo.getValue(),
+                    String.valueOf(saleIdCombo.getValue()),
                     paymentMethodCombo.getValue(),
                     Double.parseDouble(amountTxt.getText()),
                     referenceTxt.getText(),
                     datePicker.getValue()
             );
-            new Alert(Alert.AlertType.INFORMATION, paymentModel.updatePayment(paymentDTO)).show();
+            new Alert(Alert.AlertType.INFORMATION, paymentController.updatePayment(paymentDTO)).show();
             navigateReset(event);
             loadTable();
         } catch (Exception e) {
@@ -156,7 +158,7 @@ public class ManagePaymentController {
     @FXML
     void navigateDelete(ActionEvent event) {
         try {
-            new Alert(Alert.AlertType.INFORMATION, paymentModel.deletePayment(paymentIdTxt.getText())).show();
+            new Alert(Alert.AlertType.INFORMATION, paymentController.deletePayment(paymentIdTxt.getText())).show();
             navigateReset(event);
             loadTable();
         } catch (Exception e) {

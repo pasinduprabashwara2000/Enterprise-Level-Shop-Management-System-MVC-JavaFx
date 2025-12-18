@@ -2,12 +2,14 @@ package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SaleDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SaleProductTM;
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.UserDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.ReturnController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.SaleController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.UserController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -34,7 +36,7 @@ public class ManageReturnController {
     private TableColumn<ReturnDTO, String> colReturnID;
 
     @FXML
-    private TableColumn<ReturnDTO, String> colSaleID;
+    private TableColumn<ReturnDTO, Integer> colSaleID;
 
     @FXML
     private TableColumn<ReturnDTO, String> colStatus;
@@ -61,7 +63,7 @@ public class ManageReturnController {
     private TableView<ReturnDTO> returnTable;
 
     @FXML
-    private ComboBox<String> saleIdCombo;
+    private ComboBox<Integer> saleIdCombo;
 
     @FXML
     private Button saveBtn;
@@ -73,7 +75,7 @@ public class ManageReturnController {
     private Button updateBtn;
 
     @FXML
-    private void initialize(){
+    private void initialize() throws Exception {
         colReturnID.setCellValueFactory(new PropertyValueFactory<>("returnID"));
         colSaleID.setCellValueFactory(new PropertyValueFactory<>("saleID"));
         colProccesedBy.setCellValueFactory(new PropertyValueFactory<>("processedBy"));
@@ -82,8 +84,8 @@ public class ManageReturnController {
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         loadTable();
-        loadSaleId();
-        loadUserId();
+        loadSaleIdThread();
+        loadUserIdThread();
 
         returnTable.setOnMouseClicked(event -> {
             if(event.getClickCount() == 1){
@@ -99,7 +101,7 @@ public class ManageReturnController {
 
        if(returnDTO != null){
               returnIDTxt.setText(returnDTO.getReturnID());
-              saleIdCombo.setValue(returnDTO.getSaleID());
+              saleIdCombo.setValue(Integer.valueOf(returnDTO.getSaleID()));
               userIdCombo.setValue(returnDTO.getProcessedBy());
               returnDatePicker.setValue(returnDTO.getReturnDateTime());
               reasonTxt.setText(returnDTO.getReason());
@@ -117,37 +119,35 @@ public class ManageReturnController {
         }
     }
 
-    @FXML
-    void loadSaleId() {
-        try {
-            ArrayList <SaleDTO> saleDTOS = saleController.getAllSales();
-            ObservableList <String> list = FXCollections.observableArrayList();
 
-            for (SaleDTO saleDTO : saleDTOS){
-                list.add(saleDTO.getSaleID());
+    private void loadSaleIdThread() throws Exception{
+
+        Task<ObservableList<Integer>> task = new Task(){
+
+            ArrayList <SaleProductTM> sales = saleController.getAllSale();
+            @Override
+            protected Object call() throws Exception {
+                return FXCollections.observableArrayList(sales.stream().map(SaleProductTM::getSaleId).toList());
             }
-
-            saleIdCombo.setItems(list);
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-        }
+        };
+        task.setOnSucceeded(event -> saleIdCombo.setItems(task.getValue()));
+        task.setOnFailed(event -> new Alert(Alert.AlertType.ERROR, task.getMessage()).show());
+        new Thread(task).start();
     }
 
-    @FXML
-    void loadUserId(){
-        try {
-            ArrayList <UserDTO> userDTOS = userController.getAllUsers();
-            ObservableList <String> list = FXCollections.observableArrayList();
+   private void loadUserIdThread() throws Exception{
 
-            for (UserDTO userDTO : userDTOS){
-                list.add(userDTO.getUserID());
+        Task <ObservableList<String>> task = new Task() {
+            ArrayList <UserDTO> users = userController.getAllUsers();
+            @Override
+            protected Object call() throws Exception {
+                return FXCollections.observableArrayList(users.stream().map(UserDTO::getUserID).toList());
             }
-
-            userIdCombo.setItems(list);
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-        }
-    }
+        };
+        task.setOnSucceeded(event -> userIdCombo.setItems(task.getValue()));
+        task.setOnFailed(event -> new Alert(Alert.AlertType.ERROR,task.getMessage()).show());
+        new Thread(task).start();
+   }
 
     @FXML
     void navigateDelete(ActionEvent event) {
@@ -176,7 +176,7 @@ public class ManageReturnController {
         try {
             ReturnDTO returnDTO = new ReturnDTO(
                     null,
-                    saleIdCombo.getValue(),
+                    String.valueOf(saleIdCombo.getValue()),
                     userIdCombo.getValue(),
                     returnDatePicker.getValue(),
                     reasonTxt.getText(),
@@ -196,7 +196,7 @@ public class ManageReturnController {
         try {
             ReturnDTO returnDTO = new ReturnDTO(
                     returnIDTxt.getText(),
-                    saleIdCombo.getValue(),
+                    String.valueOf(saleIdCombo.getValue()),
                     userIdCombo.getValue(),
                     returnDatePicker.getValue(),
                     reasonTxt.getText(),

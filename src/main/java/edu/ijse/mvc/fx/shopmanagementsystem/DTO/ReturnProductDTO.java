@@ -12,7 +12,7 @@ public class ReturnProductDTO {
     private String returnItemId;
     private String returnId;
     private String productId;
-    private String saleItemId;
+    private int saleItemId;
     private int quantity;
     private double refundAmount;
     private String action;

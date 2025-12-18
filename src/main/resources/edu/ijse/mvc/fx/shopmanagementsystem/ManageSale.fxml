@@ -11,60 +11,80 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="680.0" prefWidth="1075.0" styleClass="white-bg" stylesheets="@css/style2.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.ManageSaleController">
+
     <children>
-        <Label layoutX="33.0" layoutY="18.0" prefHeight="38.0" prefWidth="201.0" text="Manage Sales">
+
+        <Label layoutX="33.0" layoutY="18.0" text="Manage Sales">
             <font>
                 <Font name="System Bold" size="20.0" />
             </font>
         </Label>
 
         <TextField fx:id="saleIdTxt" managed="false" visible="false" />
-        <!-- Customer ID -->
-        <Label layoutX="34.0" layoutY="74.0" prefHeight="38.0" prefWidth="157.0" text="Customer ID : ">
+
+        <Label layoutX="34.0" layoutY="74.0" text="Customer ID :">
             <font><Font size="15.0" /></font>
         </Label>
+        <ComboBox fx:id="customerIdCombo" layoutX="206.0" layoutY="71.0" prefHeight="38.0" prefWidth="259.0" promptText="Select Customer ID" />
 
-        <!-- Sale Date -->
-        <Label layoutX="34.0" layoutY="131.0" prefHeight="38.0" prefWidth="157.0" text="Sale Date : ">
+        <Label layoutX="33.0" layoutY="134.0" text="Product ID :">
             <font><Font size="15.0" /></font>
         </Label>
+        <ComboBox fx:id="productIdCombo" layoutX="204.0" layoutY="130.0" prefHeight="38.0" prefWidth="259.0" promptText="Select Product ID" />
 
-        <!-- Total Amount -->
-        <Label layoutX="33.0" layoutY="186.0" prefHeight="38.0" prefWidth="157.0" text="Total Amount : ">
+        <Label layoutX="33.0" layoutY="193.0" text="Promotion ID :">
             <font><Font size="15.0" /></font>
         </Label>
-        <TextField fx:id="totalAmountTxt" layoutX="206.0" layoutY="185.0" prefHeight="38.0" prefWidth="259.0" />
+        <ComboBox fx:id="promotionIdCombo" layoutX="205.0" layoutY="192.0" prefHeight="38.0" prefWidth="259.0" promptText="Select Promotion ID" />
 
-        <!-- Discount -->
-        <Label layoutX="521.0" layoutY="71.0" prefHeight="38.0" prefWidth="157.0" text="Discount : ">
+        <Label layoutX="33.0" layoutY="260.0" text="Quantity :">
             <font><Font size="15.0" /></font>
         </Label>
-        <TextField fx:id="discountTxt" layoutX="650.0" layoutY="69.0" prefHeight="38.0" prefWidth="259.0" />
+        <TextField fx:id="quantityTxt" layoutX="205.0" layoutY="253.0" prefHeight="38.0" prefWidth="259.0" />
 
-        <!-- Net Total -->
-        <Label layoutX="521.0" layoutY="126.0" prefHeight="38.0" prefWidth="157.0" text="Net Total : ">
+        <Label layoutX="520.0" layoutY="74.0" text="Total Amount :">
             <font><Font size="15.0" /></font>
         </Label>
-        <TextField fx:id="netTotalTxt" layoutX="650.0" layoutY="124.0" onAction="#calculateTotal" prefHeight="38.0" prefWidth="259.0" />
+        <TextField fx:id="totalAmountTxt" layoutX="651.0" layoutY="74.0" prefHeight="38.0" prefWidth="259.0" />
 
-        <!-- Action Buttons -->
-        <Button fx:id="saveBtn" layoutX="236.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Save" />
-        <Button fx:id="updateBtn" layoutX="395.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Update" />
-        <Button fx:id="deleteBtn" layoutX="552.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateDelete" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Delete" />
-        <Button fx:id="resetBtn" layoutX="706.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateReset" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Reset" />
+        <Label layoutX="521.0" layoutY="131.0" text="Discount :">
+            <font><Font size="15.0" /></font>
+        </Label>
+        <TextField fx:id="discountTxt" layoutX="650.0" layoutY="131.0" prefHeight="38.0" prefWidth="259.0" />
 
-        <!-- TableView for Sale Records -->
-        <TableView fx:id="detailsTable" layoutX="33.0" layoutY="322.0" prefHeight="320.0" prefWidth="1003.0">
+        <Label layoutX="520.0" layoutY="189.0" text="Net Total :">
+            <font><Font size="15.0" /></font>
+        </Label>
+        <TextField fx:id="netTotalTxt" editable="false" layoutX="649.0" layoutY="189.0" prefHeight="38.0" prefWidth="259.0" />
+
+        <Label layoutX="521.0" layoutY="248.0" text="Sale Date :">
+            <font><Font size="15.0" /></font>
+        </Label>
+        <DatePicker fx:id="datePicker" layoutX="650.0" layoutY="248.0" prefHeight="38.0" prefWidth="259.0" />
+
+        <Button fx:id="saveBtn" layoutX="228.0" layoutY="321.0" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Save" />
+
+        <Button fx:id="updateBtn" layoutX="387.0" layoutY="321.0" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Update" />
+
+        <Button fx:id="deleteBtn" layoutX="544.0" layoutY="321.0" onAction="#navigateDelete" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Delete" />
+
+        <Button fx:id="resetBtn" layoutX="698.0" layoutY="321.0" onAction="#navigateReset" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Reset" />
+
+        <TableView fx:id="saleTable" layoutX="27.0" layoutY="384.0" prefHeight="274.0" prefWidth="1000.0">
+
             <columns>
-                <TableColumn fx:id="colSaleId" prefWidth="104.0" text="Sale ID" />
-                <TableColumn fx:id="colCustomerId" prefWidth="213.0" text="Customer ID" />
-                <TableColumn fx:id="colSaleDate" prefWidth="223.0" text="Sale Date" />
-                <TableColumn fx:id="colTotalAmount" prefWidth="223.0" text="Total Amount" />
-                <TableColumn fx:id="colDiscount" prefWidth="108.0" text="Discount" />
-                <TableColumn fx:id="colNetTotal" prefWidth="127.0" text="Net Total" />
+                <TableColumn fx:id="colSaleId" prefWidth="80.0" text="Sale ID" />
+                <TableColumn fx:id="colCustomerId" prefWidth="130.0" text="Customer ID" />
+                <TableColumn fx:id="colProductId" prefWidth="130.0" text="Product ID" />
+                <TableColumn fx:id="colPromotionId" prefWidth="130.0" text="Promotion ID" />
+                <TableColumn fx:id="colQty" prefWidth="70.0" text="QTY" />
+                <TableColumn fx:id="colTotalAmount" prefWidth="100.0" text="Total" />
+                <TableColumn fx:id="colDiscount" prefWidth="100.0" text="Discount" />
+                <TableColumn fx:id="colNetTotal" prefWidth="110.0" text="Net Total" />
+                <TableColumn fx:id="colSaleDate" prefWidth="150.0" text="Date" />
             </columns>
+
         </TableView>
-      <DatePicker fx:id="datePicker" layoutX="206.0" layoutY="130.0" prefHeight="38.0" prefWidth="259.0" />
-      <ComboBox fx:id="customerIdCombo" layoutX="206.0" layoutY="71.0" onAction="#loadCustomerId" prefHeight="38.0" prefWidth="259.0" promptText="Select Customer ID" />
+
     </children>
 </AnchorPane>

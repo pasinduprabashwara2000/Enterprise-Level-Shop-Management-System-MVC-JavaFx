@@ -7,8 +7,8 @@ public class LoginController {
 
     private final LoginModel loginModel = new LoginModel();
 
-    public LoginDTO login(LoginDTO loginDTO) throws Exception{
-        return loginModel.findByUsernameAndPassword(loginDTO);
+    public LoginDTO login(String username, String password) throws Exception{
+        return loginModel.findByUsernameAndPassword(username, password);
     }
 
 }

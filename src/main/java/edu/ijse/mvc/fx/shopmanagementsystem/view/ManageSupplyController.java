@@ -8,6 +8,7 @@ import edu.ijse.mvc.fx.shopmanagementsystem.controller.SupplierController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.SupplyController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -78,9 +79,9 @@ public class ManageSupplyController {
         colLastCost.setCellValueFactory(new PropertyValueFactory<>("lastCost"));
         colSupplierProductCode.setCellValueFactory(new PropertyValueFactory<>("supplierProductCode"));
 
-        loadTable();
-        loadProductId();
-        loadSupplierId();
+        loadTableThread();
+        loadProductIdThread();
+        loadSupplierIdThread();
 
         detailsTable.setOnMouseClicked(event -> {
             if(event.getClickCount() == 1){
@@ -90,13 +91,16 @@ public class ManageSupplyController {
 
     }
 
-    public void loadTable(){
-        try {
-            detailsTable.getItems().clear();
-            detailsTable.getItems().addAll(supplyController.getAllSupplies());
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-        }
+    private void loadTableThread(){
+        Task <ObservableList<SupplyDTO>> task = new Task<ObservableList<SupplyDTO>>() {
+            @Override
+            protected ObservableList<SupplyDTO> call() throws Exception {
+                return FXCollections.observableArrayList(supplyController.getAllSupplies());
+            }
+        };
+        task.setOnSucceeded(event -> detailsTable.setItems(task.getValue()));
+        task.setOnFailed(event -> new Alert(Alert.AlertType.ERROR,task.getMessage()).show());
+        new Thread(task).start();
     }
 
     private void loadSelectedRow(){
@@ -109,44 +113,70 @@ public class ManageSupplyController {
             supplierCodeTxt.setText(selectedSupply.getSupplierProductCode());
         }
 
-
-
      }
 
-    @FXML
-    void loadProductId() {
-        try {
-            ArrayList <ProductDTO> productDTOS = productController.getAllProducts();
-            ObservableList <String> list = FXCollections.observableArrayList();
-            for (ProductDTO productDTO : productDTOS){
-                list.add(productDTO.getProductID());
+    private void loadProductIdThread() {
+
+        Task<ObservableList<String>> task = new Task<ObservableList<String>>() {
+            @Override
+            protected ObservableList<String> call() throws Exception {
+
+                ArrayList<ProductDTO> productDTOS = productController.getAllProducts();
+                return FXCollections.observableArrayList(
+                        productDTOS.stream()
+                                .map(ProductDTO::getProductID)
+                                .toList()
+                );
             }
-            productIdCombo.setItems(list);
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-        }
+        };
+
+        task.setOnSucceeded(event -> {
+            productIdCombo.setItems(task.getValue());
+        });
+
+        task.setOnFailed(event -> {
+            new Alert(Alert.AlertType.ERROR, task.getException().getMessage()).show();
+        });
+        new Thread(task).start();
     }
 
-    @FXML
-    void loadSupplierId() {
-        try {
-            ArrayList <SupplierDTO> supplyDTOS = supplierController.getAllSuppliers();
-            ObservableList <String> list = FXCollections.observableArrayList();
-            for (SupplierDTO supplierDTO : supplyDTOS){
-                list.add(supplierDTO.getSupplierID());
+    private void loadSupplierIdThread() {
+
+        Task<ObservableList<String>> task = new Task<>() {
+
+            @Override
+            protected ObservableList<String> call() throws Exception {
+                ArrayList<SupplierDTO> suppliers =
+                        supplierController.getAllSuppliers();
+
+                return FXCollections.observableArrayList(
+                        suppliers.stream()
+                                .map(SupplierDTO::getSupplierID)
+                                .toList()
+                );
             }
-            supplierIdCombo.setItems(list);
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-        }
+        };
+
+        task.setOnSucceeded(event ->
+                supplierIdCombo.setItems(task.getValue())
+        );
+
+        task.setOnFailed(event ->
+                new Alert(
+                        Alert.AlertType.ERROR,
+                        task.getException().getMessage()
+                ).show()
+        );
+        new Thread(task).start();
     }
+
 
     @FXML
     void navigateDelete(ActionEvent event) {
         try {
             String rsp = supplyController.deleteSupply(productIdCombo.getValue(), supplierIdCombo.getValue());
             new Alert(Alert.AlertType.INFORMATION, rsp).show();
-            loadTable();
+            loadTableThread();
             navigateReset(event);
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -174,7 +204,7 @@ public class ManageSupplyController {
             );
             String rsp = supplyController.saveSupply(supplyDTO);
             new Alert(Alert.AlertType.INFORMATION,rsp).show();
-            loadTable();
+            loadTableThread();
             navigateReset(event);
         } catch (Exception e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -192,7 +222,7 @@ public class ManageSupplyController {
             );
             String rsp = supplyController.updateSupply(supplyDTO);
             new Alert(Alert.AlertType.INFORMATION, rsp).show();
-            loadTable();
+            loadTableThread();
             navigateReset(event);
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();;

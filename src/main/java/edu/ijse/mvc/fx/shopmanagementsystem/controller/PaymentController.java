@@ -24,7 +24,7 @@ public class PaymentController {
         return paymentModel.searchPayment(paymentId);
     }
 
-    ArrayList<PaymentDTO> getAllPayments() throws Exception {
+    public ArrayList<PaymentDTO> getAllPayments() throws Exception {
         return paymentModel.getAllPayments();
     }
 
