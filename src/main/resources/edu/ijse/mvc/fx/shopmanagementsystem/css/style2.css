@@ -1,3 +1,8 @@
+.anchor-pane {
+    -fx-background-color: #fff;
+    -fx-background-radius: 16px;
+}
+
 .text-field {
     -fx-background-color: #ffffff;
     -fx-border-color: #bdc3c7;
@@ -69,10 +74,6 @@
 
 #resetBtn:hover {
     -fx-background-color: #7f8c8d;
-}
-
-.white-bg {
-    -fx-background-color: #fff;
 }
 
 .table-wrapper {

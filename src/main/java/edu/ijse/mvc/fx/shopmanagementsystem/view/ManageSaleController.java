@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -20,6 +21,9 @@ public class ManageSaleController {
     private final CustomerController customerController = new CustomerController();
     private final ProductController productController = new ProductController();
     private final PromotionController promotionController = new PromotionController();
+
+    @FXML
+    private AnchorPane anchorPane;
 
     @FXML
     private TableView<SaleProductTM> saleTable;

@@ -14,6 +14,9 @@ public class ManageMainMenu2Controller {
     private AnchorPane contentPane;
 
     @FXML
+    private Button dashboardBtn;
+
+    @FXML
     private Button searchProducts;
 
     @FXML
@@ -36,6 +39,7 @@ public class ManageMainMenu2Controller {
 
     @FXML
     public void initialize() {
+        dashboardBtn.setOnAction(event -> loadUI("Dashboard2"));
         placeOrderBtn.setOnAction(event -> loadUI("ManagePlaceOrder"));
         searchProducts.setOnAction(event -> loadUI("ManageProducts2"));
         customerBtn.setOnAction(event -> loadUI("ManageCustomer"));

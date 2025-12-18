@@ -18,31 +18,6 @@
     -fx-effect: dropshadow(gaussian, rgba(9,140,83,0.3), 8, 0.3, 0, 0);
 }
 
-.yellow-btn {
-    -fx-background-color: #f5c32c;
-    -fx-text-fill: white;
-    -fx-background-radius: 8px;
-    -fx-padding: 8px 18px;
-}
-
-.yellow-btn:hover {
-    -fx-background-color: #e6b21a;
-}
-
-.light-yellow-btn {
-    -fx-background-color: #fff176;
-    -fx-text-fill: #333333;
-    -fx-background-radius: 8px;
-    -fx-padding: 8px 18px;
-    -fx-font-weight: bold;
-    -fx-font-size: 14px;
-}
-
-.light-yellow-btn:hover {
-    -fx-background-color: #fdd835;
-    -fx-cursor: hand;
-}
-
 .success-btn {
     -fx-background-color: #26c45b;
     -fx-text-fill: white;
