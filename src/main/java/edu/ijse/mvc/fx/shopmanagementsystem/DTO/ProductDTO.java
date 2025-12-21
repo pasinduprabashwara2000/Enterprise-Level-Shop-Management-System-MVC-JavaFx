@@ -15,7 +15,6 @@ public class ProductDTO {
     private String name;
     private String unit;
     private double unitPrice;
-    private double taxRate;
     private boolean active;
     private String categoryID;
 

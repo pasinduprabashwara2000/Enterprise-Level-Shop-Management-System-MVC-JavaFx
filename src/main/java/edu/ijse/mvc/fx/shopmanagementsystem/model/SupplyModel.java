@@ -15,8 +15,7 @@ public class SupplyModel {
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, supplyDTO.getProductID());
         pstm.setString(2, supplyDTO.getSupplierID());
-        pstm.setDouble(3, supplyDTO.getLastCost());
-        pstm.setString(4, supplyDTO.getSupplierProductCode());
+        pstm.setString(3, supplyDTO.getSupplierProductCode());
 
         return pstm.executeUpdate() > 0 ? "Supply Saved Successfully" : "Supply Save Failed";
 
@@ -25,12 +24,11 @@ public class SupplyModel {
     public String updateSupply(SupplyDTO supplyDTO) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "UPDATE Supply SET lastCost=?, supplierProductCode=? WHERE productID=? AND supplierID=?";
+        String sql = "UPDATE Supply SET supplierProductCode=? WHERE productID=? AND supplierID=?";
         PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setDouble(1, supplyDTO.getLastCost());
-        pstm.setString(2, supplyDTO.getSupplierProductCode());
-        pstm.setString(3, supplyDTO.getProductID());
-        pstm.setString(4, supplyDTO.getSupplierID());
+        pstm.setString(1, supplyDTO.getSupplierProductCode());
+        pstm.setString(2, supplyDTO.getProductID());
+        pstm.setString(3, supplyDTO.getSupplierID());
 
         return pstm.executeUpdate() > 0 ? "Supply Updated Successfully" : "Supply Update Failed";
 
@@ -58,7 +56,6 @@ public class SupplyModel {
             return new SupplyDTO(
                     rst.getString("productID"),
                     rst.getString("supplierID"),
-                    rst.getDouble("lastCost"),
                     rst.getString("supplierProductCode")
             );
         }
@@ -78,7 +75,6 @@ public class SupplyModel {
             supplyList.add(new SupplyDTO(
                     rst.getString("productID"),
                     rst.getString("supplierID"),
-                    rst.getDouble("lastCost"),
                     rst.getString("supplierProductCode")
             ));
         }

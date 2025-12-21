@@ -40,12 +40,6 @@ public class ManageSupplyController {
     private TableView<SupplyDTO> detailsTable;
 
     @FXML
-    private Label lastCostLabel;
-
-    @FXML
-    private TextField lastCostTxt;
-
-    @FXML
     private Label productIDLabel;
 
     @FXML
@@ -76,7 +70,6 @@ public class ManageSupplyController {
     public void initialize(){
         colProductId.setCellValueFactory(new PropertyValueFactory<>("productID"));
         colSupplierId.setCellValueFactory(new PropertyValueFactory<>("supplierID"));
-        colLastCost.setCellValueFactory(new PropertyValueFactory<>("lastCost"));
         colSupplierProductCode.setCellValueFactory(new PropertyValueFactory<>("supplierProductCode"));
 
         loadTableThread();
@@ -109,7 +102,6 @@ public class ManageSupplyController {
         if(selectedSupply != null){
             supplierIdCombo.setValue(selectedSupply.getSupplierID());
             productIdCombo.setValue(selectedSupply.getProductID());
-            lastCostTxt.setText(String.valueOf(selectedSupply.getLastCost()));
             supplierCodeTxt.setText(selectedSupply.getSupplierProductCode());
         }
 
@@ -188,7 +180,6 @@ public class ManageSupplyController {
     void navigateReset(ActionEvent event) {
         productIdCombo.setValue(null);
         supplierIdCombo.setValue(null);
-        lastCostTxt.setText("");
         supplierCodeTxt.setText("");
 
     }
@@ -199,7 +190,6 @@ public class ManageSupplyController {
             SupplyDTO supplyDTO = new SupplyDTO(
                     productIdCombo.getValue(),
                     supplierIdCombo.getValue(),
-                    Double.parseDouble(lastCostTxt.getText()),
                     supplierCodeTxt.getText()
             );
             String rsp = supplyController.saveSupply(supplyDTO);
@@ -217,7 +207,6 @@ public class ManageSupplyController {
             SupplyDTO supplyDTO = new SupplyDTO(
                     productIdCombo.getValue(),
                     supplierIdCombo.getValue(),
-                    Double.parseDouble(lastCostTxt.getText()),
                     supplierCodeTxt.getText()
             );
             String rsp = supplyController.updateSupply(supplyDTO);

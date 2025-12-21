@@ -11,7 +11,6 @@ public class SupplyDTO {
 
     private String productID;
     private String supplierID;
-    private double lastCost;
     private String supplierProductCode;
 
 }

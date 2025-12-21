@@ -16,11 +16,29 @@ import java.util.ArrayList;
 
 public class ManageInventoryController {
 
-    final private InventoryController inventoryController = new InventoryController();
-    final private ProductController productController = new ProductController();
+    private final InventoryController inventoryController = new InventoryController();
+    private final ProductController productController = new ProductController();
 
     @FXML
-    private TableColumn<InventoryDTO, LocalDate> colLastStockUpdate;
+    private TextField inventoryID;
+
+    @FXML
+    private ComboBox<String> productIdCombo;
+
+    @FXML
+    private TextField qytTxt;
+
+    @FXML
+    private TextField reOrderLevelTxt;
+
+    @FXML
+    private TextField reOrderQytTxt;
+
+    @FXML
+    private DatePicker datePicker;
+
+    @FXML
+    private TableView<InventoryDTO> detailsTabel;
 
     @FXML
     private TableColumn<InventoryDTO, String> colProductId;
@@ -35,43 +53,7 @@ public class ManageInventoryController {
     private TableColumn<InventoryDTO, Integer> colReorderQYT;
 
     @FXML
-    private DatePicker datePicker;
-
-    @FXML
-    private Button deleteBtn;
-
-    @FXML
-    private TableView<InventoryDTO> detailsTabel;
-
-    @FXML
-    private Label idLabel;
-
-    @FXML
-    private ComboBox<String> productIdCombo;
-
-    @FXML
-    private Label loyaltyCodeLabel;
-
-    @FXML
-    private Label qytLabel;
-
-    @FXML
-    private TextField qytTxt;
-
-    @FXML
-    private Label reOrderLevelLabel;
-
-    @FXML
-    private TextField reOrderLevelTxt;
-
-    @FXML
-    private Label reOrderQYTLabel;
-
-    @FXML
-    private TextField reOrderQytTxt;
-
-    @FXML
-    private Button resetBtn;
+    private TableColumn<InventoryDTO, LocalDate> colLastStockUpdate;
 
     @FXML
     private Button saveBtn;
@@ -80,120 +62,126 @@ public class ManageInventoryController {
     private Button updateBtn;
 
     @FXML
-    public void initialize(){
+    private Button deleteBtn;
+
+    @FXML
+    private Button resetBtn;
+
+    @FXML
+    public void initialize() {
         colProductId.setCellValueFactory(new PropertyValueFactory<>("productID"));
         colQYT.setCellValueFactory(new PropertyValueFactory<>("QYT"));
         colReorderLevel.setCellValueFactory(new PropertyValueFactory<>("reOrderLevel"));
         colReorderQYT.setCellValueFactory(new PropertyValueFactory<>("reOrderQYT"));
         colLastStockUpdate.setCellValueFactory(new PropertyValueFactory<>("lastStockUpdate"));
-        
+
         loadTable();
-        loadProductId();
+        loadProductIds();
 
         detailsTabel.setOnMouseClicked(event -> {
-            if(event.getClickCount() == 1){
+            if (event.getClickCount() == 1) {
                 loadSelectedRow();
             }
         });
-
     }
 
-    private void loadSelectedRow(){
-
-        InventoryDTO selectedInventory = detailsTabel.getSelectionModel().getSelectedItem();
-        if(selectedInventory != null){
-            productIdCombo.setValue(selectedInventory.getProductID());
-            qytTxt.setText(String.valueOf(selectedInventory.getQYT()));
-            reOrderLevelTxt.setText(String.valueOf(selectedInventory.getReOrderLevel()));
-            reOrderQytTxt.setText(String.valueOf(selectedInventory.getQYT()));
-            datePicker.setValue(selectedInventory.getLastStockUpdate());
-        }
-
-    }
-
-    public void loadTable(){
+    private void loadTable() {
         try {
             detailsTabel.getItems().clear();
-            detailsTabel.getItems().addAll(inventoryController.getAllInventories());    
+            detailsTabel.getItems().addAll(inventoryController.getAllInventories());
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
-    @FXML
-    void loadProductId() {
+    private void loadProductIds() {
         try {
-            ArrayList <ProductDTO> productDTOS = productController.getAllProducts();
-            ObservableList <String> list = FXCollections.observableArrayList();
+            ArrayList<ProductDTO> products = productController.getAllProducts();
+            ObservableList<String> productIds = FXCollections.observableArrayList();
 
-            for (ProductDTO productDTO : productDTOS){
-                list.add(productDTO.getProductID());
+            for (ProductDTO product : products) {
+                productIds.add(product.getProductID());
             }
 
-            productIdCombo.setItems(list);
+            productIdCombo.setItems(productIds);
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
-
-    @FXML
-    void navigateDelete(ActionEvent event) {
-        try {
-            String res = inventoryController.deleteInventory(productIdCombo.getValue());
-            new Alert(Alert.AlertType.INFORMATION,res).show();
-            loadTable();
-            navigateReset(event);
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+    private void loadSelectedRow() {
+        InventoryDTO inventory = detailsTabel.getSelectionModel().getSelectedItem();
+        if (inventory != null) {
+            inventoryID.setText(inventory.getInventoryID());
+            productIdCombo.setValue(inventory.getProductID());
+            qytTxt.setText(String.valueOf(inventory.getQYT()));
+            reOrderLevelTxt.setText(String.valueOf(inventory.getReOrderLevel()));
+            reOrderQytTxt.setText(String.valueOf(inventory.getReOrderQYT()));
+            datePicker.setValue(inventory.getLastStockUpdate());
         }
-    }
-
-    @FXML
-    void navigateReset(ActionEvent event) {
-        productIdCombo.setValue(null);
-        qytTxt.clear();
-        reOrderLevelTxt.clear();
-        reOrderQytTxt.clear();
-        datePicker.setValue(null);
     }
 
     @FXML
     void navigateSave(ActionEvent event) {
         try {
-            InventoryDTO inventoryDTO = new InventoryDTO(
+            InventoryDTO dto = new InventoryDTO(
+                    null,
                     productIdCombo.getValue(),
                     Integer.parseInt(qytTxt.getText()),
                     Integer.parseInt(reOrderLevelTxt.getText()),
                     Integer.parseInt(reOrderQytTxt.getText()),
                     datePicker.getValue()
             );
-            String res = inventoryController.saveInventory(inventoryDTO);
-            new Alert(Alert.AlertType.INFORMATION,res).show();
+
+            String response = inventoryController.saveInventory(dto);
+            new Alert(Alert.AlertType.INFORMATION, response).show();
             loadTable();
             navigateReset(event);
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
     @FXML
     void navigateUpdate(ActionEvent event) {
         try {
-            InventoryDTO inventoryDTO = new InventoryDTO(
-                   productIdCombo.getValue(),
+            InventoryDTO dto = new InventoryDTO(
+                    inventoryID.getText(),
+                    productIdCombo.getValue(),
                     Integer.parseInt(qytTxt.getText()),
                     Integer.parseInt(reOrderLevelTxt.getText()),
                     Integer.parseInt(reOrderQytTxt.getText()),
                     datePicker.getValue()
             );
-            String res = inventoryController.updateInventory(inventoryDTO);
-            new Alert(Alert.AlertType.INFORMATION,res).show();
+
+            String response = inventoryController.updateInventory(dto);
+            new Alert(Alert.AlertType.INFORMATION, response).show();
             loadTable();
             navigateReset(event);
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
+    @FXML
+    void navigateDelete(ActionEvent event) {
+        try {
+            String response = inventoryController.deleteInventory(inventoryID.getText());
+            new Alert(Alert.AlertType.INFORMATION, response).show();
+            loadTable();
+            navigateReset(event);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    @FXML
+    void navigateReset(ActionEvent event) {
+        inventoryID.clear();
+        productIdCombo.setValue(null);
+        qytTxt.clear();
+        reOrderLevelTxt.clear();
+        reOrderQytTxt.clear();
+        datePicker.setValue(null);
+    }
 }

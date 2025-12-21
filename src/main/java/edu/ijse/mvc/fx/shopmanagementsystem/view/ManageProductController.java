@@ -47,9 +47,6 @@ public class ManageProductController {
     private TableColumn<ProductDTO, String> colSKU;
 
     @FXML
-    private TableColumn<ProductDTO, Double> colTaxRate;
-
-    @FXML
     private TableColumn<ProductDTO, String> colUnit;
 
     @FXML
@@ -68,9 +65,6 @@ public class ManageProductController {
     private TextField skuTxt;
 
     @FXML
-    private TextField taxRateTxt;
-
-    @FXML
     private TextField unitPriceTxt;
 
     @FXML
@@ -84,7 +78,6 @@ public class ManageProductController {
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colUnit.setCellValueFactory(new PropertyValueFactory<>("unit"));
         colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
-        colTaxRate.setCellValueFactory(new PropertyValueFactory<>("taxRate"));
         colActive.setCellValueFactory(new PropertyValueFactory<>("active"));
         colCategoryID.setCellValueFactory(new PropertyValueFactory<>("categoryID"));
 
@@ -107,7 +100,6 @@ public class ManageProductController {
             nameTxt.setText(p.getName());
             unitTxt.setText(p.getUnit());
             unitPriceTxt.setText(String.valueOf(p.getUnitPrice()));
-            taxRateTxt.setText(String.valueOf(p.getTaxRate()));
             activeChk.setSelected(p.isActive());
             categoryCombo.setValue(p.getCategoryID());
         }
@@ -150,7 +142,6 @@ public class ManageProductController {
                     nameTxt.getText(),
                     unitTxt.getText(),
                     Double.parseDouble(unitPriceTxt.getText()),
-                    Double.parseDouble(taxRateTxt.getText()),
                     activeChk.isSelected(),
                     categoryCombo.getValue()
             );
@@ -173,7 +164,6 @@ public class ManageProductController {
                     nameTxt.getText(),
                     unitTxt.getText(),
                     Double.parseDouble(unitPriceTxt.getText()),
-                    Double.parseDouble(taxRateTxt.getText()),
                     activeChk.isSelected(),
                     categoryCombo.getValue()
             );
@@ -206,7 +196,6 @@ public class ManageProductController {
         nameTxt.clear();
         unitTxt.clear();
         unitPriceTxt.clear();
-        taxRateTxt.clear();
         activeChk.setSelected(false);
         categoryCombo.setValue(null);
     }

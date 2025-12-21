@@ -47,25 +47,16 @@ public class ManageMainMenuController {
     private Button purchaseOrderBtn;
 
     @FXML
-    private Button purchaseOrderProductBtn;
-
-    @FXML
     private Button reportsBtn;
 
     @FXML
     private Button returnBtn;
 
     @FXML
-    private Button returnproductBtn;
-
-    @FXML
     private Button roleBtn;
 
     @FXML
-    private Button saleBtn;
-
-    @FXML
-    private Button saleProductBtn;
+    private Button orderBtn;
 
     @FXML
     private Button suppliersBtn;
@@ -91,12 +82,10 @@ public class ManageMainMenuController {
         suppliersBtn.setOnAction(e -> loadUI("ManageSupplier"));
         supplyBtn.setOnAction(event -> loadUI("ManageSupply"));
         promotionBtn.setOnAction(event -> loadUI("ManagePromotion"));
-        saleBtn.setOnAction(event -> loadUI("ManageSale"));
+        orderBtn.setOnAction(event -> loadUI("ManageOrder"));
         paymentBtn.setOnAction(event -> loadUI("ManagePayment"));
         returnBtn.setOnAction(event -> loadUI("ManageReturn"));
-        returnproductBtn.setOnAction(event -> loadUI("ManageReturnProduct"));
         purchaseOrderBtn.setOnAction(event -> loadUI("ManagePurchaseOrder"));
-        purchaseOrderProductBtn.setOnAction(event -> loadUI("ManagePurchaseOrderProduct"));
         reportsBtn.setOnAction(event -> loadUI("ManageReports"));
 
     }

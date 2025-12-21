@@ -13,10 +13,10 @@ public class PaymentModel {
     public String savePayment(PaymentDTO dto) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO Payment (sale_id, method, amount, reference, received_at) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Payment (customer_id, method, amount, reference, received_at) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement ps = connection.prepareStatement(sql);
 
-        ps.setString(1, dto.getSaleID());
+        ps.setString(1, dto.getCustomerID());
         ps.setString(2, dto.getMethod());
         ps.setDouble(3, dto.getAmount());
         ps.setString(4, dto.getReference());
@@ -30,10 +30,10 @@ public class PaymentModel {
     public String updatePayment(PaymentDTO dto) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "UPDATE Payment SET sale_id = ?, method = ?, amount = ?, reference = ?, received_at = ? WHERE payment_id = ?";
+        String sql = "UPDATE Payment SET customer_id = ?, method = ?, amount = ?, reference = ?, received_at = ? WHERE payment_id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
 
-        ps.setString(1, dto.getSaleID());
+        ps.setString(1, dto.getCustomerID());
         ps.setString(2, dto.getMethod());
         ps.setDouble(3, dto.getAmount());
         ps.setString(4, dto.getReference());
@@ -69,7 +69,7 @@ public class PaymentModel {
         return rs.next()
                 ? new PaymentDTO(
                 rs.getString("payment_id"),
-                rs.getString("sale_id"),
+                rs.getString("customer_id"),
                 rs.getString("method"),
                 rs.getDouble("amount"),
                 rs.getString("reference"),
@@ -89,7 +89,7 @@ public class PaymentModel {
         while (rs.next()) {
             list.add(new PaymentDTO(
                     rs.getString("payment_id"),
-                    rs.getString("sale_id"),
+                    rs.getString("customer_id"),
                     rs.getString("method"),
                     rs.getDouble("amount"),
                     rs.getString("reference"),

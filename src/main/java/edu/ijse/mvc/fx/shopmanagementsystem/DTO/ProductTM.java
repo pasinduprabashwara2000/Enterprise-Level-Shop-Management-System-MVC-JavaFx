@@ -16,7 +16,6 @@ public class ProductTM {
     private String unit;
     private double unitPrice;
     private int qty;
-    private double taxRate;
     private boolean active;
     private String categoryID;
 

@@ -1,92 +1,85 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.model;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.util.ArrayList;
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.InventoryDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.db.DBConnection;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
 public class InventoryModel {
 
-    public String saveInventory(InventoryDTO inventoryDTO) throws Exception {
+    public String saveInventory(InventoryDTO dto) throws Exception {
+        Connection connection = DBConnection.getInstance().getConnection();
+        String sql = "INSERT INTO Inventory (productID, QYT, reOrderLevel, reOrderQYT, lastStockUpdate) VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement pst = connection.prepareStatement(sql);
+        pst.setString(1, dto.getProductID());
+        pst.setInt(2, dto.getQYT());
+        pst.setInt(3, dto.getReOrderLevel());
+        pst.setInt(4, dto.getReOrderQYT());
+        pst.setDate(5, java.sql.Date.valueOf(dto.getLastStockUpdate()));
 
-        Connection conn = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO Inventory (QYT, reOrderLevel, reOrderQYT, lastStockUpdate) VALUES (?,?,?,?)";
-        PreparedStatement pstm = conn.prepareStatement(sql);
-        pstm.setInt(1, inventoryDTO.getQYT());
-        pstm.setInt(2, inventoryDTO.getReOrderLevel());
-        pstm.setInt(3, inventoryDTO.getReOrderQYT());
-        pstm.setDate(4, Date.valueOf(inventoryDTO.getLastStockUpdate()));
-
-        return pstm.executeUpdate() > 0 ? "Inventory Saved Successfully" : "Inventory Save Failed";
-    
+        return pst.executeUpdate() > 0 ? "Inventory saved successfully" : "Failed to save inventory";
     }
 
-    public String updateInventory(InventoryDTO inventoryDTO) throws Exception {
+    public String updateInventory(InventoryDTO dto) throws Exception {
+        Connection connection = DBConnection.getInstance().getConnection();
+        String sql = "UPDATE Inventory SET productID=?, QYT=?, reOrderLevel=?, reOrderQYT=?, lastStockUpdate=? WHERE inventoryID=?";
+        PreparedStatement pst = connection.prepareStatement(sql);
+        pst.setString(1, dto.getProductID());
+        pst.setInt(2, dto.getQYT());
+        pst.setInt(3, dto.getReOrderLevel());
+        pst.setInt(4, dto.getReOrderQYT());
+        pst.setDate(5, java.sql.Date.valueOf(dto.getLastStockUpdate()));
+        pst.setString(6, dto.getInventoryID());
 
-        Connection conn = DBConnection.getInstance().getConnection();
-        String sql = "UPDATE Inventory SET QYT=?, reOrderLevel=?, reOrderQYT=?, lastStockUpdate=? WHERE productID=?";
-        PreparedStatement pstm = conn.prepareStatement(sql);
-        pstm.setInt(1, inventoryDTO.getQYT());
-        pstm.setInt(2, inventoryDTO.getReOrderLevel());
-        pstm.setInt(3, inventoryDTO.getReOrderQYT());
-        pstm.setDate(4, Date.valueOf(inventoryDTO.getLastStockUpdate()));
-        pstm.setString(5, inventoryDTO.getProductID());
-
-        return pstm.executeUpdate() > 0 ? "Inventory Updated Successfully" : "Inventory Update Failed";
-
+        return pst.executeUpdate() > 0 ? "Inventory updated successfully" : "Failed to update inventory";
     }
 
-    public String deleteInventory(String productID) throws Exception {
-
-        Connection conn = DBConnection.getInstance().getConnection();
-        String sql = "DELETE FROM Inventory WHERE productID=?";
-        PreparedStatement pstm = conn.prepareStatement(sql);
-        pstm.setString(1, productID);
-
-        return pstm.executeUpdate() > 0 ? "Inventory Deleted Successfully" : "Inventory Delete Failed";
-
+    public String deleteInventory(String inventoryID) throws Exception {
+        Connection connection = DBConnection.getInstance().getConnection();
+        String sql = "DELETE FROM Inventory WHERE inventoryID=?";
+        PreparedStatement pst = connection.prepareStatement(sql);
+        pst.setString(1, inventoryID);
+        return pst.executeUpdate() > 0 ? "Inventory deleted successfully" : "Failed to delete inventory";
     }
 
-    public InventoryDTO searchInventory(String productID) throws Exception {
-
-        Connection conn = DBConnection.getInstance().getConnection();
-        String sql = "SELECT * FROM Inventory WHERE productID=?";
-        PreparedStatement pstm = conn.prepareStatement(sql);
-        pstm.setString(1, productID);
-        var rst = pstm.executeQuery();
-        if (rst.next()) {
+    public InventoryDTO searchInventory(String inventoryID) throws Exception {
+        Connection connection = DBConnection.getInstance().getConnection();
+        String sql = "SELECT * FROM Inventory WHERE inventoryID=?";
+        PreparedStatement pst = connection.prepareStatement(sql);
+        pst.setString(1, inventoryID);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
             return new InventoryDTO(
-                    rst.getString("productID"),
-                    rst.getInt("QYT"),
-                    rst.getInt("reOrderLevel"),
-                    rst.getInt("reOrderQYT"),
-                    rst.getDate("lastStockUpdate").toLocalDate()
+                    rs.getString("inventoryID"),
+                    rs.getString("productID"),
+                    rs.getInt("QYT"),
+                    rs.getInt("reOrderLevel"),
+                    rs.getInt("reOrderQYT"),
+                    rs.getDate("lastStockUpdate").toLocalDate()
             );
         }
         return null;
-
     }
 
     public ArrayList<InventoryDTO> getAllInventories() throws Exception {
-
-        Connection conn = DBConnection.getInstance().getConnection();
+        Connection connection = DBConnection.getInstance().getConnection();
         String sql = "SELECT * FROM Inventory";
-        PreparedStatement pstm = conn.prepareStatement(sql);
-        var rst = pstm.executeQuery();
-        ArrayList<InventoryDTO> allInventories = new ArrayList<>();
-        while (rst.next()) {
-            allInventories.add(new InventoryDTO(
-                    rst.getString("productID"),
-                    rst.getInt("QYT"),
-                    rst.getInt("reOrderLevel"),
-                    rst.getInt("reOrderQYT"),
-                    rst.getDate("lastStockUpdate").toLocalDate()
+        PreparedStatement pst = connection.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+        ArrayList<InventoryDTO> inventories = new ArrayList<>();
+        while (rs.next()) {
+            inventories.add(new InventoryDTO(
+                    rs.getString("inventoryID"),
+                    rs.getString("productID"),
+                    rs.getInt("QYT"),
+                    rs.getInt("reOrderLevel"),
+                    rs.getInt("reOrderQYT"),
+                    rs.getDate("lastStockUpdate").toLocalDate()
             ));
         }
-        return allInventories;
-
+        return inventories;
     }
-
 }

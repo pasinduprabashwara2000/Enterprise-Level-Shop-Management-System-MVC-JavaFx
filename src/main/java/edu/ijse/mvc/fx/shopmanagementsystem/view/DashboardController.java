@@ -89,7 +89,7 @@ public class DashboardController {
         loadProductsCount();
         loadSaleCount();
         loadSupplerCount();
-        loadPurchaseCount();
+        loadInventoryCount();
         loadReturnCount();
         loadTotalRevenue();
     }
@@ -139,12 +139,12 @@ public class DashboardController {
         }
     }
 
-    public void loadPurchaseCount(){
+    public void loadInventoryCount(){
         try {
-            int count = DashboardModel.getPurchaseOrdersCount();
-            lblPurchaseOrders.setText(String.valueOf(count));
+            int count = DashboardModel.getInventoryCount();
+            lblInventoryCount.setText(String.valueOf(count));
         } catch (Exception e) {
-            lblPurchaseOrders.setText("Error");
+            lblInventoryCount.setText("Error");
         }
     }
 

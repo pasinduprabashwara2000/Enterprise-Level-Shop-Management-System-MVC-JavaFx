@@ -1,54 +1,66 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.CustomerDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SaleDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SaleProductTM;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.UserDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.controller.CustomerController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.ReturnController;
-import edu.ijse.mvc.fx.shopmanagementsystem.controller.SaleController;
-import edu.ijse.mvc.fx.shopmanagementsystem.controller.UserController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
-import java.sql.Date;
+
 import java.util.ArrayList;
 
 public class ManageReturnController {
 
-    final private ReturnController returnController = new ReturnController();
-    final private SaleController saleController = new SaleController();
-    final private UserController userController = new UserController();
+    private final ReturnController returnController = new ReturnController();
+    private final CustomerController customerController = new CustomerController();
 
     @FXML
-    private TableColumn<ReturnDTO, String> colProccesedBy;
+    private ComboBox<String> actionCmb;
+
+    @FXML
+    private TableColumn<ReturnDTO, String> colCustomerId;
+
+    @FXML
+    private TableColumn<ReturnDTO, String> colAction;
 
     @FXML
     private TableColumn<ReturnDTO, String> colReason;
 
     @FXML
-    private TableColumn<ReturnDTO, Date> colReturnDate;
+    private TableColumn<ReturnDTO, Double> colRefund;
 
     @FXML
-    private TableColumn<ReturnDTO, String> colReturnID;
+    private TableColumn<ReturnDTO, java.time.LocalDate> colReturnDate;
 
     @FXML
-    private TableColumn<ReturnDTO, Integer> colSaleID;
+    private TableColumn<ReturnDTO, String> colReturnId;
 
     @FXML
     private TableColumn<ReturnDTO, String> colStatus;
 
     @FXML
+    private ComboBox<String> customerIdCombo;
+
+    @FXML
     private Button deleteBtn;
 
     @FXML
-    private ComboBox <String> userIdCombo;
+    private TextField reasonTxt;
 
     @FXML
-    private TextField reasonTxt;
+    private TextField refundAmountTxt;
 
     @FXML
     private Button resetBtn;
@@ -60,10 +72,7 @@ public class ManageReturnController {
     private TextField returnIDTxt;
 
     @FXML
-    private TableView<ReturnDTO> returnTable;
-
-    @FXML
-    private ComboBox<Integer> saleIdCombo;
+    private TableView<ReturnDTO> returnTbl;
 
     @FXML
     private Button saveBtn;
@@ -75,100 +84,85 @@ public class ManageReturnController {
     private Button updateBtn;
 
     @FXML
-    private void initialize() throws Exception {
-        colReturnID.setCellValueFactory(new PropertyValueFactory<>("returnID"));
-        colSaleID.setCellValueFactory(new PropertyValueFactory<>("saleID"));
-        colProccesedBy.setCellValueFactory(new PropertyValueFactory<>("processedBy"));
-        colReturnDate.setCellValueFactory(new PropertyValueFactory<>("returnDateTime"));
+    void initialize() throws Exception {
+        colReturnId.setCellValueFactory(new PropertyValueFactory<>("returnId"));
+        colCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        colRefund.setCellValueFactory(new PropertyValueFactory<>("refundAmount"));
         colReason.setCellValueFactory(new PropertyValueFactory<>("reason"));
+        colAction.setCellValueFactory(new PropertyValueFactory<>("action"));
+        colReturnDate.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         loadTable();
-        loadSaleIdThread();
-        loadUserIdThread();
+        loadCustomerIdThread();
 
-        returnTable.setOnMouseClicked(event -> {
-            if(event.getClickCount() == 1){
+        returnTbl.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 1 ){
                 loadSelectedRow();
             }
         });
 
     }
 
-    private void loadSelectedRow(){
-
-       ReturnDTO returnDTO = returnTable.getSelectionModel().getSelectedItem();
-
-       if(returnDTO != null){
-              returnIDTxt.setText(returnDTO.getReturnID());
-              saleIdCombo.setValue(Integer.valueOf(returnDTO.getSaleID()));
-              userIdCombo.setValue(returnDTO.getProcessedBy());
-              returnDatePicker.setValue(returnDTO.getReturnDateTime());
-              reasonTxt.setText(returnDTO.getReason());
-              statusCmb.setValue(returnDTO.getStatus());
-       }
-
-    }
-
-    private void loadTable(){
-        try{
-            returnTable.getItems().clear();
-            returnTable.getItems().addAll(returnController.getAllReturns());
+    void loadTable(){
+        try {
+            returnTbl.getItems().clear();
+            returnTbl.getItems().addAll(returnController.getAllReturn());
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();;
+            new Alert(AlertType.ERROR, e.getMessage()).show();
         }
     }
 
-
-    private void loadSaleIdThread() throws Exception{
-
-        Task<ObservableList<Integer>> task = new Task(){
-
-            ArrayList <SaleProductTM> sales = saleController.getAllSale();
-            @Override
-            protected Object call() throws Exception {
-                return FXCollections.observableArrayList(sales.stream().map(SaleProductTM::getSaleId).toList());
-            }
-        };
-        task.setOnSucceeded(event -> saleIdCombo.setItems(task.getValue()));
-        task.setOnFailed(event -> new Alert(Alert.AlertType.ERROR, task.getMessage()).show());
-        new Thread(task).start();
+    void loadSelectedRow() {
+        ReturnDTO selectedReturn = returnTbl.getSelectionModel().getSelectedItem();
+        if (selectedReturn != null) {
+            returnIDTxt.setText(selectedReturn.getReturnId());
+            customerIdCombo.setValue(selectedReturn.getCustomerId());
+            refundAmountTxt.setText(String.valueOf(selectedReturn.getRefundAmount()));
+            reasonTxt.setText(selectedReturn.getReason());
+            actionCmb.setValue(selectedReturn.getAction());
+            returnDatePicker.setValue(selectedReturn.getReturnDate());
+            statusCmb.setValue(selectedReturn.getStatus());
+        }
     }
 
-   private void loadUserIdThread() throws Exception{
+    private void loadCustomerIdThread() throws Exception {
 
-        Task <ObservableList<String>> task = new Task() {
-            ArrayList <UserDTO> users = userController.getAllUsers();
+        Task <ObservableList<String>> task = new Task<>() {
+            ArrayList <CustomerDTO> customers =  customerController.getAllCustomers();
             @Override
-            protected Object call() throws Exception {
-                return FXCollections.observableArrayList(users.stream().map(UserDTO::getUserID).toList());
+            protected ObservableList<String> call() throws Exception {
+                return FXCollections.observableArrayList(customers.stream().map(CustomerDTO::getCustomerId).toList());
             }
         };
-        task.setOnSucceeded(event -> userIdCombo.setItems(task.getValue()));
-        task.setOnFailed(event -> new Alert(Alert.AlertType.ERROR,task.getMessage()).show());
+
+        task.setOnSucceeded(event -> customerIdCombo.setItems(task.getValue()));
+        task.setOnFailed(event -> new Alert(AlertType.ERROR, task.getMessage()).show());
         new Thread(task).start();
-   }
+
+    }
 
     @FXML
     void navigateDelete(ActionEvent event) {
         try {
             String rsp = returnController.deleteReturn(returnIDTxt.getText());
-            new Alert(Alert.AlertType.INFORMATION,rsp).show();
+            new Alert(AlertType.INFORMATION, rsp).show();
             loadTable();
             navigateReset(event);
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            new Alert(AlertType.ERROR, e.getMessage()).show();
         }
     }
 
     @FXML
     void navigateReset(ActionEvent event) {
-        returnIDTxt.setText("");
-        saleIdCombo.setValue(null);
-        userIdCombo.setValue(null);
+        returnIDTxt.clear();
+        customerIdCombo.setValue(null);
+        refundAmountTxt.clear();
+        reasonTxt.clear();
+        actionCmb.setValue(null);
         returnDatePicker.setValue(null);
-        reasonTxt.setText("");
-        statusCmb.setValue("");
+        statusCmb.setValue(null);
     }
 
     @FXML
@@ -176,18 +170,20 @@ public class ManageReturnController {
         try {
             ReturnDTO returnDTO = new ReturnDTO(
                     null,
-                    String.valueOf(saleIdCombo.getValue()),
-                    userIdCombo.getValue(),
-                    returnDatePicker.getValue(),
+                    customerIdCombo.getValue(),
+                    Double.parseDouble(refundAmountTxt.getText()),
                     reasonTxt.getText(),
-                    statusCmb.getValue()
+                    actionCmb.getValue(),
+                    statusCmb.getValue(),
+                    returnDatePicker.getValue()
             );
+
             String rsp = returnController.saveReturn(returnDTO);
-            new Alert(Alert.AlertType.INFORMATION,rsp).show();
+            new Alert(AlertType.INFORMATION, rsp).show();
             loadTable();
             navigateReset(event);
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            new Alert(AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -196,18 +192,21 @@ public class ManageReturnController {
         try {
             ReturnDTO returnDTO = new ReturnDTO(
                     returnIDTxt.getText(),
-                    String.valueOf(saleIdCombo.getValue()),
-                    userIdCombo.getValue(),
-                    returnDatePicker.getValue(),
+                    customerIdCombo.getValue(),
+                    Double.parseDouble(refundAmountTxt.getText()),
                     reasonTxt.getText(),
-                    statusCmb.getValue()
+                    actionCmb.getValue(),
+                    statusCmb.getValue(),
+                    returnDatePicker.getValue()
             );
+
             String rsp = returnController.updateReturn(returnDTO);
-            new Alert(Alert.AlertType.INFORMATION,rsp).show();
+            new Alert(AlertType.INFORMATION, rsp).show();
             loadTable();
             navigateReset(event);
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            new Alert(AlertType.ERROR, e.getMessage()).show();
         }
     }
+
 }

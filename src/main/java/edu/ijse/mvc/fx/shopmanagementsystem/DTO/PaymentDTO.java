@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class PaymentDTO {
 
     private String paymentID;
-    private String saleID;
+    private String customerID;
     private String method;
     private double amount;
     private String reference;

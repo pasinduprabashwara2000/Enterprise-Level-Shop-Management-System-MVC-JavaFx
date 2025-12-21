@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="dashboardPane" prefHeight="680.0" prefWidth="1075.0" stylesheets="@css/style5.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="dashboardPane" prefHeight="680.0" prefWidth="1075.0" stylesheets="@css/style5.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.DashboardController2">
         <children>
             <VBox spacing="24.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <padding>
@@ -101,7 +101,7 @@
                                                             <Font name="System Bold" size="11.0" />
                                                         </font>
                                                     </Label>
-                                                    <Label styleClass="stat-value">
+                                                    <Label fx:id="lblOrderCount" styleClass="stat-value">
                                                         <font>
                                                             <Font name="System Bold" size="32.0" />
                                                         </font>
@@ -133,7 +133,7 @@
                                                             <Font name="System Bold" size="11.0" />
                                                         </font>
                                                     </Label>
-                                                    <Label fx:id="lblCustomerCount" styleClass="stat-value">
+                                                    <Label fx:id="lblPaymentCount" styleClass="stat-value">
                                                         <font>
                                                             <Font name="System Bold" size="32.0" />
                                                         </font>
@@ -165,7 +165,7 @@
                                                             <Font name="System Bold" size="11.0" />
                                                         </font>
                                                     </Label>
-                                                    <Label fx:id="lblInventoryCount" styleClass="stat-value">
+                                                    <Label fx:id="lblReturnCount" styleClass="stat-value">
                                                         <font>
                                                             <Font name="System Bold" size="32.0" />
                                                         </font>
@@ -196,11 +196,11 @@
                             <!-- Orders Table -->
                             <TableView fx:id="ordersTable" prefHeight="300.0" styleClass="table-view" VBox.vgrow="ALWAYS">
                                 <columns>
-                                    <TableColumn prefWidth="200.0" text="Customer" />
-                                    <TableColumn prefWidth="200.0" text="Product" />
-                                    <TableColumn prefWidth="120.0" text="Amount" />
-                                    <TableColumn prefWidth="150.0" text="Status" />
-                                    <TableColumn prefWidth="150.0" text="Action" />
+                                    <TableColumn fx:id="colCustomers" prefWidth="200.0" text="Customer" />
+                                    <TableColumn fx:id="colProduct" prefWidth="200.0" text="Product" />
+                                    <TableColumn fx:id="colAmount" prefWidth="120.0" text="Amount" />
+                                    <TableColumn fx:id="colStatus" prefWidth="150.0" text="Status" />
+                                    <TableColumn fx:id="colAction" prefWidth="150.0" text="Action" />
                                 </columns>
                                 <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

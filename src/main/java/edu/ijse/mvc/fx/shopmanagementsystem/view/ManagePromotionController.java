@@ -68,9 +68,6 @@ public class ManagePromotionController {
     private TextField nameTxt;
 
     @FXML
-    private ComboBox <String> productIdCombo;
-
-    @FXML
     private TextField promoteIDTxt;
 
     @FXML
@@ -93,8 +90,7 @@ public class ManagePromotionController {
 
     @FXML
     void initialize() throws Exception {
-        colPromotionID.setCellValueFactory(new PropertyValueFactory<>("promoteID"));
-        colProductID.setCellValueFactory(new PropertyValueFactory<>("productID"));
+        colPromotionID.setCellValueFactory(new PropertyValueFactory<>("promotionID"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colType.setCellValueFactory(new PropertyValueFactory<>("type"));
         colValue.setCellValueFactory(new PropertyValueFactory<>("value"));
@@ -105,7 +101,6 @@ public class ManagePromotionController {
         activeCmb.getItems().addAll("Active", "Inactive");
 
         loadTable();
-        loadProductIdThread();
 
         promotionTable.setOnMouseClicked(event -> {
             if(event.getClickCount() == 1){
@@ -118,9 +113,8 @@ public class ManagePromotionController {
         PromotionDTO selectedPromotion = promotionTable.getSelectionModel().getSelectedItem();
 
         if(selectedPromotion != null){
-            promoteIDTxt.setText(selectedPromotion.getPromoteID());
+            promoteIDTxt.setText(selectedPromotion.getPromotionID());
             nameTxt.setText(selectedPromotion.getName());
-            productIdCombo.setValue(selectedPromotion.getProductID());
             typeCmb.setValue(selectedPromotion.getType());
             valueTxt.setText(String.valueOf(selectedPromotion.getValue()));
             startDatePicker.setValue(selectedPromotion.getStartAt().toLocalDate());
@@ -128,22 +122,6 @@ public class ManagePromotionController {
             activeCmb.setValue(String.valueOf(selectedPromotion.isActive()));
         }
 
-    }
-
-    private void loadProductIdThread() throws Exception {
-
-        Task <ObservableList<String>> task = new Task<>() {
-            ArrayList <ProductDTO> products = productController.getAllProducts();
-            @Override
-            protected ObservableList<String> call() throws Exception {
-                return FXCollections.observableArrayList(products.stream().map(ProductDTO::getProductID).toList()
-                );
-                }
-            };
-
-            task.setOnSucceeded(event -> productIdCombo.setItems(task.getValue()));
-            task.setOnFailed(event -> new Alert(Alert.AlertType.ERROR,task.getMessage()).show());
-            new Thread(task).start();
     }
 
     @FXML
@@ -172,7 +150,6 @@ public class ManagePromotionController {
     void navigateReset(ActionEvent event) {
         promoteIDTxt.clear();
         nameTxt.clear();
-        productIdCombo.setValue(null);
         typeCmb.setValue(null);
         valueTxt.clear();
         startDatePicker.setValue(null);
@@ -190,8 +167,7 @@ public class ManagePromotionController {
                     Double.parseDouble(valueTxt.getText()),
                     Date.valueOf(startDatePicker.getValue()),
                     Date.valueOf(endDatePicker.getValue()),
-                    Boolean.parseBoolean(activeCmb.getValue()),
-                    productIdCombo.getValue()
+                    Boolean.parseBoolean(activeCmb.getValue())
             );
             String res = promotionController.savePromotion(promotionDTO);
             new Alert(Alert.AlertType.INFORMATION, res).show();
@@ -212,8 +188,7 @@ public class ManagePromotionController {
                     Double.parseDouble(valueTxt.getText()),
                     Date.valueOf(startDatePicker.getValue()),
                     Date.valueOf(endDatePicker.getValue()),
-                    Boolean.parseBoolean(activeCmb.getValue()),
-                    productIdCombo.getValue()
+                    Boolean.parseBoolean(activeCmb.getValue())
             );
             String res = promotionController.updatePromotion(promotionDTO);
             new Alert(Alert.AlertType.INFORMATION, res).show();

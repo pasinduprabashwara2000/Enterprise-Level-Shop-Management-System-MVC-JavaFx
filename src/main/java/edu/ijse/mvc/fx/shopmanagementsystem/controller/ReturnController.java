@@ -1,19 +1,20 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.controller;
 
-import java.util.ArrayList;
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.model.ReturnModel;
+
+import java.util.ArrayList;
 
 public class ReturnController {
 
     private final ReturnModel returnModel = new ReturnModel();
 
-    public String saveReturn(ReturnDTO returnDTO) throws Exception {
-        return returnModel.saveReturn(returnDTO);
+    public String saveReturn(edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnDTO dto) throws Exception {
+        return returnModel.saveReturn(dto);
     }
 
-    public String updateReturn(ReturnDTO returnDTO) throws Exception {
-        return returnModel.updateReturn(returnDTO);
+    public String updateReturn(edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnDTO dto) throws Exception {
+        return returnModel.updateReturn(dto);
     }
 
     public String deleteReturn(String returnID) throws Exception {
@@ -23,9 +24,10 @@ public class ReturnController {
     public ReturnDTO searchReturn(String returnID) throws Exception {
         return returnModel.searchReturn(returnID);
     }
-    
-    public ArrayList<ReturnDTO> getAllReturns() throws Exception {
+
+    public ArrayList<ReturnDTO> getAllReturn() throws Exception{
         return returnModel.getAllReturns();
     }
+
     
 }

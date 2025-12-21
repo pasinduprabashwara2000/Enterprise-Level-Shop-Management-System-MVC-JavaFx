@@ -43,14 +43,12 @@
                         <Button fx:id="inventoryBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Inventory" />
                         <Button fx:id="productsBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Products" />
                         <Button fx:id="suppliersBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Suppliers" />
-                        <Button fx:id="supplyBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Product Supply" />
+                        <Button fx:id="supplyBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Supply" />
                         <Button fx:id="promotionBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Promotion" />
-                        <Button fx:id="saleBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Sale" />
+                        <Button fx:id="purchaseOrderBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Purchase Order" />
+                        <Button fx:id="orderBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Customer Order" />
                         <Button fx:id="paymentBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Payment" />
                         <Button fx:id="returnBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Return" />
-                        <Button fx:id="returnproductBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Return Product" />
-                        <Button fx:id="purchaseOrderBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Purchase Order" />
-                        <Button fx:id="purchaseOrderProductBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage PurchaseOrder Product" />
                         <Button fx:id="reportsBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Reports" />
 
                         <Separator prefWidth="280.0" />

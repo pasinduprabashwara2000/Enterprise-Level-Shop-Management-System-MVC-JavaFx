@@ -11,7 +11,7 @@ public class SupplierModel {
     public String saveSupplier(SupplierDTO supplierDTO) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO Supplier (name, contactPerson, phone, email, address) VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO Supplier (name, contactPerson, phone, email, address) VALUES(?,?,?,?,?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, supplierDTO.getName());
         pstm.setString(2, supplierDTO.getContactPerson());

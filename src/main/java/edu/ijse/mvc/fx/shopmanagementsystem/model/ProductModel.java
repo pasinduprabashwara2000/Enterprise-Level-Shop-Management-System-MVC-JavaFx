@@ -10,33 +10,31 @@ public class ProductModel {
 
     public String saveProduct(ProductDTO productDTO) throws Exception {
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO Product (SKU, barCode, name, unit, unitPrice, taxRate, active, categoryID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Product (SKU, barCode, name, unit, unitPrice, active, categoryID) VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, productDTO.getSKU());
         pstm.setInt(2, productDTO.getBarCode());
         pstm.setString(3, productDTO.getName());
         pstm.setString(4, productDTO.getUnit());
         pstm.setDouble(5, productDTO.getUnitPrice());
-        pstm.setDouble(6, productDTO.getTaxRate());
-        pstm.setBoolean(7, productDTO.isActive());
-        pstm.setString(8, productDTO.getCategoryID());
+        pstm.setBoolean(6, productDTO.isActive());
+        pstm.setString(7, productDTO.getCategoryID());
 
         return pstm.executeUpdate() > 0 ? "Product Saved Successfully" : "Product Save Failed";
     }
 
     public String updateProduct(ProductDTO productDTO) throws Exception {
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "UPDATE Product SET SKU = ?, barCode = ?, name = ?, unit = ?, unitPrice = ?, taxRate = ?, active = ?, categoryID = ? WHERE productID = ?";
+        String sql = "UPDATE Product SET SKU = ?, barCode = ?, name = ?, unit = ?, unitPrice = ?, active = ?, categoryID = ? WHERE productID = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, productDTO.getSKU());
         pstm.setInt(2, productDTO.getBarCode());
         pstm.setString(3, productDTO.getName());
         pstm.setString(4, productDTO.getUnit());
         pstm.setDouble(5, productDTO.getUnitPrice());
-        pstm.setDouble(6, productDTO.getTaxRate());
-        pstm.setBoolean(7, productDTO.isActive());
-        pstm.setString(8, productDTO.getCategoryID());
-        pstm.setString(9, productDTO.getProductID());
+        pstm.setBoolean(6, productDTO.isActive());
+        pstm.setString(7, productDTO.getCategoryID());
+        pstm.setString(8, productDTO.getProductID());
 
         return pstm.executeUpdate() > 0 ? "Product Updated Successfully" : "Product Update Failed";
     }
@@ -65,7 +63,6 @@ public class ProductModel {
                     resultSet.getString("name"),
                     resultSet.getString("unit"),
                     resultSet.getDouble("unitPrice"),
-                    resultSet.getDouble("taxRate"),
                     resultSet.getBoolean("active"),
                     resultSet.getString("categoryID")
             );
@@ -88,7 +85,6 @@ public class ProductModel {
                     resultSet.getString("name"),
                     resultSet.getString("unit"),
                     resultSet.getDouble("unitPrice"),
-                    resultSet.getDouble("taxRate"),
                     resultSet.getBoolean("active"),
                     resultSet.getString("categoryID")
             ));

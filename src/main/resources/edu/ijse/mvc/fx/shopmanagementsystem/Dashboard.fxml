@@ -8,64 +8,51 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane
-        prefHeight="680.0"
-        prefWidth="1075.0"
-        styleClass="white-bg"
-        stylesheets="@css/style3.css"
-        xmlns="http://javafx.com/javafx"
-        xmlns:fx="http://javafx.com/fxml"
-        fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.DashboardController">
+<AnchorPane prefHeight="680.0" prefWidth="1075.0" styleClass="white-bg" stylesheets="@css/style3.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.DashboardController">
 
     <children>
 
         <!-- SUMMARY BOXES -->
-        <FlowPane
-                fx:id="flowStats"
-                layoutX="18.0"
-                layoutY="70.0"
-                prefWidth="1040.0"
-                hgap="20.0"
-                vgap="20.0">
+        <FlowPane fx:id="flowStats" hgap="20.0" layoutX="18.0" layoutY="70.0" prefWidth="1040.0" vgap="20.0">
 
             <VBox alignment="CENTER" prefWidth="230.0" spacing="10.0" styleClass="box1">
-                <Label text="Total Products" styleClass="dashboard-label"/>
-                <Label fx:id="lblProductsCount" text="0" styleClass="dashboard-value"/>
+                <Label styleClass="dashboard-label" text="Total Products" />
+                <Label fx:id="lblProductsCount" styleClass="dashboard-value" text="0" />
             </VBox>
 
             <VBox alignment="CENTER" prefWidth="230.0" spacing="10.0" styleClass="box2">
-                <Label text="Total Customers" styleClass="dashboard-label"/>
-                <Label fx:id="lblCustomerCount" text="0" styleClass="dashboard-value"/>
+                <Label styleClass="dashboard-label" text="Total Customers" />
+                <Label fx:id="lblCustomerCount" styleClass="dashboard-value" text="0" />
             </VBox>
 
             <VBox alignment="CENTER" prefWidth="230.0" spacing="10.0" styleClass="box3">
-                <Label text="Total Sales" styleClass="dashboard-label"/>
-                <Label fx:id="lblSalesCount" text="0" styleClass="dashboard-value"/>
+                <Label styleClass="dashboard-label" text="Total Sales" />
+                <Label fx:id="lblSalesCount" styleClass="dashboard-value" text="0" />
             </VBox>
 
             <VBox alignment="CENTER" prefWidth="230.0" spacing="10.0" styleClass="box4">
-                <Label text="Total Revenue" styleClass="dashboard-label"/>
-                <Label fx:id="lblRevenue" text="Rs. 0.00" styleClass="dashboard-value"/>
+                <Label styleClass="dashboard-label" text="Total Revenue" />
+                <Label fx:id="lblRevenue" styleClass="dashboard-value" text="Rs. 0.00" />
             </VBox>
 
             <VBox alignment="CENTER" prefWidth="230.0" spacing="10.0" styleClass="box5">
-                <Label text="Total Suppliers" styleClass="dashboard-label"/>
-                <Label fx:id="lblSupplierCount" text="0" styleClass="dashboard-value"/>
+                <Label styleClass="dashboard-label" text="Total Suppliers" />
+                <Label fx:id="lblSupplierCount" styleClass="dashboard-value" text="0" />
             </VBox>
 
-            <VBox alignment="CENTER" prefWidth="230.0" spacing="10.0" styleClass="box6">
-                <Label text="Purchase Orders" styleClass="dashboard-label"/>
-                <Label fx:id="lblPurchaseOrders" text="0" styleClass="dashboard-value"/>
+               <VBox alignment="CENTER" prefWidth="230.0" spacing="10.0" styleClass="box6">
+                <Label styleClass="dashboard-label" text="Inventory Items" />
+                <Label fx:id="lblInventoryCount" styleClass="dashboard-value" text="0" />
             </VBox>
 
             <VBox alignment="CENTER" prefWidth="230.0" spacing="10.0" styleClass="box7">
-                <Label text="Returns" styleClass="dashboard-label"/>
-                <Label fx:id="lblReturnCount" text="0" styleClass="dashboard-value"/>
+                <Label styleClass="dashboard-label" text="Returns" />
+                <Label fx:id="lblReturnCount" styleClass="dashboard-value" text="0" />
             </VBox>
 
             <VBox alignment="CENTER" prefWidth="230.0" spacing="10.0" styleClass="box8">
-                <Label text="Inventory Items" styleClass="dashboard-label"/>
-                <Label fx:id="lblInventoryCount" text="0" styleClass="dashboard-value"/>
+                <Label styleClass="dashboard-label" text="Total Profit" />
+                <Label fx:id="lblProfitCount" styleClass="dashboard-value" text="Rs. 0.00" />
             </VBox>
 
         </FlowPane>
@@ -73,36 +60,30 @@
         <!-- TITLE -->
         <Label layoutX="20.0" layoutY="27.0" text="Summary">
             <font>
-                <Font name="System Bold" size="18.0"/>
+                <Font name="System Bold" size="18.0" />
             </font>
         </Label>
 
         <Label layoutX="20.0" layoutY="338.0" text="Top Selling Products">
             <font>
-                <Font name="System Bold" size="18.0"/>
+                <Font name="System Bold" size="18.0" />
             </font>
         </Label>
 
         <!-- TABLE -->
-        <TableView
-                fx:id="detailsTable"
-                layoutX="20.0"
-                layoutY="390.0"
-                prefWidth="1003.0"
-                prefHeight="314.0"
-                stylesheets="@css/style2.css">
+        <TableView fx:id="detailsTable" layoutX="20.0" layoutY="390.0" prefHeight="314.0" prefWidth="1003.0" stylesheets="@css/style2.css">
 
             <columns>
-                <TableColumn fx:id="colProductID" text="Product ID" prefWidth="100.0"/>
-                <TableColumn fx:id="colSKU" text="SKU" prefWidth="100.0"/>
-                <TableColumn fx:id="colBarcode" text="Barcode" prefWidth="120.0"/>
-                <TableColumn fx:id="colName" text="Name" prefWidth="150.0"/>
-                <TableColumn fx:id="colUnit" text="Unit" prefWidth="70.0"/>
-                <TableColumn fx:id="colUnitPrice" text="Unit Price" prefWidth="120.0"/>
-                <TableColumn fx:id="colQty" text="QTY" prefWidth="60.0"/>
-                <TableColumn fx:id="colTaxRate" text="Tax Rate" prefWidth="100.0"/>
-                <TableColumn fx:id="colActive" text="Active" prefWidth="80.0"/>
-                <TableColumn fx:id="colCategoryID" text="Category ID" prefWidth="100.0"/>
+                <TableColumn fx:id="colProductID" prefWidth="100.0" text="Product ID" />
+                <TableColumn fx:id="colSKU" prefWidth="100.0" text="SKU" />
+                <TableColumn fx:id="colBarcode" prefWidth="120.0" text="Barcode" />
+                <TableColumn fx:id="colName" prefWidth="150.0" text="Name" />
+                <TableColumn fx:id="colUnit" prefWidth="70.0" text="Unit" />
+                <TableColumn fx:id="colUnitPrice" prefWidth="120.0" text="Unit Price" />
+                <TableColumn fx:id="colQty" prefWidth="60.0" text="QTY" />
+                <TableColumn fx:id="colTaxRate" prefWidth="100.0" text="Tax Rate" />
+                <TableColumn fx:id="colActive" prefWidth="80.0" text="Active" />
+                <TableColumn fx:id="colCategoryID" prefWidth="100.0" text="Category ID" />
             </columns>
 
         </TableView>

@@ -10,13 +10,12 @@ import lombok.NoArgsConstructor;
 @Data
 public class PromotionDTO {
 
-    private String promoteID;
+    private String promotionID;
     private String name;
     private String type;
     private Double value;
     private Date startAt;
     private Date endAt;
     private boolean active;
-    private String productID;
 
 }
