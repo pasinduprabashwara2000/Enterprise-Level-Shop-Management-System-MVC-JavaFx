@@ -1,7 +1,7 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.controller;
 
 import java.util.ArrayList;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.CustomerDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.dto.CustomerDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.model.CustomerModel;
 
 public class CustomerController {

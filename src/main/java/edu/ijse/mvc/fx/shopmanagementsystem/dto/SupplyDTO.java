@@ -1,4 +1,4 @@
-package edu.ijse.mvc.fx.shopmanagementsystem.DTO;
+package edu.ijse.mvc.fx.shopmanagementsystem.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

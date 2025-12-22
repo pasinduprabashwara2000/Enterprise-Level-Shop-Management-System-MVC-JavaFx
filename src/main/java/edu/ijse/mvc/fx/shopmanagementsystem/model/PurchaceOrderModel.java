@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.PurchaceOrderDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.dto.PurchaceOrderDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.db.DBConnection;
 
 public class PurchaceOrderModel {

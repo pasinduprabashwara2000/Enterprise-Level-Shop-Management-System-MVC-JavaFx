@@ -1,43 +1,36 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.PurchaceOrderDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SupplierDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.controller.PurchaceOrderController;
-import edu.ijse.mvc.fx.shopmanagementsystem.controller.SupplierController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import java.sql.Date;
-import java.util.ArrayList;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 public class ManagePurchaseOrderController {
 
-    private final PurchaceOrderController purchaceOrderController = new PurchaceOrderController();
-    private final SupplierController supplierController = new SupplierController();
+    @FXML
+    private TableColumn<?, ?> colCreatedAt;
 
     @FXML
-    private TableColumn<PurchaceOrderDTO, Date> colCreatedAt;
+    private TableColumn<?, ?> colCreatedBy;
 
     @FXML
-    private TableColumn<PurchaceOrderDTO, String> colCreatedBy;
+    private TableColumn<?, ?> colExpectedDate;
 
     @FXML
-    private TableColumn<PurchaceOrderDTO, Date> colExpectedDate;
+    private TableColumn<?, ?> colPOID;
 
     @FXML
-    private TableColumn<PurchaceOrderDTO, String> colPOID;
+    private TableColumn<?, ?> colStatus;
 
     @FXML
-    private TableColumn<PurchaceOrderDTO, String> colStatus;
+    private TableColumn<?, ?> colSupplierID;
 
     @FXML
-    private TableColumn<PurchaceOrderDTO, String> colSupplierID;
-
-    @FXML
-    private TableColumn<PurchaceOrderDTO, Double> colTotalCost;
+    private TableColumn<?, ?> colTotalCost;
 
     @FXML
     private DatePicker createdAtPicker;
@@ -55,7 +48,7 @@ public class ManagePurchaseOrderController {
     private TextField poIdTxt;
 
     @FXML
-    private TableView<PurchaceOrderDTO> poTable;
+    private TableView<?> poTable;
 
     @FXML
     private Button resetBtn;
@@ -64,10 +57,10 @@ public class ManagePurchaseOrderController {
     private Button saveBtn;
 
     @FXML
-    private ComboBox<String> statusCombo;
+    private ComboBox<?> statusCombo;
 
     @FXML
-    private ComboBox<String> supplierIdCombo;
+    private ComboBox<?> supplierIdCombo;
 
     @FXML
     private TextField totalCostTxt;
@@ -76,130 +69,28 @@ public class ManagePurchaseOrderController {
     private Button updateBtn;
 
     @FXML
-    private void initialize(){
-        colPOID.setCellValueFactory(new PropertyValueFactory<>("poId"));
-        colSupplierID.setCellValueFactory(new PropertyValueFactory<>("supplierId"));
-        colCreatedAt.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
-        colCreatedBy.setCellValueFactory(new PropertyValueFactory<>("createdBy"));
-        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-        colExpectedDate.setCellValueFactory(new PropertyValueFactory<>("expectedDate"));
-        colTotalCost.setCellValueFactory(new PropertyValueFactory<>("totalCost"));
+    void loadSupplierId(ActionEvent event) {
 
-        loadTable();
-        loadSupplierId();
-
-        poTable.setOnMouseClicked(event -> {
-            if(event.getClickCount() == 1){
-                loadSelectedRow();
-            }
-        });
-
-    }
-
-    private void loadSelectedRow(){
-
-        PurchaceOrderDTO purchaceOrderDTO = poTable.getSelectionModel().getSelectedItem();
-
-        if(poTable != null){
-            poIdTxt.setText(purchaceOrderDTO.getPoId());
-            supplierIdCombo.setValue(purchaceOrderDTO.getSupplierId());
-            createdAtPicker.setValue(purchaceOrderDTO.getCreatedAt());
-            createdByTxt.setText(purchaceOrderDTO.getCreatedBy());
-            statusCombo.setValue(purchaceOrderDTO.getStatus());
-            expectedDatePicker.setValue(purchaceOrderDTO.getExpectedDate());
-            totalCostTxt.setText(String.valueOf(purchaceOrderDTO.getTotalCost()));
-        }
-
-    }
-
-    private void loadTable(){
-        try {
-            poTable.getItems().clear();
-            poTable.getItems().addAll(purchaceOrderController.getAllPurchaceOrders());
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-        }
-    }
-
-    @FXML
-    private void loadSupplierId(){
-        try {
-            ArrayList <SupplierDTO> supplierDTOS = supplierController.getAllSuppliers();
-            ObservableList <String> list = FXCollections.observableArrayList();
-
-            for (SupplierDTO supplierDTO : supplierDTOS){
-                list.add(supplierDTO.getSupplierID());
-            }
-
-            supplierIdCombo.setItems(list);
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-        }
     }
 
     @FXML
     void navigateDelete(ActionEvent event) {
-        try {
-            String rsp = purchaceOrderController.deletePurchaceOrder(poIdTxt.getText());
-            new Alert(Alert.AlertType.INFORMATION,rsp).show();
-            loadTable();
-            navigateReset(event);
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-        }
+
     }
 
     @FXML
     void navigateReset(ActionEvent event) {
-        poIdTxt.setText("");
-        supplierIdCombo.setValue(null);
-        createdAtPicker.setValue(null);
-        createdByTxt.setText("");
-        statusCombo.setValue(null);
-        expectedDatePicker.setValue(null);
-        totalCostTxt.setText("");
+
     }
 
     @FXML
     void navigateSave(ActionEvent event) {
-        try {
-            PurchaceOrderDTO purchaceOrderDTO = new PurchaceOrderDTO(
-                null,
-                supplierIdCombo.getValue(),
-                createdAtPicker.getValue(),
-                createdByTxt.getText(),
-                statusCombo.getValue(),
-                expectedDatePicker.getValue(),
-                Double.parseDouble(totalCostTxt.getText())
-            );
-            String rsp = purchaceOrderController.savePurchaceOrder(purchaceOrderDTO);
-            new Alert(Alert.AlertType.INFORMATION,rsp).show();
-            loadTable();
-            navigateReset(event);
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-        }
+
     }
 
     @FXML
     void navigateUpdate(ActionEvent event) {
-        try {
-            PurchaceOrderDTO purchaceOrderDTO = new PurchaceOrderDTO(
-                    poIdTxt.getText(),
-                    supplierIdCombo.getValue(),
-                    createdAtPicker.getValue(),
-                    createdByTxt.getText(),
-                    statusCombo.getValue(),
-                    expectedDatePicker.getValue(),
-                    Double.parseDouble(totalCostTxt.getText())
-            );
-            String rsp = purchaceOrderController.updatePurchaceOrder(purchaceOrderDTO);
-            new Alert(Alert.AlertType.INFORMATION,rsp).show();
-            loadTable();
-            navigateReset(event);
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-        }
+
     }
 
 }

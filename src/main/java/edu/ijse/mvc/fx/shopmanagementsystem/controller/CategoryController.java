@@ -1,7 +1,7 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.controller;
 
 import java.util.ArrayList;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.CategoryDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.dto.CategoryDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.model.CategoryModel;
 
 public class CategoryController {

@@ -1,7 +1,7 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.LoginDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.controller.LoginController;
+import edu.ijse.mvc.fx.shopmanagementsystem.dto.LoginDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.model.LoginModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public class ManageLoginController {
 
-    private final LoginController loginController = new LoginController();
+    private final LoginModel loginModel = new LoginModel();
 
     @FXML
     private Button clearBtn;
@@ -28,7 +28,7 @@ public class ManageLoginController {
     public void navigateLogin(ActionEvent actionEvent) {
 
         try {
-            LoginDTO loginDTO = loginController.login(
+            LoginDTO loginDTO = loginModel.findByUsernameAndPassword(
                 userTxt.getText(),
                 passwordTxt.getText()
             );

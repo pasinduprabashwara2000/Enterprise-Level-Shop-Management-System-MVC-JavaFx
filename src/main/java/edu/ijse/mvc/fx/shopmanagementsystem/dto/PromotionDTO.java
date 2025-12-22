@@ -1,4 +1,4 @@
-package edu.ijse.mvc.fx.shopmanagementsystem.DTO;
+package edu.ijse.mvc.fx.shopmanagementsystem.dto;
 
 import java.sql.Date;
 import lombok.AllArgsConstructor;

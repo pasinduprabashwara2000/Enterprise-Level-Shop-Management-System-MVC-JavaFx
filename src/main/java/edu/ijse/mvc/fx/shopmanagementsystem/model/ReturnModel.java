@@ -1,6 +1,6 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.model;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.dto.ReturnDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.db.DBConnection;
 
 import java.sql.Connection;

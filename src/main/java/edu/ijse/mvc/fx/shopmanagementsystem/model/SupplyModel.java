@@ -3,7 +3,7 @@ package edu.ijse.mvc.fx.shopmanagementsystem.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SupplyDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.dto.SupplyDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.db.DBConnection;
 
 public class SupplyModel {

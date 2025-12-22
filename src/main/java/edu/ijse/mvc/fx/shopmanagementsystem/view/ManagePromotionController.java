@@ -1,14 +1,10 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.PromotionDTO;
+
+import edu.ijse.mvc.fx.shopmanagementsystem.dto.PromotionDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.ProductController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.PromotionController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

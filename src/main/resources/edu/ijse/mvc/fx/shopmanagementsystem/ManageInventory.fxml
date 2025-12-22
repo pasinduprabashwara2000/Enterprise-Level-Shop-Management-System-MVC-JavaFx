@@ -23,18 +23,12 @@
                 <Font size="15.0" />
             </font>
         </Label>
-        <Label fx:id="qytLabel" layoutX="34.0" layoutY="132.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style2.css" text="QYT :">
+        <Label fx:id="reOrderLevelLabel" layoutX="34.0" layoutY="135.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style2.css" text="Reorder Level  : ">
             <font>
                 <Font size="15.0" />
             </font>
         </Label>
-        <TextField fx:id="qytTxt" layoutX="206.0" layoutY="130.0" prefHeight="38.0" prefWidth="259.0" />
-        <Label fx:id="reOrderLevelLabel" layoutX="34.0" layoutY="187.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style2.css" text="Reorder Level  : ">
-            <font>
-                <Font size="15.0" />
-            </font>
-        </Label>
-        <TextField fx:id="reOrderLevelTxt" layoutX="207.0" layoutY="187.0" prefHeight="38.0" prefWidth="259.0" />
+        <TextField fx:id="reOrderLevelTxt" layoutX="207.0" layoutY="135.0" prefHeight="38.0" prefWidth="259.0" />
         <Label fx:id="reOrderQYTLabel" layoutX="521.0" layoutY="76.0" prefHeight="38.0" prefWidth="157.0" stylesheets="@css/style2.css" text="Reorder QYT : ">
             <font>
                 <Font size="15.0" />
@@ -46,17 +40,16 @@
             </font>
         </Label>
         <TextField fx:id="reOrderQytTxt" layoutX="685.0" layoutY="76.0" prefHeight="38.0" prefWidth="252.0" />
-        <Button fx:id="saveBtn" layoutX="236.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style2.css" text="Save" />
-        <Button fx:id="updateBtn" layoutX="395.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style2.css" text="Update" />
-        <Button fx:id="deleteBtn" layoutX="552.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateDelete" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style2.css" text="Delete" />
-        <Button fx:id="resetBtn" layoutX="706.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateReset" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style2.css" text="Reset" />
-        <TableView fx:id="detailsTabel" layoutX="33.0" layoutY="322.0" prefHeight="320.0" prefWidth="1003.0">
+        <Button fx:id="saveBtn" layoutX="236.0" layoutY="209.0" mnemonicParsing="false" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style2.css" text="Save" />
+        <Button fx:id="updateBtn" layoutX="395.0" layoutY="209.0" mnemonicParsing="false" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style2.css" text="Update" />
+        <Button fx:id="deleteBtn" layoutX="552.0" layoutY="209.0" mnemonicParsing="false" onAction="#navigateDelete" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style2.css" text="Delete" />
+        <Button fx:id="resetBtn" layoutX="706.0" layoutY="209.0" mnemonicParsing="false" onAction="#navigateReset" prefHeight="38.0" prefWidth="132.0" styleClass="btn" stylesheets="@css/style2.css" text="Reset" />
+        <TableView fx:id="detailsTabel" layoutX="33.0" layoutY="278.0" prefHeight="364.0" prefWidth="1003.0">
             <columns>
                 <TableColumn fx:id="colProductId" prefWidth="200.0" text="Product ID" />
-                <TableColumn fx:id="colQYT" prefWidth="200.0" text="QYT" />
-                <TableColumn fx:id="colReorderLevel" prefWidth="200.0" text="Reorder Level" />
-                <TableColumn fx:id="colReorderQYT" prefWidth="200.0" text="Reorder QYT" />
-                <TableColumn fx:id="colLastStockUpdate" prefWidth="202.0" text="Last Stock Update" />
+                <TableColumn fx:id="colReorderLevel" prefWidth="268.0" text="Reorder Level" />
+                <TableColumn fx:id="colReorderQYT" prefWidth="240.0" text="Reorder QYT" />
+                <TableColumn fx:id="colLastStockUpdate" prefWidth="289.0" text="Last Stock Update" />
 
             </columns>
         </TableView>

@@ -1,6 +1,6 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.controller;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.dto.ReturnDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.model.ReturnModel;
 
 import java.util.ArrayList;
@@ -9,11 +9,11 @@ public class ReturnController {
 
     private final ReturnModel returnModel = new ReturnModel();
 
-    public String saveReturn(edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnDTO dto) throws Exception {
+    public String saveReturn(edu.ijse.mvc.fx.shopmanagementsystem.dto.ReturnDTO dto) throws Exception {
         return returnModel.saveReturn(dto);
     }
 
-    public String updateReturn(edu.ijse.mvc.fx.shopmanagementsystem.DTO.ReturnDTO dto) throws Exception {
+    public String updateReturn(edu.ijse.mvc.fx.shopmanagementsystem.dto.ReturnDTO dto) throws Exception {
         return returnModel.updateReturn(dto);
     }
 

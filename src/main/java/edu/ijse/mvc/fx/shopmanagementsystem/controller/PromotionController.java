@@ -1,7 +1,7 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.controller;
 
 import java.util.ArrayList;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.PromotionDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.dto.PromotionDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.model.PromotionModel;
 
 public class PromotionController {

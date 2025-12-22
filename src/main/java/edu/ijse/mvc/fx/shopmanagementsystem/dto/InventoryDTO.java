@@ -1,4 +1,4 @@
-package edu.ijse.mvc.fx.shopmanagementsystem.DTO;
+package edu.ijse.mvc.fx.shopmanagementsystem.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +12,6 @@ public class InventoryDTO {
 
     private String inventoryID;
     private String productID;
-    private int QYT;
     private int reOrderLevel;
     private int reOrderQYT;
     private LocalDate lastStockUpdate;

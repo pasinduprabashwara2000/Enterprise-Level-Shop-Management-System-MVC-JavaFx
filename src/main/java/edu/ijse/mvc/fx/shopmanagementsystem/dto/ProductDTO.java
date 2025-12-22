@@ -1,4 +1,4 @@
-package edu.ijse.mvc.fx.shopmanagementsystem.DTO;
+package edu.ijse.mvc.fx.shopmanagementsystem.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,8 +13,8 @@ public class ProductDTO {
     private String SKU;
     private int barCode;
     private String name;
-    private String unit;
     private double unitPrice;
+    private int qyt;
     private boolean active;
     private String categoryID;
 

@@ -1,6 +1,6 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.model;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.PromotionDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.dto.PromotionDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.db.DBConnection;
 
 import java.sql.Connection;

@@ -1,7 +1,7 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.CategoryDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.dto.CategoryDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.dto.ProductDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.CategoryController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.ProductController;
 import javafx.collections.FXCollections;
@@ -47,7 +47,7 @@ public class ManageProductController {
     private TableColumn<ProductDTO, String> colSKU;
 
     @FXML
-    private TableColumn<ProductDTO, String> colUnit;
+    private TableColumn<ProductDTO, String> colQYT;
 
     @FXML
     private TableColumn<ProductDTO, Double> colUnitPrice;
@@ -68,7 +68,7 @@ public class ManageProductController {
     private TextField unitPriceTxt;
 
     @FXML
-    private TextField unitTxt;
+    private TextField qytTxt;
 
     @FXML
     private void initialize() {
@@ -76,7 +76,7 @@ public class ManageProductController {
         colSKU.setCellValueFactory(new PropertyValueFactory<>("SKU"));
         colBarcode.setCellValueFactory(new PropertyValueFactory<>("barCode"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colUnit.setCellValueFactory(new PropertyValueFactory<>("unit"));
+        colQYT.setCellValueFactory(new PropertyValueFactory<>("qyt"));
         colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         colActive.setCellValueFactory(new PropertyValueFactory<>("active"));
         colCategoryID.setCellValueFactory(new PropertyValueFactory<>("categoryID"));
@@ -98,7 +98,7 @@ public class ManageProductController {
             skuTxt.setText(p.getSKU());
             barcodeTxt.setText(String.valueOf(p.getBarCode()));
             nameTxt.setText(p.getName());
-            unitTxt.setText(p.getUnit());
+            qytTxt.setText(String.valueOf(p.getQyt()));
             unitPriceTxt.setText(String.valueOf(p.getUnitPrice()));
             activeChk.setSelected(p.isActive());
             categoryCombo.setValue(p.getCategoryID());
@@ -140,8 +140,8 @@ public class ManageProductController {
                     skuTxt.getText(),
                     Integer.parseInt(barcodeTxt.getText()),
                     nameTxt.getText(),
-                    unitTxt.getText(),
                     Double.parseDouble(unitPriceTxt.getText()),
+                    Integer.parseInt(qytTxt.getText()),
                     activeChk.isSelected(),
                     categoryCombo.getValue()
             );
@@ -162,8 +162,8 @@ public class ManageProductController {
                     skuTxt.getText(),
                     Integer.parseInt(barcodeTxt.getText()),
                     nameTxt.getText(),
-                    unitTxt.getText(),
                     Double.parseDouble(unitPriceTxt.getText()),
+                    Integer.parseInt(qytTxt.getText()),
                     activeChk.isSelected(),
                     categoryCombo.getValue()
             );
@@ -194,7 +194,7 @@ public class ManageProductController {
         skuTxt.clear();
         barcodeTxt.clear();
         nameTxt.clear();
-        unitTxt.clear();
+        qytTxt.clear();
         unitPriceTxt.clear();
         activeChk.setSelected(false);
         categoryCombo.setValue(null);

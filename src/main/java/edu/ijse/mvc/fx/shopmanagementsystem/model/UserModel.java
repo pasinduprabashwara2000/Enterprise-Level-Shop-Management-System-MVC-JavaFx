@@ -4,12 +4,13 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.UserDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.dto.UserDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.db.DBConnection;
 
 public class UserModel {
 
     public String saveUser(UserDTO userDTO) throws Exception {
+
         Connection conn = DBConnection.getInstance().getConnection();
         String sql = "INSERT INTO User (userName, password, active, createdAt) VALUES (?,?,?,?)";
         PreparedStatement pstm = conn.prepareStatement(sql);
@@ -21,6 +22,7 @@ public class UserModel {
     }
 
     public String updateUser(UserDTO userDTO) throws Exception {
+
         Connection conn = DBConnection.getInstance().getConnection();
         String sql = "UPDATE User SET userName=?, password=?, active=?, createdAt=? WHERE userID=?";
         PreparedStatement pstm = conn.prepareStatement(sql);
@@ -33,6 +35,7 @@ public class UserModel {
     }
 
     public String deleteUser(String userID) throws Exception {
+
         Connection conn = DBConnection.getInstance().getConnection();
         String sql = "DELETE FROM User WHERE userID=?";
         PreparedStatement pstm = conn.prepareStatement(sql);

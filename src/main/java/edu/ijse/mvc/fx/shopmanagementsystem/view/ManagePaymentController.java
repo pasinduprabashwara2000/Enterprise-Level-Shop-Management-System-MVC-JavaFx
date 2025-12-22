@@ -3,8 +3,8 @@ package edu.ijse.mvc.fx.shopmanagementsystem.view;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.CustomerDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.PaymentDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.dto.CustomerDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.dto.PaymentDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.CustomerController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.PaymentController;
 import javafx.collections.FXCollections;

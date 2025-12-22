@@ -1,6 +1,6 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.controller;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.PaymentDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.dto.PaymentDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.model.PaymentModel;
 import java.util.ArrayList;
 

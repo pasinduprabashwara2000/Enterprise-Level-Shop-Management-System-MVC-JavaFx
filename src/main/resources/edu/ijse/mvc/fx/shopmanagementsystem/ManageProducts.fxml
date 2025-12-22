@@ -39,11 +39,11 @@
          </font></Label>
         <TextField fx:id="nameTxt" layoutX="207.0" layoutY="74.0" prefHeight="38.0" prefWidth="259.0" />
 
-        <Label layoutX="529.0" layoutY="82.0" text="Unit :">
+        <Label layoutX="529.0" layoutY="82.0" text="QYT : ">
          <font>
             <Font size="15.0" />
          </font></Label>
-        <TextField fx:id="unitTxt" layoutX="657.0" layoutY="74.0" prefHeight="38.0" prefWidth="259.0" />
+        <TextField fx:id="qytTxt" layoutX="657.0" layoutY="74.0" prefHeight="38.0" prefWidth="259.0" />
 
         <Label layoutX="528.0" layoutY="136.0" text="Unit Price :">
          <font>
@@ -73,7 +73,7 @@
                 <TableColumn fx:id="colSKU" prefWidth="100.0" text="SKU" />
                 <TableColumn fx:id="colBarcode" prefWidth="100.0" text="Barcode" />
                 <TableColumn fx:id="colName" prefWidth="253.0" text="Name" />
-                <TableColumn fx:id="colUnit" prefWidth="72.0" text="Unit" />
+                <TableColumn fx:id="colQYT" prefWidth="72.0" text="QYT" />
                 <TableColumn fx:id="colUnitPrice" prefWidth="139.0" text="Unit Price" />
                 <TableColumn fx:id="colActive" prefWidth="114.0" text="Active" />
                 <TableColumn fx:id="colCategoryID" prefWidth="123.0" text="Category ID" />

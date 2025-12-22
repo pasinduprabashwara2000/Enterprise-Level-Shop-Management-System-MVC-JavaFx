@@ -1,6 +1,6 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductTM;
+import edu.ijse.mvc.fx.shopmanagementsystem.dto.ProductTM;
 import edu.ijse.mvc.fx.shopmanagementsystem.model.DashboardModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -58,7 +58,7 @@ public class DashboardController {
     private Label lblProductsCount;
 
     @FXML
-    private Label lblPurchaseOrders;
+    private Label lblProfitCount;
 
     @FXML
     private Label lblReturnCount;
@@ -92,6 +92,7 @@ public class DashboardController {
         loadInventoryCount();
         loadReturnCount();
         loadTotalRevenue();
+        loadTotalProfit();
     }
 
     private void loadTable(){
@@ -163,6 +164,15 @@ public class DashboardController {
             lblRevenue.setText(String.valueOf(price));
         } catch (Exception e){
             lblRevenue.setText("Error");
+        }
+    }
+
+    public void loadTotalProfit(){
+        try {
+            double profit = DashboardModel.calculateTotalProfit();
+            lblProfitCount.setText(String.valueOf(profit));
+        } catch (Exception e) {
+            lblProfitCount.setText("Error");
         }
     }
 

@@ -1,7 +1,7 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.InventoryDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.dto.InventoryDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.dto.ProductDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.InventoryController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.ProductController;
 import javafx.collections.FXCollections;
@@ -26,9 +26,6 @@ public class ManageInventoryController {
     private ComboBox<String> productIdCombo;
 
     @FXML
-    private TextField qytTxt;
-
-    @FXML
     private TextField reOrderLevelTxt;
 
     @FXML
@@ -42,9 +39,6 @@ public class ManageInventoryController {
 
     @FXML
     private TableColumn<InventoryDTO, String> colProductId;
-
-    @FXML
-    private TableColumn<InventoryDTO, Integer> colQYT;
 
     @FXML
     private TableColumn<InventoryDTO, Integer> colReorderLevel;
@@ -70,7 +64,6 @@ public class ManageInventoryController {
     @FXML
     public void initialize() {
         colProductId.setCellValueFactory(new PropertyValueFactory<>("productID"));
-        colQYT.setCellValueFactory(new PropertyValueFactory<>("QYT"));
         colReorderLevel.setCellValueFactory(new PropertyValueFactory<>("reOrderLevel"));
         colReorderQYT.setCellValueFactory(new PropertyValueFactory<>("reOrderQYT"));
         colLastStockUpdate.setCellValueFactory(new PropertyValueFactory<>("lastStockUpdate"));
@@ -114,7 +107,6 @@ public class ManageInventoryController {
         if (inventory != null) {
             inventoryID.setText(inventory.getInventoryID());
             productIdCombo.setValue(inventory.getProductID());
-            qytTxt.setText(String.valueOf(inventory.getQYT()));
             reOrderLevelTxt.setText(String.valueOf(inventory.getReOrderLevel()));
             reOrderQytTxt.setText(String.valueOf(inventory.getReOrderQYT()));
             datePicker.setValue(inventory.getLastStockUpdate());
@@ -127,7 +119,6 @@ public class ManageInventoryController {
             InventoryDTO dto = new InventoryDTO(
                     null,
                     productIdCombo.getValue(),
-                    Integer.parseInt(qytTxt.getText()),
                     Integer.parseInt(reOrderLevelTxt.getText()),
                     Integer.parseInt(reOrderQytTxt.getText()),
                     datePicker.getValue()
@@ -148,7 +139,6 @@ public class ManageInventoryController {
             InventoryDTO dto = new InventoryDTO(
                     inventoryID.getText(),
                     productIdCombo.getValue(),
-                    Integer.parseInt(qytTxt.getText()),
                     Integer.parseInt(reOrderLevelTxt.getText()),
                     Integer.parseInt(reOrderQytTxt.getText()),
                     datePicker.getValue()
@@ -179,7 +169,6 @@ public class ManageInventoryController {
     void navigateReset(ActionEvent event) {
         inventoryID.clear();
         productIdCombo.setValue(null);
-        qytTxt.clear();
         reOrderLevelTxt.clear();
         reOrderQytTxt.clear();
         datePicker.setValue(null);

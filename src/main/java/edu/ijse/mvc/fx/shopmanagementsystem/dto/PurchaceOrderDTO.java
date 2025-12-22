@@ -1,4 +1,4 @@
-package edu.ijse.mvc.fx.shopmanagementsystem.DTO;
+package edu.ijse.mvc.fx.shopmanagementsystem.dto;
 
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;

@@ -40,7 +40,7 @@ public class ManageMainMenu2Controller {
     @FXML
     public void initialize() {
         dashboardBtn.setOnAction(event -> loadUI("Dashboard2"));
-        placeOrderBtn.setOnAction(event -> loadUI("ManagePlaceOrder"));
+        placeOrderBtn.setOnAction(event -> loadUI("ManageOrder"));
         searchProducts.setOnAction(event -> loadUI("ManageProducts2"));
         customerBtn.setOnAction(event -> loadUI("ManageCustomer"));
         saleBtn.setOnAction(event -> loadUI("ManageSale"));
