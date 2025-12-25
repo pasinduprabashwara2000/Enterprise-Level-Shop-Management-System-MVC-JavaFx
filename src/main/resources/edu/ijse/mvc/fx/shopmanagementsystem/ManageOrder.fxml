@@ -13,12 +13,13 @@
 <AnchorPane fx:id="anchorPane" prefHeight="700.0" prefWidth="1050.0" styleClass="anchor-pane" stylesheets="@css/style2.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.ManageOrderController">
 
     <!-- Title -->
-    <Label layoutX="39.0" layoutY="20.0" text="Manage Orders">
+    <Label layoutX="46.0" layoutY="20.0" text="Manage Orders">
         <font>
             <Font name="System Bold" size="20.0" />
         </font>
     </Label>
 
+    <TextField fx:id="productNameTxt" managed="false" visible="false" />
     <Label layoutX="47.0" layoutY="79.0" text="Customer ID:">
       <font>
          <Font size="15.0" />
@@ -37,27 +38,30 @@
       </font></Label>
     <TextField fx:id="totalAmountTxt" editable="false" layoutX="192.0" layoutY="180.0" prefHeight="38.0" prefWidth="250.0" />
 
-    <Label layoutX="528.0" layoutY="80.0" text="Discount:">
+    <Label layoutX="528.0" layoutY="137.0" text="Discount:">
       <font>
          <Font size="15.0" />
       </font></Label>
-    <TextField fx:id="discountTxt" layoutX="658.0" layoutY="71.0" prefHeight="38.0" prefWidth="257.0" />
+    <TextField fx:id="discountTxt" editable="false" layoutX="658.0" layoutY="128.0" prefHeight="38.0" prefWidth="257.0" />
 
-    <Label layoutX="528.0" layoutY="132.0" text="Net Amount:">
+    <Label layoutX="528.0" layoutY="189.0" text="Net Amount:">
       <font>
          <Font size="15.0" />
       </font></Label>
-    <TextField fx:id="netAmountTxt" editable="false" layoutX="658.0" layoutY="123.0" prefHeight="38.0" prefWidth="257.0" />
+    <TextField fx:id="netAmountTxt" editable="false" layoutX="658.0" layoutY="180.0" prefHeight="38.0" prefWidth="257.0" />
 
-    <!-- Order Items Table -->
     <TableView fx:id="orderItemsTable" layoutX="47.0" layoutY="236.0" prefHeight="300.0" prefWidth="958.0">
+
         <columns>
-            <TableColumn fx:id="colProductId" prefWidth="120.0" text="Product ID" />
-            <TableColumn fx:id="colProductName" prefWidth="263.0" text="Product Name" />
-            <TableColumn fx:id="colQuantity" prefWidth="131.0" text="Quantity" />
-            <TableColumn fx:id="colUnitPrice" prefWidth="145.0" text="Unit Price" />
-            <TableColumn fx:id="colTotal" prefWidth="132.0" text="Total" />
+            <TableColumn fx:id="colProductId" prefWidth="97.0" text="Product ID" />
+            <TableColumn fx:id="colProductName" prefWidth="204.0" text="Product Name" />
+            <TableColumn fx:id="colQuantity" prefWidth="122.0" text="Quantity" />
+            <TableColumn fx:id="colUnitPrice" prefWidth="109.0" text="Unit Price" />
+            <TableColumn fx:id="colDiscount" prefWidth="117.0" text="Discount" />
+            <TableColumn fx:id="colTotal" prefWidth="130.0" text="Total" />
+            <TableColumn fx:id="colAction" prefWidth="180.0" text="Action" />
         </columns>
+
     </TableView>
 
     <!-- Item Controls -->
@@ -84,4 +88,10 @@
     <!-- Action Buttons -->
     <Button fx:id="saveOrderBtn" layoutX="871.0" layoutY="554.0" onAction="#saveOrder" prefHeight="38.0" prefWidth="134.0" styleClass="light-yellow-btn" stylesheets="@css/style6.css" text="Save Order" />
     <Button fx:id="resetBtn" layoutX="783.0" layoutY="554.0" onAction="#resetForm" prefHeight="38.0" prefWidth="80.0" text="Reset" />
+   <ComboBox fx:id="promotionIdCombo" layoutX="658.0" layoutY="69.0" prefHeight="43.0" prefWidth="257.0" promptText="Select Promotion ID" />
+   <Label layoutX="528.0" layoutY="80.0" text="Promotion ID :">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
 </AnchorPane>

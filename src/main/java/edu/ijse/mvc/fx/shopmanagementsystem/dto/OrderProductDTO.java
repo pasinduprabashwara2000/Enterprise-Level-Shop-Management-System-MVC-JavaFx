@@ -9,13 +9,17 @@ import lombok.NoArgsConstructor;
 @Data
 public class OrderProductDTO {
 
-    private int orderProductId;
-    private int productId;
+    private int orderId;
+    private String productId;
     private int qty;
     private double price;
 
     public double getTotal(){
         return qty * price;
+    }
+
+    public OrderProductDTO(String productID, int qty, double unitPrice) {
+
     }
 
 }

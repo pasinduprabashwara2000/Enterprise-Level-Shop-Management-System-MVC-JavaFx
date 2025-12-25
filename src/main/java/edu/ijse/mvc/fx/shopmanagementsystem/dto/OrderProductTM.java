@@ -11,8 +11,8 @@ public class OrderProductTM {
 
     private String productID;
     private String name;
-    private double unitPrice;
     private int qty;
+    private double unitPrice;
     private double total;
 
 }

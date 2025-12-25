@@ -8,14 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class PurchaceOrderDTO {
+public class PurchaseOrderDTO {
 
     private String poId;
     private String supplierId;
-    private LocalDate createdAt;
-    private String createdBy;
-    private String status;
-    private LocalDate expectedDate;
     private Double totalCost;
+    private String status;
+    private LocalDate createdAt;
+    private LocalDate expectedDate;
 
 }

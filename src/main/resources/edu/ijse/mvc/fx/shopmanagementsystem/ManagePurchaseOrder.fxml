@@ -22,28 +22,22 @@
         </Label>
 
         <TextField fx:id="poIdTxt" managed="false" visible="false" />
-        <Label layoutX="34.0" layoutY="81.0" text="Supplier ID :">
+        <Label layoutX="49.0" layoutY="85.0" text="Supplier ID :">
          <font>
             <Font size="15.0" />
          </font></Label>
 
-        <Label layoutX="34.0" layoutY="136.0" text="Created At :">
+        <Label layoutX="552.0" layoutY="83.0" text="Created At :">
          <font>
             <Font size="15.0" />
          </font></Label>
-        <DatePicker fx:id="createdAtPicker" layoutX="206.0" layoutY="129.0" prefHeight="38.0" prefWidth="259.0" />
+        <DatePicker fx:id="createdAtPicker" layoutX="681.0" layoutY="72.0" prefHeight="38.0" prefWidth="259.0" />
 
-        <Label layoutX="521.0" layoutY="78.0" text="Created By :">
+        <Label layoutX="49.0" layoutY="198.0" text="Status :">
          <font>
             <Font size="15.0" />
          </font></Label>
-        <TextField fx:id="createdByTxt" layoutX="650.0" layoutY="70.0" prefHeight="38.0" prefWidth="259.0" />
-
-        <Label layoutX="521.0" layoutY="134.0" text="Status :">
-         <font>
-            <Font size="15.0" />
-         </font></Label>
-        <ComboBox fx:id="statusCombo" layoutX="650.0" layoutY="126.0" prefHeight="38.0" prefWidth="259.0" promptText="Select Status">
+        <ComboBox fx:id="statusCombo" layoutX="207.0" layoutY="186.0" prefHeight="38.0" prefWidth="259.0" promptText="Select Status">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="DRAFT" />
@@ -55,34 +49,33 @@
             </items>
         </ComboBox>
 
-        <Label layoutX="521.0" layoutY="189.0" text="Expected Date :">
+        <Label layoutX="552.0" layoutY="139.0" text="Expected Date :">
          <font>
             <Font size="15.0" />
          </font></Label>
-        <DatePicker fx:id="expectedDatePicker" layoutX="650.0" layoutY="181.0" prefHeight="38.0" prefWidth="259.0" />
+        <DatePicker fx:id="expectedDatePicker" layoutX="681.0" layoutY="131.0" prefHeight="38.0" prefWidth="259.0" />
 
-        <Label layoutX="34.0" layoutY="191.0" text="Total Cost :">
+        <Label layoutX="49.0" layoutY="140.0" text="Total Cost :">
          <font>
             <Font size="15.0" />
          </font></Label>
-        <TextField fx:id="totalCostTxt" layoutX="206.0" layoutY="183.0" prefHeight="38.0" prefWidth="259.0" />
+        <TextField fx:id="totalCostTxt" layoutX="206.0" layoutY="132.0" prefHeight="38.0" prefWidth="259.0" />
 
-        <Button fx:id="saveBtn" layoutX="236.0" layoutY="250.0" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Save" />
-        <Button fx:id="updateBtn" layoutX="395.0" layoutY="250.0" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Update" />
-        <Button fx:id="deleteBtn" layoutX="552.0" layoutY="250.0" onAction="#navigateDelete" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Delete" />
-        <Button fx:id="resetBtn" layoutX="706.0" layoutY="250.0" onAction="#navigateReset" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Reset" />
+        <Button fx:id="saveBtn" layoutX="236.0" layoutY="260.0" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Save" />
+        <Button fx:id="updateBtn" layoutX="395.0" layoutY="260.0" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Update" />
+        <Button fx:id="deleteBtn" layoutX="552.0" layoutY="260.0" onAction="#navigateDelete" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Delete" />
+        <Button fx:id="resetBtn" layoutX="706.0" layoutY="260.0" onAction="#navigateReset" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Reset" />
 
-        <TableView fx:id="poTable" layoutX="33.0" layoutY="319.0" prefHeight="331.0" prefWidth="1003.0">
+        <TableView fx:id="poTable" layoutX="33.0" layoutY="324.0" prefHeight="331.0" prefWidth="1003.0">
             <columns>
-                <TableColumn fx:id="colPOID" prefWidth="100.0" text="PO ID" />
-                <TableColumn fx:id="colSupplierID" prefWidth="150.0" text="Supplier ID" />
-                <TableColumn fx:id="colCreatedAt" prefWidth="150.0" text="Created At" />
-                <TableColumn fx:id="colCreatedBy" prefWidth="150.0" text="Created By" />
-                <TableColumn fx:id="colStatus" prefWidth="120.0" text="Status" />
-                <TableColumn fx:id="colExpectedDate" prefWidth="150.0" text="Expected Date" />
-                <TableColumn fx:id="colTotalCost" prefWidth="179.0" text="Total Cost" />
+                <TableColumn fx:id="colPOID" prefWidth="118.0" text="PO ID" />
+                <TableColumn fx:id="colSupplierID" prefWidth="163.0" text="Supplier ID" />
+                <TableColumn fx:id="colCreatedAt" prefWidth="168.0" text="Created At" />
+                <TableColumn fx:id="colStatus" prefWidth="172.0" text="Status" />
+                <TableColumn fx:id="colExpectedDate" prefWidth="187.0" text="Expected Date" />
+                <TableColumn fx:id="colTotalCost" prefWidth="192.0" text="Total Cost" />
             </columns>
         </TableView>
-      <ComboBox fx:id="supplierIdCombo" layoutX="206.0" layoutY="70.0" onAction="#loadSupplierId" prefHeight="38.0" prefWidth="259.0" promptText="Select Supplier ID" />
+      <ComboBox fx:id="supplierIdCombo" layoutX="206.0" layoutY="73.0" prefHeight="38.0" prefWidth="259.0" promptText="Select Supplier ID" />
     </children>
 </AnchorPane>

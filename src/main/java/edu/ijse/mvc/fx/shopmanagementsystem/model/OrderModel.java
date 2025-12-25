@@ -11,7 +11,7 @@ public class OrderModel {
 
     private OrderProductModel orderProductModel = new OrderProductModel();
 
-    public boolean placeOrder(OrderDTO orderDTO) throws Exception{
+    public int placeOrder(OrderDTO orderDTO) throws Exception{
 
         Connection conn = DBConnection.getInstance().getConnection();
 
@@ -31,14 +31,13 @@ public class OrderModel {
                 }
             }
             conn.commit();
-            return true;
         } catch (Exception e) {
             conn.rollback();
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         } finally {
             conn.setAutoCommit(true);
         }
-        return false;
+        return 0;
     }
 
 }

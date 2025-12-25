@@ -98,7 +98,7 @@ public class ProductModel {
         return productList;
     }
 
-    public boolean decreaseProductQYT(int id, int qyt) throws Exception {
+    public boolean decreaseProductQYT(String id, int qyt) throws Exception {
 
         boolean isUpdated = CrudUtil.execute("UPDATE Product SET qyt -? WHERE productID = ?",
                 id,

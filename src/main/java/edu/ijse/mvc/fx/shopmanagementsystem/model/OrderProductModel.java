@@ -59,12 +59,12 @@ public class OrderProductModel {
         ResultSet rst = pstm.executeQuery();
         while (rst.next()){
             OrderProductTM orderProductTM = new OrderProductTM(
-            rst.getString("productID"),
-            rst.getString("name"),
-            rst.getDouble("unitPrice"),
-            rst.getInt("qty"),
-            rst.getDouble("total"));
-            products.add(orderProductTM);
+                    rst.getString("productID"),
+                    rst.getString("name"),
+                    rst.getInt("qty"),
+                    rst.getDouble("unitPrice"),
+                    rst.getDouble("total"));
+                    products.add(orderProductTM);
         }
         return products;
     }
