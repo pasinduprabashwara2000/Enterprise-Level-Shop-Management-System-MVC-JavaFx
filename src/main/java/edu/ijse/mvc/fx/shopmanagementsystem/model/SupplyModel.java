@@ -11,7 +11,7 @@ public class SupplyModel {
     public String saveSupply(SupplyDTO supplyDTO) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO Supply VALUES(?,?,?,?)";
+        String sql = "INSERT INTO Supply VALUES(?,?,?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, supplyDTO.getProductID());
         pstm.setString(2, supplyDTO.getSupplierID());
