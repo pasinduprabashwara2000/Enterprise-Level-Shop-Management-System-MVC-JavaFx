@@ -11,16 +11,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="productsPane" prefHeight="680.0" prefWidth="1075.0"
-            styleClass="content-area" stylesheets="@css/style6.css"
-            xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.ManageProduct2Controller">
+<AnchorPane fx:id="productsPane" prefHeight="680.0" prefWidth="1075.0" stylesheets="@css/style2.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.ManageProduct2Controller">
 
     <children>
         <!-- Main Content Container -->
-        <VBox spacing="24.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox spacing="24.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <padding>
                 <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
             </padding>
@@ -46,7 +41,7 @@
                 </HBox>
 
                 <!-- Search Section Card -->
-                <VBox spacing="16.0" styleClass="card,search-card">
+                <VBox prefHeight="182.0" prefWidth="1027.0" spacing="16.0" style="-fx-background-color: white; -fx-background-radius: 25px;">
                     <padding>
                         <Insets bottom="20.0" left="24.0" right="24.0" top="20.0" />
                     </padding>
@@ -65,15 +60,12 @@
                                 </Label>
 
                                 <!-- Search Input -->
-                                <TextField fx:id="idTxt" prefWidth="400.0"
-                                           promptText="Enter product name, SKU, or barcode..."
-                                           styleClass="text-field,search-input" HBox.hgrow="ALWAYS">
+                                <TextField fx:id="idTxt" prefWidth="400.0" promptText="Enter product name, SKU, or barcode..." styleClass="text-field,search-input" HBox.hgrow="ALWAYS">
                                     <font><Font size="14.0" /></font>
                                 </TextField>
 
                                 <!-- Search Button -->
-                                <Button fx:id="searchBtn" mnemonicParsing="false" prefWidth="120.0"
-                                        styleClass="primary-btn" text="Search">
+                                <Button fx:id="searchBtn" mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #27ae60;" text="Search" textFill="WHITE">
                                     <padding>
                                         <Insets bottom="12.0" left="24.0" right="24.0" top="12.0" />
                                     </padding>
@@ -81,12 +73,11 @@
                                 </Button>
 
                                 <!-- Clear/Reset Button -->
-                                <Button fx:id="clearBtn" mnemonicParsing="false" prefWidth="100.0"
-                                        styleClass="secondary-btn" text="Clear">
+                                <Button fx:id="clearBtn" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: #e74c3c;" text="Clear" textFill="WHITE">
                                     <padding>
                                         <Insets bottom="12.0" left="20.0" right="20.0" top="12.0" />
                                     </padding>
-                                    <font><Font size="13.0" /></font>
+                                    <font><Font name="System Bold" size="13.0" /></font>
                                 </Button>
                             </children>
                         </HBox>
@@ -94,7 +85,7 @@
                 </VBox>
 
                 <!-- Results Section -->
-                <VBox spacing="12.0" VBox.vgrow="ALWAYS">
+                <VBox prefHeight="400.0" prefWidth="1027.0" spacing="12.0" VBox.vgrow="ALWAYS">
                     <children>
                         <!-- Results Header -->
                         <HBox alignment="CENTER_LEFT" spacing="12.0">
@@ -107,19 +98,16 @@
                                 <HBox HBox.hgrow="ALWAYS" />
 
                                 <!-- Results Count Badge -->
-                                <Label fx:id="resultsCountLabel" styleClass="badge,badge-info"
-                                       text="0 products found">
+                                <Label fx:id="resultsCountLabel" styleClass="badge,badge-info" text="0 products found">
                                     <font><Font name="System Bold" size="11.0" /></font>
                                 </Label>
                             </children>
                         </HBox>
 
                         <!-- Products Table -->
-                        <TableView fx:id="detailsTable" styleClass="table-view,products-table"
-                                   VBox.vgrow="ALWAYS">
+                        <TableView fx:id="detailsTable" VBox.vgrow="ALWAYS">
                             <columns>
-                                <TableColumn fx:id="colProductID" prefWidth="80.0"
-                                             styleClass="table-column-id" text="ID" />
+                                <TableColumn fx:id="colProductID" prefWidth="80.0" styleClass="table-column-id" text="ID" />
                                 <TableColumn fx:id="colSKU" prefWidth="100.0" text="SKU" />
                                 <TableColumn fx:id="colBarcode" prefWidth="120.0" text="Barcode" />
                                 <TableColumn fx:id="colName" prefWidth="220.0" text="Product Name" />

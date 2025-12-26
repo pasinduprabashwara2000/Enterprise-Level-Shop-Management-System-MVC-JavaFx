@@ -67,7 +67,7 @@ public class DashboardController {
     private Label lblRevenue;
 
     @FXML
-    private Label lblSalesCount;
+    private Label lblOrderCount;
 
     @FXML
     private Label lblSupplierCount;
@@ -87,7 +87,7 @@ public class DashboardController {
         loadTable();
         loadCustomerCount();
         loadProductsCount();
-        loadSaleCount();
+        loadOrderCount();
         loadSupplerCount();
         loadInventoryCount();
         loadReturnCount();
@@ -131,12 +131,12 @@ public class DashboardController {
         }
     }
 
-    public void loadSaleCount(){
+    public void loadOrderCount(){
         try {
-            int count = DashboardModel.getSaleCount();
-            lblSalesCount.setText(String.valueOf(count));
+            int count = DashboardModel.getOrderCount();
+            lblOrderCount.setText(String.valueOf(count));
         } catch (Exception e) {
-            lblSalesCount.setText("Error");
+            lblOrderCount.setText("Error");
         }
     }
 

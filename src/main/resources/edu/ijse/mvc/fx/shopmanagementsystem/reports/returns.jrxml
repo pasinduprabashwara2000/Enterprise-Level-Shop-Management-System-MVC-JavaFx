@@ -1,0 +1,92 @@
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 7.0.3-41034ca841d452f3305ba55b9042260aaa1ab5dd  -->
+<jasperReport name="Returns" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="947be04a-80d5-48f1-a90f-1dbb13c0e0f4">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Database Adapter"/>
+	<parameter name="FROM_DATE" class="java.util.Date"/>
+	<parameter name="TO_DATE" class="java.util.Date"/>
+	<query language="SQL"><![CDATA[SELECT `Customer`.name,
+	`Returns`.reason,
+	`Returns`.`refundAmount`,
+	`Returns`.`returnDate`,
+	`Returns`.action
+FROM `Customer`
+	JOIN `Returns` ON 
+	 `Customer`.`customerID` = `Returns`.`customerId`
+ WHERE returnDate BETWEEN $P{FROM_DATE} AND $P{TO_DATE} 
+	 ]]></query>
+	<field name="name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name"/>
+		<property name="com.jaspersoft.studio.field.label" value="name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Customer"/>
+	</field>
+	<field name="reason" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="reason"/>
+		<property name="com.jaspersoft.studio.field.label" value="reason"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Returns"/>
+	</field>
+	<field name="refundAmount" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="refundAmount"/>
+		<property name="com.jaspersoft.studio.field.label" value="refundAmount"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Returns"/>
+	</field>
+	<field name="returnDate" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="returnDate"/>
+		<property name="com.jaspersoft.studio.field.label" value="returnDate"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Returns"/>
+	</field>
+	<field name="action" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="action"/>
+		<property name="com.jaspersoft.studio.field.label" value="action"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Returns"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="66" splitType="Stretch">
+		<element kind="staticText" uuid="7a199015-06e6-445a-bd28-512c645f3d56" x="25" y="2" width="500" height="30" fontSize="20.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Sheiba Arcade Computer System]]></text>
+		</element>
+		<element kind="staticText" uuid="96f40634-7416-46af-b3fc-7d583505cd7c" x="86" y="35" width="387" height="30" fontSize="15.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[No. 746/6 Shobitha Road Wadduwa]]></text>
+		</element>
+	</title>
+	<pageHeader height="40" splitType="Stretch">
+		<element kind="staticText" uuid="738d20f8-9414-4b1c-ad05-c3dabc0e0b3c" x="180" y="4" width="195" height="30" fontSize="14.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Returns Details]]></text>
+		</element>
+	</pageHeader>
+	<columnHeader height="37" splitType="Stretch">
+		<element kind="staticText" uuid="6cf06573-4e5f-4825-974c-ac4ce1ad8aba" x="1" y="3" width="100" height="30" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Name]]></text>
+		</element>
+		<element kind="staticText" uuid="ffad7341-156b-4348-a8fb-87db1f494ac0" x="343" y="3" width="100" height="30" bold="true" hTextAlign="Left" vTextAlign="Middle">
+			<text><![CDATA[Refund Amount]]></text>
+		</element>
+		<element kind="staticText" uuid="a9224e6b-b08b-419f-9a99-a56fb2f6d79a" x="132" y="4" width="100" height="28" bold="true" hTextAlign="Left" vTextAlign="Middle">
+			<text><![CDATA[Description]]></text>
+		</element>
+		<element kind="staticText" uuid="c64e8589-6a1e-4357-8006-372d849ca43e" x="453" y="5" width="100" height="27" bold="true" hTextAlign="Left" vTextAlign="Middle">
+			<text><![CDATA[Action]]></text>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<element kind="textField" uuid="6db2393c-9261-4e08-8585-82467757c737" x="343" y="3" width="100" height="30" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$F{refundAmount}]]></expression>
+			</element>
+			<element kind="textField" uuid="fdc78c1f-1e21-40ba-81bc-d1ac6cf9fce4" x="132" y="3" width="196" height="30" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$F{reason}]]></expression>
+			</element>
+			<element kind="textField" uuid="d0d1d14d-c246-4789-8649-3d96d73da8e8" x="0" y="3" width="100" height="30" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$F{name}]]></expression>
+			</element>
+			<element kind="textField" uuid="0eba9f1d-ad81-42de-a576-a0164b83104e" x="454" y="3" width="100" height="30" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$F{action}]]></expression>
+			</element>
+		</band>
+	</detail>
+	<pageFooter height="31" splitType="Stretch">
+		<element kind="staticText" uuid="e562db70-af96-4c03-a192-dbb0fd80b77e" x="360" y="7" width="194" height="20" hTextAlign="Center">
+			<text><![CDATA[Developed By Sample IT System]]></text>
+		</element>
+	</pageFooter>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>

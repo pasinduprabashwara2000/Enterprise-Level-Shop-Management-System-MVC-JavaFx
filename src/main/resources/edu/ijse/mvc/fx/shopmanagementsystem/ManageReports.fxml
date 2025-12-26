@@ -36,15 +36,16 @@
                         <String fx:value="Customer Purchase Report" />
                         <String fx:value="Revenue Report" />
                         <String fx:value="Profit Report" />
-                        <String fx:value="Sales Return Report" />
+                        <String fx:value="Payment Report" />
+                        <String fx:value="Return Report" />
                     </FXCollections>
                     </items>
                 </ComboBox>
 
-            <DatePicker fx:id="dpFromDate" prefHeight="44.0" prefWidth="209.0" promptText="From Date" stylesheets="@css/style2.css" />
-            <DatePicker fx:id="dpToDate" prefHeight="43.0" prefWidth="209.0" promptText="To Date" stylesheets="@css/style2.css" />
+            <DatePicker fx:id="fromDate" prefHeight="44.0" prefWidth="209.0" promptText="From Date" stylesheets="@css/style2.css" />
+            <DatePicker fx:id="toDate" prefHeight="43.0" prefWidth="209.0" promptText="To Date" stylesheets="@css/style2.css" />
 
-            <Button fx:id="btnGenerate" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="160.0" styleClass="success-btn" stylesheets="@css/style4.css" text="Generate Report">
+            <Button fx:id="btnGenerate" alignment="CENTER" contentDisplay="CENTER" onAction="#generateReports" prefHeight="35.0" prefWidth="160.0" styleClass="success-btn" stylesheets="@css/style4.css" text="Generate Report">
             <font>
                <Font name="System Bold" size="13.0" />
             </font></Button>

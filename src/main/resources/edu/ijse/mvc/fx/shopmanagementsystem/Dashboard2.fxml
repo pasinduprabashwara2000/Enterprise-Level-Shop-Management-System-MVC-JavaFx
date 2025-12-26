@@ -64,12 +64,12 @@
                                         <children>
                                             <VBox spacing="4.0" HBox.hgrow="ALWAYS">
                                                 <children>
-                                                    <Label styleClass="stat-label" text="TOTAL SALES">
+                                                    <Label styleClass="stat-label" text="TOTAL Customers">
                                                         <font>
                                                             <Font name="System Bold" size="11.0" />
                                                         </font>
                                                     </Label>
-                                                    <Label fx:id="lblSalesCount" styleClass="stat-value" text="">
+                                                    <Label fx:id="lblCustomersCount" styleClass="stat-value" text="">
                                                         <font>
                                                             <Font name="System Bold" size="32.0" />
                                                         </font>

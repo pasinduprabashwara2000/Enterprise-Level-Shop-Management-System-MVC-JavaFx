@@ -1,0 +1,125 @@
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 7.0.3-41034ca841d452f3305ba55b9042260aaa1ab5dd  -->
+<jasperReport name="payment" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7288d07c-3cfb-4a11-bf5a-733bca093f0b">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
+	<dataset name="Dataset1" uuid="01bc8a98-eac9-4bde-be71-1b4d9a785b21">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Database Adapter"/>
+		<query language="SQL"><![CDATA[SELECT Customer.name, Payment.amount, Payment.method, Payment.reference, Payment.received_at
+FROM Payment
+JOIN Customer
+ON Payment.customer_id = Customer.customerID]]></query>
+		<field name="name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="name"/>
+			<property name="com.jaspersoft.studio.field.label" value="name"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="Customer"/>
+		</field>
+		<field name="amount" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="amount"/>
+			<property name="com.jaspersoft.studio.field.label" value="amount"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="Payment"/>
+		</field>
+		<field name="method" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="method"/>
+			<property name="com.jaspersoft.studio.field.label" value="method"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="Payment"/>
+		</field>
+		<field name="reference" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="reference"/>
+			<property name="com.jaspersoft.studio.field.label" value="reference"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="Payment"/>
+		</field>
+		<field name="received_at" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.name" value="received_at"/>
+			<property name="com.jaspersoft.studio.field.label" value="received_at"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="Payment"/>
+		</field>
+	</dataset>
+	<parameter name="FROM_DATE" class="java.util.Date"/>
+	<parameter name="TO_DATE" class="java.util.Date"/>
+	<query language="SQL"><![CDATA[SELECT Customer.name, Payment.amount, Payment.method, Payment.reference, Payment.received_at
+FROM Payment
+JOIN Customer
+ON Payment.customer_id = Customer.customerID
+WHERE received_at BETWEEN $P{FROM_DATE} AND $P{TO_DATE}
+	 ]]></query>
+	<field name="name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name"/>
+		<property name="com.jaspersoft.studio.field.label" value="name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Customer"/>
+	</field>
+	<field name="amount" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="amount"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Payment"/>
+	</field>
+	<field name="method" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="method"/>
+		<property name="com.jaspersoft.studio.field.label" value="method"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Payment"/>
+	</field>
+	<field name="reference" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="reference"/>
+		<property name="com.jaspersoft.studio.field.label" value="reference"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Payment"/>
+	</field>
+	<field name="received_at" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="received_at"/>
+		<property name="com.jaspersoft.studio.field.label" value="received_at"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Payment"/>
+	</field>
+	<title height="65" splitType="Stretch">
+		<element kind="staticText" uuid="31c870a0-5f2a-4c19-a2be-56bb410029e7" x="27" y="0" width="500" height="30" fontSize="20.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Sheiba Arcade Computer System]]></text>
+		</element>
+		<element kind="staticText" uuid="783428ca-6840-426f-89c1-ab8322e1bd7b" x="84" y="33" width="387" height="30" fontSize="15.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[No. 746/6 Shobitha Road Wadduwa]]></text>
+		</element>
+	</title>
+	<pageHeader height="34" splitType="Stretch">
+		<element kind="staticText" uuid="d233ccd0-94d6-4452-999f-08691ea4f440" x="179" y="1" width="195" height="30" fontSize="14.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Payment Details]]></text>
+		</element>
+	</pageHeader>
+	<columnHeader height="35" splitType="Stretch">
+		<element kind="staticText" uuid="6e61693b-38f6-42f0-a113-f5e417d8beee" x="-11" y="0" width="100" height="30" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Name]]></text>
+		</element>
+		<element kind="staticText" uuid="3e1e2267-6f20-4593-bf32-d424a7a37158" x="104" y="1" width="100" height="30" bold="true" hTextAlign="Left" vTextAlign="Middle">
+			<text><![CDATA[Amount]]></text>
+		</element>
+		<element kind="staticText" uuid="f53c15c7-5228-44ef-8dda-5af0bc710dca" x="222" y="0" width="100" height="30" bold="true" hTextAlign="Left" vTextAlign="Middle">
+			<text><![CDATA[Method]]></text>
+		</element>
+		<element kind="staticText" uuid="78c07993-fd40-4cc1-afe4-53cdb24e024a" x="340" y="0" width="100" height="30" bold="true" hTextAlign="Left" vTextAlign="Middle">
+			<text><![CDATA[Referenced]]></text>
+		</element>
+		<element kind="staticText" uuid="04adc98d-1dfd-4a37-bc0c-367259527bf6" x="453" y="0" width="100" height="30" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Received At]]></text>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<element kind="textField" uuid="b62702aa-e69c-4a15-bbdf-2ab341a10378" x="-11" y="-1" width="101" height="20" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$F{name}]]></expression>
+			</element>
+			<element kind="textField" uuid="7348bc1b-bdd9-48e7-863e-b5a46c78cc51" x="103" y="-1" width="101" height="20" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$F{amount}]]></expression>
+			</element>
+			<element kind="textField" uuid="acfc5bd8-d8c5-484b-a561-31e0f53ae3f9" x="221" y="-1" width="101" height="20" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$F{method}]]></expression>
+			</element>
+			<element kind="textField" uuid="3e8c2479-1f76-4194-ad9c-29ff11cbb429" x="340" y="-1" width="101" height="20" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$F{reference}]]></expression>
+			</element>
+			<element kind="textField" uuid="ad82948e-1995-4045-b71a-ae8c885da63d" x="454" y="-1" width="101" height="20" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$F{received_at}]]></expression>
+			</element>
+		</band>
+	</detail>
+	<pageFooter height="31" splitType="Stretch">
+		<element kind="staticText" uuid="30978c94-798f-4b00-9517-7d3fab2c8608" x="359" y="11" width="194" height="20" hTextAlign="Center">
+			<text><![CDATA[Developed By Sample IT System]]></text>
+		</element>
+	</pageFooter>
+</jasperReport>

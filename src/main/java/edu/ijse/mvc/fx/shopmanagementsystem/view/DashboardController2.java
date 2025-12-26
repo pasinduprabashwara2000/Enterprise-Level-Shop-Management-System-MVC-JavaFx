@@ -38,7 +38,7 @@ public class DashboardController2 {
     private Label lblOrderCount;
 
     @FXML
-    private Label lblSalesCount;
+    private Label lblCustomersCount;
 
     @FXML
     private TableView<?> ordersTable;
@@ -46,17 +46,17 @@ public class DashboardController2 {
     @FXML
     void initialize() throws Exception {
 
-        loadSaleCount();
+        loadCustomerCount();
         loadOrdersCount();
         loadPaymentCount();
         loadReturnCount();
 
     }
 
-    private void loadSaleCount() throws Exception {
+    private void loadCustomerCount() throws Exception {
         try {
-            int count = DashboardModel.getSaleCount();
-            lblSalesCount.setText(String.valueOf(count));
+            int count = DashboardModel.getCustomerCount();
+            lblCustomersCount.setText(String.valueOf(count));
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }

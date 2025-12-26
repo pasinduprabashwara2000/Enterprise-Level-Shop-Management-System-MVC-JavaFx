@@ -29,21 +29,21 @@ public class ManageMainMenu2Controller {
     private Button paymentBtn;
 
     @FXML
+    private Button utilitiesBtn;
+
+    @FXML
     private Button placeOrderBtn;
 
     @FXML
     private Button returnBtn;
 
     @FXML
-    private Button saleBtn;
-
-    @FXML
     public void initialize() {
         dashboardBtn.setOnAction(event -> loadUI("Dashboard2"));
+        utilitiesBtn.setOnAction(event -> loadUI("Utilities"));
         placeOrderBtn.setOnAction(event -> loadUI("ManageOrder"));
         searchProducts.setOnAction(event -> loadUI("ManageProducts2"));
         customerBtn.setOnAction(event -> loadUI("ManageCustomer"));
-        saleBtn.setOnAction(event -> loadUI("ManageSale"));
         paymentBtn.setOnAction(event -> loadUI("ManagePayment"));
         returnBtn.setOnAction(event -> loadUI("ManageReturn"));
         logOutBtn.setOnAction(event -> loadUI(""));

@@ -26,7 +26,7 @@
             </VBox>
 
             <VBox alignment="CENTER" prefWidth="230.0" spacing="10.0" styleClass="box3">
-                <Label styleClass="dashboard-label" text="Total Sales" />
+                <Label styleClass="dashboard-label" text="Total Orders" />
                 <Label fx:id="lblSalesCount" styleClass="dashboard-value" text="0" />
             </VBox>
 
@@ -46,7 +46,7 @@
             </VBox>
 
             <VBox alignment="CENTER" prefWidth="230.0" spacing="10.0" styleClass="box7">
-                <Label styleClass="dashboard-label" text="Returns" />
+                <Label styleClass="dashboard-label" text="Total Returns" />
                 <Label fx:id="lblReturnCount" styleClass="dashboard-value" text="0" />
             </VBox>
 
