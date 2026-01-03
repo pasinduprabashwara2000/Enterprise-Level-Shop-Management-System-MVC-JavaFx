@@ -1,7 +1,7 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.dto.RoleDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.dto.UserDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.RoleDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.UserDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.RoleController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.UserController;
 import javafx.collections.FXCollections;

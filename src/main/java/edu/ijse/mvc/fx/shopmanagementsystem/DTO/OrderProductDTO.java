@@ -1,4 +1,4 @@
-package edu.ijse.mvc.fx.shopmanagementsystem.dto;
+package edu.ijse.mvc.fx.shopmanagementsystem.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,12 +14,10 @@ public class OrderProductDTO {
     private int qty;
     private double price;
 
-    public double getTotal(){
-        return qty * price;
-    }
-
-    public OrderProductDTO(String productID, int qty, double unitPrice) {
-
+    public OrderProductDTO(String productId, double price, int qty) {
+        this.productId = productId;
+        this.price = price;
+        this.qty = qty;
     }
 
 }

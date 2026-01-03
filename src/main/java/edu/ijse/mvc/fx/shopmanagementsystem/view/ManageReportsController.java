@@ -1,6 +1,6 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.db.DBConnection;
+import edu.ijse.mvc.fx.shopmanagementsystem.DB.DBConnection;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;

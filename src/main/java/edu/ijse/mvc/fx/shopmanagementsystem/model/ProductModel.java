@@ -3,8 +3,8 @@ package edu.ijse.mvc.fx.shopmanagementsystem.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import edu.ijse.mvc.fx.shopmanagementsystem.dto.ProductDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.db.DBConnection;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DB.DBConnection;
 import edu.ijse.mvc.fx.shopmanagementsystem.util.CrudUtil;
 
 public class ProductModel {
@@ -98,12 +98,13 @@ public class ProductModel {
         return productList;
     }
 
-    public boolean decreaseProductQYT(String id, int qyt) throws Exception {
+    public boolean decreaseProductQTY(String productId, int qty) throws Exception {
 
-        boolean isUpdated = CrudUtil.execute("UPDATE Product SET qyt -? WHERE productID = ?",
-                id,
-                qyt);
-
-        return isUpdated;
+        return CrudUtil.execute(
+                "UPDATE Product SET qyt = qyt - ? WHERE productID = ?",
+                qty,
+                productId
+        );
     }
+
 }

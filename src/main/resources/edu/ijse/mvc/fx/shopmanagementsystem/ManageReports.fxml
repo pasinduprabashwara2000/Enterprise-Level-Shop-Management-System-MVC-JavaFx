@@ -27,15 +27,6 @@
             <ComboBox fx:id="cmbReportType" prefHeight="43.0" prefWidth="277.0" promptText="Select Report Type" styleClass="combo-box" stylesheets="@css/style2.css">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Monthly Sales Report" />
-                        <String fx:value="Daily Sales Report" />
-                        <String fx:value="Product Wise Sales Report" />
-                        <String fx:value="Top Selling Products Report" />
-                        <String fx:value="Inventory / Stock Report" />
-                        <String fx:value="Low Stock Report" />
-                        <String fx:value="Customer Purchase Report" />
-                        <String fx:value="Revenue Report" />
-                        <String fx:value="Profit Report" />
                         <String fx:value="Payment Report" />
                         <String fx:value="Return Report" />
                     </FXCollections>

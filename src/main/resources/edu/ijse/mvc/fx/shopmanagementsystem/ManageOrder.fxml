@@ -2,96 +2,103 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="700.0" prefWidth="1050.0" styleClass="anchor-pane" stylesheets="@css/style2.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.ManageOrderController">
+<AnchorPane prefHeight="633.0" prefWidth="1047.0" style="-fx-background-color: white; -fx-background-radius: 20px;" stylesheets="@css/style2.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.ManageOrderController">
 
-    <!-- Title -->
-    <Label layoutX="46.0" layoutY="20.0" text="Manage Orders">
+    <!-- Header -->
+    <Text layoutX="21.0" layoutY="42.0" styleClass="header-text" text="Place Order" wrappingWidth="153.0">
         <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Bold" size="21.0" />
         </font>
+    </Text>
+
+    <!-- Customer Info -->
+    <Label layoutX="20.0" layoutY="64.0" styleClass="label-title" text="Customer ID:">
+        <font><Font name="System Bold" size="16.0" /></font>
+    </Label>
+    <ComboBox fx:id="comboCustomerId" layoutX="21.0" layoutY="102.0" onAction="#selectedCustomerId" prefHeight="41.0" prefWidth="223.0" promptText="Select Customer ID" styleClass="combo-box" />
+
+    <Label layoutX="281.0" layoutY="64.0" styleClass="label-title" text="Customer Name:">
+        <font><Font name="System Bold" size="16.0" /></font>
+    </Label>
+    <Label fx:id="lblCustomerNameValue" layoutX="281.0" layoutY="102.0" prefHeight="41.0" prefWidth="246.0" styleClass="label-value" text="-">
+        <font><Font size="16.0" /></font>
     </Label>
 
-    <TextField fx:id="productNameTxt" managed="false" visible="false" />
-    <Label layoutX="47.0" layoutY="79.0" text="Customer ID:">
-      <font>
-         <Font size="15.0" />
-      </font></Label>
-    <ComboBox fx:id="customerIdCombo" layoutX="192.0" layoutY="69.0" prefHeight="38.0" prefWidth="250.0" promptText="Select Customer ID" />
+    <Label layoutX="539.0" layoutY="64.0" styleClass="label-title" text="Customer Phone:">
+        <font><Font name="System Bold" size="16.0" /></font>
+    </Label>
+    <Label fx:id="lblCustomerPhoneValue" layoutX="540.0" layoutY="102.0" prefHeight="41.0" prefWidth="236.0" styleClass="label-value" text="-">
+        <font><Font size="16.0" /></font>
+    </Label>
 
-    <Label layoutX="47.0" layoutY="136.0" text="Order Date:">
-      <font>
-         <Font size="15.0" />
-      </font></Label>
-    <DatePicker fx:id="orderDatePicker" layoutX="192.0" layoutY="125.0" prefHeight="38.0" prefWidth="250.0" />
+    <Label layoutX="811.0" layoutY="61.0" styleClass="label-title" text="Customer E-mail:">
+        <font><Font name="System Bold" size="16.0" /></font>
+    </Label>
+    <Label fx:id="lblCustomerEmailValue" layoutX="808.0" layoutY="96.0" prefHeight="41.0" prefWidth="236.0" styleClass="label-value" text="-">
+        <font><Font size="16.0" /></font>
+    </Label>
 
-    <Label layoutX="49.0" layoutY="187.0" text="Total Amount:">
-      <font>
-         <Font size="15.0" />
-      </font></Label>
-    <TextField fx:id="totalAmountTxt" editable="false" layoutX="192.0" layoutY="180.0" prefHeight="38.0" prefWidth="250.0" />
+    <!-- Item Info -->
+    <Label layoutX="20.0" layoutY="177.0" styleClass="label-title" text="Item ID:">
+        <font><Font name="System Bold" size="16.0" /></font>
+    </Label>
+    <ComboBox fx:id="comboItemId" layoutX="21.0" layoutY="215.0" onAction="#selectedItemId" prefHeight="41.0" prefWidth="223.0" promptText="Select Item ID" styleClass="combo-box" />
 
-    <Label layoutX="528.0" layoutY="137.0" text="Discount:">
-      <font>
-         <Font size="15.0" />
-      </font></Label>
-    <TextField fx:id="discountTxt" editable="false" layoutX="658.0" layoutY="128.0" prefHeight="38.0" prefWidth="257.0" />
+    <Label layoutX="288.0" layoutY="177.0" styleClass="label-title" text="Item Name:">
+        <font><Font name="System Bold" size="16.0" /></font>
+    </Label>
+    <Label fx:id="lblItemNameValue" layoutX="287.0" layoutY="215.0" prefHeight="41.0" prefWidth="223.0" styleClass="label-value" text="-">
+        <font><Font size="16.0" /></font>
+    </Label>
 
-    <Label layoutX="528.0" layoutY="189.0" text="Net Amount:">
-      <font>
-         <Font size="15.0" />
-      </font></Label>
-    <TextField fx:id="netAmountTxt" editable="false" layoutX="658.0" layoutY="180.0" prefHeight="38.0" prefWidth="257.0" />
+    <Label layoutX="541.0" layoutY="174.0" styleClass="label-title" text="Available QTY:">
+        <font><Font name="System Bold" size="16.0" /></font>
+    </Label>
+    <Label fx:id="lblItemQtyValue" layoutX="543.0" layoutY="215.0" prefHeight="41.0" prefWidth="236.0" styleClass="label-value" text="-">
+        <font><Font size="16.0" /></font>
+    </Label>
 
-    <TableView fx:id="orderItemsTable" layoutX="47.0" layoutY="236.0" prefHeight="300.0" prefWidth="958.0">
+    <Label layoutX="810.0" layoutY="169.0" styleClass="label-title" text="Unit Price:">
+        <font><Font name="System Bold" size="16.0" /></font>
+    </Label>
+    <Label fx:id="lblItemPriceValue" layoutX="812.0" layoutY="212.0" prefHeight="41.0" prefWidth="229.0" styleClass="label-value" text="-">
+        <font><Font size="16.0" /></font>
+    </Label>
 
+    <Label layoutX="21.0" layoutY="284.0" styleClass="label-title" text="QTY:">
+        <font><Font name="System Bold" size="16.0" /></font>
+    </Label>
+    <TextField fx:id="qtyField" layoutX="91.0" layoutY="282.0" prefHeight="41.0" prefWidth="153.0" styleClass="text-field" />
+
+    <Button layoutX="880.0" layoutY="292.0" onAction="#handleAddToCart" prefHeight="34.0" prefWidth="135.0" styleClass="yellow-btn" stylesheets="@css/style4.css" text="Add to Cart" />
+
+    <!-- Order Table -->
+    <TableView fx:id="tblOrderItem" layoutX="20.0" layoutY="344.0" prefHeight="191.0" prefWidth="996.0" styleClass="order-table">
         <columns>
-            <TableColumn fx:id="colProductId" prefWidth="97.0" text="Product ID" />
-            <TableColumn fx:id="colProductName" prefWidth="204.0" text="Product Name" />
-            <TableColumn fx:id="colQuantity" prefWidth="122.0" text="Quantity" />
-            <TableColumn fx:id="colUnitPrice" prefWidth="109.0" text="Unit Price" />
-            <TableColumn fx:id="colDiscount" prefWidth="117.0" text="Discount" />
-            <TableColumn fx:id="colTotal" prefWidth="130.0" text="Total" />
-            <TableColumn fx:id="colAction" prefWidth="180.0" text="Action" />
+            <TableColumn fx:id="colItemName" prefWidth="252.0" text="Item Name" />
+            <TableColumn fx:id="colUnitPrice" prefWidth="205.0" text="Unit Price" />
+            <TableColumn fx:id="colQty" prefWidth="131.0" text="QTY" />
+            <TableColumn fx:id="colTotalPrice" prefWidth="202.0" text="Total Price" />
+            <TableColumn fx:id="colAction" prefWidth="200.0" text="Action" />
         </columns>
-
     </TableView>
 
-    <!-- Item Controls -->
-    <Label layoutX="47.0" layoutY="556.0" text="Product ID:">
-      <font>
-         <Font size="15.0" />
-      </font></Label>
-    <ComboBox fx:id="productIdCombo" layoutX="137.0" layoutY="551.0" prefWidth="200.0" />
+    <!-- Order Summary -->
+    <Label layoutX="23.0" layoutY="560.0" styleClass="label-title" text="Total (Rs):">
+        <font><Font name="System Bold" size="16.0" /></font>
+    </Label>
+    <Label fx:id="lblOrderTotal" layoutX="119.0" layoutY="560.0" styleClass="total-label" text="-">
+        <font><Font size="16.0" /></font>
+    </Label>
 
-    <Label layoutX="347.0" layoutY="556.0" text="Quantity:">
-      <font>
-         <Font size="15.0" />
-      </font></Label>
-    <TextField fx:id="quantityTxt" layoutX="417.0" layoutY="551.0" prefHeight="43.0" prefWidth="54.0" />
-
-    <Label layoutX="491.0" layoutY="556.0" text="Unit Price:">
-      <font>
-         <Font size="15.0" />
-      </font></Label>
-    <TextField fx:id="unitPriceTxt" editable="false" layoutX="571.0" layoutY="551.0" prefHeight="43.0" prefWidth="100.0" />
-
-    <Button fx:id="addItemBtn" layoutX="680.0" layoutY="554.0" onAction="#addItemToOrder" prefHeight="38.0" prefWidth="94.0" styleClass="success-btn" stylesheets="@css/style4.css" text="Add Item" />
-
-    <!-- Action Buttons -->
-    <Button fx:id="saveOrderBtn" layoutX="871.0" layoutY="554.0" onAction="#saveOrder" prefHeight="38.0" prefWidth="134.0" styleClass="light-yellow-btn" stylesheets="@css/style6.css" text="Save Order" />
-    <Button fx:id="resetBtn" layoutX="783.0" layoutY="554.0" onAction="#resetForm" prefHeight="38.0" prefWidth="80.0" text="Reset" />
-   <ComboBox fx:id="promotionIdCombo" layoutX="658.0" layoutY="69.0" prefHeight="43.0" prefWidth="257.0" promptText="Select Promotion ID" />
-   <Label layoutX="528.0" layoutY="80.0" text="Promotion ID :">
-      <font>
-         <Font size="15.0" />
-      </font>
-   </Label>
+    <Button layoutX="756.0" layoutY="560.0" prefHeight="37.0" prefWidth="105.0" styleClass="remove-btn" text="Reset" />
+    <Button fx:id="btnPlaceOrder" layoutX="880.0" layoutY="559.0" onAction="#handlePlaceOrder" prefHeight="37.0" prefWidth="145.0" styleClass="success-btn" stylesheets="@css/style4.css" text="Place Order" />
 </AnchorPane>

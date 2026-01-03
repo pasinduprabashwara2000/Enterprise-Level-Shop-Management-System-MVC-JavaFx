@@ -1,13 +1,11 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.dto.ProductDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.ProductController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ManageProduct2Controller {
@@ -45,22 +43,14 @@ public class ManageProduct2Controller {
     private TableView<ProductDTO> detailsTable;
 
     @FXML
-    private TextField idTxt;
-
-    @FXML
-    private Button searchBtn;
-
-    @FXML
     void initialize() {
         colProductID.setCellValueFactory(new PropertyValueFactory<>("productID"));
-        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colCategoryID.setCellValueFactory(new PropertyValueFactory<>("categoryID"));
         colSKU.setCellValueFactory(new PropertyValueFactory<>("SKU"));
-        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
-        colUnit.setCellValueFactory(new PropertyValueFactory<>("unit"));
-        colTaxRate.setCellValueFactory(new PropertyValueFactory<>("taxRate"));
-        colActive.setCellValueFactory(new PropertyValueFactory<>("active"));
         colBarcode.setCellValueFactory(new PropertyValueFactory<>("barCode"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+        colActive.setCellValueFactory(new PropertyValueFactory<>("active"));
+        colCategoryID.setCellValueFactory(new PropertyValueFactory<>("categoryID"));
 
         loadTable();
 
@@ -74,6 +64,6 @@ public class ManageProduct2Controller {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
     }
 
-}
+    }
 
 }

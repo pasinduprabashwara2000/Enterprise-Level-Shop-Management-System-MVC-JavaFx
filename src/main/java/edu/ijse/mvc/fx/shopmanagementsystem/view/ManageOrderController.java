@@ -1,9 +1,8 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.*;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.CustomerController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.ProductController;
-import edu.ijse.mvc.fx.shopmanagementsystem.controller.PromotionController;
-import edu.ijse.mvc.fx.shopmanagementsystem.dto.*;
 import edu.ijse.mvc.fx.shopmanagementsystem.model.OrderModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,332 +11,219 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 public class ManageOrderController {
 
     final private CustomerController customerController = new CustomerController();
     final private ProductController productController = new ProductController();
-    final private PromotionController promotionController = new PromotionController();
+    private OrderModel orderModel = new OrderModel();
 
     @FXML
-    private TextField productNameTxt;
-
-    @FXML
-    private Button addItemBtn;
-
-    @FXML
-    private AnchorPane anchorPane;
-
-    @FXML
-    private TableColumn<OrderProductTM, String> colProductId;
-
-    @FXML
-    private TableColumn<OrderProductTM, String> colProductName;
-
-    @FXML
-    private TableColumn<OrderProductTM, Integer> colQuantity;
-
-    @FXML
-    private TableColumn<OrderProductTM, Double> colTotal;
-
-    @FXML
-    private TableColumn<OrderProductTM, Double> colUnitPrice;
+    private Button btnPlaceOrder;
 
     @FXML
     private TableColumn<OrderProductTM, Void> colAction;
 
     @FXML
-    private TableColumn<OrderProductTM, Double> colDiscount;
+    private TableColumn<OrderProductTM, String> colItemName;
 
     @FXML
-    private ComboBox<String> customerIdCombo;
+    private TableColumn<OrderProductTM, Integer> colQty;
 
     @FXML
-    private ComboBox<String> promotionIdCombo;
+    private TableColumn<OrderProductTM, Double> colTotalPrice;
 
     @FXML
-    private TextField discountTxt;
+    private TableColumn<OrderProductTM, Double> colUnitPrice;
 
     @FXML
-    private TextField netAmountTxt;
+    private ComboBox<String> comboCustomerId;
 
     @FXML
-    private DatePicker orderDatePicker;
+    private ComboBox<String> comboItemId;
 
     @FXML
-    private TableView<OrderProductTM> orderItemsTable;
+    private Label lblCustomerPhoneValue;
 
     @FXML
-    private ComboBox<String> productIdCombo;
+    private Label lblCustomerNameValue;
 
     @FXML
-    private TextField quantityTxt;
+    private Label lblCustomerEmailValue;
 
     @FXML
-    private Button resetBtn;
+    private Label lblItemNameValue;
 
     @FXML
-    private Button saveOrderBtn;
+    private Label lblItemPriceValue;
 
     @FXML
-    private TextField totalAmountTxt;
+    private Label lblItemQtyValue;
 
     @FXML
-    private TextField unitPriceTxt;
+    private Label lblOrderTotal;
 
-    final private ObservableList <OrderProductTM> list = FXCollections.observableArrayList();
-    final private OrderModel orderModel = new OrderModel();
+    @FXML
+    private TextField qtyField;
+
+    @FXML
+    private TableView<OrderProductTM> tblOrderItem;
+
+    private final ObservableList<OrderProductTM> orderProductTMS = FXCollections.observableArrayList();
 
     @FXML
     void initialize() throws Exception {
-        colProductId.setCellValueFactory(new PropertyValueFactory<>("productID"));
-        colProductName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colQuantity.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        colItemName.setCellValueFactory(new PropertyValueFactory<>("productId"));
+        colItemName.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        colQty.setCellValueFactory(new PropertyValueFactory<>("orderQty"));
         colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
-        colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
-        colAction.setCellFactory(cell -> new TableCell<OrderProductTM, Void>() {
-
-            Button btn = new Button("Remove");
-
-            {
-                btn.getStyleClass().add("remove-btn");
-                btn.setOnAction(event -> {
-
-                    OrderProductTM productTM = getTableView().getItems().get(getIndex());
-                    list.remove(productTM);
-                    loadTable();
-
-                });
-            }
-
-            @Override
-            protected void updateItem(Void item, boolean empty) {
-                super.updateItem(item,empty);
-                setGraphic(empty?null:btn);
-            }
-
-        });
+        colTotalPrice.setCellValueFactory(new PropertyValueFactory<>("productTotal"));
 
         loadCustomerIdThread();
-        loadProductIdThread();
-        loadPromotionIdThread();
-        loadTable();
-        loadSelectedRow();
-        setProductSelectionListner();
-        setDiscountSelectionListner();
-
-        orderItemsTable.setOnMouseClicked(event -> {
-            if(event.getClickCount() == 1){
-                loadSelectedRow();
-            }
-        });
-
-
+        loadItemIdThread();
     }
 
     private void loadCustomerIdThread() throws Exception{
+        Task <ObservableList<String>> task = new Task<>() {
 
-            Task<ObservableList<String>> task = new Task<>() {
-                @Override
-                protected ObservableList<String> call() throws Exception {
-                    ArrayList<CustomerDTO> customers = customerController.getAllCustomers();
-                    return FXCollections.observableArrayList(
-                            customers.stream().map(CustomerDTO::getCustomerId).toList()
-                    );
-                }
-            };
-
-            task.setOnSucceeded(e -> customerIdCombo.setItems(task.getValue()));
-            task.setOnFailed(e -> new Alert(Alert.AlertType.ERROR, task.getException().getMessage()).show());
-
-            new Thread(task).start();
-    }
-
-
-    private void loadProductIdThread() throws Exception {
-        Task <ObservableList<String>> task = new Task() {
-
-            ArrayList <ProductDTO> products = productController.getAllProducts();
+            ArrayList <CustomerDTO> customers = customerController.getAllCustomers();
             @Override
-            protected Object call() throws Exception {
-                return FXCollections.observableArrayList(products.stream().map(ProductDTO::getProductID).toList());
+            protected ObservableList<String> call() throws Exception {
+                return FXCollections.observableArrayList(customers.stream().map(CustomerDTO::getCustomerId).toList());
             }
         };
-        task.setOnSucceeded(event -> productIdCombo.setItems(task.getValue()));
+        task.setOnSucceeded(event -> comboCustomerId.setItems(task.getValue()));
         task.setOnFailed(event -> new Alert(Alert.AlertType.ERROR,task.getMessage()).show());
         new Thread(task).start();
     }
 
-    private void loadPromotionIdThread() throws Exception {
+    @FXML
+    void selectedCustomerId(ActionEvent event) throws Exception {
 
-        Task <ObservableList<String>> task = new Task(){
+        try {
+            String selectedId = comboCustomerId.getSelectionModel().getSelectedItem();
+            if (selectedId != null) {
+                CustomerDTO customerDTO = customerController.searchCustomer(selectedId);
+                lblCustomerNameValue.setText(customerDTO.getName());
+                lblCustomerPhoneValue.setText(String.valueOf(customerDTO.getPhone()));
+                lblCustomerEmailValue.setText(customerDTO.getEmail());
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
 
-            ArrayList <PromotionDTO> promotions = promotionController.getAllPromotions();
+    }
+
+    private void loadItemIdThread() throws Exception{
+        Task<ObservableList<String>> task = new Task<>() {
+
+            ArrayList <ProductDTO> products = productController.getAllProducts();
             @Override
-            protected Object call() throws Exception {
-                return FXCollections.observableArrayList(promotions.stream().map(PromotionDTO::getPromotionID).toList());
+            protected ObservableList<String> call() throws Exception {
+                return FXCollections.observableArrayList(products.stream().map(ProductDTO::getProductID).toList());
             }
         };
-        task.setOnSucceeded(event -> promotionIdCombo.setItems(task.getValue()));
-        task.setOnFailed(event -> new Alert(Alert.AlertType.ERROR, task.getMessage()).show());
+        task.setOnSucceeded(event -> comboItemId.setItems(task.getValue()));
+        task.setOnFailed(event -> new Alert(Alert.AlertType.ERROR,task.getMessage()).show());
         new Thread(task).start();
     }
 
-    private void setProductSelectionListner(){
+    @FXML
+    void selectedItemId(ActionEvent event) {
+        try {
+            String selectedId = comboItemId.getSelectionModel().getSelectedItem();
+            ProductDTO productDTO = productController.searchProduct(selectedId);
 
-        productIdCombo.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> {
-                    if (newValue != null){
-                        try {
-                            ProductDTO productDTO = productController.searchProduct(newValue);
-                            unitPriceTxt.setText(String.valueOf(productDTO.getUnitPrice()));
-                            productNameTxt.setText(productDTO.getName());
-                        } catch (Exception e) {
-                           new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-                        }
-                    }
+            if(productDTO != null){
+                lblItemNameValue.setText(productDTO.getName());
+                lblItemPriceValue.setText(String.valueOf(productDTO.getUnitPrice()));
+                lblItemQtyValue.setText(String.valueOf(productDTO.getQyt()));
+            }
+        } catch (Exception e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    @FXML
+    void handleAddToCart(ActionEvent event) {
+        String itemId = comboItemId.getSelectionModel().getSelectedItem();
+        String itemName = lblItemNameValue.getText();
+        String itemQYT = lblItemQtyValue.getText();
+        String itemPrice = lblItemPriceValue.getText();
+        String orderQYT = qtyField.getText();
+
+        if(itemId != null){
+            if (orderQYT != null){
+                if (Integer.parseInt(orderQYT) <= (Integer.parseInt(itemQYT))){
+                    OrderProductTM orderProductTM = new OrderProductTM(
+                            itemId,
+                            itemName,
+                            Integer.parseInt(itemQYT),
+                            Double.parseDouble(itemPrice),
+                            Integer.parseInt(itemQYT)*Double.parseDouble(itemPrice)
+                    );
+
+                    orderProductTMS.add(orderProductTM);
+                    loadTable();
+
+                } else {
+                   new Alert(Alert.AlertType.ERROR,"Invalid").show();
                 }
-        );
-    }
 
-    private void setDiscountSelectionListner(){
+                } else {
+                    new Alert(Alert.AlertType.ERROR,"Invalid Quantity").show();
+            }
 
-        promotionIdCombo.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> {
-                    if(newValue != null){
-                        try {
-                            PromotionDTO promotionDTO = promotionController.searchPromotion(newValue);
-                            discountTxt.setText(String.valueOf(promotionDTO.getValue()));
-                            loadTotalCalc();
-                        } catch (Exception e) {
-                            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-                        }
-                    }
-                }
-        );
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Invalid Item Id").show();
+        }
 
     }
 
-    private void loadTable(){
-        orderItemsTable.setItems(list);
-        loadTotalCalc();
-    }
-
-    private void loadTotalCalc(){
+    void loadTable() {
+        tblOrderItem.setItems(orderProductTMS);
 
         double total = 0.0;
-        double discount = 0.0;
 
-        if (!discountTxt.getText().isEmpty()){
-            discount = Double.parseDouble(discountTxt.getText());
+        for (OrderProductTM orderProductTM : orderProductTMS){
+            total += orderProductTM.getProductTotal();
         }
 
-        for (OrderProductTM orderProductTM : list){
-            total += orderProductTM.getTotal();
-        }
+        lblOrderTotal.setText(String.valueOf(total));
 
-        totalAmountTxt.setText(String.valueOf(total));
-        double netTotal = total-discount;
-        netAmountTxt.setText(String.valueOf(netTotal));
-
-    }
-
-    private void loadSelectedRow(){
-
-        OrderProductTM orderProductTM = orderItemsTable.getSelectionModel().getSelectedItem();
-
-        if(orderProductTM != null){
-            productIdCombo.setValue(orderProductTM.getProductID());
-            quantityTxt.setText(String.valueOf(orderProductTM.getQty()));
-            unitPriceTxt.setText(String.valueOf(orderProductTM.getUnitPrice()));
-        }
     }
 
     @FXML
-    void addItemToOrder(ActionEvent event) {
-        String selectedId = productIdCombo.getSelectionModel().getSelectedItem();
-        if(selectedId == null){
-            new Alert(Alert.AlertType.ERROR, "Please Select Product ID ").show();
-            return;
-        }
-
-        ProductDTO productDTO;
-
+    void handlePlaceOrder(ActionEvent event) {
         try {
-            productDTO = productController.searchProduct(selectedId);
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, "Product not found!").show();
-            return;
-        }
+            String customerId = comboCustomerId.getSelectionModel().getSelectedItem();
 
-        int qty;
-        double price;
+            ArrayList <OrderProductDTO> orderProductDTOS = new ArrayList<>();
 
-        try {
-            qty = Integer.parseInt(quantityTxt.getText());
-            price = Double.parseDouble(unitPriceTxt.getText());
-        } catch (NumberFormatException e) {
-            new Alert(Alert.AlertType.ERROR, "Invalid quantity or unit price").show();
-            return;
-        }
-
-        double total = qty * price;
-        OrderProductTM orderProductTM = new OrderProductTM(
-                productDTO.getProductID(),
-                productDTO.getName(),
-                qty,
-                price,
-                total
-        );
-
-        list.add(orderProductTM);
-        loadTable();
-    }
-
-    @FXML
-    void resetForm(ActionEvent event) {
-        customerIdCombo.setValue(null);
-        orderDatePicker.setValue(null);
-        totalAmountTxt.setText("");
-        promotionIdCombo.setValue(null);
-        discountTxt.setText("");
-        netAmountTxt.setText("");
-        productIdCombo.setValue(null);
-        quantityTxt.setText("");
-        unitPriceTxt.setText("");
-    }
-
-    @FXML
-    void saveOrder(ActionEvent event) {
-        try {
-            String customerId = customerIdCombo.getSelectionModel().getSelectedItem();
-            LocalDate date = orderDatePicker.getValue();
-
-            List <OrderProductDTO> productDTOS = new ArrayList<>();
-
-            for (OrderProductTM orderProductTM : list){
+            for (OrderProductTM orderProductTM : orderProductTMS){
                 OrderProductDTO orderProductDTO = new OrderProductDTO(
-                        orderProductTM.getProductID(),
-                        orderProductTM.getQty(),
-                        orderProductTM.getUnitPrice());
-                productDTOS.add(orderProductDTO);
+                        orderProductTM.getProductId(),
+                        orderProductTM.getUnitPrice(),
+                        orderProductTM.getOrderQty()
+
+                );
+                orderProductDTOS.add(orderProductDTO);
             }
 
-            OrderDTO orderDTO = new OrderDTO(0,customerId, date, productDTOS);
-            int result = orderModel.placeOrder(orderDTO);
+            OrderDTO orderDTO = new OrderDTO(customerId, new Date(), orderProductDTOS);
+            boolean isOrderPlaced = orderModel.placeOrder(orderDTO);
 
-            if (result > 0) {
-                new Alert(Alert.AlertType.INFORMATION, "Order Saved Successfully").show();
+            if (isOrderPlaced){
+                new Alert(Alert.AlertType.INFORMATION,"Order Placed Successfully").show();
+                orderModel.printInvoice(isOrderPlaced);
             } else {
-                new Alert(Alert.AlertType.ERROR, "Order Saved Failed").show();
+                new Alert(Alert.AlertType.ERROR,"Order Saved Failed").show();
             }
 
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            new Alert (Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
 

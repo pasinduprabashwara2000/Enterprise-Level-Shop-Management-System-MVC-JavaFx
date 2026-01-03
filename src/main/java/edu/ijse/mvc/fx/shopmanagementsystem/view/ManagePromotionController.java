@@ -2,7 +2,7 @@ package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
 import java.sql.Date;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.dto.PromotionDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.PromotionDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.ProductController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.PromotionController;
 import javafx.event.ActionEvent;

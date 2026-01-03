@@ -1,8 +1,8 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.dto.ProductDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.dto.SupplierDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.dto.SupplyDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SupplierDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SupplyDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.ProductController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.SupplierController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.SupplyController;

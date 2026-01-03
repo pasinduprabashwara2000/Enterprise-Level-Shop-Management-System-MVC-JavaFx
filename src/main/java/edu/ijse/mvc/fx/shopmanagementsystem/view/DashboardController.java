@@ -1,6 +1,6 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.dto.ProductTM;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductTM;
 import edu.ijse.mvc.fx.shopmanagementsystem.model.DashboardModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -11,9 +11,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.FlowPane;
 
 public class DashboardController {
-
-    @FXML
-    private TableColumn<ProductTM, Boolean> colActive;
 
     @FXML
     private TableColumn<ProductTM, Integer> colBarcode;
@@ -29,12 +26,6 @@ public class DashboardController {
 
     @FXML
     private TableColumn<ProductTM, String> colSKU;
-
-    @FXML
-    private TableColumn<ProductTM, Double> colTaxRate;
-
-    @FXML
-    private TableColumn<ProductTM, String> colUnit;
 
     @FXML
     private TableColumn<ProductTM, Double> colUnitPrice;
@@ -77,11 +68,8 @@ public class DashboardController {
         colSKU.setCellValueFactory(new PropertyValueFactory<>("SKU"));
         colBarcode.setCellValueFactory(new PropertyValueFactory<>("barCode"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colUnit.setCellValueFactory(new PropertyValueFactory<>("unit"));
         colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
-        colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
-        colTaxRate.setCellValueFactory(new PropertyValueFactory<>("taxRate"));
-        colActive.setCellValueFactory(new PropertyValueFactory<>("active"));
+        colQty.setCellValueFactory(new PropertyValueFactory<>("totalQty"));
         colCategoryID.setCellValueFactory(new PropertyValueFactory<>("categoryID"));
 
         loadTable();

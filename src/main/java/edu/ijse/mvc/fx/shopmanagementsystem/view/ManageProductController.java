@@ -1,7 +1,7 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.dto.CategoryDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.dto.ProductDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.CategoryDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.CategoryController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.ProductController;
 import javafx.collections.FXCollections;
@@ -11,7 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 import java.util.ArrayList;
 
 public class ManageProductController {

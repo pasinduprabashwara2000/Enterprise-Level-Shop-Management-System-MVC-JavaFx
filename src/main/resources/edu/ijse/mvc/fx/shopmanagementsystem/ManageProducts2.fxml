@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -40,69 +38,9 @@
                     </children>
                 </HBox>
 
-                <!-- Search Section Card -->
-                <VBox prefHeight="182.0" prefWidth="1027.0" spacing="16.0" style="-fx-background-color: white; -fx-background-radius: 25px;">
-                    <padding>
-                        <Insets bottom="20.0" left="24.0" right="24.0" top="20.0" />
-                    </padding>
-
-                    <children>
-                        <Label styleClass="section-title" text="Search Products">
-                            <font><Font name="System Bold" size="16.0" /></font>
-                        </Label>
-
-                        <!-- Search Input Row -->
-                        <HBox alignment="CENTER_LEFT" spacing="12.0">
-                            <children>
-                                <!-- Search Icon Label -->
-                                <Label styleClass="search-icon" text="">
-                                    <font><Font size="20.0" /></font>
-                                </Label>
-
-                                <!-- Search Input -->
-                                <TextField fx:id="idTxt" prefWidth="400.0" promptText="Enter product name, SKU, or barcode..." styleClass="text-field,search-input" HBox.hgrow="ALWAYS">
-                                    <font><Font size="14.0" /></font>
-                                </TextField>
-
-                                <!-- Search Button -->
-                                <Button fx:id="searchBtn" mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #27ae60;" text="Search" textFill="WHITE">
-                                    <padding>
-                                        <Insets bottom="12.0" left="24.0" right="24.0" top="12.0" />
-                                    </padding>
-                                    <font><Font name="System Bold" size="13.0" /></font>
-                                </Button>
-
-                                <!-- Clear/Reset Button -->
-                                <Button fx:id="clearBtn" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: #e74c3c;" text="Clear" textFill="WHITE">
-                                    <padding>
-                                        <Insets bottom="12.0" left="20.0" right="20.0" top="12.0" />
-                                    </padding>
-                                    <font><Font name="System Bold" size="13.0" /></font>
-                                </Button>
-                            </children>
-                        </HBox>
-                    </children>
-                </VBox>
-
                 <!-- Results Section -->
                 <VBox prefHeight="400.0" prefWidth="1027.0" spacing="12.0" VBox.vgrow="ALWAYS">
                     <children>
-                        <!-- Results Header -->
-                        <HBox alignment="CENTER_LEFT" spacing="12.0">
-                            <children>
-                                <Label styleClass="section-title" text="Product Results">
-                                    <font><Font name="System Bold" size="16.0" /></font>
-                                </Label>
-
-                                <!-- Spacer -->
-                                <HBox HBox.hgrow="ALWAYS" />
-
-                                <!-- Results Count Badge -->
-                                <Label fx:id="resultsCountLabel" styleClass="badge,badge-info" text="0 products found">
-                                    <font><Font name="System Bold" size="11.0" /></font>
-                                </Label>
-                            </children>
-                        </HBox>
 
                         <!-- Products Table -->
                         <TableView fx:id="detailsTable" VBox.vgrow="ALWAYS">
@@ -111,9 +49,7 @@
                                 <TableColumn fx:id="colSKU" prefWidth="100.0" text="SKU" />
                                 <TableColumn fx:id="colBarcode" prefWidth="120.0" text="Barcode" />
                                 <TableColumn fx:id="colName" prefWidth="220.0" text="Product Name" />
-                                <TableColumn fx:id="colUnit" prefWidth="100.0" text="Unit" />
                                 <TableColumn fx:id="colUnitPrice" prefWidth="110.0" text="Price" />
-                                <TableColumn fx:id="colTaxRate" prefWidth="80.0" text="Tax" />
                                 <TableColumn fx:id="colActive" prefWidth="90.0" text="Status" />
                                 <TableColumn fx:id="colCategoryID" prefWidth="110.0" text="Category" />
                             </columns>

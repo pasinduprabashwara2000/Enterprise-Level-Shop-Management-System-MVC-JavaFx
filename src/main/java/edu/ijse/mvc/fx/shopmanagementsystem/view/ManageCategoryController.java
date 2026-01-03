@@ -1,6 +1,6 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.dto.CategoryDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.CategoryDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.CategoryController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

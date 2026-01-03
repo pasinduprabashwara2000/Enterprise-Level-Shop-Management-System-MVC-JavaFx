@@ -1,4 +1,4 @@
-package edu.ijse.mvc.fx.shopmanagementsystem.dto;
+package edu.ijse.mvc.fx.shopmanagementsystem.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @Data
 public class OrderProductTM {
 
-    private String productID;
-    private String name;
-    private int qty;
+    private String productId;
+    private String productName;
+    private int orderQty;
     private double unitPrice;
-    private double total;
+    private double productTotal;
 
 }

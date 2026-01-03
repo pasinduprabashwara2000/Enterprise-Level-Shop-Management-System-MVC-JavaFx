@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1c4d7dce-2db6-44c5-a6af-fdcde8bd6d6d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/InventoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/PaymentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/PromotionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/PromotionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/PurchaseOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/PurchaseOrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/ReturnController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/ReturnController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/RoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/RoleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/SupplierController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/SupplierController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/SupplyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/SupplyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/db/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/DB/DBConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/dto/CategoryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/DTO/CategoryDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/dto/CustomerDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/DTO/CustomerDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/dto/InventoryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/DTO/InventoryDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/dto/LoginDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/DTO/LoginDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/dto/OrderDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/DTO/OrderDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/dto/OrderProductDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/DTO/OrderProductDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/dto/OrderProductTM.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/DTO/OrderProductTM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/dto/PaymentDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/DTO/PaymentDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/dto/ProductDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/DTO/ProductDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/dto/ProductTM.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/DTO/ProductTM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/dto/PromotionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/DTO/PromotionDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/dto/PurchaseOrderDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/DTO/PurchaseOrderDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/dto/ReturnDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/DTO/ReturnDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/dto/RoleDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/DTO/RoleDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/dto/SupplierDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/DTO/SupplierDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/dto/SupplyDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/DTO/SupplyDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/DTO/UserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/CategoryModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/CategoryModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/CustomerModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/CustomerModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/InventoryModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/InventoryModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/LoginModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/LoginModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/OrderModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/OrderModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/OrderProductModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/OrderProductModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/PaymentModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/PaymentModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/ProductModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/ProductModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/PromotionModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/PromotionModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/PurchaseOrderModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/PurchaseOrderModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/ReturnModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/ReturnModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/RoleModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/RoleModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/SupplierModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/SupplierModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/SupplyModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/SupplyModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/UserModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/model/UserModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/util/CrudUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/util/CrudUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageCategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageCustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageCustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageInventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageInventoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageLoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageOrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManagePaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManagePaymentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageProduct2Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageProduct2Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManagePromotionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManagePromotionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManagePurchaseOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManagePurchaseOrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageReportsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageReportsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageReturnController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageReturnController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageRoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageRoleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageSupplierController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageSupplierController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageSupplyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageSupplyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/edu/ijse/mvc/fx/shopmanagementsystem/view/ManageUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Dashboard.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../../../../.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "pasinduprabashwara2000"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/pasinduprabashwara2000/Enterprise-Level-Shop-Management-System-MVC-JavaFx.git",
+    "accountId": "98e8fa55-13a5-4781-bf07-06cab43fdb21"
+  }
+}]]></component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="37Z7pDVOMElDGOHwJ3Ip3WMqxDh" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/lenovo/Desktop/H.Dip in SE/Practicals/First Year/First Semester/Shop Management System",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.138" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.138" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1c4d7dce-2db6-44c5-a6af-fdcde8bd6d6d" name="Changes" comment="" />
+      <created>1767098920246</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1767098920246</updated>
+      <workItem from="1767098921711" duration="23000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

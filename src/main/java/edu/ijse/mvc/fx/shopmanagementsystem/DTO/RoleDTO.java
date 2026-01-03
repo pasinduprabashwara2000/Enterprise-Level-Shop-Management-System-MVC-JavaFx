@@ -1,4 +1,4 @@
-package edu.ijse.mvc.fx.shopmanagementsystem.dto;
+package edu.ijse.mvc.fx.shopmanagementsystem.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class CategoryDTO {
+public class RoleDTO {
 
-    private String categoryID;
+    private String roleID;
     private String name;
-    private String description;
-
+    private String userID;
+    
 }

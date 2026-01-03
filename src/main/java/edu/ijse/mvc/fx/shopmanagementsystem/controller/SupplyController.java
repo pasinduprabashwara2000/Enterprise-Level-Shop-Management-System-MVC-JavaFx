@@ -1,7 +1,7 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.controller;
 
 import java.util.ArrayList;
-import edu.ijse.mvc.fx.shopmanagementsystem.dto.SupplyDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SupplyDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.model.SupplyModel;
 
 public class SupplyController {

@@ -1,7 +1,7 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.dto.InventoryDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.dto.ProductDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.InventoryDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.InventoryController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.ProductController;
 import javafx.collections.FXCollections;

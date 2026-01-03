@@ -1,7 +1,7 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.controller;
 
 import java.util.ArrayList;
-import edu.ijse.mvc.fx.shopmanagementsystem.dto.RoleDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.RoleDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.model.RoleModel;
 
 public class RoleController {

@@ -27,7 +27,7 @@
 
             <VBox alignment="CENTER" prefWidth="230.0" spacing="10.0" styleClass="box3">
                 <Label styleClass="dashboard-label" text="Total Orders" />
-                <Label fx:id="lblSalesCount" styleClass="dashboard-value" text="0" />
+                <Label fx:id="lblOrderCount" styleClass="dashboard-value" text="0" />
             </VBox>
 
             <VBox alignment="CENTER" prefWidth="230.0" spacing="10.0" styleClass="box4">
@@ -71,19 +71,16 @@
         </Label>
 
         <!-- TABLE -->
-        <TableView fx:id="detailsTable" layoutX="20.0" layoutY="390.0" prefHeight="314.0" prefWidth="1003.0" stylesheets="@css/style2.css">
+        <TableView fx:id="detailsTable" layoutX="20.0" layoutY="388.0" prefHeight="314.0" prefWidth="1003.0" stylesheets="@css/style2.css">
 
             <columns>
-                <TableColumn fx:id="colProductID" prefWidth="100.0" text="Product ID" />
-                <TableColumn fx:id="colSKU" prefWidth="100.0" text="SKU" />
-                <TableColumn fx:id="colBarcode" prefWidth="120.0" text="Barcode" />
-                <TableColumn fx:id="colName" prefWidth="150.0" text="Name" />
-                <TableColumn fx:id="colUnit" prefWidth="70.0" text="Unit" />
-                <TableColumn fx:id="colUnitPrice" prefWidth="120.0" text="Unit Price" />
-                <TableColumn fx:id="colQty" prefWidth="60.0" text="QTY" />
-                <TableColumn fx:id="colTaxRate" prefWidth="100.0" text="Tax Rate" />
-                <TableColumn fx:id="colActive" prefWidth="80.0" text="Active" />
-                <TableColumn fx:id="colCategoryID" prefWidth="100.0" text="Category ID" />
+                <TableColumn fx:id="colProductID" prefWidth="97.0" text="Product ID" />
+                <TableColumn fx:id="colSKU" prefWidth="94.0" text="SKU" />
+                <TableColumn fx:id="colBarcode" prefWidth="96.0" text="Barcode" />
+                <TableColumn fx:id="colName" prefWidth="300.0" text="Name" />
+                <TableColumn fx:id="colUnitPrice" prefWidth="148.0" text="Unit Price" />
+                <TableColumn fx:id="colQty" prefWidth="130.0" text="QTY" />
+                <TableColumn fx:id="colCategoryID" prefWidth="133.0" text="Category ID" />
             </columns>
 
         </TableView>

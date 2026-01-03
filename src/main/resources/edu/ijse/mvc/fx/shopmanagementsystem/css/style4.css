@@ -7,10 +7,9 @@
     -fx-background-radius: 8px;
     -fx-padding: 8px;
     -fx-font-size: 13px;
-    -fx-background-color: #ffffff;
+    -fx-background-color: #fff;
     -fx-border-color: #c4c4c4;
     -fx-border-width: 1px;
-    -fx-border-radius: 8px;
 }
 
 .text-field:focused, .combo-box-base:focused {
@@ -18,9 +17,20 @@
     -fx-effect: dropshadow(gaussian, rgba(9,140,83,0.3), 8, 0.3, 0, 0);
 }
 
+.yellow-btn {
+    -fx-background-color: #efd10b;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 8px;
+    -fx-padding: 8px 18px;
+}
+
+.yellow-btn:hover {
+    -fx-background-color: #a4ac39;
+}
+
 .success-btn {
     -fx-background-color: #26c45b;
-    -fx-text-fill: white;
+    -fx-text-fill: #fff;
     -fx-background-radius: 8px;
     -fx-padding: 8px 18px;
 }
@@ -31,7 +41,7 @@
 
 .danger-btn {
     -fx-background-color: #ff4e4e;
-    -fx-text-fill: white;
+    -fx-text-fill: #fff;
     -fx-background-radius: 8px;
     -fx-padding: 8px 18px;
 }

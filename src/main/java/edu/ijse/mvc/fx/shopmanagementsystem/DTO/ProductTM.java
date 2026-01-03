@@ -1,4 +1,4 @@
-package edu.ijse.mvc.fx.shopmanagementsystem.dto;
+package edu.ijse.mvc.fx.shopmanagementsystem.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,15 +7,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ProductDTO {
+public class ProductTM {
 
     private String productID;
-    private String SKU;
-    private int barCode;
     private String name;
+    private String SKU;
+    private String barCode;
+    private int totalQty;
     private double unitPrice;
-    private int qyt;
-    private boolean active;
     private String categoryID;
 
 }

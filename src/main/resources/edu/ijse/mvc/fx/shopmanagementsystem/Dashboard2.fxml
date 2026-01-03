@@ -187,27 +187,24 @@
                     <!-- Recent Orders Section -->
                     <VBox spacing="16.0">
                         <children>
-                            <Label styleClass="section-title" text="Recent Orders">
+                            <Label styleClass="section-title" text="Top Selling Products">
                                 <font>
                                     <Font name="System Bold" size="18.0" />
                                 </font>
                             </Label>
-
-                            <!-- Orders Table -->
-                            <TableView fx:id="ordersTable" prefHeight="300.0" styleClass="table-view" VBox.vgrow="ALWAYS">
-                                <columns>
-                                    <TableColumn fx:id="colCustomers" prefWidth="200.0" text="Customer" />
-                                    <TableColumn fx:id="colProduct" prefWidth="200.0" text="Product" />
-                                    <TableColumn fx:id="colAmount" prefWidth="120.0" text="Amount" />
-                                    <TableColumn fx:id="colStatus" prefWidth="150.0" text="Status" />
-                                    <TableColumn fx:id="colAction" prefWidth="150.0" text="Action" />
-                                </columns>
-                                <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                </columnResizePolicy>
-                            </TableView>
                         </children>
                     </VBox>
+            <TableView fx:id="detailsTable" prefHeight="314.0" prefWidth="1003.0" stylesheets="@css/style2.css">
+               <columns>
+                  <TableColumn fx:id="colProductID" prefWidth="97.0" text="Product ID" />
+                  <TableColumn fx:id="colSKU" prefWidth="94.0" text="SKU" />
+                  <TableColumn fx:id="colBarcode" prefWidth="96.0" text="Barcode" />
+                  <TableColumn fx:id="colName" prefWidth="300.0" text="Name" />
+                  <TableColumn fx:id="colUnitPrice" prefWidth="148.0" text="Unit Price" />
+                  <TableColumn fx:id="colQty" prefWidth="142.0" text="QTY" />
+                  <TableColumn fx:id="colCategoryID" prefWidth="166.0" text="Category ID" />
+               </columns>
+            </TableView>
                 </children>
             </VBox>
         </children>

@@ -1,6 +1,6 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.util;
 
-import edu.ijse.mvc.fx.shopmanagementsystem.db.DBConnection;
+import edu.ijse.mvc.fx.shopmanagementsystem.DB.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

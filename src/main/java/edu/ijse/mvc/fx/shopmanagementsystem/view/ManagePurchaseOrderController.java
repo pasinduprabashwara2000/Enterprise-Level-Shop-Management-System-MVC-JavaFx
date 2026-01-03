@@ -2,8 +2,8 @@ package edu.ijse.mvc.fx.shopmanagementsystem.view;
 
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.PurchaseOrderController;
 import edu.ijse.mvc.fx.shopmanagementsystem.controller.SupplierController;
-import edu.ijse.mvc.fx.shopmanagementsystem.dto.PurchaseOrderDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.dto.SupplierDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.PurchaseOrderDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.SupplierDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;

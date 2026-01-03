@@ -1,7 +1,7 @@
 package edu.ijse.mvc.fx.shopmanagementsystem.controller;
 
 import java.util.ArrayList;
-import edu.ijse.mvc.fx.shopmanagementsystem.dto.InventoryDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.InventoryDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.model.InventoryModel;
 
 public class InventoryController {

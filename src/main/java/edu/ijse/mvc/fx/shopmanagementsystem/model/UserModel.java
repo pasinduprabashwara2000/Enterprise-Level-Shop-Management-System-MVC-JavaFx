@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import edu.ijse.mvc.fx.shopmanagementsystem.dto.UserDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.db.DBConnection;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.UserDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DB.DBConnection;
 
 public class UserModel {
 
