@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class ManageUserController {
 
@@ -23,7 +23,7 @@ public class ManageUserController {
     private TableColumn<UserDTO, Boolean> colActive;
 
     @FXML
-    private TableColumn<UserDTO, Date> colCreatedAt;
+    private TableColumn<UserDTO, LocalDate> colCreatedAt;
 
     @FXML
     private TableColumn<UserDTO, String> colId;
@@ -69,6 +69,9 @@ public class ManageUserController {
 
     @FXML
     private TextField userIDTxt;
+
+    private final String usernameRegex = "^[A-Za-z0-9]{3,20}$";
+    private final String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{6,20}$";
 
     @FXML
     public void initialize() {
@@ -131,10 +134,23 @@ public class ManageUserController {
     @FXML
     void navigateSave(ActionEvent event) {
         try {
+            String username = userNameTxt.getText();
+            String password = passwordTxt.getText();
+
+            if (!username.matches(usernameRegex)) {
+                new Alert(AlertType.ERROR, "Invalid Username! Only letters and numbers allowed (3-20 chars).").show();
+                return;
+            }
+
+            if (!password.matches(passwordRegex)) {
+                new Alert(AlertType.ERROR, "Invalid Password! Must be 6-20 chars with at least 1 uppercase, 1 lowercase, and 1 number.").show();
+                return;
+            }
+
             UserDTO userDTO = new UserDTO(
-                    null, 
-                    userNameTxt.getText(),
-                    passwordTxt.getText(),
+                    null,
+                    username,
+                    password,
                     activeStatusPicker.getValue(),
                     datePicker.getValue()
             );
@@ -150,10 +166,23 @@ public class ManageUserController {
     @FXML
     void navigateUpdate(ActionEvent event) {
         try {
+            String username = userNameTxt.getText();
+            String password = passwordTxt.getText();
+
+            if (!username.matches(usernameRegex)) {
+                new Alert(AlertType.ERROR, "Invalid Username! Only letters and numbers allowed (3-20 chars).").show();
+                return;
+            }
+
+            if (!password.matches(passwordRegex)) {
+                new Alert(AlertType.ERROR, "Invalid Password! Must be 6-20 chars with at least 1 uppercase, 1 lowercase, and 1 number.").show();
+                return;
+            }
+
             UserDTO userDTO = new UserDTO(
                     userIDTxt.getText(),
-                    userNameTxt.getText(),
-                    passwordTxt.getText(),
+                    username,
+                    password,
                     activeStatusPicker.getValue(),
                     datePicker.getValue()
             );

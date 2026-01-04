@@ -16,7 +16,7 @@ public class OrderModel {
 
     private OrderProductModel orderProductModel = new OrderProductModel();
 
-    public boolean placeOrder(OrderDTO orderDTO) throws Exception {
+    public int placeOrder(OrderDTO orderDTO) throws Exception {
 
         Connection conn = DBConnection.getInstance().getConnection();
 
@@ -24,42 +24,48 @@ public class OrderModel {
             conn.setAutoCommit(false);
 
             boolean isSaved = CrudUtil.execute(
-                    "INSERT INTO orders (date, customer_id) VALUES (?,?)",
+                    "INSERT INTO orders (date, customer_id) VALUES (?, ?)",
                     orderDTO.getOrderDate(),
                     orderDTO.getCustomerId()
             );
 
-            if (isSaved) {
-                ResultSet rst = CrudUtil.execute(
-                        "SELECT id FROM orders ORDER BY id DESC LIMIT 1"
-                );
-
-                if (rst.next()) {
-                    int latestOrderId = rst.getInt("id");
-                    orderProductModel.saveProductsToList(
-                            latestOrderId,
-                            orderDTO.getOrderItems()
-                    );
-                } else {
-                    throw new Exception("Error Finding Id");
-                }
-            } else {
+            if (!isSaved) {
                 throw new Exception("Error Inserting Order Data");
             }
 
+            ResultSet rst = CrudUtil.execute(
+                    "SELECT id FROM orders ORDER BY id DESC LIMIT 1"
+            );
+
+            if (!rst.next()) {
+                throw new Exception("Error Finding Order ID");
+            }
+
+            int orderId = rst.getInt("id");
+
+            boolean isItemsSaved = orderProductModel.saveProductsToList(
+                    orderId,
+                    orderDTO.getOrderItems()
+            );
+
+            if (!isItemsSaved) {
+                throw new Exception("Error Saving Order Items");
+            }
+
             conn.commit();
-            return true;
+            return orderId;
 
         } catch (Exception e) {
             conn.rollback();
             e.printStackTrace();
-            return false;
+            return -1;
+
         } finally {
             conn.setAutoCommit(true);
         }
     }
 
-    public void printInvoice(boolean orderId) throws SQLException, JRException, ClassNotFoundException {
+    public void printInvoice(Integer orderId) throws SQLException, JRException, ClassNotFoundException {
 
         Connection conn = DBConnection.getInstance().getConnection();
         InputStream inputStream = getClass().getResourceAsStream("/edu/ijse/mvc/fx/shopmanagementsystem/reports/invoice.jrxml");
