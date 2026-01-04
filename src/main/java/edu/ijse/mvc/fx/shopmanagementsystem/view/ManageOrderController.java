@@ -213,11 +213,11 @@ public class ManageOrderController {
             }
 
             OrderDTO orderDTO = new OrderDTO(customerId, new Date(), orderProductDTOS);
-            boolean isOrderPlaced = orderModel.placeOrder(orderDTO);
+            int result = orderModel.placeOrder(orderDTO);
 
-            if (isOrderPlaced){
+            if (result > 0){
                 new Alert(Alert.AlertType.INFORMATION,"Order Placed Successfully").show();
-                orderModel.printInvoice(isOrderPlaced);
+                orderModel.printInvoice(result);
             } else {
                 new Alert(Alert.AlertType.ERROR,"Order Saved Failed").show();
             }
