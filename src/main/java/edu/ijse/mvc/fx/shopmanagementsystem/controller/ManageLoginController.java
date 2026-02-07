@@ -1,4 +1,4 @@
-package edu.ijse.mvc.fx.shopmanagementsystem.view;
+package edu.ijse.mvc.fx.shopmanagementsystem.controller;
 
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.LoginDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.model.LoginModel;

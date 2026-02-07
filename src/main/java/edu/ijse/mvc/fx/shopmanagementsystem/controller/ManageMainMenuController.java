@@ -1,4 +1,4 @@
-package edu.ijse.mvc.fx.shopmanagementsystem.view;
+package edu.ijse.mvc.fx.shopmanagementsystem.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,9 +30,6 @@ public class ManageMainMenuController {
     private Button dashboardBtn;
 
     @FXML
-    private Button inventoryBtn;
-
-    @FXML
     private Button logoutBtn;
 
     @FXML
@@ -43,9 +40,6 @@ public class ManageMainMenuController {
 
     @FXML
     private Button productsBtn;
-
-    @FXML
-    private Button promotionBtn;
 
     @FXML
     private Button purchaseOrderBtn;
@@ -60,13 +54,7 @@ public class ManageMainMenuController {
     private Button roleBtn;
 
     @FXML
-    private Button orderBtn;
-
-    @FXML
     private Button suppliersBtn;
-
-    @FXML
-    private Button supplyBtn;
 
     @FXML
     private Hyperlink tradeMarkLabel;
@@ -81,12 +69,8 @@ public class ManageMainMenuController {
         userBtn.setOnAction(e -> loadUI("ManageUser"));
         customersBtn.setOnAction(e -> loadUI("ManageCustomer"));
         categoryBtn.setOnAction(e -> loadUI("ManageCategory"));
-        inventoryBtn.setOnAction(e -> loadUI("ManageInventory"));
         productsBtn.setOnAction(event -> loadUI("ManageProducts"));
         suppliersBtn.setOnAction(e -> loadUI("ManageSupplier"));
-        supplyBtn.setOnAction(event -> loadUI("ManageSupply"));
-        promotionBtn.setOnAction(event -> loadUI("ManagePromotion"));
-        orderBtn.setOnAction(event -> loadUI("ManageOrder"));
         paymentBtn.setOnAction(event -> loadUI("ManagePayment"));
         returnBtn.setOnAction(event -> loadUI("ManageReturn"));
         purchaseOrderBtn.setOnAction(event -> loadUI("ManagePurchaseOrder"));

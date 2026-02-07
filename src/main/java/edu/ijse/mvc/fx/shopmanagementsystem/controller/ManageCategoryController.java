@@ -1,7 +1,7 @@
-package edu.ijse.mvc.fx.shopmanagementsystem.view;
+package edu.ijse.mvc.fx.shopmanagementsystem.controller;
 
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.CategoryDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.controller.CategoryController;
+import edu.ijse.mvc.fx.shopmanagementsystem.model.CategoryModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -15,7 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ManageCategoryController {
 
-    private final CategoryController categoryController = new CategoryController();
+    private final CategoryModel categoryModel = new CategoryModel();
 
     @FXML
     private TextField categoryIDTxt;
@@ -86,7 +86,7 @@ public class ManageCategoryController {
     private void loadTable() {
         try {
             detailsTable.getItems().clear();
-            detailsTable.getItems().addAll(categoryController.getAllCategories());
+            detailsTable.getItems().addAll(categoryModel.getAllCategories());
         } catch (Exception e) {
             new Alert(AlertType.ERROR,e.getMessage()).show();
         }
@@ -95,7 +95,7 @@ public class ManageCategoryController {
     @FXML
     void navigateDelete(ActionEvent event) {
         try {
-            String res = categoryController.deleteCategory(categoryIDTxt.getText());
+            String res = categoryModel.deleteCategory(categoryIDTxt.getText());
             new Alert(AlertType.INFORMATION,res).show();
             loadTable();
             navigateReset(event);
@@ -118,7 +118,7 @@ public class ManageCategoryController {
                     nameTxt.getText(),
                     descriptionTxt.getText()
             );
-            String res = categoryController.saveCategory(categoryDTO);
+            String res = categoryModel.saveCategory(categoryDTO);
             new Alert(Alert.AlertType.INFORMATION,res).show();
             loadTable();
             navigateReset(event);
@@ -135,7 +135,7 @@ public class ManageCategoryController {
                 nameTxt.getText(),
                 descriptionTxt.getText()
             );
-            String res = categoryController.updateCategory(categoryDTO);
+            String res = categoryModel.updateCategory(categoryDTO);
             new Alert(AlertType.INFORMATION,res).show();
             loadTable();
             navigateReset(event);

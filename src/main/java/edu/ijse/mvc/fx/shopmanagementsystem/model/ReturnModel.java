@@ -12,9 +12,9 @@ public class ReturnModel {
     public String saveReturn(ReturnDTO returnDTO) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO Returns (customerId, action, reason, refundAmount, returnDate, status) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Returns (paymentId, action, reason, refundAmount, returnDate, status) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, returnDTO.getCustomerId());
+        pstm.setString(1, returnDTO.getPaymentId());
         pstm.setString(2, returnDTO.getAction());
         pstm.setString(3, returnDTO.getReason());
         pstm.setDouble(4, returnDTO.getRefundAmount());
@@ -27,9 +27,9 @@ public class ReturnModel {
     public String updateReturn(ReturnDTO returnDTO) throws Exception {
 
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "UPDATE Returns SET customerId = ?, action = ?, reason = ?, refundAmount = ?, returnDate = ?, status = ? WHERE returnId = ?";
+        String sql = "UPDATE Returns SET paymentId = ?, action = ?, reason = ?, refundAmount = ?, returnDate = ?, status = ? WHERE returnId = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, returnDTO.getCustomerId());
+        pstm.setString(1, returnDTO.getPaymentId());
         pstm.setString(2, returnDTO.getAction());
         pstm.setString(3, returnDTO.getReason());
         pstm.setDouble(4, returnDTO.getRefundAmount());
@@ -61,7 +61,7 @@ public class ReturnModel {
         if (resultSet.next()) {
             return new ReturnDTO(
                     resultSet.getString("returnId"),
-                    resultSet.getString("customerId"),
+                    resultSet.getString("paymentId"),
                     resultSet.getDouble("refundAmount"),
                     resultSet.getString("reason"),
                     resultSet.getString("action"),
@@ -83,7 +83,7 @@ public class ReturnModel {
         while (resultSet.next()) {
             ReturnDTO returnDTO = new ReturnDTO(
                     resultSet.getString("returnId"),
-                    resultSet.getString("customerId"),
+                    resultSet.getString("paymentId"),
                     resultSet.getDouble("refundAmount"),
                     resultSet.getString("reason"),
                     resultSet.getString("action"),

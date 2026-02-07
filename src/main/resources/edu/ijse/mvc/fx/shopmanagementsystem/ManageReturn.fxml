@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="680.0" prefWidth="1075.0" styleClass="anchor-pane" stylesheets="@css/style2.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.ManageReturnController">
+<AnchorPane prefHeight="680.0" prefWidth="1075.0" styleClass="anchor-pane" stylesheets="@css/style2.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.controller.ManageReturnController">
 
     <children>
         <Label layoutX="33.0" layoutY="18.0" prefHeight="38.0" prefWidth="300.0" text="Manage Return">
@@ -23,11 +23,11 @@
 
         <TextField fx:id="returnIDTxt" managed="false" visible="false" />
 
-        <Label layoutX="34.0" layoutY="91.0" prefWidth="157.0" text="Customer ID :">
+        <Label layoutX="34.0" layoutY="91.0" prefWidth="157.0" text="Payment ID :">
             <font><Font size="15.0" /></font>
         </Label>
 
-        <ComboBox fx:id="customerIdCombo" layoutX="206.0" layoutY="79.0" prefHeight="38.0" prefWidth="259.0" promptText="Select Customer ID" />
+        <ComboBox fx:id="paymentIdCombo" layoutX="206.0" layoutY="79.0" prefHeight="38.0" prefWidth="259.0" promptText="Select Payment ID" />
 
         <Label layoutX="36.0" layoutY="144.0" prefWidth="157.0" text="Refund Amount :">
             <font><Font size="15.0" /></font>
@@ -86,7 +86,7 @@
         <TableView fx:id="returnTbl" layoutX="36.0" layoutY="339.0" prefHeight="318.0" prefWidth="998.0">
             <columns>
                 <TableColumn fx:id="colReturnId" prefWidth="90.0" text="Return ID" />
-                <TableColumn fx:id="colCustomerId" prefWidth="120.0" text="Customer ID" />
+                <TableColumn fx:id="colPaymentId" prefWidth="120.0" text="Payment ID" />
                 <TableColumn fx:id="colRefund" prefWidth="124.0" text="Refund Amount" />
                 <TableColumn fx:id="colReason" prefWidth="271.0" text="Reason" />
                 <TableColumn fx:id="colReturnDate" prefWidth="142.0" text="Return Date" />

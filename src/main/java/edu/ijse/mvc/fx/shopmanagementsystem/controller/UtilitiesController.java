@@ -1,4 +1,4 @@
-package edu.ijse.mvc.fx.shopmanagementsystem.view;
+package edu.ijse.mvc.fx.shopmanagementsystem.controller;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;

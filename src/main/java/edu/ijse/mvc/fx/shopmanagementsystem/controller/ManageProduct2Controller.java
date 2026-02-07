@@ -1,7 +1,7 @@
-package edu.ijse.mvc.fx.shopmanagementsystem.view;
+package edu.ijse.mvc.fx.shopmanagementsystem.controller;
 
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.controller.ProductController;
+import edu.ijse.mvc.fx.shopmanagementsystem.model.ProductModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
@@ -10,7 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ManageProduct2Controller {
 
-    private final ProductController productController = new ProductController();
+    private final ProductModel productModel = new ProductModel();
 
     @FXML
     private TableColumn<ProductDTO, String> colProductID;
@@ -59,7 +59,7 @@ public class ManageProduct2Controller {
     private void loadTable() {
         try {
             detailsTable.getItems().clear();
-            detailsTable.getItems().addAll(productController.getAllProducts());
+            detailsTable.getItems().addAll(productModel.getAllProducts());
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
     }

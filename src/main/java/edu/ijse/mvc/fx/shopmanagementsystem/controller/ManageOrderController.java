@@ -1,9 +1,9 @@
-package edu.ijse.mvc.fx.shopmanagementsystem.view;
+package edu.ijse.mvc.fx.shopmanagementsystem.controller;
 
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.*;
-import edu.ijse.mvc.fx.shopmanagementsystem.controller.CustomerController;
-import edu.ijse.mvc.fx.shopmanagementsystem.controller.ProductController;
+import edu.ijse.mvc.fx.shopmanagementsystem.model.CustomerModel;
 import edu.ijse.mvc.fx.shopmanagementsystem.model.OrderModel;
+import edu.ijse.mvc.fx.shopmanagementsystem.model.ProductModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -16,8 +16,8 @@ import java.util.Date;
 
 public class ManageOrderController {
 
-    final private CustomerController customerController = new CustomerController();
-    final private ProductController productController = new ProductController();
+    final private CustomerModel customerModel = new CustomerModel();
+    final private ProductModel productModel = new ProductModel();
     private OrderModel orderModel = new OrderModel();
 
     @FXML
@@ -88,7 +88,7 @@ public class ManageOrderController {
     private void loadCustomerIdThread() throws Exception{
         Task <ObservableList<String>> task = new Task<>() {
 
-            ArrayList <CustomerDTO> customers = customerController.getAllCustomers();
+            ArrayList <CustomerDTO> customers = customerModel.getAllCustomers();
             @Override
             protected ObservableList<String> call() throws Exception {
                 return FXCollections.observableArrayList(customers.stream().map(CustomerDTO::getCustomerId).toList());
@@ -105,7 +105,7 @@ public class ManageOrderController {
         try {
             String selectedId = comboCustomerId.getSelectionModel().getSelectedItem();
             if (selectedId != null) {
-                CustomerDTO customerDTO = customerController.searchCustomer(selectedId);
+                CustomerDTO customerDTO = customerModel.searchCustomer(selectedId);
                 lblCustomerNameValue.setText(customerDTO.getName());
                 lblCustomerPhoneValue.setText(String.valueOf(customerDTO.getPhone()));
                 lblCustomerEmailValue.setText(customerDTO.getEmail());
@@ -119,7 +119,7 @@ public class ManageOrderController {
     private void loadItemIdThread() throws Exception{
         Task<ObservableList<String>> task = new Task<>() {
 
-            ArrayList <ProductDTO> products = productController.getAllProducts();
+            ArrayList <ProductDTO> products = productModel.getAllProducts();
             @Override
             protected ObservableList<String> call() throws Exception {
                 return FXCollections.observableArrayList(products.stream().map(ProductDTO::getProductID).toList());
@@ -134,7 +134,7 @@ public class ManageOrderController {
     void selectedItemId(ActionEvent event) {
         try {
             String selectedId = comboItemId.getSelectionModel().getSelectedItem();
-            ProductDTO productDTO = productController.searchProduct(selectedId);
+            ProductDTO productDTO = productModel.searchProduct(selectedId);
 
             if(productDTO != null){
                 lblItemNameValue.setText(productDTO.getName());

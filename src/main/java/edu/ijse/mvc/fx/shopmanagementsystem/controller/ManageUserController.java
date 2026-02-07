@@ -1,7 +1,7 @@
-package edu.ijse.mvc.fx.shopmanagementsystem.view;
+package edu.ijse.mvc.fx.shopmanagementsystem.controller;
 
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.UserDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.controller.UserController;
+import edu.ijse.mvc.fx.shopmanagementsystem.model.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 public class ManageUserController {
 
-    private final UserController userController = new UserController();
+    private final UserModel userModel = new UserModel();
 
     @FXML
     private Label activeLabel;
@@ -104,7 +104,7 @@ public class ManageUserController {
     public void loadTable() {
         try {
             detailsTable.getItems().clear();
-            detailsTable.getItems().addAll(userController.getAllUsers());
+            detailsTable.getItems().addAll(userModel.getAllUsers());
         } catch (Exception e) {
             new Alert(AlertType.ERROR, e.getMessage()).show();
         }
@@ -113,7 +113,7 @@ public class ManageUserController {
     @FXML
     void navigateDelete(ActionEvent event) {
         try {
-            String rsp = userController.deleteUser(userIDTxt.getText());
+            String rsp = userModel.deleteUser(userIDTxt.getText());
             new Alert(AlertType.INFORMATION, rsp).show();
             loadTable();
             navigateReset(event);
@@ -154,7 +154,7 @@ public class ManageUserController {
                     activeStatusPicker.getValue(),
                     datePicker.getValue()
             );
-            String rsp = userController.saveUser(userDTO);
+            String rsp = userModel.saveUser(userDTO);
             new Alert(AlertType.INFORMATION, rsp).show();
             loadTable();
             navigateReset(event);
@@ -186,7 +186,7 @@ public class ManageUserController {
                     activeStatusPicker.getValue(),
                     datePicker.getValue()
             );
-            String rsp = userController.updateUser(userDTO);
+            String rsp = userModel.updateUser(userDTO);
             new Alert(AlertType.INFORMATION, rsp).show();
             loadTable();
             navigateReset(event);

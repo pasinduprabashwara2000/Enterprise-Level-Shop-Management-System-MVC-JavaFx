@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1366.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.ManageMainMenuController">
+<AnchorPane prefHeight="720.0" prefWidth="1366.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.controller.ManageMainMenuController">
 
     <children>
 
@@ -27,7 +25,7 @@
         <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefWidth="317.0" style="-fx-background-color:transparent;" vbarPolicy="AS_NEEDED" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
 
             <content>
-                <VBox fx:id="menuVBox" alignment="TOP_CENTER" prefWidth="317.0" spacing="10.0" styleClass="anchor-pane">
+                <VBox fx:id="menuVBox" alignment="TOP_CENTER" prefHeight="717.0" prefWidth="315.0" spacing="10.0" styleClass="anchor-pane">
 
                     <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="271.0" text="Main Menu" textFill="WHITE">
@@ -35,24 +33,17 @@
                                 <Font name="System Bold" size="16.0" />
                             </font>
                         </Label>
-                        <Button fx:id="dashboardBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="🏠 Dashboard" />
-                        <Button fx:id="roleBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Role" />
-                        <Button fx:id="userBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage User" />
-                        <Button fx:id="customersBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Customers" />
-                        <Button fx:id="categoryBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Category" />
-                        <Button fx:id="inventoryBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Inventory" />
-                        <Button fx:id="productsBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Products" />
-                        <Button fx:id="suppliersBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Suppliers" />
-                        <Button fx:id="supplyBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Supply" />
-                        <Button fx:id="promotionBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Promotion" />
-                        <Button fx:id="purchaseOrderBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Purchase Order" />
-                        <Button fx:id="orderBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Customer Order" />
-                        <Button fx:id="paymentBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Payment" />
-                        <Button fx:id="returnBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Return" />
-                        <Button fx:id="reportsBtn" prefHeight="30.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Reports" />
-
-                        <Separator prefWidth="280.0" />
-                        <Hyperlink fx:id="tradeMarkLabel" prefWidth="308" text="© 2025 Sample IT System. All rights reserved." />
+                        <Button fx:id="dashboardBtn" prefHeight="40.0" prefWidth="264.0" styleClass="nav-btn" text="🏠 Dashboard" />
+                        <Button fx:id="roleBtn" prefHeight="40.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Role" />
+                        <Button fx:id="userBtn" prefHeight="40.0" prefWidth="264.0" styleClass="nav-btn" text="Manage User" />
+                        <Button fx:id="customersBtn" prefHeight="40.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Customers" />
+                        <Button fx:id="categoryBtn" prefHeight="40.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Category" />
+                        <Button fx:id="productsBtn" prefHeight="40.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Products" />
+                        <Button fx:id="suppliersBtn" prefHeight="40.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Suppliers" />
+                        <Button fx:id="purchaseOrderBtn" prefHeight="40.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Purchase Order" />
+                        <Button fx:id="paymentBtn" prefHeight="40.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Payment" />
+                        <Button fx:id="returnBtn" prefHeight="40.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Return" />
+                        <Button fx:id="reportsBtn" prefHeight="40.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Reports" />
                     </children>
                 </VBox>
             </content>

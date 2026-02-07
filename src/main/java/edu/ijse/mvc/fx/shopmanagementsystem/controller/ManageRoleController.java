@@ -1,9 +1,9 @@
-package edu.ijse.mvc.fx.shopmanagementsystem.view;
+package edu.ijse.mvc.fx.shopmanagementsystem.controller;
 
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.RoleDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.UserDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.controller.RoleController;
-import edu.ijse.mvc.fx.shopmanagementsystem.controller.UserController;
+import edu.ijse.mvc.fx.shopmanagementsystem.model.RoleModel;
+import edu.ijse.mvc.fx.shopmanagementsystem.model.UserModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class ManageRoleController {
 
-    private final RoleController roleController = new RoleController();
-    private final UserController userController = new UserController();
+    private final RoleModel roleModel = new RoleModel();
+    private final UserModel userModel = new UserModel();
 
     @FXML
     private ComboBox<String> ComboUserId;
@@ -66,7 +66,7 @@ public class ManageRoleController {
         Task<ObservableList<RoleDTO>> task = new Task<>() {
             @Override
             protected ObservableList<RoleDTO> call() throws Exception {
-                return FXCollections.observableArrayList(roleController.getAllRoles());
+                return FXCollections.observableArrayList(roleModel.getAllRoles());
             }
         };
 
@@ -80,7 +80,7 @@ public class ManageRoleController {
         Task<ObservableList<String>> task = new Task<>() {
             @Override
             protected ObservableList<String> call() throws Exception {
-                ArrayList<UserDTO> users = userController.getAllUsers();
+                ArrayList<UserDTO> users = userModel.getAllUsers();
                 ObservableList<String> userIds = FXCollections.observableArrayList();
                 for (UserDTO user : users) userIds.add(user.getUserID());
                 return userIds;
@@ -101,7 +101,7 @@ public class ManageRoleController {
                     nameTxt.getText(),
                     ComboUserId.getValue()
             );
-            String rsp = roleController.saveRole(roleDTO);
+            String rsp = roleModel.saveRole(roleDTO);
             new Alert(Alert.AlertType.INFORMATION, rsp).show();
             loadTableThread();
             navigateReset(null);
@@ -118,7 +118,7 @@ public class ManageRoleController {
                     nameTxt.getText(),
                     ComboUserId.getValue()
             );
-            String rsp = roleController.updateRole(roleDTO);
+            String rsp = roleModel.updateRole(roleDTO);
             new Alert(Alert.AlertType.INFORMATION, rsp).show();
             loadTableThread();
             navigateReset(null);
@@ -130,7 +130,7 @@ public class ManageRoleController {
     @FXML
     void navigateDelete(ActionEvent event) {
         try {
-            String rsp = roleController.deleteRole(roleIDTxt.getText());
+            String rsp = roleModel.deleteRole(roleIDTxt.getText());
             new Alert(Alert.AlertType.INFORMATION, rsp).show();
             loadTableThread();
             navigateReset(null);

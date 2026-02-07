@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="680.0" prefWidth="1075.0" styleClass="anchor-pane" stylesheets="@css/style2.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.view.ManageRoleController">
+<AnchorPane prefHeight="680.0" prefWidth="1075.0" styleClass="anchor-pane" stylesheets="@css/style2.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.controller.ManageRoleController">
     <children>
         <Label layoutX="33.0" layoutY="18.0" prefHeight="38.0" prefWidth="201.0" text="Manage Role">
             <font>

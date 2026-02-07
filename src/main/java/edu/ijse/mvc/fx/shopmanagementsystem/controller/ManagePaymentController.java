@@ -1,12 +1,12 @@
-package edu.ijse.mvc.fx.shopmanagementsystem.view;
+package edu.ijse.mvc.fx.shopmanagementsystem.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.CustomerDTO;
 import edu.ijse.mvc.fx.shopmanagementsystem.DTO.PaymentDTO;
-import edu.ijse.mvc.fx.shopmanagementsystem.controller.CustomerController;
-import edu.ijse.mvc.fx.shopmanagementsystem.controller.PaymentController;
+import edu.ijse.mvc.fx.shopmanagementsystem.model.CustomerModel;
+import edu.ijse.mvc.fx.shopmanagementsystem.model.PaymentModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -17,8 +17,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ManagePaymentController {
 
-    private final PaymentController paymentController = new PaymentController();
-    private final CustomerController customerController = new CustomerController();
+    private final PaymentModel paymentModel = new PaymentModel();
+    private final CustomerModel customerModel = new CustomerModel();
 
     @FXML
     private TextField amountTxt;
@@ -95,7 +95,7 @@ public class ManagePaymentController {
     private void loadTable() {
         try {
             detailsTable.getItems().clear();
-            detailsTable.getItems().addAll(paymentController.getAllPayments());
+            detailsTable.getItems().addAll(paymentModel.getAllPayments());
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
@@ -104,7 +104,7 @@ public class ManagePaymentController {
     private void loadCustomerIdThread() throws Exception {
             Task <ObservableList<String>> task = new Task<>() {
 
-                ArrayList <CustomerDTO> customers = customerController.getAllCustomers();
+                ArrayList <CustomerDTO> customers = customerModel.getAllCustomers();
                 @Override
                 protected ObservableList<String> call() throws Exception {
                     return FXCollections.observableArrayList(customers.stream().map(CustomerDTO::getCustomerId).toList());
@@ -126,7 +126,7 @@ public class ManagePaymentController {
                     referenceTxt.getText(),
                     datePicker.getValue()
             );
-            new Alert(Alert.AlertType.INFORMATION, paymentController.savePayment(paymentDTO)).show();
+            new Alert(Alert.AlertType.INFORMATION, paymentModel.savePayment(paymentDTO)).show();
             navigateReset(event);
             loadTable();
         } catch (Exception e) {
@@ -145,7 +145,7 @@ public class ManagePaymentController {
                     referenceTxt.getText(),
                     datePicker.getValue()
             );
-            new Alert(Alert.AlertType.INFORMATION, paymentController.updatePayment(paymentDTO)).show();
+            new Alert(Alert.AlertType.INFORMATION, paymentModel.updatePayment(paymentDTO)).show();
             navigateReset(event);
             loadTable();
         } catch (Exception e) {
@@ -156,7 +156,7 @@ public class ManagePaymentController {
     @FXML
     void navigateDelete(ActionEvent event) {
         try {
-            new Alert(Alert.AlertType.INFORMATION, paymentController.deletePayment(paymentIdTxt.getText())).show();
+            new Alert(Alert.AlertType.INFORMATION, paymentModel.deletePayment(paymentIdTxt.getText())).show();
             navigateReset(event);
             loadTable();
         } catch (Exception e) {

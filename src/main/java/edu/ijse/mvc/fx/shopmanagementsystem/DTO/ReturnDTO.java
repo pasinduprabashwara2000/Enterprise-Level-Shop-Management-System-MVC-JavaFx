@@ -3,7 +3,6 @@ package edu.ijse.mvc.fx.shopmanagementsystem.DTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
 
 @NoArgsConstructor
@@ -12,7 +11,7 @@ import java.time.LocalDate;
 public class ReturnDTO {
 
     private String returnId;
-    private String customerId;
+    private String paymentId;
     private double refundAmount;
     private String reason;
     private String action;
