@@ -42,6 +42,9 @@ public class ManageMainMenuController {
     private Button productsBtn;
 
     @FXML
+    private Button expensesBtn;
+
+    @FXML
     private Button purchaseOrderBtn;
 
     @FXML
@@ -70,6 +73,7 @@ public class ManageMainMenuController {
         customersBtn.setOnAction(e -> loadUI("ManageCustomer"));
         categoryBtn.setOnAction(e -> loadUI("ManageCategory"));
         productsBtn.setOnAction(event -> loadUI("ManageProducts"));
+        expensesBtn.setOnAction(event -> loadUI("ManageExpense"));
         suppliersBtn.setOnAction(e -> loadUI("ManageSupplier"));
         paymentBtn.setOnAction(event -> loadUI("ManagePayment"));
         returnBtn.setOnAction(event -> loadUI("ManageReturn"));

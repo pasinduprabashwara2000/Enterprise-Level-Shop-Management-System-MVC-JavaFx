@@ -41,6 +41,7 @@
                         <Button fx:id="productsBtn" prefHeight="40.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Products" />
                         <Button fx:id="suppliersBtn" prefHeight="40.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Suppliers" />
                         <Button fx:id="purchaseOrderBtn" prefHeight="40.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Purchase Order" />
+                  <Button fx:id="expensesBtn" layoutX="36.0" layoutY="419.0" prefHeight="40.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Expenses" />
                         <Button fx:id="paymentBtn" prefHeight="40.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Payment" />
                         <Button fx:id="returnBtn" prefHeight="40.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Return" />
                         <Button fx:id="reportsBtn" prefHeight="40.0" prefWidth="264.0" styleClass="nav-btn" text="Manage Reports" />

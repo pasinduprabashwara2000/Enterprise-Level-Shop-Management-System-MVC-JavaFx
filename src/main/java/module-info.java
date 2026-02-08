@@ -7,6 +7,7 @@ module edu.ijse.mvc.fx.shopmanagementsystem {
     requires java.desktop;
     requires net.sf.jasperreports.core;
     requires org.json;
+    requires org.apache.xmlgraphics.batik.gvt;
 
     opens edu.ijse.mvc.fx.shopmanagementsystem.model to javafx.base;
     opens edu.ijse.mvc.fx.shopmanagementsystem.DTO to javafx.base;
