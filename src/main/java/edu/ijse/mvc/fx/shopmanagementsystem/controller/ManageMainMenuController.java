@@ -1,0 +1,116 @@
+package edu.ijse.mvc.fx.shopmanagementsystem.controller;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
+
+public class ManageMainMenuController {
+
+    @FXML
+    private Button categoryBtn;
+
+    @FXML
+    private AnchorPane contentPane;
+
+    @FXML
+    private Button customersBtn;
+
+    @FXML
+    private Button dashboardBtn;
+
+    @FXML
+    private Button logoutBtn;
+
+    @FXML
+    private VBox menuVBox;
+
+    @FXML
+    private Button paymentBtn;
+
+    @FXML
+    private Button productsBtn;
+
+    @FXML
+    private Button expensesBtn;
+
+    @FXML
+    private Button purchaseOrderBtn;
+
+    @FXML
+    private Button reportsBtn;
+
+    @FXML
+    private Button returnBtn;
+
+    @FXML
+    private Button roleBtn;
+
+    @FXML
+    private Button suppliersBtn;
+
+    @FXML
+    private Hyperlink tradeMarkLabel;
+
+    @FXML
+    private Button userBtn;
+
+    @FXML
+    public void initialize() {
+        dashboardBtn.setOnAction(event -> loadUI("Dashboard"));
+        roleBtn.setOnAction(e -> loadUI("ManageRole"));
+        userBtn.setOnAction(e -> loadUI("ManageUser"));
+        customersBtn.setOnAction(e -> loadUI("ManageCustomer"));
+        categoryBtn.setOnAction(e -> loadUI("ManageCategory"));
+        productsBtn.setOnAction(event -> loadUI("ManageProducts"));
+        expensesBtn.setOnAction(event -> loadUI("ManageExpense"));
+        suppliersBtn.setOnAction(e -> loadUI("ManageSupplier"));
+        paymentBtn.setOnAction(event -> loadUI("ManagePayment"));
+        returnBtn.setOnAction(event -> loadUI("ManageReturn"));
+        purchaseOrderBtn.setOnAction(event -> loadUI("ManagePurchaseOrder"));
+        reportsBtn.setOnAction(event -> loadUI("ManageReports"));
+
+    }
+
+    private void loadUI(String fxmlName) {
+        try {
+            String fxmlPath = "/edu/ijse/mvc/fx/shopmanagementsystem/" + fxmlName + ".fxml";
+            URL fxmlLocation = getClass().getResource(fxmlPath);
+            Parent root = FXMLLoader.load(fxmlLocation);
+            contentPane.getChildren().setAll(root);
+
+        } catch (IOException e) {
+            System.err.println("Error loading FXML: " + fxmlName);
+            e.printStackTrace();
+        }
+    }
+
+    public void navigateLogout(ActionEvent actionEvent) throws IOException {
+        try {
+            Stage stage = (Stage) logoutBtn.getScene().getWindow();
+
+            Scene scene = new Scene(
+                    FXMLLoader.load(getClass().getResource(
+                            "/edu/ijse/mvc/fx/shopmanagementsystem/ManageLogin.fxml"
+                    ))
+            );
+
+            stage.setScene(scene);
+            stage.sizeToScene();
+            stage.centerOnScreen();
+            new Alert(Alert.AlertType.INFORMATION,"Logout Successfully !").show();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+}

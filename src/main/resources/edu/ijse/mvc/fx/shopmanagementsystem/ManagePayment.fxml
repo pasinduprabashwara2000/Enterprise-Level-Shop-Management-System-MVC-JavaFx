@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="680.0" prefWidth="1075.0" styleClass="anchor-pane" stylesheets="@css/style2.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.mvc.fx.shopmanagementsystem.controller.ManagePaymentController">
+    <children>
+        <Label layoutX="33.0" layoutY="18.0" prefHeight="38.0" prefWidth="201.0" text="Manage Payments">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+
+        <TextField fx:id="paymentIdTxt" managed="false" visible="false" />
+
+        <!-- Method -->
+        <Label layoutX="34.0" layoutY="137.0" prefHeight="38.0" prefWidth="157.0" text="Payment Method : ">
+            <font><Font size="15.0" /></font>
+        </Label>
+
+        <!-- Amount -->
+        <Label layoutX="34.0" layoutY="196.0" prefHeight="38.0" prefWidth="157.0" text="Amount : ">
+            <font><Font size="15.0" /></font>
+        </Label>
+        <TextField fx:id="amountTxt" layoutX="206.0" layoutY="196.0" prefHeight="38.0" prefWidth="259.0" />
+
+        <!-- Reference -->
+        <Label layoutX="520.0" layoutY="72.0" prefHeight="38.0" prefWidth="157.0" text="Reference : ">
+            <font><Font size="15.0" /></font>
+        </Label>
+        <TextField fx:id="referenceTxt" layoutX="649.0" layoutY="70.0" prefHeight="38.0" prefWidth="259.0" />
+
+        <!-- Received Date -->
+        <Label layoutX="520.0" layoutY="133.0" prefHeight="38.0" prefWidth="157.0" text="Received At : ">
+            <font><Font size="15.0" /></font>
+        </Label>
+
+        <!-- Action Buttons -->
+        <Button fx:id="saveBtn" layoutX="236.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateSave" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Save" />
+        <Button fx:id="updateBtn" layoutX="395.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateUpdate" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Update" />
+        <Button fx:id="deleteBtn" layoutX="552.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateDelete" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Delete" />
+        <Button fx:id="resetBtn" layoutX="706.0" layoutY="254.0" mnemonicParsing="false" onAction="#navigateReset" prefHeight="38.0" prefWidth="132.0" styleClass="btn" text="Reset" />
+
+        <!-- TableView for Payment Records -->
+        <TableView fx:id="detailsTable" layoutX="33.0" layoutY="322.0" prefHeight="325.0" prefWidth="1003.0">
+            <columns>
+                <TableColumn fx:id="colPaymentId" prefWidth="127.0" text="Payment ID" />
+                <TableColumn fx:id="colCustomerId" prefWidth="152.0" text="Customer ID" />
+                <TableColumn fx:id="colMethod" prefWidth="182.0" text="Method" />
+                <TableColumn fx:id="colAmount" prefWidth="178.0" text="Amount" />
+                <TableColumn fx:id="colReference" prefWidth="192.0" text="Reference" />
+                <TableColumn fx:id="colReceivedAt" prefWidth="167.0" text="Received At" />
+            </columns>
+        </TableView>
+      <DatePicker fx:id="datePicker" layoutX="649.0" layoutY="134.0" prefHeight="38.0" prefWidth="259.0" />
+      <ComboBox fx:id="paymentMethodCombo" layoutX="206.0" layoutY="134.0" prefHeight="38.0" prefWidth="259.0" promptText="Select Payment Method">
+          <items>
+              <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="CASH" />
+                  <String fx:value="CARD" />
+                  <String fx:value="MOBILE" />
+                  <String fx:value="OTHER" />
+              </FXCollections>
+          </items>
+      </ComboBox>
+      <Label layoutX="34.0" layoutY="77.0" prefHeight="38.0" prefWidth="157.0" text="Customer ID :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="customerIdCombo" layoutX="206.0" layoutY="73.0" prefHeight="38.0" prefWidth="259.0" promptText="Select Customer ID">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="CASH" />
+               <String fx:value="CARD" />
+               <String fx:value="MOBILE" />
+               <String fx:value="OTHER" />
+            </FXCollections>
+         </items>
+      </ComboBox>
+    </children>
+</AnchorPane>

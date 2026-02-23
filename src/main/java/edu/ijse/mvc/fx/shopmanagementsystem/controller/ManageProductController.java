@@ -1,0 +1,202 @@
+package edu.ijse.mvc.fx.shopmanagementsystem.controller;
+
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.CategoryDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.DTO.ProductDTO;
+import edu.ijse.mvc.fx.shopmanagementsystem.model.CategoryModel;
+import edu.ijse.mvc.fx.shopmanagementsystem.model.ProductModel;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import java.util.ArrayList;
+
+public class ManageProductController {
+
+    private final ProductModel productModel = new ProductModel();
+    private final CategoryModel categoryModel = new CategoryModel();
+
+    @FXML
+    private CheckBox activeChk;
+
+    @FXML
+    private TextField barcodeTxt;
+
+    @FXML
+    private ComboBox<String> categoryCombo;
+
+    @FXML
+    private TableColumn<ProductDTO, Boolean> colActive;
+
+    @FXML
+    private TableColumn<ProductDTO, String> colBarcode;
+
+    @FXML
+    private TableColumn<ProductDTO, String> colCategoryID;
+
+    @FXML
+    private TableColumn<ProductDTO, String> colName;
+
+    @FXML
+    private TableColumn<ProductDTO, String> colProductID;
+
+    @FXML
+    private TableColumn<ProductDTO, String> colSKU;
+
+    @FXML
+    private TableColumn<ProductDTO, String> colQYT;
+
+    @FXML
+    private TableColumn<ProductDTO, Double> colUnitPrice;
+
+    @FXML
+    private TextField nameTxt;
+
+    @FXML
+    private TextField productIDTxt;
+
+    @FXML
+    private TableView<ProductDTO> detailsTable;
+
+    @FXML
+    private TextField skuTxt;
+
+    @FXML
+    private TextField unitPriceTxt;
+
+    @FXML
+    private TextField qytTxt;
+
+    @FXML
+    private void initialize() {
+        colProductID.setCellValueFactory(new PropertyValueFactory<>("productID"));
+        colSKU.setCellValueFactory(new PropertyValueFactory<>("SKU"));
+        colBarcode.setCellValueFactory(new PropertyValueFactory<>("barCode"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colQYT.setCellValueFactory(new PropertyValueFactory<>("qyt"));
+        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+        colActive.setCellValueFactory(new PropertyValueFactory<>("active"));
+        colCategoryID.setCellValueFactory(new PropertyValueFactory<>("categoryID"));
+
+        loadTableThread();
+        loadCategoryThread();
+
+        detailsTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1){
+                loadSelectedRow();
+            }
+        });
+    }
+
+    private void loadSelectedRow() {
+        ProductDTO p = detailsTable.getSelectionModel().getSelectedItem();
+        if (p != null) {
+            productIDTxt.setText(p.getProductID());
+            skuTxt.setText(p.getSKU());
+            barcodeTxt.setText(String.valueOf(p.getBarCode()));
+            nameTxt.setText(p.getName());
+            qytTxt.setText(String.valueOf(p.getQyt()));
+            unitPriceTxt.setText(String.valueOf(p.getUnitPrice()));
+            activeChk.setSelected(p.isActive());
+            categoryCombo.setValue(p.getCategoryID());
+        }
+    }
+
+    private void loadTableThread() {
+        Task<ObservableList<ProductDTO>> task = new Task<>() {
+            @Override
+            protected ObservableList<ProductDTO> call() throws Exception {
+                return FXCollections.observableArrayList(productModel.getAllProducts());
+            }
+        };
+        task.setOnSucceeded(e -> detailsTable.setItems(task.getValue()));
+        task.setOnFailed(e -> new Alert(Alert.AlertType.ERROR,task.getMessage()).show());
+        new Thread(task).start();
+    }
+
+    private void loadCategoryThread() {
+        Task<ObservableList<String>> task = new Task<>() {
+            @Override
+            protected ObservableList<String> call() throws Exception {
+                ArrayList<CategoryDTO> categories = categoryModel.getAllCategories();
+                return FXCollections.observableArrayList(
+                        categories.stream().map(CategoryDTO::getCategoryID).toList()
+                );
+            }
+        };
+        task.setOnSucceeded(e -> categoryCombo.setItems(task.getValue()));
+        task.setOnFailed(e -> new Alert(Alert.AlertType.ERROR,task.getMessage()).show());
+        new Thread(task).start();
+    }
+
+    @FXML
+    void navigateSave(ActionEvent event) {
+        try {
+            ProductDTO dto = new ProductDTO(
+                    null,
+                    skuTxt.getText(),
+                    Integer.parseInt(barcodeTxt.getText()),
+                    nameTxt.getText(),
+                    Double.parseDouble(unitPriceTxt.getText()),
+                    Integer.parseInt(qytTxt.getText()),
+                    activeChk.isSelected(),
+                    categoryCombo.getValue()
+            );
+            String rsp = productModel.saveProduct(dto);
+            new Alert(Alert.AlertType.INFORMATION, rsp).show();
+            loadTableThread();
+            navigateReset(null);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
+    }
+
+    @FXML
+    void navigateUpdate(ActionEvent event) {
+        try {
+            ProductDTO dto = new ProductDTO(
+                    productIDTxt.getText(),
+                    skuTxt.getText(),
+                    Integer.parseInt(barcodeTxt.getText()),
+                    nameTxt.getText(),
+                    Double.parseDouble(unitPriceTxt.getText()),
+                    Integer.parseInt(qytTxt.getText()),
+                    activeChk.isSelected(),
+                    categoryCombo.getValue()
+            );
+            String rsp = productModel.updateProduct(dto);
+            new Alert(Alert.AlertType.INFORMATION, rsp).show();
+            loadTableThread();
+            navigateReset(null);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
+    }
+
+    @FXML
+    void navigateDelete(ActionEvent event) {
+        try {
+            String rsp = productModel.deleteProduct(productIDTxt.getText());
+            new Alert(Alert.AlertType.INFORMATION, rsp).show();
+            loadTableThread();
+            navigateReset(null);
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
+    }
+
+    @FXML
+    void navigateReset(ActionEvent event) {
+        productIDTxt.clear();
+        skuTxt.clear();
+        barcodeTxt.clear();
+        nameTxt.clear();
+        qytTxt.clear();
+        unitPriceTxt.clear();
+        activeChk.setSelected(false);
+        categoryCombo.setValue(null);
+    }
+
+}

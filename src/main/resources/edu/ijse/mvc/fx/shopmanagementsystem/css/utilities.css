@@ -1,0 +1,82 @@
+.anchor-pane {
+    -fx-background-color: #ffffff;
+}
+
+.button {
+    -fx-background-color: #e0e0e0;
+    -fx-text-fill: #333333;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-padding: 8 15 8 15;
+}
+
+.button:hover {
+    -fx-background-color: #d0d0d0;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.button:pressed {
+    -fx-background-color: #c0c0c0;
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+.text-field {
+    -fx-border-color: #cccccc;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5 10 5 10;
+}
+
+.text-field:focused {
+    -fx-border-color: #4a90e2;
+}
+
+.combo-box {
+    -fx-border-color: #cccccc;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5 10 5 10;
+    -fx-background-color: #ffffff;
+}
+
+.combo-box:focused {
+    -fx-border-color: #4a90e2;
+}
+
+.combo-box .list-cell {
+    -fx-padding: 5 10;
+    -fx-background-color: #ffffff;
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: #f0f0f0;
+}
+
+.success-btn {
+    -fx-background-color: #26c45b;
+    -fx-text-fill: white;
+    -fx-background-radius: 8px;
+    -fx-padding: 8px 18px;
+}
+
+.success-btn:hover {
+    -fx-background-color: #20a64d;
+}
+
+.danger-btn {
+    -fx-background-color: #ff4e4e;
+    -fx-text-fill: white;
+    -fx-background-radius: 8px;
+    -fx-padding: 8px 18px;
+}
+
+.danger-btn:hover {
+    -fx-background-color: #d63c3c;
+}
+
