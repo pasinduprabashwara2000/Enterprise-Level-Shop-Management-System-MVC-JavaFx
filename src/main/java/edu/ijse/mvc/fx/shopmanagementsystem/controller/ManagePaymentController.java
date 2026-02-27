@@ -103,15 +103,14 @@ public class ManagePaymentController {
 
     private void loadCustomerIdThread() throws Exception {
             Task <ObservableList<String>> task = new Task<>() {
-
-                ArrayList <CustomerDTO> customers = customerModel.getAllCustomers();
                 @Override
                 protected ObservableList<String> call() throws Exception {
+                    ArrayList<CustomerDTO> customers = customerModel.getAllCustomers();
                     return FXCollections.observableArrayList(customers.stream().map(CustomerDTO::getCustomerId).toList());
                 }
             };
             task.setOnSucceeded(event -> customerIdCombo.setItems(task.getValue()));
-            task.setOnFailed(event -> new Alert(Alert.AlertType.ERROR,task.getMessage()).show());
+            task.setOnFailed(event -> new Alert(Alert.AlertType.ERROR,task.getException().getMessage()).show());
             new Thread(task).start();
     }
 

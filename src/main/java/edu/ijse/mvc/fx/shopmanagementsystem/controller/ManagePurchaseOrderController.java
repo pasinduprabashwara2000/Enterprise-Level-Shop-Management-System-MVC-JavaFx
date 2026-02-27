@@ -93,6 +93,7 @@ public class ManagePurchaseOrderController {
            PurchaseOrderDTO purchaseOrderDTO = poTable.getSelectionModel().getSelectedItem();
 
            if(purchaseOrderDTO != null){
+                poIdTxt.setText(String.valueOf(purchaseOrderDTO.getPoId()));
                 supplierIdCombo.setValue(purchaseOrderDTO.getSupplierId());
                 createdAtPicker.setValue(purchaseOrderDTO.getCreatedAt());
                 expectedDatePicker.setValue(purchaseOrderDTO.getExpectedDate());
@@ -106,15 +107,14 @@ public class ManagePurchaseOrderController {
 
     void loadSupplierIdThread() throws Exception{
         Task <ObservableList<String>> task = new Task<>() {
-
-            ArrayList <SupplierDTO> suppliers = supplierModel.getAllSuppliers();
             @Override
             protected ObservableList<String> call() throws Exception {
+                ArrayList<SupplierDTO> suppliers = supplierModel.getAllSuppliers();
                 return FXCollections.observableArrayList(suppliers.stream().map(SupplierDTO::getSupplierID).toList());
             }
         };
         task.setOnSucceeded(event -> supplierIdCombo.setItems(task.getValue()));
-        task.setOnFailed(event -> new Alert(Alert.AlertType.ERROR, task.getMessage()).show());
+        task.setOnFailed(event -> new Alert(Alert.AlertType.ERROR, task.getException().getMessage()).show());
         new Thread(task).start();
     }
 

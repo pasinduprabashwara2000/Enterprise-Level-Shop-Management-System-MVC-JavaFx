@@ -128,15 +128,15 @@ public class ManageReturnController {
     private void loadCustomerIdThread() throws Exception {
 
         Task <ObservableList<String>> task = new Task<>() {
-            ArrayList <PaymentDTO> payments =  paymentModel.getAllPayments();
             @Override
             protected ObservableList<String> call() throws Exception {
+                ArrayList<PaymentDTO> payments = paymentModel.getAllPayments();
                 return FXCollections.observableArrayList(payments.stream().map(PaymentDTO::getPaymentID).toList());
             }
         };
 
         task.setOnSucceeded(event -> paymentIdCombo.setItems(task.getValue()));
-        task.setOnFailed(event -> new Alert(AlertType.ERROR, task.getMessage()).show());
+        task.setOnFailed(event -> new Alert(AlertType.ERROR, task.getException().getMessage()).show());
         new Thread(task).start();
 
     }
