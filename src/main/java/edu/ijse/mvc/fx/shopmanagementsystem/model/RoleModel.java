@@ -48,7 +48,6 @@ public class RoleModel {
         Connection conn = DBConnection.getInstance().getConnection();
         String sql = "DELETE FROM Role WHERE roleID=?";
         PreparedStatement pstm = conn.prepareStatement(sql);
-
         pstm.setString(1, roleID);
         return pstm.executeUpdate() > 0 ? "Role Deleted Successfully" : "Role Delete Failed";
     }

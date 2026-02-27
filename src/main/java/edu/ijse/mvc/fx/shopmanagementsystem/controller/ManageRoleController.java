@@ -11,7 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 import java.util.ArrayList;
 
 public class ManageRoleController {
@@ -57,6 +56,7 @@ public class ManageRoleController {
     private void loadSelectedRow() {
         RoleDTO selected = detailsTable.getSelectionModel().getSelectedItem();
         if (selected != null) {
+            roleIDTxt.setText(selected.getRoleID());
             nameTxt.setText(selected.getName());
             ComboUserId.setValue(selected.getUserID());
         }
