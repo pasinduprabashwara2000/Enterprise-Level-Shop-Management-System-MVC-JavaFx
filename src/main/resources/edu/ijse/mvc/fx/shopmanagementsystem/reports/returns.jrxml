@@ -2,18 +2,21 @@
 <jasperReport name="Returns" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="947be04a-80d5-48f1-a90f-1dbb13c0e0f4">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Database Adapter"/>
+
 	<parameter name="FROM_DATE" class="java.util.Date"/>
 	<parameter name="TO_DATE" class="java.util.Date"/>
-	<query language="SQL"><![CDATA[SELECT `Customer`.name,
-	`Returns`.reason,
-	`Returns`.`refundAmount`,
-	`Returns`.`returnDate`,
-	`Returns`.action
-FROM `Customer`
-	JOIN `Returns` ON 
-	 `Customer`.`customerID` = `Returns`.`customerId`
- WHERE returnDate BETWEEN $P{FROM_DATE} AND $P{TO_DATE} 
-	 ]]></query>
+
+	<query language="SQL"><![CDATA[SELECT Returns.returnId, Customer.name, Returns.returnDate, Returns.action, Returns.status, Returns.reason, Returns.refundAmount
+FROM Returns
+JOIN Payment ON Returns.paymentId = Payment.payment_id
+JOIN Customer ON Payment.customer_id = Customer.customerId
+WHERE Returns.returnDate BETWEEN $P{FROM_DATE} AND $P{TO_DATE}]]></query>
+
+	<field name="returnId" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="returnId"/>
+		<property name="com.jaspersoft.studio.field.label" value="returnId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Returns"/>
+	</field>
 	<field name="name" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="name"/>
 		<property name="com.jaspersoft.studio.field.label" value="name"/>
@@ -39,54 +42,229 @@ FROM `Customer`
 		<property name="com.jaspersoft.studio.field.label" value="action"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="Returns"/>
 	</field>
+	<field name="status" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="status"/>
+		<property name="com.jaspersoft.studio.field.label" value="status"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Returns"/>
+	</field>
+
 	<background splitType="Stretch"/>
-	<title height="66" splitType="Stretch">
-		<element kind="staticText" uuid="7a199015-06e6-445a-bd28-512c645f3d56" x="25" y="2" width="500" height="30" fontSize="20.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+
+	<!-- ========== TITLE ========== -->
+	<title height="90" splitType="Stretch">
+		<!-- Navy background -->
+		<element kind="rectangle" uuid="f1a2b3c4-d5e6-7890-fabc-de1234567801"
+				 x="0" y="0" width="555" height="90"
+				 mode="Opaque" backcolor="#1A3C6E" forecolor="#1A3C6E">
+			<pen lineWidth="0.0"/>
+		</element>
+		<!-- Gold accent bar -->
+		<element kind="rectangle" uuid="f1a2b3c4-d5e6-7890-fabc-de1234567802"
+				 x="0" y="83" width="555" height="7"
+				 mode="Opaque" backcolor="#F0A500" forecolor="#F0A500">
+			<pen lineWidth="0.0"/>
+		</element>
+		<!-- Company name -->
+		<element kind="staticText" uuid="7a199015-06e6-445a-bd28-512c645f3d56"
+				 x="0" y="8" width="555" height="36"
+				 fontSize="22.0" bold="true" hTextAlign="Center" vTextAlign="Middle"
+				 mode="Transparent" forecolor="#FFFFFF">
 			<text><![CDATA[Sheiba Arcade Computer System]]></text>
 		</element>
-		<element kind="staticText" uuid="96f40634-7416-46af-b3fc-7d583505cd7c" x="86" y="35" width="387" height="30" fontSize="15.0" hTextAlign="Center" vTextAlign="Middle">
-			<text><![CDATA[No. 746/6 Shobitha Road Wadduwa]]></text>
+		<!-- Address -->
+		<element kind="staticText" uuid="96f40634-7416-46af-b3fc-7d583505cd7c"
+				 x="0" y="46" width="555" height="26"
+				 fontSize="11.0" italic="true" hTextAlign="Center" vTextAlign="Middle"
+				 mode="Transparent" forecolor="#DDEBF7">
+			<text><![CDATA[No. 746/6 Shobitha Road, Wadduwa]]></text>
 		</element>
 	</title>
-	<pageHeader height="40" splitType="Stretch">
-		<element kind="staticText" uuid="738d20f8-9414-4b1c-ad05-c3dabc0e0b3c" x="180" y="4" width="195" height="30" fontSize="14.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+
+	<!-- ========== PAGE HEADER ========== -->
+	<pageHeader height="46" splitType="Stretch">
+		<!-- Light blue background -->
+		<element kind="rectangle" uuid="f1a2b3c4-d5e6-7890-fabc-de1234567803"
+				 x="0" y="6" width="555" height="34"
+				 mode="Opaque" backcolor="#EAF2FB" forecolor="#EAF2FB">
+			<pen lineWidth="0.0"/>
+		</element>
+		<!-- Gold left stripe -->
+		<element kind="rectangle" uuid="f1a2b3c4-d5e6-7890-fabc-de1234567804"
+				 x="0" y="6" width="5" height="34"
+				 mode="Opaque" backcolor="#F0A500" forecolor="#F0A500">
+			<pen lineWidth="0.0"/>
+		</element>
+		<!-- "Returns Details" label -->
+		<element kind="staticText" uuid="738d20f8-9414-4b1c-ad05-c3dabc0e0b3c"
+				 x="14" y="6" width="280" height="34"
+				 fontSize="14.0" bold="true" hTextAlign="Left" vTextAlign="Middle"
+				 mode="Transparent" forecolor="#1A3C6E">
+			<box leftPadding="6"/>
 			<text><![CDATA[Returns Details]]></text>
 		</element>
+		<!-- Date range (right-aligned) -->
+		<element kind="textField" uuid="f1a2b3c4-d5e6-7890-fabc-de1234567805"
+				 x="295" y="6" width="254" height="34"
+				 fontSize="9.0" italic="true" hTextAlign="Right" vTextAlign="Middle"
+				 mode="Transparent" forecolor="#555555">
+			<box rightPadding="6"/>
+			<expression><![CDATA["From: " + new java.text.SimpleDateFormat("dd MMM yyyy").format($P{FROM_DATE}) + "   To: " + new java.text.SimpleDateFormat("dd MMM yyyy").format($P{TO_DATE})]]></expression>
+		</element>
 	</pageHeader>
-	<columnHeader height="37" splitType="Stretch">
-		<element kind="staticText" uuid="6cf06573-4e5f-4825-974c-ac4ce1ad8aba" x="1" y="3" width="100" height="30" bold="true" hTextAlign="Center" vTextAlign="Middle">
+
+	<!-- ========== COLUMN HEADER ========== -->
+	<columnHeader height="32" splitType="Stretch">
+		<!-- Navy background -->
+		<element kind="rectangle" uuid="f1a2b3c4-d5e6-7890-fabc-de1234567806"
+				 x="0" y="0" width="555" height="32"
+				 mode="Opaque" backcolor="#1A3C6E" forecolor="#1A3C6E">
+			<pen lineWidth="0.0"/>
+		</element>
+		<!-- Name: x=0, w=80 -->
+		<element kind="staticText" uuid="6cf06573-4e5f-4825-974c-ac4ce1ad8aba"
+				 x="0" y="0" width="80" height="32"
+				 bold="true" fontSize="10.0" hTextAlign="Left" vTextAlign="Middle"
+				 mode="Transparent" forecolor="#FFFFFF">
+			<box leftPadding="8"/>
 			<text><![CDATA[Name]]></text>
 		</element>
-		<element kind="staticText" uuid="ffad7341-156b-4348-a8fb-87db1f494ac0" x="343" y="3" width="100" height="30" bold="true" hTextAlign="Left" vTextAlign="Middle">
-			<text><![CDATA[Refund Amount]]></text>
+		<!-- Return Date: x=80, w=75 -->
+		<element kind="staticText" uuid="b1234567-0001-0001-0001-000000000001"
+				 x="80" y="0" width="75" height="32"
+				 bold="true" fontSize="10.0" hTextAlign="Left" vTextAlign="Middle"
+				 mode="Transparent" forecolor="#FFFFFF">
+			<text><![CDATA[Return Date]]></text>
 		</element>
-		<element kind="staticText" uuid="a9224e6b-b08b-419f-9a99-a56fb2f6d79a" x="132" y="4" width="100" height="28" bold="true" hTextAlign="Left" vTextAlign="Middle">
+		<!-- Description: x=155, w=100 -->
+		<element kind="staticText" uuid="a9224e6b-b08b-419f-9a99-a56fb2f6d79a"
+				 x="155" y="0" width="100" height="32"
+				 bold="true" fontSize="10.0" hTextAlign="Left" vTextAlign="Middle"
+				 mode="Transparent" forecolor="#FFFFFF">
 			<text><![CDATA[Description]]></text>
 		</element>
-		<element kind="staticText" uuid="c64e8589-6a1e-4357-8006-372d849ca43e" x="453" y="5" width="100" height="27" bold="true" hTextAlign="Left" vTextAlign="Middle">
+		<!-- Status: x=255, w=70 -->
+		<element kind="staticText" uuid="b1234567-0001-0001-0001-000000000002"
+				 x="255" y="0" width="70" height="32"
+				 bold="true" fontSize="10.0" hTextAlign="Left" vTextAlign="Middle"
+				 mode="Transparent" forecolor="#FFFFFF">
+			<text><![CDATA[Status]]></text>
+		</element>
+		<!-- Refund Amount: x=325, w=110 -->
+		<element kind="staticText" uuid="ffad7341-156b-4348-a8fb-87db1f494ac0"
+				 x="325" y="0" width="110" height="32"
+				 bold="true" fontSize="10.0" hTextAlign="Left" vTextAlign="Middle"
+				 mode="Transparent" forecolor="#FFFFFF">
+			<text><![CDATA[Refund Amount]]></text>
+		</element>
+		<!-- Action: x=435, w=120 -->
+		<element kind="staticText" uuid="c64e8589-6a1e-4357-8006-372d849ca43e"
+				 x="435" y="0" width="120" height="32"
+				 bold="true" fontSize="10.0" hTextAlign="Left" vTextAlign="Middle"
+				 mode="Transparent" forecolor="#FFFFFF">
 			<text><![CDATA[Action]]></text>
 		</element>
 	</columnHeader>
+
+	<!-- ========== DETAIL ========== -->
 	<detail>
-		<band height="36" splitType="Stretch">
-			<element kind="textField" uuid="6db2393c-9261-4e08-8585-82467757c737" x="343" y="3" width="100" height="30" hTextAlign="Left" vTextAlign="Middle">
-				<expression><![CDATA[$F{refundAmount}]]></expression>
+		<band height="24" splitType="Stretch">
+			<!-- Even row: light blue -->
+			<element kind="rectangle" uuid="f1a2b3c4-d5e6-7890-fabc-de1234567807"
+					 x="0" y="0" width="555" height="24"
+					 mode="Opaque" backcolor="#EAF2FB" forecolor="#EAF2FB"
+					 printWhenExpression="$V{REPORT_COUNT} % 2 == 0">
+				<pen lineWidth="0.0"/>
 			</element>
-			<element kind="textField" uuid="fdc78c1f-1e21-40ba-81bc-d1ac6cf9fce4" x="132" y="3" width="196" height="30" hTextAlign="Left" vTextAlign="Middle">
-				<expression><![CDATA[$F{reason}]]></expression>
+			<!-- Odd row: white -->
+			<element kind="rectangle" uuid="f1a2b3c4-d5e6-7890-fabc-de1234567808"
+					 x="0" y="0" width="555" height="24"
+					 mode="Opaque" backcolor="#FFFFFF" forecolor="#FFFFFF"
+					 printWhenExpression="$V{REPORT_COUNT} % 2 != 0">
+				<pen lineWidth="0.0"/>
 			</element>
-			<element kind="textField" uuid="d0d1d14d-c246-4789-8649-3d96d73da8e8" x="0" y="3" width="100" height="30" hTextAlign="Left" vTextAlign="Middle">
+			<!-- Row bottom divider -->
+			<element kind="line" uuid="f1a2b3c4-d5e6-7890-fabc-de1234567809"
+					 x="0" y="23" width="555" height="1"
+					 forecolor="#D5E8F5">
+				<pen lineWidth="0.5"/>
+			</element>
+			<!-- Name -->
+			<element kind="textField" uuid="d0d1d14d-c246-4789-8649-3d96d73da8e8"
+					 x="0" y="2" width="80" height="20"
+					 fontSize="9.0" hTextAlign="Left" vTextAlign="Middle"
+					 mode="Transparent" forecolor="#2C3E50">
+				<box leftPadding="8"/>
 				<expression><![CDATA[$F{name}]]></expression>
 			</element>
-			<element kind="textField" uuid="0eba9f1d-ad81-42de-a576-a0164b83104e" x="454" y="3" width="100" height="30" hTextAlign="Left" vTextAlign="Middle">
+			<!-- Return Date -->
+			<element kind="textField" uuid="b2345678-0001-0001-0001-000000000001"
+					 x="80" y="2" width="75" height="20"
+					 fontSize="9.0" hTextAlign="Left" vTextAlign="Middle"
+					 mode="Transparent" forecolor="#555555">
+				<expression><![CDATA[$F{returnDate}]]></expression>
+			</element>
+			<!-- Description / Reason -->
+			<element kind="textField" uuid="fdc78c1f-1e21-40ba-81bc-d1ac6cf9fce4"
+					 x="155" y="2" width="100" height="20"
+					 fontSize="9.0" hTextAlign="Left" vTextAlign="Middle"
+					 mode="Transparent" forecolor="#2C3E50">
+				<expression><![CDATA[$F{reason}]]></expression>
+			</element>
+			<!-- Status -->
+			<element kind="textField" uuid="b2345678-0001-0001-0001-000000000002"
+					 x="255" y="2" width="70" height="20"
+					 fontSize="9.0" hTextAlign="Left" vTextAlign="Middle"
+					 mode="Transparent" forecolor="#2C3E50">
+				<expression><![CDATA[$F{status}]]></expression>
+			</element>
+			<!-- Refund Amount (green, bold) -->
+			<element kind="textField" uuid="6db2393c-9261-4e08-8585-82467757c737"
+					 x="325" y="2" width="110" height="20"
+					 fontSize="9.0" bold="true" hTextAlign="Left" vTextAlign="Middle"
+					 mode="Transparent" forecolor="#1A7A4A">
+				<expression><![CDATA["Rs. " + $F{refundAmount}]]></expression>
+			</element>
+			<!-- Action -->
+			<element kind="textField" uuid="0eba9f1d-ad81-42de-a576-a0164b83104e"
+					 x="435" y="2" width="120" height="20"
+					 fontSize="9.0" hTextAlign="Left" vTextAlign="Middle"
+					 mode="Transparent" forecolor="#2C3E50">
 				<expression><![CDATA[$F{action}]]></expression>
 			</element>
 		</band>
 	</detail>
-	<pageFooter height="31" splitType="Stretch">
-		<element kind="staticText" uuid="e562db70-af96-4c03-a192-dbb0fd80b77e" x="360" y="7" width="194" height="20" hTextAlign="Center">
+
+	<!-- ========== PAGE FOOTER ========== -->
+	<pageFooter height="36" splitType="Stretch">
+		<!-- Gold top border -->
+		<element kind="line" uuid="f1a2b3c4-d5e6-7890-fabc-de1234567810"
+				 x="0" y="0" width="555" height="1"
+				 forecolor="#F0A500">
+			<pen lineWidth="1.5"/>
+		</element>
+		<!-- Light grey background -->
+		<element kind="rectangle" uuid="f1a2b3c4-d5e6-7890-fabc-de1234567811"
+				 x="0" y="1" width="555" height="35"
+				 mode="Opaque" backcolor="#F7F9FC" forecolor="#F7F9FC">
+			<pen lineWidth="0.0"/>
+		</element>
+		<!-- Developer credit -->
+		<element kind="staticText" uuid="e562db70-af96-4c03-a192-dbb0fd80b77e"
+				 x="6" y="10" width="280" height="18"
+				 fontSize="8.0" italic="true" hTextAlign="Left"
+				 mode="Transparent" forecolor="#7F8C8D">
 			<text><![CDATA[Developed By Sample IT System]]></text>
 		</element>
+		<!-- Page number -->
+		<element kind="textField" uuid="f1a2b3c4-d5e6-7890-fabc-de1234567812"
+				 x="370" y="10" width="179" height="18"
+				 fontSize="8.0" hTextAlign="Right"
+				 mode="Transparent" forecolor="#7F8C8D">
+			<box rightPadding="6"/>
+			<expression><![CDATA["Page " + $V{PAGE_NUMBER} + " of " + $V{PAGE_COUNT}]]></expression>
+		</element>
 	</pageFooter>
+
 	<summary height="42" splitType="Stretch"/>
+
 </jasperReport>

@@ -20,6 +20,12 @@
 
   <dependencies>
 
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.2</version>
+    </dependency>
+
     <!-- JSON -->
     <dependency>
       <groupId>org.json</groupId>
@@ -55,17 +61,23 @@
       <version>${javafx.version}</version>
     </dependency>
 
-    <!-- JasperReports (ONLY ONCE – duplicate removed) -->
+    <!-- JasperReports -->
     <dependency>
       <groupId>net.sf.jasperreports</groupId>
       <artifactId>jasperreports</artifactId>
-      <version>7.0.3</version>
+      <version>7.0.4</version>
     </dependency>
 
     <dependency>
       <groupId>net.sf.jasperreports</groupId>
       <artifactId>jasperreports-jdt</artifactId>
-      <version>7.0.1</version>
+      <version>7.0.4</version>
+    </dependency>
+
+    <dependency>
+      <groupId>net.sf.jasperreports</groupId>
+      <artifactId>jasperreports-pdf</artifactId>
+      <version>7.0.4</version>
     </dependency>
 
     <!-- JUnit -->
