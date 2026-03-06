@@ -16,27 +16,12 @@ import java.util.Date;
 
 public class ManageOrderController {
 
-    final private CustomerModel customerModel = new CustomerModel();
-    final private ProductModel productModel = new ProductModel();
-    private OrderModel orderModel = new OrderModel();
+    private final CustomerModel customerModel = new CustomerModel();
+    private final ProductModel productModel = new ProductModel();
+    private final OrderModel orderModel = new OrderModel();
 
     @FXML
-    private Button btnPlaceOrder;
-
-    @FXML
-    private TableColumn<OrderProductTM, Void> colAction;
-
-    @FXML
-    private TableColumn<OrderProductTM, String> colItemName;
-
-    @FXML
-    private TableColumn<OrderProductTM, Integer> colQty;
-
-    @FXML
-    private TableColumn<OrderProductTM, Double> colTotalPrice;
-
-    @FXML
-    private TableColumn<OrderProductTM, Double> colUnitPrice;
+    private Button resetBtn;
 
     @FXML
     private ComboBox<String> comboCustomerId;
@@ -71,157 +56,273 @@ public class ManageOrderController {
     @FXML
     private TableView<OrderProductTM> tblOrderItem;
 
+    @FXML
+    private TableColumn<OrderProductTM,String> colItemName;
+
+    @FXML
+    private TableColumn<OrderProductTM,Integer> colQty;
+
+    @FXML
+    private TableColumn<OrderProductTM,Double> colUnitPrice;
+
+    @FXML
+    private TableColumn<OrderProductTM,Double> colTotalPrice;
+
+    @FXML
+    private TableColumn<OrderProductTM,Void> colAction;
+
     private final ObservableList<OrderProductTM> orderProductTMS = FXCollections.observableArrayList();
 
     @FXML
     void initialize() throws Exception {
+
         colItemName.setCellValueFactory(new PropertyValueFactory<>("productName"));
         colQty.setCellValueFactory(new PropertyValueFactory<>("orderQty"));
         colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         colTotalPrice.setCellValueFactory(new PropertyValueFactory<>("productTotal"));
 
+        addDeleteButton();
+
         loadCustomerIdThread();
         loadItemIdThread();
     }
 
-    private void loadCustomerIdThread() throws Exception{
-        Task <ObservableList<String>> task = new Task<>() {
+    // Delete Button inside Table
+    private void addDeleteButton(){
+
+        colAction.setCellFactory(param -> new TableCell<>() {
+
+            private final Button btnDelete = new Button("Delete");
+
+            {
+                btnDelete.setOnAction(event -> {
+
+                    OrderProductTM selectedItem =
+                            getTableView().getItems().get(getIndex());
+
+                    orderProductTMS.remove(selectedItem);
+                    loadTable();
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if(empty){
+                    setGraphic(null);
+                }else{
+                    setGraphic(btnDelete);
+                }
+            }
+        });
+    }
+
+    // Load Customer IDs
+    private void loadCustomerIdThread() {
+
+        Task<ObservableList<String>> task = new Task<>() {
             @Override
             protected ObservableList<String> call() throws Exception {
-                ArrayList<CustomerDTO> customers = customerModel.getAllCustomers();
-                return FXCollections.observableArrayList(customers.stream().map(CustomerDTO::getCustomerId).toList());
+
+                ArrayList<CustomerDTO> customers =
+                        customerModel.getAllCustomers();
+
+                return FXCollections.observableArrayList(
+                        customers.stream()
+                                .map(CustomerDTO::getCustomerId)
+                                .toList()
+                );
             }
         };
-        task.setOnSucceeded(event -> comboCustomerId.setItems(task.getValue()));
-        task.setOnFailed(event -> new Alert(Alert.AlertType.ERROR,task.getException().getMessage()).show());
+
+        task.setOnSucceeded(e -> comboCustomerId.setItems(task.getValue()));
+        task.setOnFailed(e -> new Alert(Alert.AlertType.ERROR,
+                task.getException().getMessage()).show());
+
         new Thread(task).start();
     }
 
+    // Customer Selection
     @FXML
-    void selectedCustomerId(ActionEvent event) throws Exception {
+    void selectedCustomerId(ActionEvent event) {
 
         try {
-            String selectedId = comboCustomerId.getSelectionModel().getSelectedItem();
-            if (selectedId != null) {
-                CustomerDTO customerDTO = customerModel.searchCustomer(selectedId);
+
+            String selectedId =
+                    comboCustomerId.getSelectionModel().getSelectedItem();
+
+            if(selectedId != null){
+
+                CustomerDTO customerDTO =
+                        customerModel.searchCustomer(selectedId);
+
                 lblCustomerNameValue.setText(customerDTO.getName());
                 lblCustomerPhoneValue.setText(String.valueOf(customerDTO.getPhone()));
                 lblCustomerEmailValue.setText(customerDTO.getEmail());
             }
-        } catch (Exception e) {
+
+        }catch (Exception e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
-
     }
 
-    private void loadItemIdThread() throws Exception{
+    // Load Item IDs
+    private void loadItemIdThread(){
+
         Task<ObservableList<String>> task = new Task<>() {
             @Override
             protected ObservableList<String> call() throws Exception {
-                ArrayList<ProductDTO> products = productModel.getAllProducts();
-                return FXCollections.observableArrayList(products.stream().map(ProductDTO::getProductID).toList());
+
+                ArrayList<ProductDTO> products =
+                        productModel.getAllProducts();
+
+                return FXCollections.observableArrayList(
+                        products.stream()
+                                .map(ProductDTO::getProductID)
+                                .toList()
+                );
             }
         };
-        task.setOnSucceeded(event -> comboItemId.setItems(task.getValue()));
-        task.setOnFailed(event -> new Alert(Alert.AlertType.ERROR,task.getException().getMessage()).show());
+
+        task.setOnSucceeded(e -> comboItemId.setItems(task.getValue()));
+        task.setOnFailed(e -> new Alert(Alert.AlertType.ERROR,
+                task.getException().getMessage()).show());
+
         new Thread(task).start();
     }
 
+    // Item Selection
     @FXML
     void selectedItemId(ActionEvent event) {
+
         try {
-            String selectedId = comboItemId.getSelectionModel().getSelectedItem();
-            ProductDTO productDTO = productModel.searchProduct(selectedId);
+
+            String selectedId =
+                    comboItemId.getSelectionModel().getSelectedItem();
+
+            ProductDTO productDTO =
+                    productModel.searchProduct(selectedId);
 
             if(productDTO != null){
+
                 lblItemNameValue.setText(productDTO.getName());
                 lblItemPriceValue.setText(String.valueOf(productDTO.getUnitPrice()));
                 lblItemQtyValue.setText(String.valueOf(productDTO.getQyt()));
             }
-        } catch (Exception e) {
-                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+
+        }catch (Exception e){
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
 
+    // Add to Cart
     @FXML
     void handleAddToCart(ActionEvent event) {
-        String itemId = comboItemId.getSelectionModel().getSelectedItem();
+
+        String itemId = comboItemId.getValue();
         String itemName = lblItemNameValue.getText();
-        String itemQYT = lblItemQtyValue.getText();
+        String itemQty = lblItemQtyValue.getText();
         String itemPrice = lblItemPriceValue.getText();
-        String orderQYT = qtyField.getText();
+        String orderQty = qtyField.getText();
 
-        if(itemId != null){
-            if (orderQYT != null && !orderQYT.isBlank()){
-                if (Integer.parseInt(orderQYT) <= (Integer.parseInt(itemQYT))){
-                    OrderProductTM orderProductTM = new OrderProductTM(
-                            itemId,
-                            itemName,
-                            Integer.parseInt(orderQYT),
-                            Double.parseDouble(itemPrice),
-                            Integer.parseInt(orderQYT)*Double.parseDouble(itemPrice)
-                    );
-
-                    orderProductTMS.add(orderProductTM);
-                    loadTable();
-
-                } else {
-                   new Alert(Alert.AlertType.ERROR,"Invalid").show();
-                }
-
-                } else {
-                    new Alert(Alert.AlertType.ERROR,"Invalid Quantity").show();
-            }
-
-        } else {
-            new Alert(Alert.AlertType.ERROR, "Invalid Item Id").show();
+        if(itemId == null){
+            new Alert(Alert.AlertType.ERROR,"Select Item").show();
+            return;
         }
 
+        if(orderQty == null || orderQty.isBlank()){
+            new Alert(Alert.AlertType.ERROR,"Invalid Quantity").show();
+            return;
+        }
+
+        int orderQuantity = Integer.parseInt(orderQty);
+        int availableQty = Integer.parseInt(itemQty);
+
+        if(orderQuantity > availableQty){
+            new Alert(Alert.AlertType.ERROR,"Not enough stock").show();
+            return;
+        }
+
+        OrderProductTM tm = new OrderProductTM(
+                itemId,
+                itemName,
+                orderQuantity,
+                Double.parseDouble(itemPrice),
+                orderQuantity * Double.parseDouble(itemPrice)
+        );
+
+        orderProductTMS.add(tm);
+
+        loadTable();
     }
 
-    void loadTable() {
+    // Load Table
+    void loadTable(){
+
         tblOrderItem.setItems(orderProductTMS);
 
-        double total = 0.0;
+        double total = 0;
 
-        for (OrderProductTM orderProductTM : orderProductTMS){
-            total += orderProductTM.getProductTotal();
+        for(OrderProductTM tm : orderProductTMS){
+            total += tm.getProductTotal();
         }
 
         lblOrderTotal.setText(String.valueOf(total));
-
     }
 
+    // Place Order
     @FXML
-    void handlePlaceOrder(ActionEvent event) {
+    void handlePlaceOrder(ActionEvent event){
+
         try {
-            String customerId = comboCustomerId.getSelectionModel().getSelectedItem();
 
-            ArrayList <OrderProductDTO> orderProductDTOS = new ArrayList<>();
+            String customerId = comboCustomerId.getValue();
 
-            for (OrderProductTM orderProductTM : orderProductTMS){
-                OrderProductDTO orderProductDTO = new OrderProductDTO(
-                        orderProductTM.getProductId(),
-                        orderProductTM.getUnitPrice(),
-                        orderProductTM.getOrderQty()
+            ArrayList<OrderProductDTO> orderProductDTOS = new ArrayList<>();
 
+            for(OrderProductTM tm : orderProductTMS){
+
+                orderProductDTOS.add(
+                        new OrderProductDTO(
+                                tm.getProductId(),
+                                tm.getUnitPrice(),
+                                tm.getOrderQty()
+                        )
                 );
-                orderProductDTOS.add(orderProductDTO);
             }
 
-            OrderDTO orderDTO = new OrderDTO(customerId, new Date(), orderProductDTOS);
+            OrderDTO orderDTO =
+                    new OrderDTO(customerId,new Date(),orderProductDTOS);
+
             int result = orderModel.placeOrder(orderDTO);
 
-            if (result > 0){
-                new Alert(Alert.AlertType.INFORMATION,"Order Placed Successfully").show();
+            if(result > 0){
+
+                new Alert(Alert.AlertType.INFORMATION,
+                        "Order Placed Successfully").show();
+
                 orderModel.printInvoice(result);
-            } else {
-                new Alert(Alert.AlertType.ERROR,"Order Saved Failed").show();
+
+            }else{
+                new Alert(Alert.AlertType.ERROR,
+                        "Order Save Failed").show();
             }
 
-        } catch (Exception e) {
-            new Alert (Alert.AlertType.ERROR,e.getMessage()).show();
+        }catch (Exception e){
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
 
+    public void navigateReset(ActionEvent actionEvent) {
+        comboCustomerId.setValue(null);
+        lblCustomerNameValue.setText("");
+        lblCustomerPhoneValue.setText("");
+        lblCustomerEmailValue.setText("");
+        comboItemId.setValue(null);
+        lblItemNameValue.setText("");
+        lblItemQtyValue.setText("");
+        lblItemPriceValue.setText("");
+        qtyField.setText("");
+    }
 }
