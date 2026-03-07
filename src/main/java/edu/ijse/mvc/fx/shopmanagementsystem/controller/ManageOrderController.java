@@ -273,16 +273,24 @@ public class ManageOrderController {
 
     // Place Order
     @FXML
-    void handlePlaceOrder(ActionEvent event){
+    void handlePlaceOrder(ActionEvent event) {
 
         try {
-
             String customerId = comboCustomerId.getValue();
+
+            if (customerId == null) {
+                new Alert(Alert.AlertType.ERROR, "Please select a customer").show();
+                return;
+            }
+
+            if (orderProductTMS.isEmpty()) {
+                new Alert(Alert.AlertType.ERROR, "Cart is empty").show();
+                return;
+            }
 
             ArrayList<OrderProductDTO> orderProductDTOS = new ArrayList<>();
 
-            for(OrderProductTM tm : orderProductTMS){
-
+            for (OrderProductTM tm : orderProductTMS) {
                 orderProductDTOS.add(
                         new OrderProductDTO(
                                 tm.getProductId(),
@@ -292,25 +300,19 @@ public class ManageOrderController {
                 );
             }
 
-            OrderDTO orderDTO =
-                    new OrderDTO(customerId,new Date(),orderProductDTOS);
+            OrderDTO orderDTO = new OrderDTO(customerId, new Date(), orderProductDTOS);
 
-            int result = orderModel.placeOrder(orderDTO);
+            int orderId = orderModel.placeOrder(orderDTO);
 
-            if(result > 0){
+            orderModel.printInvoice(orderId);
 
-                new Alert(Alert.AlertType.INFORMATION,
-                        "Order Placed Successfully").show();
+            new Alert(Alert.AlertType.INFORMATION, "Order Placed Successfully! Order ID: " + orderId).show();
 
-                orderModel.printInvoice(result);
+            navigateReset(null);
 
-            }else{
-                new Alert(Alert.AlertType.ERROR,
-                        "Order Save Failed").show();
-            }
-
-        }catch (Exception e){
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Failed: " + e.getMessage()).show();
+            e.printStackTrace();
         }
     }
 

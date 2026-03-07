@@ -95,7 +95,7 @@ public class ManageReportsController {
         switch (reportType) {
             case "Payment Report":
                 return "payment.jrxml";
-            case "Return Report" :
+            case "Return Report":
                 return "returns.jrxml";
             default:
                 return null;
